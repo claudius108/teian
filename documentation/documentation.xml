@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article>
+    <articleinfo>
+        <title>Documentation for teian</title>
+        <abstract>
+            <para>
+                <emphasis role="strong">teian</emphasis> is a standalone, web-based annotator for texts in XML format. It works by directly annotating the respective XML file or fragment. The end user does not have to
+				know the XML markup, but just choose the text to annotate, and select an annotator.</para>
+            <para>
+                <emphasis role="strong">teian</emphasis> can be easily extended in order to use new XML annotators</para>
+        </abstract>
+        <author>
+            <firstname>Claudius</firstname>
+            <surname>Teodorescu</surname>
+            <affiliation>
+                <jobtitle>XML Consultant</jobtitle>
+                <address>
+                    <email>claudius.teodorescu@gmail.com</email>
+                </address>
+            </affiliation>
+        </author>
+        <pubdate>2011-09-20</pubdate>
+    </articleinfo>
+    <sect1>
+        <title>Scope</title>
+        <sect2>
+            <title>Description</title>
+            <para>
+                <emphasis role="strong">teian</emphasis> is a standalone, web-based annotator for texts in XML.</para>
+            <para>It runs in all major modern browsers: Opera, Firefox, Google Chrome, Safari, and Internet Explorer (8+).</para>
+        </sect2>
+        <sect2>
+            <title>Localization</title>
+            <para>
+                <emphasis role="strong">teian</emphasis>'s default language is English.
+				For other languages, copy the <emphasis>$TEIAN_HOME/config/lang/en.xml</emphasis>
+				file with a new name, of type <emphasis>language-abbreviation.xml</emphasis>,
+				and add a new <emphasis>lang</emphasis> child element to
+				<emphasis>ui-languages</emphasis> element of
+				<emphasis>$TEIAN_HOME/config/configuration-options.xml</emphasis> file.
+			</para>
+        </sect2>
+    </sect1>
+    <sect1>
+        <title>Installation</title>
+        <sect2>
+            <title>Prerequisites</title>
+            <itemizedlist>
+                <listitem>
+                    <para>jQuery, the core library.</para>
+                </listitem>
+                <listitem>
+                    <para>
+						jQuery UI, the core library, and the position, widget,
+						and dialog plugins.
+					</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://code.google.com/p/rangy/">rangy</ulink>,
+						a cross-browser JavaScript range and selection library.
+					</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://sourceforge.net/projects/kyer/">kyer</ulink>,
+						data binding and templating engine.
+					</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://sourceforge.net/projects/simpath/">simpath</ulink>,
+						simpathetic cross-browser XPath processor.
+					</para>
+                </listitem>
+            </itemizedlist>
+            <note>
+                <para>
+					These dependencies have to be installed in the same folder as teian.
+					They are archived by default in the <emphasis role="strong">teian</emphasis>
+					package.
+				</para>
+            </note>
+        </sect2>
+        <sect2>
+            <title>Installation of the annotator</title>
+            <para>
+				Create a base folder and copy within it the <emphasis role="strong">teian</emphasis>
+				folder and all dependecies from the <emphasis role="strong">teian</emphasis>
+				package.
+			</para>
+            <para>
+				Access page <emphasis>http://server-name:port/url-to-teian-base-folder/core/teian.html</emphasis>
+				and add a <emphasis>doc-url</emphasis> parameter to the address, having as
+				value the URL of the XML document to annotate.
+			</para>
+            <example>
+                <title>Example of access URL for teian:</title>
+                <programlisting>http://localhost/teian/core/teian.html?doc-url=http://localhost/data/01.xml</programlisting>
+            </example>
+        </sect2>
+    </sect1>
+    <sect1>
+        <title>Usage</title>
+        <para>Each XML element to be used for annotation has to be defined as follows:</para>
+        <itemizedlist>
+            <listitem>
+                <para>
+					in <emphasis>$TEIAN_HOME/config/annotator-specifications.xml</emphasis>
+					file, according to its type (see below the detailed description of 
+					annotators' types).
+				</para>
+            </listitem>
+            <listitem>
+                <para>
+					in <emphasis>$TEIAN_HOME/config/lang/language-abbreviation.xml</emphasis>
+					file(s), according to the needs for localization of
+					<emphasis role="strong">teian</emphasis>.
+				</para>
+            </listitem>
+            <listitem>
+                <para>
+					in <emphasis>$TEIAN_HOME/config/css/elements.css</emphasis> file(s),
+					according to presentation desired for each XML element.
+				</para>
+            </listitem>
+            <listitem>
+                <para>
+					in <emphasis>$TEIAN_HOME/core/teian.html</emphasis> file(s), as child
+					of <emphasis>kyer:menu</emphasis> element, according to the way
+					desired for rendering the annotator in the page's toolbar (button,
+					drop-down menu, etc.). This <emphasis>kyer:menu</emphasis> element
+					is an implementation in kyer of this <ulink url="https://docs.google.com/document/d/1NActoq8gbknSN2ibpsvWV8x-TXXrv1LkI9k3lCQGB7o/edit?hl=en_GB">element</ulink>.
+				</para>
+            </listitem>
+        </itemizedlist>
+    </sect1>
+    <sect1>
+        <title>Description of annotators</title>
+        <sect2>
+            <title>Generalities</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+						The annotators are defined in 
+						<emphasis>$TEIAN_HOME/config/annotator-specifications.xml</emphasis>
+						file.
+					</para>
+                </listitem>
+                <listitem>
+                    <para>
+						The localization is defined in <emphasis>$TEIAN_HOME/config/lang/en.xml</emphasis>,
+						or other file, according to choosen language -
+						for examples of usage, see below.
+					</para>
+                </listitem>
+                <listitem>
+                    <para>
+						One has to provide for each annotator an unique id (@id),
+						a name (@name), which is the corresponding XML element
+						name, and a type code (@type-code), which is the type of
+						the respective annotator.
+					</para>
+                </listitem>
+                <listitem>
+                    <para>
+						In order to provide an annotated XML document that is
+						conformant to its schema, one has to provide for each
+						annotator the name of the parent and preceding sibling
+						XML elements (annotator-possible-parent-element-names
+						and annotator-possible-preceding-sibling-element-names).
+					</para>
+                </listitem>
+                <listitem>
+                    <para>
+						Also, for each annotator has to be provided the description
+						of each attribute of the respective XML element (if any),
+						according to examples, and the name for annotator's icon
+						(this is the icon that will appear on toolbar; the
+						respective file should be located into
+						<emphasis>$TEIAN_HOME/config/images</emphasis> folder).
+					</para>
+                </listitem>
+                <listitem>
+                    <para>
+						In case when the annotator has as UI a dialog panel, the
+						respective panel and its tabs has to be defined according
+						to the examples below.
+					</para>
+                    <para>
+						Principially speaking, this web-annotator allows user, by
+						means of an panel (for certain annotators), to attach
+						desired strings to the respective XML element's attributes.
+						For this, each panel has text fields and/or lists, having
+						their values as result of a query to a server or not; each
+						text field/list is thus attached to an XML element's
+						attribute and its content can be validated against a
+						regular expression contained by 
+						annotator-panel-field-validation-regex element.
+					</para>
+                    <para>
+						The labels for each text fiels/list are defined in the
+						respective language file.
+					</para>
+                    <para>
+						Note that the annotators of "selected-wrap-server" type
+						have a common panel definition, which is entered
+						separately into annotator-specifications.xml file.
+					</para>
+                </listitem>
+                <listitem>
+                    <para>
+						The annotators' localization definitions have to closely
+						follow the annotator definition, namely to have the same
+						id (@id). Also, one has to define the text that will appear
+						when user hovers over the annotator's button
+						(toolbar-button-title).
+					</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2>
+            <title>Types of annotators</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <link linkend="insert-annotator-description">insert</link>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <link linkend="insert-parametrized-annotator-description">insert-parametrized</link>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <link linkend="selected-wrap-annotator-description">selected-wrap</link>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <link linkend="selected-wrap-parameterized-annotator-description">selected-wrap-parameterized</link>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <link linkend="selected-wrap-server-annotator-description">selected-wrap-server</link>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2>
+            <title>Description of annotator types</title>
+            <itemizedlist>
+                <listitem id="insert-annotator-description">
+                    <para>
+						Annotator of "insert" type. This type of annotator includes
+						the XML elements that are simply inserted into text.
+					</para>
+                    <para>
+						Example of annotator definition:
+					</para>
+                    <programlisting>
+&lt;teian:annotator id="lb-annotator" name="lb" type-code="insert"&gt;
+	&lt;teian:annotator-description-text&gt;
+		Insert a line break at the insertion point. Only for inside p and div tags.
+	&lt;/teian:annotator-description-text&gt;
+	&lt;teian:annotator-possible-parent-element-names&gt;
+		cl m phr s span w abbr add addrLine address author bibl biblScope cit corr date del distinct
+		editor email emph expan foreign gloss head headItem headLabel hi imprint item l label lg list
+		listBibl measure mentioned name note num orig p pubPlace publisher q quote ref reg resp rs
+		said series sic soCalled sp speaker stage street term time title unclear
+		activity channel constitution derivation domain factuality interaction locale preparedness
+		purpose case colloc def dictScrap entry entryFree etym form gen gram gramGrp hom hyph iType
+		lang lbl mood number orth per pos pron re sense stress subc syll tns usg xr actor camera
+		caption castGroup castItem castList epilogue performance prologue role roleDesc set sound
+		tech view cell figure table authority change classCode creation distributor edition extent
+		funder geoDecl handNote language principal scriptNote sponsor typeNote ab seg accMat acquisition
+		additions catchwords collation colophon condition custEvent decoNote explicit filiation
+		finalRubric foliation heraldry incipit layout material msItem musicNotation objectType
+		origDate origPlace origin provenance rubric secFol signatures source stamp summary support
+		surrogates textLang watermark addName affiliation age birth bloc country death district
+		education faith floruit forename genName geogName langKnown nameLink nationality occupation
+		orgName persName person placeName region residence roleName settlement sex socecStatus
+		surname graph u writing valDesc app lem rdg wit witDetail argument back body byline closer
+		dateline div div1 div2 div3 div4 div5 div6 div7 docAuthor docDate docEdition docImprint
+		docTitle epigraph floatingText front group imprimatur opener postscript salute signed text
+		titlePage titlePart trailer damage fw restore supplied surplus metSym rhyme
+	&lt;/teian:annotator-possible-parent-element-names&gt;
+        &lt;teian:annotator-possible-preceding-sibling-element-names/&gt;
+        &lt;teian:annotator-attribute/&gt;
+        &lt;teian:annotator-icon-name&gt;lineBreak.gif&lt;/teian:annotator-icon-name&gt;
+&lt;/teian:annotator&gt;						
+					</programlisting>
+                    <para>
+						Example of annotator localization:
+					</para>
+                    <programlisting>
+&lt;teian:annotator id="lb-annotator"&gt;
+	&lt;teian:toolbar-button-title&gt;Insert a line break&lt;/teian:toolbar-button-title&gt;
+	&lt;teian:toolbar-button-label&gt;lb&lt;/teian:toolbar-button-label&gt;
+&lt;/teian:annotator&gt;						
+					</programlisting>
+                </listitem>
+                <listitem id="insert-parametrized-annotator-description">
+                    <para>
+						Annotator of "insert-parametrized" type. This type of
+						annotator is similar to "insert" type annotators, with the
+						difference that the corresponding XML element has attributes,
+						which are the annotator's parameters; these parameters can
+						be set in a dialog panel.
+					</para>
+                    <para>
+						Example of annotator definition:
+					</para>
+                    <programlisting>
+&lt;teian:annotator id="pb-annotator" name="pb" type-code="insert-parametrized"&gt;
+	&lt;teian:annotator-description-text&gt;
+		Insert a page break at the insertion point. Only for inside p and div tags.
+		Note that page breaks can have three attributes.
+	&lt;/teian:annotator-description-text&gt;
+	&lt;teian:annotator-possible-parent-element-names&gt;
+		cl m phr s span w abbr add addrLine address author bibl biblScope cit corr date del
+		distinct editor email emph expan foreign gloss head headItem headLabel hi imprint item l
+		label lg list listBibl measure mentioned name note num orig p pubPlace publisher q quote
+		ref reg resp rs said series sic soCalled sp speaker stage street term time title unclear
+		activity channel constitution derivation domain factuality interaction locale preparedness
+		purpose case colloc def dictScrap entry entryFree etym form gen gram gramGrp hom hyph iType
+		lang lbl mood number orth per pos pron re sense stress subc syll tns usg xr actor camera
+		caption castGroup castItem castList epilogue performance prologue role roleDesc set sound
+		tech view cell figure table authority change classCode creation distributor edition extent
+		funder geoDecl handNote language principal scriptNote sponsor typeNote ab seg accMat
+		acquisition additions catchwords collation colophon condition custEvent decoNote explicit
+		filiation finalRubric foliation heraldry incipit layout material msItem musicNotation
+		objectType origDate origPlace origin provenance rubric secFol signatures source stamp
+		summary support surrogates textLang watermark addName affiliation age birth bloc country
+		death district education faith floruit forename genName geogName langKnown nameLink
+		nationality occupation orgName persName person placeName region residence roleName
+		settlement sex socecStatus surname graph u writing valDesc app lem rdg wit witDetail
+		argument back body byline closer dateline div div1 div2 div3 div4 div5 div6 div7 docAuthor
+		docDate docEdition docImprint docTitle epigraph floatingText front group imprimatur opener
+		postscript salute signed text titlePage titlePart trailer damage fw restore supplied
+		surplus metSym rhyme
+	&lt;/teian:annotator-possible-parent-element-names&gt;
+        &lt;teian:annotator-possible-preceding-sibling-element-names/&gt;
+        &lt;teian:annotator-icon-name&gt;pageBreak.gif&lt;/teian:annotator-icon-name&gt;
+        &lt;teian:annotator-attribute&gt;n&lt;/teian:annotator-attribute&gt;
+        &lt;teian:annotator-attribute&gt;xml:id&lt;/teian:annotator-attribute&gt;
+        &lt;teian:annotator-attribute&gt;facs&lt;/teian:annotator-attribute&gt;
+        &lt;teian:annotator-panel&gt;
+        &lt;/teian:annotator-panel&gt;
+    &lt;/teian:annotator&gt;						
+					</programlisting>
+                    <para>
+						Example of annotator localization:
+					</para>
+                    <programlisting>
+&lt;teian:annotator id="lb-annotator"&gt;
+	&lt;teian:toolbar-button-title&gt;Insert a page break&lt;/teian:toolbar-button-title&gt;
+	&lt;teian:toolbar-button-label&gt;pb&lt;/teian:toolbar-button-label&gt;
+&lt;/teian:annotator&gt;						
+					</programlisting>
+                </listitem>
+                <listitem id="selected-wrap-annotator-description">
+                    <para>
+						Annotator of "selected-wrap" type. This type of annotator
+						is used for the XML elements needed for styling (bold,
+						italic, etc.).
+					</para>
+                    <para>
+						Example of annotator definition:
+					</para>
+                    <programlisting>
+&lt;teian:annotator id="strong-annotator" name="hi" type-code="selected-wrap"&gt;
+	&lt;teian:annotator-description-text&gt;
+		Wrap bold tags around the selected text.
+	&lt;/teian:annotator-description-text&gt;
+	&lt;teian:annotator-possible-parent-element-names&gt;
+		cl phr s w abbr add addrLine author bibl biblScope corr date del distinct editor email
+		emph expan foreign gloss head headItem headLabel hi item l label measure mentioned name
+		note num orig p pubPlace publisher q quote ref reg rs said sic soCalled speaker stage
+		street term time title unclear case colloc def dictScrap entryFree etym form gen gram
+		gramGrp hyph iType lang lbl mood number orth per pos pron re sense stress subc syll tns
+		usg xr actor camera caption castItem role roleDesc sound tech view cell distributor
+		edition extent geoDecl handNote scriptNote typeNote ab seg accMat acquisition additions
+		catchwords collation colophon condition custEvent decoNote explicit filiation finalRubric
+		foliation heraldry incipit layout material musicNotation objectType origDate origPlace
+		origin provenance rubric secFol signatures source stamp summary support surrogates
+		textLang watermark addName affiliation birth bloc country death district education faith
+		floruit forename genName geogName nameLink nationality occupation orgName persName
+		placeName region residence roleName settlement sex socecStatus surname u writing lem
+		rdg wit witDetail byline closer dateline docAuthor docDate docEdition docImprint imprimatur
+		opener salute signed titlePart trailer damage fw restore supplied surplus rhyme
+	&lt;/teian:annotator-possible-parent-element-names&gt;
+        &lt;teian:annotator-possible-preceding-sibling-element-names/&gt;
+	&lt;teian:annotator-icon-name&gt;bold.gif&lt;/teian:annotator-icon-name&gt;
+	&lt;teian:annotator-attribute name="rend" value="strong"/&gt;
+    &lt;/teian:annotator&gt;						
+					</programlisting>
+                    <para>
+						Example of annotator localization:
+					</para>
+                    <programlisting>
+&lt;teian:annotator id="lb-annotator"&gt;
+	&lt;teian:toolbar-button-title&gt;Insert strong style&lt;/teian:toolbar-button-title&gt;
+	&lt;teian:toolbar-button-label&gt;
+		&lt;b&gt;B&lt;/b&gt;
+	&lt;/teian:toolbar-button-label&gt;
+&lt;/teian:annotator&gt;						
+					</programlisting>
+                </listitem>
+                <listitem id="selected-wrap-parameterized-annotator-description">
+                    <para>
+						Annotator of "selected-wrap-parameterized" type. This type
+						of annotator is similar to "selected-wrap" type annotators,
+						with the difference that the corresponding XML element has
+						attributes, which are the annotator's parameters; these
+						parameters can be set in a dialog panel.
+					</para>
+                    <para>
+						Example of annotator definition:
+					</para>
+                    <programlisting>
+&lt;teian:annotator id="date-annotator" name="date" type-code="selected-wrap-parameterized"&gt;
+	&lt;teian:annotator-description-text&gt;Wrap date tags around the selected text and display the date selector panel.&lt;/teian:annotator-description-text&gt;
+	&lt;teian:annotator-icon-name&gt;calendar.png&lt;/teian:annotator-icon-name&gt;
+	&lt;teian:annotator-possible-parent-element-names&gt;
+		cl phr s w abbr add addrLine author bibl biblScope corr date del distinct editor email
+		emph expan foreign gloss head headItem headLabel hi item l label measure mentioned name
+		note num orig p pubPlace publisher q quote ref reg rs said sic soCalled speaker stage
+		street term time title unclear case colloc def dictScrap entryFree etym form gen gram
+		gramGrp hyph iType lang lbl mood number orth per pos pron re sense stress subc syll tns
+		usg xr actor camera caption castItem role roleDesc sound tech view cell distributor edition
+		extent geoDecl handNote scriptNote typeNote ab seg accMat acquisition additions catchwords
+		collation colophon condition custEvent decoNote explicit filiation finalRubric foliation
+		heraldry incipit layout material musicNotation objectType origDate origPlace origin
+		provenance rubric secFol signatures source stamp summary support surrogates textLang
+		watermark addName affiliation birth bloc country death district education faith floruit
+		forename genName geogName nameLink nationality occupation orgName persName placeName
+		region residence roleName settlement sex socecStatus surname u writing lem rdg wit
+		witDetail byline closer dateline docAuthor docDate docEdition docImprint imprimatur opener
+		salute signed titlePart trailer damage fw restore supplied surplus rhyme
+	&lt;/teian:annotator-possible-parent-element-names&gt;
+	&lt;teian:annotator-possible-preceding-sibling-element-names/&gt;
+	&lt;teian:annotator-attribute name="when" value=""/&gt;
+	&lt;teian:annotator-panel&gt;
+            &lt;div id="date-dialog" title=""&gt;
+                &lt;label for="teian-date-when" 
+			ref="simpath:instance('ui-lang')//teian:annotator[@id = 'date-annotator']/teian:annotator-panel/teian:annotator-panel-element[@id = 'date-when-label']"/&gt;
+                &lt;input type="text" id="teian-date-when"/&gt;
+            &lt;/div&gt;
+            &lt;script type="text/javascript" charset="utf-8"&gt;
+		$("#date-dialog").attr('title', $x.xpath("simpath:instance('ui-lang')//teian:annotator[@id = 'date-annotator']/teian:annotator-panel/teian:annotator-panel-title/text()"));
+		$("label[for='teian-date-when']").text($($x.xpath($("label[for='teian-date-when']").attr('ref'))[0]).text());
+		teian.ui['date-annotator'] = $("#date-dialog").dialog({
+			autoOpen: false,
+			width : 700,
+			height : 200,
+			modal : true,
+			buttons: {
+				"Save": function() {
+					$( this ).dialog( "close" );
+					$($("#date-annotator")[0]['oAnnotatorMarkup']).attr('when', $("#teian-date-when").val());
+					teian.annotator[0]($("#date-annotator")[0]);
+					$($("#date-annotator")[0]['oAnnotatorMarkup']).attr('when', '');
+					$("#teian-date-when").val('');
+				},
+				"Cancel": function() {
+					$( this ).dialog( "close" );
+					teian.utils.oSavedSelection = null;
+					$("#teian-date-when").val('');
+				}
+			}
+		});
+		&lt;/script&gt;
+        &lt;/teian:annotator-panel&gt;
+    &lt;/teian:annotator&gt;						
+					</programlisting>
+                    <para>
+						Example of annotator localization:
+					</para>
+                    <programlisting>
+&lt;teian:annotator id="lb-annotator"&gt;
+	&lt;teian:toolbar-button-title&gt;Date&lt;/teian:toolbar-button-title&gt;
+	&lt;teian:toolbar-button-label&gt;date&lt;/teian:toolbar-button-label&gt;
+        &lt;teian:annotator-panel&gt;
+            &lt;teian:annotator-panel-title&gt;Enter date in format YYYY-MM-DD&lt;/teian:annotator-panel-title&gt;
+            &lt;teian:annotator-panel-element id="date-when-label"&gt;Enter date: &lt;/teian:annotator-panel-element&gt;
+        &lt;/teian:annotator-panel&gt;	
+&lt;/teian:annotator&gt;						
+					</programlisting>
+                    <note>
+                        <para>
+							Note: Each annotator should have a definition of
+							the dialog panel's content, contained by
+							<emphasis>annotator-panel</emphasis> element.
+						</para>
+                    </note>
+                </listitem>
+                <listitem id="selected-wrap-server-annotator-description">
+                    <para>
+						Annotator of "selected-wrap-server" type. This type of
+						annotator is similar to "selected-wrap-parameterized"
+						type annotators, with the difference that the values of
+						the corresponding XML elements' attributes are set based
+						upon the response to a query sent to a server.
+					</para>
+                    <para>
+						Example of annotator definition:
+					</para>
+                    <programlisting>
+&lt;teian:annotator id="persName-annotator" name="persName" type-code="selected-wrap-server"&gt;
+	&lt;teian:annotator-description-text&gt;Wrap the person tags around the selected text and display the person selection panel.&lt;/teian:annotator-description-text&gt;
+	&lt;teian:annotator-icon-name&gt;person.png&lt;/teian:annotator-icon-name&gt;
+	&lt;teian:annotator-id-service-uri&gt;http://demoedb.richmond.edu/exist/rest/db/urbml/apps/tei/utils/teian/services/suggest.xql?type=people&amp;word=&lt;/teian:annotator-id-service-uri&gt;
+	&lt;teian:annotator-possible-parent-element-names&gt;
+		cl phr s span abbr add addrLine address author bibl biblScope corr date del desc distinct
+		editor email emph expan foreign gloss head headItem headLabel hi item l label measure
+		meeting mentioned name note num orig p pubPlace publisher q quote ref reg resp respStmt
+		rs said sic soCalled speaker stage street term time title unclear activity channel
+		constitution derivation domain factuality interaction locale preparedness purpose setting
+		case colloc def dictScrap entryFree etym form gen gram gramGrp hyph iType lang lbl mood
+		number orth per pos pron re sense stress subc syll tns usg xr actor camera caption castItem
+		role roleDesc sound tech view cell figDesc authority catDesc change classCode creation
+		distributor edition extent funder geoDecl handNote language principal rendition scriptNote
+		sponsor tagUsage typeNote fDescr fsDescr ab seg accMat acquisition additions catchwords
+		collation colophon condition custEvent decoNote explicit filiation finalRubric foliation
+		heraldry incipit layout material musicNotation objectType origDate origPlace origin
+		provenance rubric secFol signatures source stamp summary support surrogates textLang
+		watermark addName affiliation age birth bloc country death district education faith floruit
+		forename genName geogName langKnown nameLink nationality occupation org orgName persName
+		person personGrp placeName region residence roleName settlement sex socecStatus surname
+		u writing valDesc lem rdg wit witDetail witness byline closer dateline docAuthor docDate
+		docEdition docImprint imprimatur opener salute signed titlePart trailer damage fw restore
+		supplied surplus metSym rhyme
+	&lt;/teian:annotator-possible-parent-element-names&gt;
+	&lt;teian:annotator-possible-preceding-sibling-element-names/&gt;
+	&lt;teian:annotator-attribute name="corresp" value=""/&gt;
+&lt;/teian:annotator&gt;						
+					</programlisting>
+                    <para>
+						Example of annotator localization:
+					</para>
+                    <programlisting>
+&lt;teian:annotator id="lb-annotator"&gt;
+	&lt;teian:toolbar-button-title&gt;Person&lt;/teian:toolbar-button-title&gt;
+	&lt;teian:toolbar-button-label&gt;persName&lt;/teian:toolbar-button-label&gt;
+        &lt;teian:annotator-panel&gt;
+            &lt;teian:annotator-panel-title&gt;Person&lt;/teian:annotator-panel-title&gt;
+        &lt;/teian:annotator-panel&gt;	
+&lt;/teian:annotator&gt;						
+					</programlisting>
+                    <note>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+								The dialog panel for this type of annotator
+								has a standard format, which is defined by
+								the <emphasis>common-panel</emphasis> element
+								with @id = "selected-wrap-server-annotator-panel"
+								in <emphasis>$TEIAN_HOME/config/annotator-specifications.xml</emphasis>
+								file.
+								</para>
+                            </listitem>
+                            <listitem>
+                                <para>
+								In <emphasis>$TEIAN_HOME/config/annotator-specifications.xml</emphasis>
+								file, the first attribute for annotators of
+								this type will automatically receive the
+								value selected by user from the results
+								returned by server.
+								</para>
+                            </listitem>
+                        </itemizedlist>
+                    </note>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>
+</article>

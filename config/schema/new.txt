@@ -1,0 +1,98 @@
+1) Run the RELAX NG (XML syntax) schema through the program
+  'relaxng_refModel_resolver.xslt', appended. It is based on
+  http://wiki.tei-c.org/index.php/Relaxng_refAtt_resolver.xslt, but
+  works on elements instead of attributes. It takes out each
+  reference to a model class or macro, and replaces it with the
+  content of the model class or macro. The result is a huge, hard to
+  read, really inefficient schema, but it is easy to process.
+
+2) Run the expanded schema through the 'list-RNG-parents.xslt'
+  program, appended. It goes through schema, and for each element,
+  finds every single reference to it, and for each reference puts
+  the @name of the closest ancestor <rng:element> element in a list.
+
+Note that program #1 is in XSLT 1.0, program #2 is in XSLT 2.0 (in
+order to be able to use distinct-values -- if you have to use 1.0,
+could change program to spit out all parents, then `uniq` that
+output).
+
+Caveats:
+* I haven't tested this much at all.
+* There must be a more efficient way.
+* There's probably a better overall approach, too. Sebastian is the
+ expert on this stuff.
+* Could conceivably combine these two into 1 XSLT 2.0 stylesheet, but
+ I have reason to use the 1st part independently, so I didn't
+ combine them.
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ version="1.0" xmlns="http://relaxng.org/ns/structure/1.0"
+ xmlns:rng="http://relaxng.org/ns/structure/1.0">
+
+ <!-- Reads in a TEI RELAX NG (XML syntax) file, and writes out the
+same with -->
+ <!-- references to model classes resolved -->
+ <!-- Conceived and started 2011-08-11, based entirely on
+   http://wiki.tei-c.org/index.php/Relaxng_refAtt_resolver.xslt,
+   in response to Joe Wicentowski's post. -->
+
+ <xsl:template match="/">
+   <xsl:apply-templates/>
+ </xsl:template>
+
+ <xsl:template match="@*|node()">
+   <xsl:copy>
+     <xsl:apply-templates select="@*|node()"/>
+   </xsl:copy>
+ </xsl:template>
+
+ <xsl:template match="rng:define[starts-with(@name,'model.') or
+starts-with(@name,'macro.')]">
+   <xsl:comment>deleted define <xsl:value-of select="@name"/></xsl:comment>
+ </xsl:template>
+
+ <xsl:template match="rng:define" mode="referred">
+   <xsl:apply-templates/>
+ </xsl:template>
+
+ <xsl:template match="rng:ref[starts-with(@name,'model.') or
+starts-with(@name,'macro.')]">
+   <xsl:comment>resolved define <xsl:value-of select="@name"/></xsl:comment>
+   <xsl:variable name="name" select="@name"/>
+   <xsl:apply-templates mode="referred" select="//rng:define[@name=$name]"/>
+ </xsl:template>
+
+</xsl:stylesheet>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:rng="http://relaxng.org/ns/structure/1.0" version="2.0"
+ xmlns="http://www.tei-c.org/ns/1.0">
+
+ <xsl:template match="/">
+   <div>
+     <xsl:apply-templates select="//rng:element"/>
+   </div>
+ </xsl:template>
+
+ <xsl:template match="rng:element">
+   <xsl:variable name="list-of-parents">
+     <xsl:for-each select="//rng:ref[@name=current()/@name]">
+       <xsl:value-of select="ancestor::rng:element[1]/@name"/>
+       <xsl:text> </xsl:text>
+     </xsl:for-each>
+   </xsl:variable>
+   <list>
+     <head>parents of <gi><xsl:value-of select="@name"/></gi></head>
+     <xsl:for-each select="distinct-values( tokenize( $list-of-parents, ' ') )">
+       <xsl:sort/>
+       <item>
+         <xsl:value-of select="."/>
+       </item>
+     </xsl:for-each>
+   </list>
+ </xsl:template>
+
+</xsl:stylesheet>

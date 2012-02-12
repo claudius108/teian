@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:teian="http://kuberam.ro/ns/teian" xmlns:kyer="http://kuberam.ro/ns/kyer">
+    <head>
+	<!--dependencies for teian-->
+        <link rel="stylesheet" href="teian.css" type="text/css"/>
+        <link rel="stylesheet" href="../config/css/elements.css" type="text/css"/>
+	<!--dependencies for jquery-->
+        <script type="text/javascript" charset="utf-8" src="../../jquery/core/jquery.min.js">/**/</script>
+        <title>teian</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/> 
+	<!--dependencies for dialog plugin-->
+        <link rel="stylesheet" type="text/css" href="../../jquery/ui/themes/base/jquery-ui.css"/>
+        <script type="text/javascript" charset="utf-8" src="../../jquery/ui/jquery.ui.core.min.js">/**/</script>
+        <script type="text/javascript" charset="utf-8" src="../../jquery/ui/jquery.ui.position.js">/**/</script>
+        <script type="text/javascript" charset="utf-8" src="../../jquery/ui/jquery.ui.widget.min.js">/**/</script>
+        <script type="text/javascript" charset="utf-8" src="../../jquery/ui/jquery.ui.dialog.js">/**/</script>
+	<!--dependencies for jQuery UI theme switcher -->
+        <link rel="stylesheet" type="text/css" href="../../jquery/themes/jquery.themes.css"/>
+        <script type="text/javascript" src="../../jquery/themeswitcher/themeswitchertool.js">/**/</script>
+        <script type="text/javascript" src="../../jquery/themes/jquery.themes.min.js">/**/</script>
+	<!--dependencies for contextMenu plugin-->
+        <link rel="stylesheet" type="text/css" href="../../jquery/contextMenu/jquery.contextMenu.css"/>
+        <script type="text/javascript" src="../../jquery/contextMenu/jquery.contextMenu.js">/**/</script>
+	<!--dependencies for kyer-->
+        <link rel="stylesheet" type="text/css" href="../../kyer/extensions/kyer-toolbar-menu.css"/>
+        <script type="text/javascript" charset="utf-8" src="../../kyer/core/kyer.js">/**/</script>
+	<!--dependencies for teian-->
+        <script type="text/javascript" charset="utf-8" src="teian.js">/**/</script>
+	<!--dependencies for simpath-->
+        <script type="text/javascript" charset="utf-8" src="../../simpath/core/simpath.js">/**/</script>
+	<!--dependencies for rangy-->
+        <script type="text/javascript" charset="utf-8" src="../../rangy/rangy-core.js">/**/</script>
+        <script type="text/javascript" charset="utf-8" src="../../rangy/rangy-selectionsaverestore.js">/**/</script>
+    </head>
+    <body>
+        <div id="kFloadingMask">
+            <div id="kFloadingText">
+                <img src="../resources/images/ajax-loader.gif"/>
+                <div class="loadingIndicator">Loading ...</div>
+            </div>
+        </div>
+		<!--separator-->
+<!-- 		<div class="fg-buttonset" style="width: 100%; margin-top: 7px;"> </div> -->
+        <kyer:menu xmlns:xf="http://www.w3.org/2002/xforms" id="teian-toolbar-menu" type="toolbar" appearance="kyer-toolbar-menu">
+            <kyer:optionset selection="none">
+                <kyer:option id="save-button" command="teian.save()" appearance="text-button"/>
+            </kyer:optionset>
+            <kyer:optionset id="hi-dd-menu" selection="none" type="drop-down">
+                <kyer:label>hi</kyer:label>
+                <kyer:option id="strong-annotator" appearance="text-button"/>
+                <kyer:option id="italic-annotator" appearance="text-button"/>
+                <kyer:option id="underline-annotator" appearance="text-button"/>
+                <kyer:option id="strikethrough-annotator" appearance="text-button"/>
+            </kyer:optionset>
+            <kyer:optionset id="lists-dd-menu" selection="none" type="drop-down">
+                <kyer:label>lists</kyer:label>
+                <kyer:option id="label-annotator" appearance="text-button"/>
+                <kyer:option id="list-annotator" appearance="text-button"/>
+                <kyer:option id="listBibl-annotator" appearance="text-button"/>
+            </kyer:optionset>
+            <kyer:optionset selection="none">
+                <kyer:option id="date-annotator" appearance="image-button"/>
+            </kyer:optionset>
+            <kyer:optionset selection="none">
+                <kyer:option id="ref-annotator" appearance="text-button"/>
+            </kyer:optionset>
+            <kyer:optionset selection="none">
+                <kyer:option id="lb-annotator" appearance="text-button"/>
+            </kyer:optionset>
+            <kyer:optionset selection="none">
+                <kyer:option id="pb-annotator" appearance="text-button"/>
+            </kyer:optionset>
+            <kyer:optionset selection="none">
+                <kyer:option id="persName-annotator" appearance="text-button"/>
+            </kyer:optionset>
+            <kyer:optionset selection="none">
+                <kyer:option id="orgName-annotator" appearance="text-button"/>
+            </kyer:optionset>
+            <kyer:optionset selection="none">
+                <kyer:option id="placeName-annotator" appearance="text-button"/>
+            </kyer:optionset>
+            <kyer:optionset selection="single" type="horizontal">
+                <kyer:option id="annotate-button" command="teian.annotate();" appearance="text-button"/>
+                <kyer:option id="source-button" command="teian.source();" appearance="text-button"/>
+            </kyer:optionset>
+            <kyer:optionset selection="single" type="horizontal">
+                <kyer:option id="lock-button" command="teian.lock();" appearance="text-button"/>
+                <kyer:option id="unlock-button" command="teian.unlock();" appearance="text-button"/>
+            </kyer:optionset>
+            <kyer:optionset selection="none">
+                <kyer:option id="back-button" command="history.go(-1);" appearance="text-button"/>
+            </kyer:optionset>
+            <kyer:optionset selection="none">
+                <kyer:option id="help-button" command="teian.ui['help-dialog'].dialog('open');" appearance="text-button"/>
+            </kyer:optionset>
+            <kyer:optionset id="language-dd-menu" selection="none" type="drop-down">
+                <kyer:label>Language</kyer:label>
+                <kyer:option id="en-language" appearance="text-button">
+                    <kyer:label>EN</kyer:label>
+                </kyer:option>
+                <kyer:option id="fr-language" appearance="text-button">
+                    <kyer:label>FR</kyer:label>
+                </kyer:option>
+            </kyer:optionset>
+        </kyer:menu>
+<!--        <div id="teian-toolbar2" class="fg-toolbar ui-widget-header ui-corner-all ui-helper-clearfix">
+            <div class="fg-buttonset ui-helper-clearfix">
+			<a href="#" class="fg-button ui-state-default fg-button-icon-solo ui-corner-all" title="Open"><span class="ui-icon ui-icon-folder-open"></span> Open</a>
+			<a href="#" class="fg-button ui-state-default fg-button-icon-solo ui-corner-all" title="Delete"><span class="ui-icon ui-icon-trash"></span> Clear entity</a>
+            </div>
+
+
+            <div class="fg-buttonset ui-helper-clearfix">
+			<a href="#" class="fg-button ui-state-default fg-button-icon-solo ui-corner-all" title="Print"><span class="ui-icon ui-icon-print"></span> Print</a>
+            </div>
+            <div id="themes-dd-menu" class="teian-dd-menu fg-buttonset ui-helper-clearfix">
+                <button class="teian-dd-menu-button fg-button ui-state-default ui-corner-all">Themes</button>
+                <div class="teian-dd-menu-options-container">
+                    <span class="teian-dd-menu-options-set fg-toolbar ui-widget-header ui-corner-all ui-helper-clearfix">
+                        <a href="jquery-ui-themeroller.smoothness.css" title="Smoothness">
+                            <img src="../../jquery/themeswitcher/themethumbs/themenail_smoothness.png" alt="image" width="25" height="22"/>
+                        </a>
+                        <a href="jquery-ui-themeroller.blacktie.css" title="Smoothness">
+                            <img src="../../jquery/themeswitcher/themethumbs/themenail_blacktie.png" alt="image" width="25" height="22"/>
+                        </a>
+                        <a href="jquery-ui-themeroller.excitebike.css" title="Excite Bike">
+                            <img src="../../jquery/themeswitcher/themethumbs/themenail_excitetruck.png" alt="image" width="25" height="22"/>
+                        </a>
+                        <a href="jquery-ui-themeroller.southstreet.css" title="South Street">
+                            <img src="../../jquery/themeswitcher/themethumbs/themenail_southst.png" alt="image" width="25" height="22"/>
+                        </a>
+                        <a href="jquery-ui-themeroller.cupertino.css" title="Cupertino">
+                            <img src="../../jquery/themeswitcher/themethumbs/themenail_cupertino.png" alt="image" width="25" height="22"/>
+                        </a>
+                        <a href="jquery-ui-themeroller.corpcool.css" title="Corp Cool">
+                            <img src="../../jquery/themeswitcher/themethumbs/themenail_corpcool.png" alt="image" width="25" height="22"/>
+                        </a>
+                        <a href="jquery-ui-themeroller.mintchoco.css" title="Mint Choco">
+                            <img src="../../jquery/themeswitcher/themethumbs/themenail_mintchoc.png" alt="image" width="25" height="22"/>
+                        </a>
+                        <a href="jquery-ui-themeroller.dustyshelf.css" title="Dusty Shelf">
+                            <img src="../../jquery/themeswitcher/themethumbs/themenail_dustyshelf.png" alt="image" width="25" height="22"/>
+                        </a>
+                        <a href="jquery-ui-themeroller.dotluv.css" title="Dot Luv">
+                            <img src="../../jquery/themeswitcher/themethumbs/themenail_dotluv.png" alt="image" width="25" height="22"/>
+                        </a>
+                        <a href="jquery-ui-themeroller.creamsicle.css" title="Creamsicle">
+                            <img src="../../jquery/themeswitcher/themethumbs/themenail_creamsicle.png" alt="image" width="25" height="22"/>
+                        </a>
+                        <a href="jquery-ui-themeroller.uisite.css" title="UI Site">
+                            <img src="../../jquery/themeswitcher/themethumbs/themenail_uisite.png" alt="image" width="25" height="22"/>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>-->
+        <kyer:menu xmlns:xf="http://www.w3.org/2002/xforms" id="teian-context-menu" type="context" container="#teian-content" appearance="kyer-context-menu">
+            <kyer:optionset selection="none">
+                <kyer:option id="edit-entity-button" command="teian.editEntity();" appearance="text-button">
+                    <kyer:label>Edit entity</kyer:label>
+                </kyer:option>
+                <kyer:option id="clear-entity-button" command="teian.ui['clear-entity-dialog'].dialog('open');" appearance="text-button">
+                    <kyer:label>Clear entity</kyer:label>
+                </kyer:option>
+            </kyer:optionset>
+        </kyer:menu>
+        <div class="teian-hr"/>
+<!-- 	<p><span id="label">Select your new theme:</span> <span id="themeSelection"></span></p> -->
+        <form id="teian-form" action="save.xq" method="post">
+            <textarea id="data" name="data" style="display: none;"/>
+            <div id="teian-content" class="ui-corner-all" style="border: 5px solid #3F7506; margin-top: 3px; height: 75%; overflow-y: auto; padding: 10px;"/>
+        </form>
+    </body>
+</html>

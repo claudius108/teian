@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+    <item>
+        <value>000001</value>
+        <label>Africa</label>
+        <description/>
+    </item>
+    <item>
+        <value>000002</value>
+        <label>Antarctica</label>
+        <description/>
+    </item>
+    <item>
+        <value>000003</value>
+        <label>Arctic Ocean</label>
+        <description/>
+    </item>
+    <item>
+        <value>000004</value>
+        <label>Asia</label>
+        <description/>
+    </item>
+    <item>
+        <value>000005</value>
+        <label>Atlantic Ocean</label>
+        <description/>
+    </item>
+    <item>
+        <value>000006</value>
+        <label>Australia</label>
+        <description/>
+    </item>
+    <item>
+        <value>000007</value>
+        <label>Berlin, Berlin State, Germany</label>
+        <description/>
+    </item>
+    <item>
+        <value>000008</value>
+        <label>Blagoveshchensk, Amur Oblast, Russia</label>
+        <description/>
+    </item>
+    <item>
+        <value>000009</value>
+        <label>Brisbane, Queensland, Australia</label>
+        <description/>
+    </item>
+    <item>
+        <value>000010</value>
+        <label>British Malaya, Malay Peninsula</label>
+        <description/>
+    </item>
+    <item>
+        <value>000011</value>
+        <label>Burma (Myanmar)</label>
+        <description/>
+    </item>
+    <item>
+        <value>000012</value>
+        <label>California, United States</label>
+        <description/>
+    </item>
+    <item>
+        <value>000013</value>
+        <label>Chemulpo (Inchon), South Korea</label>
+        <description/>
+    </item>
+    <item>
+        <value>000014</value>
+        <label>China</label>
+        <description/>
+    </item>
+    <item>
+        <value>000015</value>
+        <label>Dutch East Indies (Indonesia)</label>
+        <description/>
+    </item>
+    <item>
+        <value>000016</value>
+        <label>Etorofu (Iturup), Kuriles (Kuril'skiye Ostrova), Russia</label>
+        <description/>
+    </item>
+    <item>
+        <value>000017</value>
+        <label>Europe</label>
+        <description/>
+    </item>
+    <item>
+        <value>000018</value>
+        <label>France</label>
+        <description/>
+    </item>
+    <item>
+        <value>000019</value>
+        <label>French Indochina</label>
+        <description/>
+    </item>
+    <item>
+        <value>000020</value>
+        <label>Germany</label>
+        <description/>
+    </item>
+    <item>
+        <value>000021</value>
+        <label>Guam, Mariana Islands</label>
+        <description/>
+    </item>
+    <item>
+        <value>000022</value>
+        <label>Guangzhou, Canton, China</label>
+        <description/>
+    </item>
+    <item>
+        <value>000023</value>
+        <label>Habarovsk (Chabarovsk), Khabarovsk, Russia</label>
+        <description/>
+    </item>
+    <item>
+        <value>000024</value>
+        <label>Haleakala, Maui, Hawaii, United States</label>
+        <description/>
+    </item>
+    <item>
+        <value>000025</value>
+        <label>Harbin, Heilongjiang Sheng, China</label>
+        <description/>
+    </item>
+    <item>
+        <value>000026</value>
+        <label>Hawaii, United States</label>
+        <description/>
+    </item>
+    <item>
+        <value>000027</value>
+        <label>Hitokappu Bay (Zaliv Kasatka), Etorofu (Iturup), Kuriles (Kuril'skiye Ostrova), Russa</label>
+        <description/>
+    </item>
+    <item>
+        <value>000028</value>
+        <label>Honolulu, Oahu, Hawaii, United States</label>
+        <description/>
+    </item>
+    <item>
+        <value>000029</value>
+        <label>Iman (Dalnerechensk), Primorsky Krai, Russia</label>
+        <description/>
+    </item>
+    <item>
+        <value>000030</value>
+        <label>India</label>
+        <description/>
+    </item>
+    <item>
+        <value>000031</value>
+        <label>Indian Ocean</label>
+        <description/>
+    </item>
+    <item>
+        <value>000032</value>
+        <label>Inland Sea (Seto-naikai), Japan</label>
+        <description/>
+    </item>
+    <item>
+        <value>000033</value>
+        <label>Italy</label>
+        <description/>
+    </item>
+    <item>
+        <value>000034</value>
+        <label>Jaluit Atoll, Marshall Islands</label>
+        <description/>
+    </item>
+    <item>
+        <value>000035</value>
+        <label>Japan</label>
+        <description/>
+    </item>
+    <item>
+        <value>000036</value>
+        <label>Kailua Bay, Oahu, Hawaii, United States</label>
+        <description/>
+    </item>
+    <item>
+        <value>000037</value>
+        <label>Kalama, Kailua, Oahu, Hawaii, United States</label>
+        <description/>
+    </item>
+    <item>
+        <value>000038</value>
+        <label>Khabarovsk, Khabarovsk Krai, Russia</label>
+        <description/>
+    </item>
+    <item>
+        <value>000039</value>
+        <label>Kula (Waiakoa), Maui, Hawaii, United States</label>
+        <description/>
+    </item>
+    <item>
+        <value>000040</value>
+        <label>Kure, Chugoku, Japan</label>
+        <description/>
+    </item>
+    <item>
+        <value>000041</value>
+        <label>Kuril Islands (Kuril'skiye Ostrova), Russia</label>
+        <description/>
+    </item>
+    <item>
+        <value>000042</value>
+        <label>Kwajalein Atoll, Marshall Islands</label>
+        <description/>
+    </item>
+    <item>
+        <value>000043</value>
+        <label>Kyushu, Japan</label>
+        <description/>
+    </item>
+    <item>
+        <value>000044</value>
+        <label>Lanikai Beach, Kailua, Oahu, Hawaii, United States</label>
+        <description/>
+    </item>
+    <item>
+        <value>000045</value>
+        <label>London, England, United Kingdom</label>
+        <description/>
+    </item>
+    <item>
+        <value>000046</value>
+        <label>Manchukuo (Manchuria), China</label>
+        <description/>
+    </item>
+    <item>
+        <value>000047</value>
+        <label>Manchuria, China</label>
+        <description/>
+    </item>
+    <item>
+        <value>000048</value>
+        <label>Manila Bay, Philippines</label>
+        <description/>
+    </item>
+    <item>
+        <value>000049</value>
+        <label>Manila, Luzon, Philippines</label>
+        <description/>
+    </item>
+    <item>
+        <value>000050</value>
+        <label>Maui, Hawaii, United States</label>
+        <description/>
+    </item>
+    <item>
+        <value>000051</value>
+        <label>Netherlands</label>
+        <description/>
+    </item>
+    <item>
+        <value>000052</value>
+        <label>New Zealand</label>
+        <description/>
+    </item>
+    <item>
+        <value>000053</value>
+        <label>North America</label>
+        <description/>
+    </item>
+    <item>
+        <value>000054</value>
+        <label>Oahu, Hawaii, United States</label>
+        <description/>
+    </item>
+    <item>
+        <value>000055</value>
+        <label>Outer Mongolia (Mongolia)</label>
+        <description/>
+    </item>
+    <item>
+        <value>000056</value>
+        <label>Pacific Ocean</label>
+        <description/>
+    </item>
+    <item>
+        <value>000057</value>
+        <label>Palau Islands, Palau</label>
+        <description/>
+    </item>
+    <item>
+        <value>000058</value>
+        <label>Panama</label>
+        <description/>
+    </item>
+    <item>
+        <value>000059</value>
+        <label>Panama Canal, Panama</label>
+        <description/>
+    </item>
+    <item>
+        <value>000060</value>
+        <label>Pearl Harbor, Oahu, Hawaii, United States</label>
+        <description/>
+    </item>
+    <item>
+        <value>000061</value>
+        <label>Peking (Beijing), China</label>
+        <description/>
+    </item>
+    <item>
+        <value>000062</value>
+        <label>Philippines</label>
+        <description/>
+    </item>
+    <item>
+        <value>000063</value>
+        <label>Port Arthur (Lushun), Liaoning, China</label>
+        <description/>
+    </item>
+    <item>
+        <value>000064</value>
+        <label>Sacramento, California, United States</label>
+        <description/>
+    </item>
+    <item>
+        <value>000065</value>
+        <label>Saipan, Mariana Islands</label>
+        <description/>
+    </item>
+    <item>
+        <value>000066</value>
+        <label>San Francisco, United States</label>
+        <description/>
+    </item>
+    <item>
+        <value>000067</value>
+        <label>South America</label>
+        <description/>
+    </item>
+    <item>
+        <value>000068</value>
+        <label>Taroa, Maloelap Atoll, Marshall Islands</label>
+        <description/>
+    </item>
+    <item>
+        <value>000069</value>
+        <label>Tokyo, Kanto, Japan</label>
+        <description/>
+    </item>
+    <item>
+        <value>000070</value>
+        <label>Tolosa, Leyte, Philippines</label>
+        <description/>
+    </item>
+    <item>
+        <value>000071</value>
+        <label>Truk Islands, Chuuk, Micronesia</label>
+        <description/>
+    </item>
+    <item>
+        <value>000072</value>
+        <label>Ulanbator (Ulaanbaatar), Mongolia</label>
+        <description/>
+    </item>
+    <item>
+        <value>000073</value>
+        <label>United States of America</label>
+        <description/>
+    </item>
+    <item>
+        <value>000074</value>
+        <label>Vladivostok, Primorsky Krai, Russia</label>
+        <description/>
+    </item>
+    <item>
+        <value>000075</value>
+        <label>Voroshilov (Ussuriysk), Primorsky Krai, Russia</label>
+        <description/>
+    </item>
+    <item>
+        <value>000076</value>
+        <label>Wake Island, Wake Islands, United States</label>
+        <description/>
+    </item>
+    <item>
+        <value>000077</value>
+        <label>Washington, District of Columbia, United States</label>
+        <description/>
+    </item>
+    <item>
+        <value>000078</value>
+        <label>Wotje Atoll, Marshall Islands</label>
+        <description/>
+    </item>
+    <item>
+        <value>000079</value>
+        <label>Yokohama, Kanto, Japan</label>
+        <description/>
+    </item>
+    <item>
+        <value>000080</value>
+        <label>Zabaikalye (Zabaikalsk), Kabaykalsky Krai, Russia</label>
+        <description/>
+    </item>
+</items>

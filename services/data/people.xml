@@ -1,0 +1,1363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+    <item>
+        <value>000001</value>
+        <label>Abe Akira</label>
+        <description/>
+    </item>
+    <item>
+        <value>000002</value>
+        <label>Ando Yoshiro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000003</value>
+        <label>Ao, Daniel S.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000004</value>
+        <label>Araki Sadao</label>
+        <description/>
+    </item>
+    <item>
+        <value>000005</value>
+        <label>Arimatsu Sukeo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000006</value>
+        <label>Banno Junkichi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000007</value>
+        <label>Bernard, Henri</label>
+        <description/>
+    </item>
+    <item>
+        <value>000008</value>
+        <label>Blakeney, Ben Bruce</label>
+        <description/>
+    </item>
+    <item>
+        <value>000009</value>
+        <label>Blewett, George Francis</label>
+        <description/>
+    </item>
+    <item>
+        <value>000010</value>
+        <label>Borgerhoff-Mulder, W. G. Frederick</label>
+        <description/>
+    </item>
+    <item>
+        <value>000011</value>
+        <label>Brabner-Smith, John W.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000012</value>
+        <label>Brannon, John G.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000013</value>
+        <label>Brock, James H.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000014</value>
+        <label>Brooks, Alfred W.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000015</value>
+        <label>Brown, W. Glannville</label>
+        <description/>
+    </item>
+    <item>
+        <value>000016</value>
+        <label>Caudle, Charles B.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000017</value>
+        <label>Chiu, Henry</label>
+        <description/>
+    </item>
+    <item>
+        <value>000018</value>
+        <label>Cole, Charles T.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000019</value>
+        <label>Cole, Roger F.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000020</value>
+        <label>Comyns Carr, Arthur S.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000021</value>
+        <label>Cramer, Myron C.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000022</value>
+        <label>Crowe, Smith N.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000023</value>
+        <label>Cunningham, Floyd W.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000024</value>
+        <label>Cunningham, Owen</label>
+        <description/>
+    </item>
+    <item>
+        <value>000025</value>
+        <label>Damste, J. S. Sinninghe</label>
+        <description/>
+    </item>
+    <item>
+        <value>000026</value>
+        <label>Darsey, John</label>
+        <description/>
+    </item>
+    <item>
+        <value>000027</value>
+        <label>Davies, Reginald Spencer</label>
+        <description/>
+    </item>
+    <item>
+        <value>000028</value>
+        <label>Delaney, T. R.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000029</value>
+        <label>Depo, Roger</label>
+        <description/>
+    </item>
+    <item>
+        <value>000030</value>
+        <label>Dohihara Kenji</label>
+        <description/>
+    </item>
+    <item>
+        <value>000031</value>
+        <label>Donihi, Robert M.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000032</value>
+        <label>Dunigan, Lester C.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000033</value>
+        <label>Edwards, William E.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000034</value>
+        <label>English, Joseph F.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000035</value>
+        <label>Enomoto Juji</label>
+        <description/>
+    </item>
+    <item>
+        <value>000036</value>
+        <label>Enomoto Kenji</label>
+        <description/>
+    </item>
+    <item>
+        <value>000037</value>
+        <label>Fihelly, John W.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000038</value>
+        <label>Fixel, Rowland W.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000039</value>
+        <label>Freeman, James N.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000040</value>
+        <label>Fujii Goichiro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000041</value>
+        <label>Fujisawa Chikao</label>
+        <description/>
+    </item>
+    <item>
+        <value>000042</value>
+        <label>Fujiwara Kenji</label>
+        <description/>
+    </item>
+    <item>
+        <value>000043</value>
+        <label>Fukuoka Fumiko</label>
+        <description/>
+    </item>
+    <item>
+        <value>000044</value>
+        <label>Fukushima Hisashi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000045</value>
+        <label>Furness, George A.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000046</value>
+        <label>Golunsky, S. A.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000047</value>
+        <label>Gouelou, Jacques</label>
+        <description/>
+    </item>
+    <item>
+        <value>000048</value>
+        <label>Hammack, Valentine C.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000049</value>
+        <label>Hanai Tadashi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000050</value>
+        <label>Hara Seiji</label>
+        <description/>
+    </item>
+    <item>
+        <value>000051</value>
+        <label>Hardin, Grover C.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000052</value>
+        <label>Harris, E. Richard</label>
+        <description/>
+    </item>
+    <item>
+        <value>000053</value>
+        <label>Hasegawa Motokichi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000054</value>
+        <label>Hashimoto Kingoro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000055</value>
+        <label>Hasuoka Takaaki</label>
+        <description/>
+    </item>
+    <item>
+        <value>000056</value>
+        <label>Hata Shunroku</label>
+        <description/>
+    </item>
+    <item>
+        <value>000057</value>
+        <label>Hauxhurst, Henry A.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000058</value>
+        <label>Hayashi Itsuro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000059</value>
+        <label>Helm, Hugh B.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000060</value>
+        <label>Higgins, Carlisle W.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000061</value>
+        <label>Higgins, John P.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000062</value>
+        <label>Hiranuma Kiichir</label>
+        <description/>
+    </item>
+    <item>
+        <value>000063</value>
+        <label>Hirota Koki</label>
+        <description>Ambassador to France, 1932-1938</description>
+    </item>
+    <item>
+        <value>000064</value>
+        <label>Hirota Masao</label>
+        <description/>
+    </item>
+    <item>
+        <value>000065</value>
+        <label>Hirota Yoji</label>
+        <description/>
+    </item>
+    <item>
+        <value>000066</value>
+        <label>Hongo Tameo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000067</value>
+        <label>Horowitz, Solis</label>
+        <description/>
+    </item>
+    <item>
+        <value>000068</value>
+        <label>Hoshino Naoki</label>
+        <description/>
+    </item>
+    <item>
+        <value>000069</value>
+        <label>Howard, Joseph C.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000070</value>
+        <label>Hozumi Shigetaka</label>
+        <description/>
+    </item>
+    <item>
+        <value>000071</value>
+        <label>Hsaing, Che-chun</label>
+        <description/>
+    </item>
+    <item>
+        <value>000072</value>
+        <label>Hummel, John F.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000073</value>
+        <label>Humphreys, Christmas</label>
+        <description/>
+    </item>
+    <item>
+        <value>000074</value>
+        <label>Hyde, G. Osmond</label>
+        <description/>
+    </item>
+    <item>
+        <value>000075</value>
+        <label>Hyder, Elton M., Jr.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000076</value>
+        <label>Ichikawa Sakae</label>
+        <description/>
+    </item>
+    <item>
+        <value>000077</value>
+        <label>Ikeda Sumihassa</label>
+        <description/>
+    </item>
+    <item>
+        <value>000078</value>
+        <label>Inagawa Tatsuo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000079</value>
+        <label>Inoue Matsutaro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000080</value>
+        <label>Itagaki Seishiro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000081</value>
+        <label>Ito Kiyose</label>
+        <description/>
+    </item>
+    <item>
+        <value>000082</value>
+        <label>Ivanov, A. T.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000083</value>
+        <label>Iwai Shimao</label>
+        <description/>
+    </item>
+    <item>
+        <value>000084</value>
+        <label>Iwama Kohei</label>
+        <description/>
+    </item>
+    <item>
+        <value>000085</value>
+        <label>Iwamatsu Takao</label>
+        <description/>
+    </item>
+    <item>
+        <value>000086</value>
+        <label>Iwanari Taitaro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000087</value>
+        <label>Jaranilla, Delfin</label>
+        <description/>
+    </item>
+    <item>
+        <value>000088</value>
+        <label>Jodai Takayoshi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000089</value>
+        <label>Kaino Michitaka</label>
+        <description/>
+    </item>
+    <item>
+        <value>000090</value>
+        <label>Kanase Kunji</label>
+        <description/>
+    </item>
+    <item>
+        <value>000091</value>
+        <label>Kanauchi Ryosuke</label>
+        <description/>
+    </item>
+    <item>
+        <value>000092</value>
+        <label>Kanaya Shizuo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000093</value>
+        <label>Kanzaki, Masayoshi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000094</value>
+        <label>Kaplan, V.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000095</value>
+        <label>Kasahara Yukio</label>
+        <description/>
+    </item>
+    <item>
+        <value>000096</value>
+        <label>Kato Denjiro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000097</value>
+        <label>Kato Ippei</label>
+        <description/>
+    </item>
+    <item>
+        <value>000098</value>
+        <label>Kato Takahisa</label>
+        <description/>
+    </item>
+    <item>
+        <value>000099</value>
+        <label>Kawakita Kenjiro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000100</value>
+        <label>Kaya Okinori</label>
+        <description/>
+    </item>
+    <item>
+        <value>000101</value>
+        <label>Kazuma Isaburo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000102</value>
+        <label>KcKinney, Worth E.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000103</value>
+        <label>Keenan, Joseph B.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000104</value>
+        <label>Kido Koichi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000105</value>
+        <label>Kimura Heitaro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000106</value>
+        <label>Kimura Shigeharu</label>
+        <description/>
+    </item>
+    <item>
+        <value>000107</value>
+        <label>Kiyose Ichiro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000108</value>
+        <label>Kleiman, Samuel Joseph</label>
+        <description/>
+    </item>
+    <item>
+        <value>000109</value>
+        <label>Kobayashi Kyoichi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000110</value>
+        <label>Kobayashi Shunzo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000111</value>
+        <label>Koiso Kuniaki</label>
+        <description/>
+    </item>
+    <item>
+        <value>000112</value>
+        <label>Kokubu Tomoharu</label>
+        <description/>
+    </item>
+    <item>
+        <value>000113</value>
+        <label>Kondo Geiichi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000114</value>
+        <label>Kunin, A. V.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000115</value>
+        <label>Kurashige Tetsuichi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000116</value>
+        <label>Kusano Hyoichiro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000117</value>
+        <label>Kwei, Yu</label>
+        <description/>
+    </item>
+    <item>
+        <value>000118</value>
+        <label>Lambert, Mrs.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000119</value>
+        <label>Laverge, A. T.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000120</value>
+        <label>Lazarus, Aristides G.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000121</value>
+        <label>Levin, Michael</label>
+        <description/>
+    </item>
+    <item>
+        <value>000122</value>
+        <label>Liebert, John Granville</label>
+        <description/>
+    </item>
+    <item>
+        <value>000123</value>
+        <label>Liu, James T. C.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000124</value>
+        <label>Llewellyn, Grace Kanode</label>
+        <description/>
+    </item>
+    <item>
+        <value>000125</value>
+        <label>Logan, William, Jr.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000126</value>
+        <label>Lopez, Pedro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000127</value>
+        <label>Mahoney, Willis E.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000128</value>
+        <label>Makino Ryoso</label>
+        <description/>
+    </item>
+    <item>
+        <value>000129</value>
+        <label>Mansfield, Alan James</label>
+        <description/>
+    </item>
+    <item>
+        <value>000130</value>
+        <label>Matsui Iwane</label>
+        <description/>
+    </item>
+    <item>
+        <value>000131</value>
+        <label>Matsumura Tomokatsu</label>
+        <description/>
+    </item>
+    <item>
+        <value>000132</value>
+        <label>Matsuoaka Tokihiko</label>
+        <description/>
+    </item>
+    <item>
+        <value>000133</value>
+        <label>Matsuoka Kenichiro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000134</value>
+        <label>Matsuoka Yosuke</label>
+        <description/>
+    </item>
+    <item>
+        <value>000135</value>
+        <label>Matsuru Heisuke</label>
+        <description/>
+    </item>
+    <item>
+        <value>000136</value>
+        <label>Matsushita Masatoshi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000137</value>
+        <label>Matsuzawa Tatsuo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000138</value>
+        <label>Mattice, Floyd J.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000139</value>
+        <label>McCormack, William J.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000140</value>
+        <label>McDermott, Edward P.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000141</value>
+        <label>McDougall, Edward Stuart</label>
+        <description/>
+    </item>
+    <item>
+        <value>000142</value>
+        <label>McKenzie, Walter I.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000143</value>
+        <label>McManus, Lawrence</label>
+        <description/>
+    </item>
+    <item>
+        <value>000144</value>
+        <label>Mei Ju-ao</label>
+        <description/>
+    </item>
+    <item>
+        <value>000145</value>
+        <label>Menon, Govinda</label>
+        <description/>
+    </item>
+    <item>
+        <value>000146</value>
+        <label>Menon, K. Krisna</label>
+        <description/>
+    </item>
+    <item>
+        <value>000147</value>
+        <label>Migita Masao</label>
+        <description/>
+    </item>
+    <item>
+        <value>000148</value>
+        <label>Mignone, F. A.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000149</value>
+        <label>Mimachi Tsunehisa</label>
+        <description/>
+    </item>
+    <item>
+        <value>000150</value>
+        <label>Minami Jiro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000151</value>
+        <label>Miura Kazuichi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000152</value>
+        <label>Miyake Shotaro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000153</value>
+        <label>Miyata Misuo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000154</value>
+        <label>Morgan, Roy</label>
+        <description/>
+    </item>
+    <item>
+        <value>000155</value>
+        <label>Mori Yoichi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000156</value>
+        <label>Morishima Goro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000157</value>
+        <label>Morname, Thomas F.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000158</value>
+        <label>Morosov, Platon Dmitrievich</label>
+        <description/>
+    </item>
+    <item>
+        <value>000159</value>
+        <label>Morrow, Thomas H.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000160</value>
+        <label>Muto Akira</label>
+        <description/>
+    </item>
+    <item>
+        <value>000161</value>
+        <label>Nagano Osami</label>
+        <description/>
+    </item>
+    <item>
+        <value>000162</value>
+        <label>Narahashi Wataru</label>
+        <description/>
+    </item>
+    <item>
+        <value>000163</value>
+        <label>Naritomi Nobuo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000164</value>
+        <label>Nihro Katsumi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000165</value>
+        <label>Nishi Haruhiko</label>
+        <description/>
+    </item>
+    <item>
+        <value>000166</value>
+        <label>Nolan, Henry Grattan</label>
+        <description/>
+    </item>
+    <item>
+        <value>000167</value>
+        <label>Northcroft, Erima Harvey</label>
+        <description/>
+    </item>
+    <item>
+        <value>000168</value>
+        <label>Nyi, Judson T. Y.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000169</value>
+        <label>O'Neill, Edward E.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000170</value>
+        <label>Oba, Mr.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000171</value>
+        <label>Oda Yasuma</label>
+        <description/>
+    </item>
+    <item>
+        <value>000172</value>
+        <label>Ohara Shinichi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000173</value>
+        <label>Ohkoshi Kenji</label>
+        <description/>
+    </item>
+    <item>
+        <value>000174</value>
+        <label>Ohta Kinjiro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000175</value>
+        <label>Oka Takasumi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000176</value>
+        <label>Okamoto Otoichi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000177</value>
+        <label>Okamoto Shoichi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000178</value>
+        <label>Okamoto Toshio</label>
+        <description/>
+    </item>
+    <item>
+        <value>000179</value>
+        <label>Okawa Shumei</label>
+        <description/>
+    </item>
+    <item>
+        <value>000180</value>
+        <label>Okuyama Hachiro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000181</value>
+        <label>Omuro Ryoichi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000182</value>
+        <label>Oneto, Robert</label>
+        <description/>
+    </item>
+    <item>
+        <value>000183</value>
+        <label>Ono Kisaku</label>
+        <description/>
+    </item>
+    <item>
+        <value>000184</value>
+        <label>Ono Seiichiro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000185</value>
+        <label>Oshima Hiroshi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000186</value>
+        <label>Osumi Keizo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000187</value>
+        <label>Pal, Radhabinod</label>
+        <description/>
+    </item>
+    <item>
+        <value>000188</value>
+        <label>Parkinson, Kenneth N.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000189</value>
+        <label>Pashkovsky, Alex A.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000190</value>
+        <label>Patrick, William Donald</label>
+        <description/>
+    </item>
+    <item>
+        <value>000191</value>
+        <label>Pignatelli, Guido</label>
+        <description/>
+    </item>
+    <item>
+        <value>000192</value>
+        <label>Prout, William C.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000193</value>
+        <label>Roberts, Samuel Allen</label>
+        <description/>
+    </item>
+    <item>
+        <value>000194</value>
+        <label>Robinson, James J.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000195</value>
+        <label>Roling, Bernard Victor A.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000196</value>
+        <label>Rosenblit, S. J.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000197</value>
+        <label>Rutchick, Roger S.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000198</value>
+        <label>Sackett, Henry A.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000199</value>
+        <label>Saeki Chihiro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000200</value>
+        <label>Saigo Jugo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000201</value>
+        <label>Saito Hisashi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000202</value>
+        <label>Saito Seiichi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000203</value>
+        <label>Sakaya Tadashi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000204</value>
+        <label>Sakuma Shin</label>
+        <description/>
+    </item>
+    <item>
+        <value>000205</value>
+        <label>Sammonji Shohei</label>
+        <description/>
+    </item>
+    <item>
+        <value>000206</value>
+        <label>Sandusky, Arthur A.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000207</value>
+        <label>Sasagawa Tomoji</label>
+        <description/>
+    </item>
+    <item>
+        <value>000208</value>
+        <label>Sato Kenryo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000209</value>
+        <label>Sawa Kunio</label>
+        <description/>
+    </item>
+    <item>
+        <value>000210</value>
+        <label>Sejima Ruizo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000211</value>
+        <label>Shea, John D.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000212</value>
+        <label>Shibasawa Shinichi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000213</value>
+        <label>Shichida Motoharu</label>
+        <description/>
+    </item>
+    <item>
+        <value>000214</value>
+        <label>Shigemitsu Mamoru</label>
+        <description/>
+    </item>
+    <item>
+        <value>000215</value>
+        <label>Shimada Shigetaro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000216</value>
+        <label>Shimanouchi Tatsuki</label>
+        <description/>
+    </item>
+    <item>
+        <value>000217</value>
+        <label>Shiohara Tokisaburo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000218</value>
+        <label>Shiratori Toshio</label>
+        <description/>
+    </item>
+    <item>
+        <value>000219</value>
+        <label>Smirnov, A. T.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000220</value>
+        <label>Smith, David F.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000221</value>
+        <label>Somiya Shinji</label>
+        <description/>
+    </item>
+    <item>
+        <value>000222</value>
+        <label>Sorsey, Harryman</label>
+        <description/>
+    </item>
+    <item>
+        <value>000223</value>
+        <label>Steiner, Kurt</label>
+        <description/>
+    </item>
+    <item>
+        <value>000224</value>
+        <label>Strooker, Mrs. C. R.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000225</value>
+        <label>Sugai Toshiko</label>
+        <description/>
+    </item>
+    <item>
+        <value>000226</value>
+        <label>Sugawara Yutaka</label>
+        <description/>
+    </item>
+    <item>
+        <value>000227</value>
+        <label>Sutton, David Nelson</label>
+        <description/>
+    </item>
+    <item>
+        <value>000228</value>
+        <label>Suzuki Isamu</label>
+        <description/>
+    </item>
+    <item>
+        <value>000229</value>
+        <label>Suzuki Teiichi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000230</value>
+        <label>Tadevosyan, V.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000231</value>
+        <label>Takagi Kazuya</label>
+        <description/>
+    </item>
+    <item>
+        <value>000232</value>
+        <label>Takahashi Yoshitsugu</label>
+        <description/>
+    </item>
+    <item>
+        <value>000233</value>
+        <label>Takano Tsuruo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000234</value>
+        <label>Takayanagi Kenzo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000235</value>
+        <label>Takeuchi Kintaro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000236</value>
+        <label>Takigawa Masajiro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000237</value>
+        <label>Tanaka Tadakatsu</label>
+        <description/>
+    </item>
+    <item>
+        <value>000238</value>
+        <label>Tanaka Yasumichi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000239</value>
+        <label>Tatsumi Koretsune</label>
+        <description/>
+    </item>
+    <item>
+        <value>000240</value>
+        <label>Tavenner, Frank S., Jr.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000241</value>
+        <label>Tereshkin, Peter Fedorovich</label>
+        <description/>
+    </item>
+    <item>
+        <value>000242</value>
+        <label>Togo Shigenori</label>
+        <description/>
+    </item>
+    <item>
+        <value>000243</value>
+        <label>Tojo Hideki</label>
+        <description/>
+    </item>
+    <item>
+        <value>000244</value>
+        <label>Tokuoka Jiro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000245</value>
+        <label>Tsukazaki Naoyoshi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000246</value>
+        <label>Uchida Fujio</label>
+        <description/>
+    </item>
+    <item>
+        <value>000247</value>
+        <label>Uchiyama Hiroshi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000248</value>
+        <label>Umezu Yoshijiro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000249</value>
+        <label>Umezu Yoshikazu</label>
+        <description/>
+    </item>
+    <item>
+        <value>000250</value>
+        <label>Usami Rokuro</label>
+        <description/>
+    </item>
+    <item>
+        <value>000251</value>
+        <label>Ushiba Nobuhiko</label>
+        <description/>
+    </item>
+    <item>
+        <value>000252</value>
+        <label>Uzawa Somei</label>
+        <description/>
+    </item>
+    <item>
+        <value>000253</value>
+        <label>Vasiliev, A. N.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000254</value>
+        <label>Vote, Robert M.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000255</value>
+        <label>Warren, Franklin E. N.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000256</value>
+        <label>Webb, William Flood</label>
+        <description/>
+    </item>
+    <item>
+        <value>000257</value>
+        <label>Wiley, Robert L.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000258</value>
+        <label>Williams, Albert</label>
+        <description/>
+    </item>
+    <item>
+        <value>000259</value>
+        <label>Williams, Eugene D.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000260</value>
+        <label>Williams, George C.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000261</value>
+        <label>Woolworth, Gilbert S.</label>
+        <description/>
+    </item>
+    <item>
+        <value>000262</value>
+        <label>Wu, Hsueh-yi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000263</value>
+        <label>Wuilliam, Ronald Henry</label>
+        <description/>
+    </item>
+    <item>
+        <value>000264</value>
+        <label>Yamada Hanzo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000265</value>
+        <label>Yamagiwa Masamichi</label>
+        <description/>
+    </item>
+    <item>
+        <value>000266</value>
+        <label>Yamana Juzo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000267</value>
+        <label>Yamaoka, George</label>
+        <description/>
+    </item>
+    <item>
+        <value>000268</value>
+        <label>Yanai Hisao</label>
+        <description/>
+    </item>
+    <item>
+        <value>000269</value>
+        <label>Yasuda Shigeo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000270</value>
+        <label>Yatsugi Kazuo</label>
+        <description/>
+    </item>
+    <item>
+        <value>000271</value>
+        <label>Yoshinagaa Taganobu</label>
+        <description/>
+    </item>
+    <item>
+        <value>000272</value>
+        <label>Zaryanov, I. M.</label>
+        <description/>
+    </item>
+</items>
