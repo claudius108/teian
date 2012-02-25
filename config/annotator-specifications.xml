@@ -421,25 +421,25 @@ damage fw restore supplied surplus metSym rhyme
         <teian:annotator-attribute/>
     </teian:annotator>
     <teian:annotator id="annotate-button" name="" editable="false" type-code="action">
-        <teian:annotator-description-text>Save current document.</teian:annotator-description-text>
+        <teian:annotator-description-text>Save document.</teian:annotator-description-text>
         <teian:annotator-icon-name/>
         <teian:annotator-possible-parent-element-names/>
         <teian:annotator-attribute/>
     </teian:annotator>
     <teian:annotator id="source-button" name="" editable="false" type-code="action">
-        <teian:annotator-description-text>Save current document.</teian:annotator-description-text>
+        <teian:annotator-description-text>View source of document.</teian:annotator-description-text>
         <teian:annotator-icon-name/>
         <teian:annotator-possible-parent-element-names/>
         <teian:annotator-attribute/>
     </teian:annotator>
     <teian:annotator id="lock-button" name="" editable="false" type-code="action">
-        <teian:annotator-description-text>Save current document.</teian:annotator-description-text>
+        <teian:annotator-description-text>Lock document.</teian:annotator-description-text>
         <teian:annotator-icon-name/>
         <teian:annotator-possible-parent-element-names/>
         <teian:annotator-attribute/>
     </teian:annotator>
     <teian:annotator id="unlock-button" name="" editable="false" type-code="action">
-        <teian:annotator-description-text>Save current document.</teian:annotator-description-text>
+        <teian:annotator-description-text>Unlock document.</teian:annotator-description-text>
         <teian:annotator-icon-name/>
         <teian:annotator-possible-parent-element-names/>
         <teian:annotator-attribute/>
