@@ -7,3 +7,27 @@ refer the CSS file for docbook content is below:
   </teian:content-styling-css-files>.
 Thus, in case when the content's root element has the name 'book', or 'bookmap', the content is styled by using the CSS file located 
 at the relative location provided by @href's value. One can add any names for the root element are needed.  
+
+Version 2.2 - 2011.11.02
+This version allows editing and clearing entities' properties, and also editing of text content of the entities.
+
+Version 2.1 - 2011-09-28
+Added support for annotators presented as context menu items.
+
+Version 2.2 - 2011-09-23
+Major refactoring of teian. The architecture was changed, so that now teian allows editing directly big XML files.
+The styling is provided by specialized CSS files for each XML vocabulary one chooses.
+
+Version 1.4.7 - 2011.11.05
+1. The plugin works now with Opera, Safari, and Google Chrome.
+2. Some minor code improvements.
+
+Version 1.4.7 - 2010.10.13
+1. Improved documentation.
+
+Version 1.4.6 - 2010.08.05
+1. Added "Edit Entity" command, used to edit entities.
+2. Added "Clear entity" and "Edit Entity" commands as options for editor's context menu, which is available
+by right-click inside text. Thus, there is no need for add "teiannRemoveEntityBtn" in toolbar item of exfk:rteOptions
+element, within the respective page.
+3. "Date" and "Hyperlink"annotators (and all of their type) are now editable.
