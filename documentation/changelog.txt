@@ -1,0 +1,9 @@
+Version 2.2 - 2012.06.07
+1. Teian is now able to style the content by using a CSS file adapted to the respective content. This is based upon the correspondence
+provided in $TEIAN_HOME/config.config.xml file, in the section about the CSS files for styling the content. An example on how to
+refer the CSS file for docbook content is below: 
+  <teian:content-styling-css-files>
+    <teian:file href="../config/css/docbook/driver.css" content-root-element-names="book bookmap" />
+  </teian:content-styling-css-files>.
+Thus, in case when the content's root element has the name 'book', or 'bookmap', the content is styled by using the CSS file located 
+at the relative location provided by @href's value. One can add any names for the root element are needed.  

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teian:configuration xmlns:teian="http://kuberam.ro/ns/teian">
+  <!--list of ui languages -->
+  <teian:ui-languages>
+    <teian:lang code="en-US" />
+    <teian:lang code="fr-FR" />
+  </teian:ui-languages>
+  <teian:content-styling-css-files>
+    <teian:file href="../config/css/docbook/driver.css" content-root-element-names="book bookmap" />
+    <teian:file href="../config/css/TEI/tei.css" content-root-element-names="TEI" />
+    <teian:file href="../config/css/xliff/xliff.css" content-root-element-names="xliff" />
+  </teian:content-styling-css-files>
+</teian:configuration>
