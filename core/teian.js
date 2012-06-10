@@ -6,7 +6,7 @@
 
 window.teian = {
 	"name" : "teian",
-	"version" : "2.2",
+	"version" : "2.3",
 	"utils" : {
 		"sOperationType" : "add"
 	},
@@ -108,11 +108,12 @@ window.teian = {
 			"mode" : "synchronous",
 			"method" : "get"
 		});
-		var contentRootElementName = $x._instances['data'].documentElement.nodeName;
+		var contentRootElement = $x._instances['data'].documentElement;
+		var contentRootElementClarkName = '{' + contentRootElement.namespaceURI + '}' + contentRootElement.nodeName;
 		var fileref = document.createElement("link");
 		fileref.setAttribute("rel", "stylesheet");
 		fileref.setAttribute("type", "text/css");
-		fileref.setAttribute("href", $x.xpath("simpath:instance('config')//teian:file[contains(@content-root-element-names, '" + contentRootElementName + "')]/@href")[0].value);
+		fileref.setAttribute("href", $x.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@href")[0].value);
 		document.getElementsByTagName("head")[0].appendChild(fileref);
 		($x.utils.isIE) ? $("#teian-content").html($x.instance('data').source()) : $("#teian-content").append(
 				$($x.instance('data').root().cloneNode(true)));

@@ -6,8 +6,17 @@
     <teian:lang code="fr-FR" />
   </teian:ui-languages>
   <teian:content-styling-css-files>
-    <teian:file href="../config/css/docbook/driver.css" content-root-element-names="book bookmap" />
-    <teian:file href="../config/css/TEI/tei.css" content-root-element-names="TEI" />
-    <teian:file href="../config/css/xliff/xliff.css" content-root-element-names="xliff" />
+    <teian:file href="../config/css/docbook/driver.css">
+      <teian:content-root-element-name>{http://docbook.org/ns/docbook}book</teian:content-root-element-name>
+      <teian:content-root-element-name>{http://docbook.org/ns/docbook}assembly</teian:content-root-element-name>
+      <teian:content-root-element-name>{http://docbook.org/ns/docbook}bookmap</teian:content-root-element-name>
+      <teian:content-root-element-name>{http://docbook.org/ns/docbook}topic</teian:content-root-element-name>
+    </teian:file>
+    <teian:file href="../config/css/TEI/tei.css">
+          <teian:content-root-element-name>{http://www.tei-c.org/ns/1.0}TEI</teian:content-root-element-name>
+    </teian:file>
+    <teian:file href="../config/css/xliff/xliff.css" content-root-element-names="xliff">
+          <teian:content-root-element-name>{urn:oasis:names:tc:xliff:document:1.2}xliff</teian:content-root-element-name>
+    </teian:file>
   </teian:content-styling-css-files>
 </teian:configuration>

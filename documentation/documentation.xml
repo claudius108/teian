@@ -26,7 +26,7 @@
         <sect2>
             <title>Description</title>
             <para>
-                <emphasis role="strong">teian</emphasis> is a standalone, web-based annotator for texts in XML.</para>
+                <emphasis role="strong">teian</emphasis> is a standalone, web-based annotator and simple editor for texts in XML format.</para>
             <para>It runs in all major modern browsers: Opera, Firefox, Google Chrome, Safari, and Internet Explorer (8+).</para>
         </sect2>
         <sect2>
@@ -37,7 +37,7 @@
 				file with a new name, of type <emphasis>language-abbreviation.xml</emphasis>,
 				and add a new <emphasis>lang</emphasis> child element to
 				<emphasis>ui-languages</emphasis> element of
-				<emphasis>$TEIAN_HOME/config/configuration-options.xml</emphasis> file.
+				<emphasis>$TEIAN_HOME/config/configuration-options.xml</emphasis> file (the mechanism for dynamically changing the UI language it is not fully implemented).
 			</para>
         </sect2>
     </sect1>
