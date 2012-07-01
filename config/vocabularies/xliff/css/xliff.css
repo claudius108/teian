@@ -1,0 +1,29 @@
+file > body {
+	width: 100%;
+	background-color: red;
+}
+
+note {
+	display: none;
+}
+
+trans-unit {
+	display: table-row;
+	width: 100%;
+}
+
+source {
+	display: table-cell;
+	background-color: #A9F5F2;
+	border: 1px solid black;
+	padding: 3px;
+	width: 50%;
+}
+
+target {
+	display: table-cell;
+	background-color: #A9E2F3;
+	border: 1px solid black;
+	padding: 3px;
+	width: 50%;
+}
