@@ -8,7 +8,7 @@
   <teian:general-error-messages>
     <teian:selection-empty>In order to annotate, you must select something.</teian:selection-empty>
     <teian:selection-non-empty>In order to annotate, you must NOT select text!</teian:selection-non-empty>
-    <teian:forbidden-overlapping>You are not allowed to overlap these TEI elements!</teian:forbidden-overlapping>
+    <teian:forbidden-overlapping>You are not allowed to overlap these DocBook elements!</teian:forbidden-overlapping>
     <teian:non-editable-entity>This entity ('%entityName') is not editable.</teian:non-editable-entity>
     <!-- <teian:warnOnMissingHyperlinkTarget>URL must not be empty!</teian:warnOnMissingHyperlinkTarget> -->
     <teian:warnOnSelectingSearchResult>In order to annotate, you must select one search result!</teian:warnOnSelectingSearchResult>
