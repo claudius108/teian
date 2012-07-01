@@ -153,49 +153,4 @@
         <teian:warnOnRemovingRootEntity>You are not allowed to remove the root entity!</teian:warnOnRemovingRootEntity>
         <teian:warnOnSplittingElement>You are not allowed to insert this entity here!</teian:warnOnSplittingElement>
     </teian:general-error-messages>
-    <!--This annotator below is standard, do not modify!-->
-    <teian:annotator id="save-button">
-        <teian:toolbar-button-title>Save</teian:toolbar-button-title>
-        <teian:toolbar-button-label>Save</teian:toolbar-button-label>
-    </teian:annotator>
-    <teian:annotator id="annotate-button">
-        <teian:toolbar-button-title>Annotate</teian:toolbar-button-title>
-        <teian:toolbar-button-label>Annotate</teian:toolbar-button-label>
-    </teian:annotator>
-    <teian:annotator id="source-button">
-        <teian:toolbar-button-title>Source</teian:toolbar-button-title>
-        <teian:toolbar-button-label>Source</teian:toolbar-button-label>
-    </teian:annotator>
-    <teian:annotator id="lock-button">
-        <teian:toolbar-button-title>Lock content</teian:toolbar-button-title>
-        <teian:toolbar-button-label>Lock</teian:toolbar-button-label>
-    </teian:annotator>
-    <teian:annotator id="unlock-button">
-        <teian:toolbar-button-title>Unlock content</teian:toolbar-button-title>
-        <teian:toolbar-button-label>Unlock</teian:toolbar-button-label>
-    </teian:annotator>
-    <teian:annotator id="back-button">
-        <teian:toolbar-button-title>Back</teian:toolbar-button-title>
-        <teian:toolbar-button-label>Back</teian:toolbar-button-label>
-    </teian:annotator>
-    <teian:annotator id="help-button">
-        <teian:toolbar-button-title>Help</teian:toolbar-button-title>
-        <teian:toolbar-button-label>Help</teian:toolbar-button-label>
-        <teian:annotator-panel>
-            <teian:annotator-panel-title>Documentation for teian</teian:annotator-panel-title>
-            <teian:annotator-panel-element id="help-dialog-content" xlink:href="http://demoedb.richmond.edu/exist/rest/db/urbml/apps/tei/utils/teian/config/lang/documentation-en.html"/>
-        </teian:annotator-panel>
-    </teian:annotator>
-    <teian:annotator id="clear-entity-button">
-        <teian:toolbar-button-title>Clear entity</teian:toolbar-button-title>
-        <teian:toolbar-button-label>Clear entity</teian:toolbar-button-label>
-        <teian:annotator-panel>
-            <teian:annotator-panel-title>Do you really want to clear this entity?</teian:annotator-panel-title>
-            <teian:annotator-panel-element id="clear-entity-label">Do you really want to clear the entity '%entityName'?</teian:annotator-panel-element>
-        </teian:annotator-panel>
-    </teian:annotator>
-    <teian:annotator id="edit-entity-button">
-        <teian:toolbar-button-title>Edit entity</teian:toolbar-button-title>
-        <teian:toolbar-button-label>Edit entity</teian:toolbar-button-label>
-    </teian:annotator>
 </teian:lang>
