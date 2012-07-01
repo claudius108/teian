@@ -20,11 +20,11 @@
 	<!--dependencies for contextMenu plugin-->
         <link rel="stylesheet" type="text/css" href="../../jquery/contextMenu/jquery.contextMenu.css"/>
         <script type="text/javascript" src="../../jquery/contextMenu/jquery.contextMenu.js">/**/</script>
-	<!--dependencies for kyer-->
-        <link rel="stylesheet" type="text/css" href="../../kyer/extensions/kyer-toolbar-menu.css"/>
-        <script type="text/javascript" charset="utf-8" src="../../kyer/core/kyer.js">/**/</script>
 	<!--dependencies for teian-->
         <script type="text/javascript" charset="utf-8" src="teian.js">/**/</script>
+	<!--dependencies for kyer-->
+        <link rel="stylesheet" type="text/css" href="../../kyer/extensions/kyer-toolbar-menu.css"/>
+        <script type="text/javascript" charset="utf-8" src="../../kyer/core/kyer.js">/**/</script>        
 	<!--dependencies for simpath-->
         <script type="text/javascript" charset="utf-8" src="../../simpath/core/simpath.js">/**/</script>
 	<!--dependencies for rangy-->
@@ -41,80 +41,7 @@
         
 		<!--separator-->
 <!-- 		<div class="fg-buttonset" style="width: 100%; margin-top: 7px;"> </div> -->
-        <kyer:menu xmlns:xf="http://www.w3.org/2002/xforms" id="teian-toolbar-menu" type="toolbar" appearance="kyer-toolbar-menu">
-            <kyer:optionset selection="none">
-                <kyer:option id="save-button" command="teian.save()" appearance="text-button"></kyer:option>
-            </kyer:optionset>
-<!--            <kyer:optionset id="hi-dd-menu" selection="none" type="drop-down">
-                <kyer:label>hi</kyer:label>
-                <kyer:option id="strong-annotator" appearance="text-button"/>
-                <kyer:option id="italic-annotator" appearance="text-button"/>
-                <kyer:option id="underline-annotator" appearance="text-button"/>
-                <kyer:option id="strikethrough-annotator" appearance="text-button"/>
-            </kyer:optionset>
-            <kyer:optionset id="lists-dd-menu" selection="none" type="drop-down">
-                <kyer:label>lists</kyer:label>
-                <kyer:option id="label-annotator" appearance="text-button"/>
-                <kyer:option id="list-annotator" appearance="text-button"/>
-                <kyer:option id="listBibl-annotator" appearance="text-button"/>
-            </kyer:optionset>
-            <kyer:optionset selection="none">
-                <kyer:option id="date-annotator" appearance="image-button"/>
-            </kyer:optionset>
-            <kyer:optionset selection="none">
-                <kyer:option id="ref-annotator" appearance="text-button"/>
-            </kyer:optionset>
-            <kyer:optionset selection="none">
-                <kyer:option id="lb-annotator" appearance="text-button"/>
-            </kyer:optionset>
-            <kyer:optionset selection="none">
-                <kyer:option id="pb-annotator" appearance="text-button"/>
-            </kyer:optionset>
-            <kyer:optionset selection="none">
-                <kyer:option id="persName-annotator" appearance="text-button"/>
-            </kyer:optionset>
-            <kyer:optionset selection="none">
-                <kyer:option id="orgName-annotator" appearance="text-button"/>
-            </kyer:optionset>
-            <kyer:optionset selection="none">
-                <kyer:option id="placeName-annotator" appearance="text-button"/>
-            </kyer:optionset>-->
-            <kyer:optionset selection="none">
-                <kyer:option id="annotate-button" command="teian.annotate();" appearance="text-button" />
-            </kyer:optionset>
-            <kyer:optionset selection="none">
-                <kyer:option id="source-button" command="teian.source();" appearance="text-button" />
-            </kyer:optionset>
-<!--             <kyer:optionset selection="single" type="horizontal"> -->
-<!--                 <kyer:option id="annotate-button" command="teian.annotate();" appearance="text-button" /> -->
-<!--                 <kyer:option id="source-button" command="teian.source();" appearance="text-button" /> -->
-<!--             </kyer:optionset> -->
-            <kyer:optionset selection="none">
-                <kyer:option id="lock-button" command="teian.lock();" appearance="text-button" />            
-            </kyer:optionset>
-            <kyer:optionset selection="none">
-                <kyer:option id="unlock-button" command="teian.unlock();" appearance="text-button" />            
-            </kyer:optionset>
-<!--             <kyer:optionset selection="single" type="horizontal"> -->
-<!--                 <kyer:option id="lock-button" command="teian.lock();" appearance="text-button" />             -->
-<!--                 <kyer:option id="unlock-button" command="teian.unlock();" appearance="text-button" />             -->
-<!--             </kyer:optionset> -->
-<!--             <kyer:optionset selection="none"> -->
-<!--                 <kyer:option id="back-button" command="history.go(-1);" appearance="text-button"></kyer:option> -->
-<!--             </kyer:optionset> -->
-<!--             <kyer:optionset selection="none"> -->
-<!--                 <kyer:option id="help-button" command="teian.ui['help-dialog'].dialog('open');" appearance="text-button"></kyer:option> -->
-<!--             </kyer:optionset> -->
-<!--             <kyer:optionset id="language-dd-menu" selection="none" type="drop-down"> -->
-<!--                 <kyer:label>UI lang</kyer:label> -->
-<!--                 <kyer:option id="en-language" appearance="text-button"> -->
-<!--                     <kyer:label>EN</kyer:label> -->
-<!--                 </kyer:option> -->
-<!--                 <kyer:option id="fr-language" appearance="text-button"> -->
-<!--                     <kyer:label>FR</kyer:label> -->
-<!--                 </kyer:option> -->
-<!--             </kyer:optionset> -->
-        </kyer:menu>
+        <kyer:menu id="teian-toolbar-menu" appearance="kyer-toolbar-menu"></kyer:menu>
 <!--        <div id="teian-toolbar2" class="fg-toolbar ui-widget-header ui-corner-all ui-helper-clearfix">
             <div class="fg-buttonset ui-helper-clearfix">
 			<a href="#" class="fg-button ui-state-default fg-button-icon-solo ui-corner-all" title="Open"><span class="ui-icon ui-icon-folder-open"></span> Open</a>
@@ -166,16 +93,7 @@
                 </div>
             </div>
         </div>-->
-        <kyer:menu xmlns:xf="http://www.w3.org/2002/xforms" id="teian-context-menu" type="context" container="#teian-content" appearance="kyer-context-menu">
-            <kyer:optionset selection="none">
-                <kyer:option id="edit-entity-button" command="teian.editEntity();" appearance="text-button">
-                    <kyer:label>Edit entity</kyer:label>
-                </kyer:option>
-                <kyer:option id="clear-entity-button" command="teian.ui['clear-entity-dialog'].dialog('open');" appearance="text-button">
-                    <kyer:label>Clear entity</kyer:label>
-                </kyer:option>
-            </kyer:optionset>
-        </kyer:menu>
+        <kyer:menu id="teian-context-menu" appearance="kyer-context-menu"></kyer:menu>
 <!-- 	<p><span id="label">Select your new theme:</span> <span id="themeSelection"></span></p> -->
         <form id="teian-form" action="../services/save.xq" method="post">
             <textarea id="data" name="data" style="display: none;">/**/</textarea>
