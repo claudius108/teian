@@ -80,7 +80,7 @@
 	</teian:annotator-possible-parent-element-names>
         <teian:annotator-possible-preceding-sibling-element-names/>
         <teian:annotator-attribute/>
-        <teian:annotator-icon-name>lineBreak.gif</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/lineBreak.gif</teian:annotator-icon-name>
     </teian:annotator>
     <teian:annotator id="pb-annotator" name="pb" editable="false" type-code="insert"><!--this is actually of insert-parametrized type-->
 		<!-- Sample: <pb n="III" xml:id="pg_III" facs="0003"/> -->
@@ -97,7 +97,7 @@
 		damage fw restore supplied surplus metSym rhyme
 	</teian:annotator-possible-parent-element-names>
         <teian:annotator-possible-preceding-sibling-element-names/>
-        <teian:annotator-icon-name>pageBreak.gif</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/pageBreak.gif</teian:annotator-icon-name>
         <teian:annotator-attribute>n</teian:annotator-attribute>
         <teian:annotator-attribute>xml:id</teian:annotator-attribute>
         <teian:annotator-attribute>facs</teian:annotator-attribute>
@@ -134,7 +134,7 @@
 		damage fw restore supplied surplus rhyme
 	</teian:annotator-possible-parent-element-names>
         <teian:annotator-possible-preceding-sibling-element-names/>
-        <teian:annotator-icon-name>italic.png</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/italic.png</teian:annotator-icon-name>
         <teian:annotator-attribute name="rend" value="italic"/>
     </teian:annotator>
     <teian:annotator id="strong-annotator" name="hi" editable="false" type-code="selected-wrap">
@@ -151,7 +151,7 @@
 		damage fw restore supplied surplus rhyme
 	</teian:annotator-possible-parent-element-names>
         <teian:annotator-possible-preceding-sibling-element-names/>
-        <teian:annotator-icon-name>bold.gif</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/bold.gif</teian:annotator-icon-name>
         <teian:annotator-attribute name="rend" value="strong"/>
     </teian:annotator>
     <teian:annotator id="underline-annotator" name="hi" editable="false" type-code="selected-wrap">
@@ -168,12 +168,12 @@
 		damage fw restore supplied surplus rhyme
 	</teian:annotator-possible-parent-element-names>
         <teian:annotator-possible-preceding-sibling-element-names/>
-        <teian:annotator-icon-name>underline.png</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/underline.png</teian:annotator-icon-name>
         <teian:annotator-attribute name="rend" value="underline"/>
     </teian:annotator>
     <teian:annotator id="strikethrough-annotator" name="hi" editable="false" type-code="selected-wrap">
         <teian:annotator-description-text>Wrap strikethrough tags around the selected text.</teian:annotator-description-text>
-        <teian:annotator-icon-name>strikethrough.png</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/strikethrough.png</teian:annotator-icon-name>
         <teian:annotator-possible-parent-element-names>
 		cl phr s w abbr add addrLine author bibl biblScope corr date del distinct editor email emph expan foreign gloss head headItem headLabel hi item l label measure mentioned name note num orig p pubPlace publisher q quote ref reg rs said sic soCalled speaker stage street term time title unclear
 		case colloc def dictScrap entryFree etym form gen gram gramGrp hyph iType lang lbl mood number orth per pos pron re sense stress subc syll tns usg xr
@@ -190,7 +190,7 @@
     </teian:annotator>
     <teian:annotator id="date-annotator" name="date" editable="true" type-code="selected-wrap-parameterized">
         <teian:annotator-description-text>Wrap date tags around the selected text and display the date selector panel.</teian:annotator-description-text>
-        <teian:annotator-icon-name>calendar.png</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/calendar.png</teian:annotator-icon-name>
         <teian:annotator-possible-parent-element-names>
 		cl phr s w abbr add addrLine author bibl biblScope corr date del distinct editor email emph expan foreign gloss head headItem headLabel hi item l label measure mentioned name note num orig p pubPlace publisher q quote ref reg rs said sic soCalled speaker stage street term time title unclear
 		case colloc def dictScrap entryFree etym form gen gram gramGrp hyph iType lang lbl mood number orth per pos pron re sense stress subc syll tns usg xr
@@ -237,7 +237,7 @@
     </teian:annotator>
     <teian:annotator id="ref-annotator" name="ref" editable="true" type-code="selected-wrap-parameterized">
         <teian:annotator-description-text>Wrap hypertext link tags around the selected text and display the hypertext link panel.</teian:annotator-description-text>
-        <teian:annotator-icon-name>link.png</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/link.png</teian:annotator-icon-name>
         <teian:annotator-possible-parent-element-names>
 		cl phr s w abbr add addrLine author bibl biblScope corr date del distinct editor email emph expan foreign gloss head headItem headLabel hi item l label measure mentioned name note num orig p pubPlace publisher q quote ref reg rs said sic soCalled speaker stage street term time title unclear
 		case colloc def dictScrap entryFree etym form gen gram gramGrp hyph iType lang lbl mood number orth per pos pron re sense stress subc syll tns usg xr
@@ -284,7 +284,7 @@
     </teian:annotator>
     <teian:annotator id="persName-annotator" name="persName" editable="true" type-code="selected-wrap-server">
         <teian:annotator-description-text>Wrap the person tags around the selected text and display the person selection panel.</teian:annotator-description-text>
-        <teian:annotator-icon-name>person.png</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/person.png</teian:annotator-icon-name>
         <teian:annotator-id-service-uri>http://demoedb.richmond.edu/exist/rest/db/urbml/apps/tei/utils/teian/services/suggest.xql?type=people&amp;word=</teian:annotator-id-service-uri>
         <teian:annotator-possible-parent-element-names>
 cl phr s span abbr add addrLine address author bibl biblScope corr date del desc distinct editor email emph expan foreign gloss head headItem headLabel hi item l label measure meeting mentioned name note num orig p pubPlace publisher q quote ref reg resp respStmt rs said sic soCalled speaker stage street term time title unclear
@@ -301,7 +301,7 @@ damage fw restore supplied surplus metSym rhyme
     </teian:annotator>
     <teian:annotator id="orgName-annotator" name="orgName" editable="true" type-code="selected-wrap-server">
         <teian:annotator-description-text>Wrap the orgName tags around the selected text and display the person selection panel.</teian:annotator-description-text>
-        <teian:annotator-icon-name>person.png</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/person.png</teian:annotator-icon-name>
         <teian:annotator-id-service-uri>http://demoedb.richmond.edu/exist/rest/db/urbml/apps/tei/utils/teian/services/suggest.xql?type=organizations&amp;word=</teian:annotator-id-service-uri>
         <teian:annotator-possible-parent-element-names>
 		    cl phr s span abbr add addrLine address author bibl biblScope corr date del desc distinct editor email emph expan foreign gloss head headItem headLabel hi item l label measure meeting mentioned name note num orig p pubPlace publisher q quote ref reg resp respStmt rs said sic soCalled speaker stage street term time title unclear
@@ -319,7 +319,7 @@ damage fw restore supplied surplus metSym rhyme
     </teian:annotator>
     <teian:annotator id="gloss-annotator" name="gloss" editable="true" type-code="selected-wrap-server">
         <teian:annotator-description-text>Wrap the glossary tags around the selected text and display the glossary term selection panel.</teian:annotator-description-text>
-        <teian:annotator-icon-name>gloss.png</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/gloss.png</teian:annotator-icon-name>
         <teian:annotator-id-service-uri>http://demoedb.richmond.edu/exist/rest/db/urbml/apps/tei/utils/teian/services/suggest-term.xql?word=</teian:annotator-id-service-uri>
         <teian:annotator-possible-parent-element-names>
 		cl phr s span abbr add addrLine address author bibl biblScope corr date del desc distinct editor email emph expan foreign gloss head headItem headLabel hi item l label measure meeting mentioned name note num orig p pubPlace publisher q quote ref reg resp respStmt rs said sic soCalled speaker stage street term time title unclear
@@ -337,7 +337,7 @@ damage fw restore supplied surplus metSym rhyme
     </teian:annotator>
     <teian:annotator id="placeName-annotator" name="placeName" editable="true" type-code="selected-wrap-server">
         <teian:annotator-description-text>Wrap the geolocation tags around the selected text and display the geolocation selection panel.</teian:annotator-description-text>
-        <teian:annotator-icon-name>geolocation.png</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/geolocation.png</teian:annotator-icon-name>
         <teian:annotator-id-service-uri>http://demoedb.richmond.edu/exist/rest/db/urbml/apps/tei/utils/teian/services/suggest.xql?type=places&amp;word=</teian:annotator-id-service-uri>
         <teian:annotator-possible-parent-element-names>
 		cl phr s span abbr add addrLine address author bibl biblScope corr date del desc distinct editor email emph expan foreign gloss head headItem headLabel hi item l label measure meeting mentioned name note num orig p pubPlace publisher q quote ref reg resp respStmt rs said sic soCalled speaker stage street term time title unclear
@@ -357,7 +357,7 @@ damage fw restore supplied surplus metSym rhyme
         <teian:annotator-possible-parent-element-names>teiHeader p div</teian:annotator-possible-parent-element-names>
         <teian:annotator-possible-preceding-sibling-element-names/>
         <teian:annotator-attribute/>
-        <teian:annotator-icon-name>paragraph.png</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/paragraph.png</teian:annotator-icon-name>
     </teian:annotator>
     <teian:annotator id="label-annotator" name="label" editable="false" type-code="selected-wrap">
         <teian:annotator-description-text>Insert a label at the selected point in the text</teian:annotator-description-text>
@@ -369,7 +369,7 @@ damage fw restore supplied surplus metSym rhyme
         <teian:annotator-description-text>Insert a list at the selected point in the text</teian:annotator-description-text>
         <teian:annotator-possible-parent-element-names>teiHeader p div</teian:annotator-possible-parent-element-names>
         <teian:annotator-possible-preceding-sibling-element-names/>
-        <teian:annotator-icon-name>list.png</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/list.png</teian:annotator-icon-name>
     </teian:annotator>
     <teian:annotator id="listBibl-annotator" name="listBibl" editable="false" type-code="selected-wrap">
         <teian:annotator-description-text>Insert a listBibl at the selected point in the text</teian:annotator-description-text>
@@ -381,30 +381,30 @@ damage fw restore supplied surplus metSym rhyme
         <teian:annotator-description-text>Insert a list header on the selected list</teian:annotator-description-text>
         <teian:annotator-possible-parent-element-names>list</teian:annotator-possible-parent-element-names>
         <teian:annotator-possible-preceding-sibling-element-names/>
-        <teian:annotator-icon-name>head.png</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/head.png</teian:annotator-icon-name>
     </teian:annotator>
     <teian:annotator id="teiannItemBtn" name="item" editable="false" type-code="selected-wrap">
         <teian:annotator-description-text>Add an item to the selected list.</teian:annotator-description-text>
         <teian:annotator-possible-parent-element-names>list</teian:annotator-possible-parent-element-names>
         <teian:annotator-possible-preceding-sibling-element-names/>
-        <teian:annotator-icon-name>item.png</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/item.png</teian:annotator-icon-name>
     </teian:annotator>
     <teian:annotator id="teiannTableBtn" name="table" editable="false" type-code="selected-wrap">
         <teian:annotator-description-text>Add an table at the insertion point.</teian:annotator-description-text>
         <teian:annotator-possible-parent-element-names>teiHeader p div</teian:annotator-possible-parent-element-names>
         <teian:annotator-possible-preceding-sibling-element-names/>
-        <teian:annotator-icon-name>table.png</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/table.png</teian:annotator-icon-name>
     </teian:annotator>
     <teian:annotator id="teiannRowBtn" name="row" editable="false" type-code="selected-wrap">
         <teian:annotator-description-text>Add an row to the selected table.</teian:annotator-description-text>
         <teian:annotator-possible-parent-element-names>table</teian:annotator-possible-parent-element-names>
         <teian:annotator-possible-preceding-sibling-element-names/>
-        <teian:annotator-icon-name>row.png</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/row.png</teian:annotator-icon-name>
     </teian:annotator>
     <teian:annotator id="teiannCellBtn" name="cell" editable="false" type-code="selected-wrap">
         <teian:annotator-description-text>Add a cell to the selected row</teian:annotator-description-text>
         <teian:annotator-possible-parent-element-names>teiHeader p div</teian:annotator-possible-parent-element-names>
         <teian:annotator-possible-preceding-sibling-element-names/>
-        <teian:annotator-icon-name>cell.png</teian:annotator-icon-name>
+        <teian:annotator-icon-name>../vocabularies/TEI/resources/images/cell.png</teian:annotator-icon-name>
     </teian:annotator>
 </teian:annotators>
