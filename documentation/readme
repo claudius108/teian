@@ -3,7 +3,7 @@ teian can be easily extended in order to use new XML vocabularies.
 
 Version 2.3.3 - 2012.07.01
 1. Added support for selecting the UI language for standard annotators.
-1. Added support for selecting the UI language for vocabulary specific annotators.
+2. Added support for selecting the UI language for vocabulary specific annotators.
 
 Version 2.3.2 - 2012.06.26
 1. Added support for selecting the annotator definitions based upon the content's root element, just like for the selecting the CSS file used for styling the content.

@@ -6,7 +6,7 @@
 
 window.teian = {
 	"name" : "teian",
-	"version" : "2.3.2",
+	"version" : "2.3.3",
 	"utils" : {
 		"sOperationType" : "add"
 	},
