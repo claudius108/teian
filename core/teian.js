@@ -7,15 +7,20 @@
 window.teian = {
 	"name" : "teian",
 	"version" : "2.3.3",
+	"compatibility" : {
+		"standard-annotators" : "0.1",
+		"annotator-types" : "0.1"
+	}
 	"utils" : {
 		"sOperationType" : "add"
 	},
 	"annotator" : [ function(oAnnotator, sAnnotatorType) {
 		var utils = teian.utils;
 		teian.utils.restoreSelection();
-		var oSelection = rangy.getSelection(), sOperationType = utils.sOperationType;
+		var oSelection = rangy.getSelection(), sOperationType = utils.sOperationType
+		
 		;
-		if (oSelection == "" && sAnnotatorType != 'insert') {
+		if (oSelection == "" && "insert insert-parametrized".indexOf(sAnnotatorType) == -1) {
 			alert(teian._errors[0]);
 			return;
 		}
@@ -115,22 +120,20 @@ window.teian = {
 				.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@css-href")[0].value);
 		document.getElementsByTagName("head")[0].appendChild(fileref);
 		// load the specific annotators
-		$x
-				.submission({
+		$x.submission({
 					"ref" : "simpath:instance('vocabulary-annotators')",
 					"resource" : $x.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName
 							+ "']/@annotators-href")[0].value,
 					"mode" : "synchronous",
 					"method" : "get"
-				});
+		});
 		// load kyer-toolbar-menu
-		$x
-				.submission({
+		$x.submission({
 					"ref" : "simpath:instance('menus')",
 					"resource" : $x.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@menus-href")[0].value,
 					"mode" : "synchronous",
 					"method" : "get"
-				});
+		});
 		// load vocabulary specific lang file
 		$x.submission({
 			"ref" : "simpath:instance('vocabulary-ui-lang')",
@@ -308,6 +311,16 @@ $(document)
 														teian.annotator[0](this, 'insert');
 													});
 													break;
+												case 'insert-parametrized':
+													oHTMLAnnotator.click(function() {
+														if (rangy.getSelection() != "") {
+															alert(teian._errors[2]);
+															return;
+														}
+														teian.utils.saveSelection();
+														teian.annotator[0](this, 'insert-parametrized');
+													});
+													break;													
 												case 'selected-wrap-server':
 													oHTMLAnnotator.click(function() {
 														if (rangy.getSelection() == "") {
