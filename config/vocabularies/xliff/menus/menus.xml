@@ -18,6 +18,13 @@
     <kyer:optionset selection="none">
       <kyer:option id="help-button" command="teian.ui['help-dialog'].dialog('open');" appearance="text-button"></kyer:option>
     </kyer:optionset>
+    <kyer:optionset id="track-changes-menu-container" selection="none" type="drop-down">
+      <kyer:label>Changes</kyer:label>
+      <kyer:option id="track-changes-button" appearance="text-button" />
+      <kyer:option id="untrack-changes-button" appearance="text-button" />
+      <kyer:option id="toggle-changes-button" appearance="text-button" />
+      <kyer:option id="remove-changes-button" appearance="text-button" />
+    </kyer:optionset>
     <kyer:optionset id="language-dd-menu" selection="none" type="drop-down">
       <kyer:label>UI lang</kyer:label>
       <kyer:option id="en-language" appearance="text-button">

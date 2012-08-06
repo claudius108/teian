@@ -4,7 +4,7 @@
     By Claudius Teodorescu
     Licensed under LGPL.
 -->
-<teian:annotators xmlns:teian="http://kuberam.ro/ns/teian" xmlns="http://www.w3.org/1999/xhtml" model-version="0.1">
+<teian:annotators xmlns="http://www.w3.org/1999/xhtml" xmlns:teian="http://kuberam.ro/ns/teian">
     <teian:annotator id="save-button" name="" editable="false" type-code="action">
         <teian:annotator-description-text>Save current document.</teian:annotator-description-text>
         <teian:annotator-attribute/>
@@ -47,8 +47,26 @@
         <teian:annotator-possible-parent-element-names/>
         <teian:annotator-attribute/>
     </teian:annotator>
-    <teian:annotator id="toggle-changes-button" name="" editable="false" type-code="action">
+    <teian:annotator id="track-changes-button" name="" editable="false" type-code="action">
         <teian:annotator-description-text>Track changes in document.</teian:annotator-description-text>
+        <teian:annotator-icon-name/>
+        <teian:annotator-possible-parent-element-names/>
+        <teian:annotator-attribute/>
+    </teian:annotator>
+    <teian:annotator id="untrack-changes-button" name="" editable="false" type-code="action">
+        <teian:annotator-description-text>Untrack changes in document.</teian:annotator-description-text>
+        <teian:annotator-icon-name/>
+        <teian:annotator-possible-parent-element-names/>
+        <teian:annotator-attribute/>
+    </teian:annotator>
+    <teian:annotator id="toggle-changes-button" name="" editable="false" type-code="action">
+        <teian:annotator-description-text>Toggle changes view.</teian:annotator-description-text>
+        <teian:annotator-icon-name/>
+        <teian:annotator-possible-parent-element-names/>
+        <teian:annotator-attribute/>
+    </teian:annotator>
+    <teian:annotator id="remove-changes-button" name="" editable="false" type-code="action">
+        <teian:annotator-description-text>Remove changes from document.</teian:annotator-description-text>
         <teian:annotator-icon-name/>
         <teian:annotator-possible-parent-element-names/>
         <teian:annotator-attribute/>
