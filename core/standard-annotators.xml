@@ -47,6 +47,12 @@
         <teian:annotator-possible-parent-element-names/>
         <teian:annotator-attribute/>
     </teian:annotator>
+    <teian:annotator id="toggle-changes-button" name="" editable="false" type-code="action">
+        <teian:annotator-description-text>Track changes in document.</teian:annotator-description-text>
+        <teian:annotator-icon-name/>
+        <teian:annotator-possible-parent-element-names/>
+        <teian:annotator-attribute/>
+    </teian:annotator>
     <teian:annotator id="help-button" name="" editable="false" type-code="action">
         <teian:annotator-description-text>Display documentation for teian.</teian:annotator-description-text>
         <teian:annotator-icon-name/>

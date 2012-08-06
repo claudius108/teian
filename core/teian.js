@@ -47,35 +47,39 @@ window.teian = {
 		    calculatedParentNode = currentParentNode;
 		  }
 		}
+		
+		function calculatePrecedingSiblingNode(userSelectedFormerParentNode, possiblePrecedingSiblingNodesNumber, possiblePrecedingSiblingNodes) {
+		  var startNodeIndex = 0, middleNodeIndex;
+		  while (startNodeIndex <= possiblePrecedingSiblingNodesNumber) { 
+		      if (possiblePrecedingSiblingNodes[(middleNodeIndex = (startNodeIndex + possiblePrecedingSiblingNodesNumber) >> 1)].compareDocumentPosition(userSelectedFormerParentNode) & 4) {
+			startNodeIndex = middleNodeIndex + 1;
+		      } else {
+			possiblePrecedingSiblingNodesNumber = (userSelectedFormerParentNode === possiblePrecedingSiblingNodes[middleNodeIndex]) ? -2 : middleNodeIndex - 1;
+		      }
+		  }
+		  return (possiblePrecedingSiblingNodesNumber == -2) ? middleNodeIndex : -1;
+
+		}
 
 		//calculate the parent node based on annotator schema
 		calculateParentNode(userSelectedParentNode);
 		
 		//calculate the preceding sibling node based on annotator schema
 		if (userSelectedFormerParentNode != null) {
-		alert(userSelectedFormerParentNode.nodeName);		  
-		  var possiblePrecedingSiblingNodes = calculatedParentNode.querySelectorAll("para[role = 'objective']");
+		  var possiblePrecedingSiblingNodes = calculatedParentNode.querySelectorAll(oAnnotator.possiblePrecedingSiblingNames);
 		  var possiblePrecedingSiblingNodesNumber = possiblePrecedingSiblingNodes.length;
-		  if ((possiblePrecedingSiblingNodes[0].compareDocumentPosition(userSelectedFormerParentNode) & 2)) {
+		  var lastPossiblePrecedingSiblingNodeIndex = possiblePrecedingSiblingNodesNumber - 1;
+		  if (possiblePrecedingSiblingNodes[0].compareDocumentPosition(userSelectedFormerParentNode) & 2) {
 		    //check if userSelectedFormerParentNode is before all possiblePrecedingSiblingNodes
 		    calculatedPrecedingSiblingNode = possiblePrecedingSiblingNodes[0];
-		  } else if ((possiblePrecedingSiblingNodes[possiblePrecedingSiblingNodesNumber - 1].compareDocumentPosition(userSelectedFormerParentNode) & 4)) {
+		  } else if (possiblePrecedingSiblingNodes[lastPossiblePrecedingSiblingNodeIndex].compareDocumentPosition(userSelectedFormerParentNode) & 4) {
 		    //check if userSelectedFormerParentNode is after all possiblePrecedingSiblingNodes
-		    calculatedPrecedingSiblingNode = possiblePrecedingSiblingNodes[possiblePrecedingSiblingNodesNumber - 1].nextElementSibling;
+		    calculatedPrecedingSiblingNode = possiblePrecedingSiblingNodes[lastPossiblePrecedingSiblingNodeIndex];
 		  } else {
 		    //calculate the exact preceding sibling node
-		    alert('possiblePrecedingSiblingNodesNumber (%) = ' + Math.round(possiblePrecedingSiblingNodesNumber / 2));
-		    calculatedPrecedingSiblingNode = possiblePrecedingSiblingNodes[possiblePrecedingSiblingNodesNumber - 1];
-		    
-		    
-		  }
-		  
-		  for (i = 0, il = possiblePrecedingSiblingNodes.length; i < il; i++) {
-		    var possiblePrecedingSiblingNode = possiblePrecedingSiblingNodes[i];
-		    //alert(possiblePrecedingSiblingNode.nodeName + "[" + (i + 1) + "] precedes " + userSelectedFormerParentNode.nodeName + ": " + !!(possiblePrecedingSiblingNode.compareDocumentPosition(userSelectedFormerParentNode) & 4));
+		    calculatedPrecedingSiblingNode = possiblePrecedingSiblingNodes[calculatePrecedingSiblingNode(userSelectedFormerParentNode, possiblePrecedingSiblingNodesNumber, possiblePrecedingSiblingNodes)];
 		  }		  
 		}
-
 		
 		var nodeToInsert = oAnnotator.oAnnotatorMarkup.cloneNode(true);
 
@@ -83,13 +87,8 @@ window.teian = {
 		  if (calculatedPrecedingSiblingNode == null || calculatedPrecedingSiblingNode.nextElementSibling == null) {
 		    calculatedParentNode.appendChild(nodeToInsert);
 		  } else {
-		    calculatedParentNode.insertBefore(nodeToInsert, calculatedPrecedingSiblingNode);
+		    calculatedParentNode.insertBefore(nodeToInsert, calculatedPrecedingSiblingNode.nextElementSibling);
 		  } 
-// 			var range = oSelection.rangeCount ? oSelection.getRangeAt(0) : null;
-// 			if (range) {
-// 				range.insertNode(nodeToInsert);
-// 				rangy.getSelection().setSingleRange(range);
-// 			}
 		} else {
 			if (sOperationType == 'add') {
 				oSelection.getRangeAt(0).surroundContents(nodeToInsert);
@@ -252,7 +251,41 @@ $(document)
 					if (q) {
 						teian.contentUrl = q.substring(9);
 						teian._fGetData(teian.contentUrl);
+						
+						//process track changes processing instructions
+// 						$('#teian-content *')[0].querySelector("para").setAttribute('teian-track-change', 'added');
+						
+						//select authors of changes
+						var changesAuthors = {};
+						$("ins, del").each(function(index) {
+							changesAuthors[$(this).attr("author")] = 1;
+						});
+						
+						var changesContainer = document.getElementById("changes-container");
+						//output the changes
+						for (var changesAuthor in changesAuthors) {
+						  var authorChangesContainer = document.createElement("div");
+						  var changeAuthorContainer = document.createElement("span");
+						  changeAuthorContainer.textContent = changesAuthor;
+						  changeAuthorContainer.setAttribute("style", "background-color: pink;");
+						  authorChangesContainer.appendChild(changeAuthorContainer);						  
+						  var changes = document.querySelectorAll("ins[author = '" + changesAuthor + "'], del[author = '" + changesAuthor + "']");
+						  for (var i = 0, il = changes.length; i < il; i++) {
+						    var change = changes[i];						    
+						    var changeContainer = document.createElement("div");						    
+						    changeContainer.textContent = ((change.nodeName == "INS") ? "Added" : "Deleted") + ": " + change.textContent + " " + change.getAttribute("timestamp");
+						    authorChangesContainer.appendChild(changeContainer);
+						  }
+						  changesContainer.appendChild(authorChangesContainer);
+						}
+						
+						
+						
 
+
+						
+						//document.styleSheets[0].insertRule("", 1);
+						
 						// get the tei-ann module's base uri
 						var sStandardAnnotatorIDs = "", sAnnotatorIDs = "", sEditableAnnotatorIDs = "", oDataRoot = $("#teian-content > *")[0], sDataRootPrefix = oDataRoot.prefix ? oDataRoot.prefix
 								+ ":" : "";
@@ -331,7 +364,7 @@ $(document)
 												//set the possible preceding siblings names
 												var possiblePrecedingSiblingNames = $x.xpath(
 														"normalize-space(/teian:annotator/teian:annotator-possible-preceding-sibling-element-names/text())", oAnnotator0);
-												oHTMLAnnotator0.possiblePrecedingSiblingNames = (possiblePrecedingSiblingNames != "") ? ", " + possiblePrecedingSiblingNames + "," : "";
+												oHTMLAnnotator0.possiblePrecedingSiblingNames = possiblePrecedingSiblingNames.replace(/@/g, "");
 												
 
 												var oAnnotatorMarkup = $(typeof (document.createElementNS) == 'undefined' ? document.createElement(sDataRootPrefix

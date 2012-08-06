@@ -1,11 +1,12 @@
 teian is a standalone, web-based annotator for texts in XML format. It works by directly annotating the respective XML file or fragment. The end user does not have to know the XML markup, but just choose the text to annotate, and select an annotator.
 teian can be easily extended in order to use new XML vocabularies.
 
-Version 2.3.4 - 2012.
+Version 2.3.4 - 2012.08.06
 1. Created resource folder for each vocabulary.
 2. Created models for the standard and for the specific annotators. The current version for standard annotators is 0.1, and the current version for specific annotators is 0.4.
 3. Added XSLT stylesheet to convert from specific annotators v0.3 to v0.4.
 4. Version 0.4 of specific annotators contains 'teian:content-model' child for annotators of type 'insert', allowing to define the content model to be inserted in document.
+5. Insertion of annotators of types 'insert' and 'insert-parametrized' is now more user assistive, namely the respective element will be inserted at a calculated position, based upon user's click and according to schema for that element. Thus, teian is "guessing" user's intentions. If no possible parent is provided, teian wil automatically use the document root as possible parent.
 
 Version 2.3.3 - 2012.07.01
 1. Added support for selecting the UI language for standard annotators.
