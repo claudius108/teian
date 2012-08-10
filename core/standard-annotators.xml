@@ -4,63 +4,81 @@
     By Claudius Teodorescu
     Licensed under LGPL.
 -->
-<teian:annotators xmlns="http://www.w3.org/1999/xhtml" xmlns:teian="http://kuberam.ro/ns/teian">
+<teian:annotators xmlns:teian="http://kuberam.ro/ns/teian" xmlns="http://www.w3.org/1999/xhtml">
     <teian:annotator id="save-button" name="" editable="false" type-code="action">
         <teian:description>Save current document.</teian:description>
+        <teian:annotator-icon-name/>
+        <teian:content-model/>
     </teian:annotator>
     <teian:annotator id="store-button" name="" type-code="action">
         <teian:description>Store current document.</teian:description>
+        <teian:annotator-icon-name/>
+        <teian:content-model/>
     </teian:annotator>
     <teian:annotator id="word-count-button" name="" type-code="action">
         <teian:description>Count words for current document.</teian:description>
+        <teian:annotator-icon-name/>
+        <teian:content-model/>
     </teian:annotator>
     <teian:annotator id="annotate-button" name="" editable="false" type-code="action">
         <teian:description>Save document.</teian:description>
         <teian:annotator-icon-name/>
+        <teian:content-model/>
     </teian:annotator>
     <teian:annotator id="source-button" name="" editable="false" type-code="action">
         <teian:description>View source of document.</teian:description>
         <teian:annotator-icon-name/>
+        <teian:content-model/>
     </teian:annotator>
     <teian:annotator id="lock-button" name="" editable="false" type-code="action">
         <teian:description>Lock document.</teian:description>
         <teian:annotator-icon-name/>
+        <teian:content-model/>
     </teian:annotator>
     <teian:annotator id="unlock-button" name="" editable="false" type-code="action">
         <teian:description>Unlock document.</teian:description>
         <teian:annotator-icon-name/>
+        <teian:content-model/>
     </teian:annotator>
     <teian:annotator id="back-button" name="" editable="false" type-code="action">
         <teian:description>Save current document.</teian:description>
         <teian:annotator-icon-name/>
+        <teian:content-model/>
     </teian:annotator>
     <teian:annotator id="toggle-track-changes-button" name="" editable="false" type-code="action">
         <teian:description>Track changes in document.</teian:description>
         <teian:annotator-icon-name/>
+        <teian:content-model/>
     </teian:annotator>
     <teian:annotator id="toggle-show-changes-button" name="" editable="false" type-code="action">
         <teian:description>Toggle view changes.</teian:description>
         <teian:annotator-icon-name/>
+        <teian:content-model/>
     </teian:annotator>
     <teian:annotator id="accept-all-changes-button" name="" editable="false" type-code="action">
         <teian:description>Accept all changes.</teian:description>
         <teian:annotator-icon-name/>
+        <teian:content-model/>
     </teian:annotator>
     <teian:annotator id="reject-all-changes-button" name="" editable="false" type-code="action">
         <teian:description>Reject all changes.</teian:description>
         <teian:annotator-icon-name/>
+        <teian:content-model/>
     </teian:annotator>
     <teian:annotator id="accept-a-change-button" name="" editable="false" type-code="action">
         <teian:description>Accept a change.</teian:description>
         <teian:annotator-icon-name/>
+        <teian:content-model/>
     </teian:annotator>
     <teian:annotator id="reject-a-change-button" name="" editable="false" type-code="action">
         <teian:description>Reject a change.</teian:description>
         <teian:annotator-icon-name/>
+        <teian:content-model/>
     </teian:annotator>
     <teian:annotator id="help-button" name="" editable="false" type-code="action">
         <teian:description>Display documentation for teian.</teian:description>
         <teian:annotator-icon-name/>
+        <teian:content-model/>
         <teian:annotator-panel>
             <div id="help-dialog" title="">
                 <div id="help-dialog-content" ref="simpath:instance('ui-lang')//teian:annotator[@id = 'help-button']/teian:annotator-panel/teian:annotator-panel-element[@id = 'help-dialog-content']/text()"/>
@@ -86,10 +104,12 @@
     <teian:annotator id="edit-entity-button" name="" editable="false" type-code="action">
         <teian:description>Edit any of the properties of the selected entity.</teian:description>
         <teian:annotator-icon-name>edit-entity.gif</teian:annotator-icon-name>
+        <teian:content-model/>
     </teian:annotator>
     <teian:annotator id="clear-entity-button" name="" editable="false" type-code="action">
         <teian:description>Remove the selected entity annotation.</teian:description>
         <teian:annotator-icon-name>clear-entity.gif</teian:annotator-icon-name>
+        <teian:content-model/>
         <teian:annotator-panel>
             <div id="clear-entity-dialog" title="">
                 <span id="clear-entity-label" ref="simpath:instance('ui-lang')//teian:annotator[@id = 'clear-entity-button']/teian:annotator-panel/teian:annotator-panel-element[@id = 'clear-entity-label']/text()" style="white-space: normal;"/>
