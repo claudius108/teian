@@ -11,7 +11,8 @@
     <teian:forbidden-overlapping>You are not allowed to overlap these DocBook elements!</teian:forbidden-overlapping>
     <teian:non-editable-entity>This entity ('%entityName') is not editable.</teian:non-editable-entity>
     <!-- <teian:warnOnMissingHyperlinkTarget>URL must not be empty!</teian:warnOnMissingHyperlinkTarget> -->
-    <teian:warnOnSelectingSearchResult>In order to annotate, you must select one search result!</teian:warnOnSelectingSearchResult>
+    <teian:warnOnSelectingSearchResult>In order to annotate, you must select one search result!
+    </teian:warnOnSelectingSearchResult>
     <!-- <teian:warnOnInvalidDate>Invalid date!</teian:warnOnInvalidDate> -->
     <teian:warnOnRemovingRootEntity>You are not allowed to remove the root entity!</teian:warnOnRemovingRootEntity>
     <teian:warnOnSplittingElement>You are not allowed to insert this entity here!</teian:warnOnSplittingElement>
