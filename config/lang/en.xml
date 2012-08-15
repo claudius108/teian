@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Teian - Web adnotator By Claudius Teodorescu Licensed under LGPL. -->
-<teian:lang xmlns="http://www.w3.org/1999/xhtml" xmlns:teian="http://kuberam.ro/ns/teian" xmlns:xlink="http://www.w3.org/1999/xlink">
+<teian:lang xmlns:teian="http://kuberam.ro/ns/teian" xmlns="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink">
     <teian:annotator id="save-button">
         <teian:toolbar-button-title>Save</teian:toolbar-button-title>
         <teian:toolbar-button-label>Save</teian:toolbar-button-label>
@@ -25,21 +25,13 @@
         <teian:toolbar-button-title>Back</teian:toolbar-button-title>
         <teian:toolbar-button-label>Back</teian:toolbar-button-label>
     </teian:annotator>
-    <teian:annotator id="track-changes-button">
-        <teian:toolbar-button-title>Track changes</teian:toolbar-button-title>
-        <teian:toolbar-button-label>Track changes</teian:toolbar-button-label>
+    <teian:annotator id="toggle-track-changes-button">
+        <teian:toolbar-button-title>Track</teian:toolbar-button-title>
+        <teian:toolbar-button-label>Track</teian:toolbar-button-label>
     </teian:annotator>
-    <teian:annotator id="untrack-changes-button">
-        <teian:toolbar-button-title>Untrack changes</teian:toolbar-button-title>
-        <teian:toolbar-button-label>Untrack changes</teian:toolbar-button-label>
-    </teian:annotator>
-    <teian:annotator id="toggle-changes-button">
-        <teian:toolbar-button-title>Toggle changes</teian:toolbar-button-title>
-        <teian:toolbar-button-label>Toggle changes</teian:toolbar-button-label>
-    </teian:annotator>
-    <teian:annotator id="remove-changes-button">
-        <teian:toolbar-button-title>Remove changes</teian:toolbar-button-title>
-        <teian:toolbar-button-label>Remove changes</teian:toolbar-button-label>
+    <teian:annotator id="toggle-show-changes-button">
+        <teian:toolbar-button-title>Toggle</teian:toolbar-button-title>
+        <teian:toolbar-button-label>Toggle</teian:toolbar-button-label>
     </teian:annotator>
     <teian:annotator id="help-button">
         <teian:toolbar-button-title>Help</teian:toolbar-button-title>
