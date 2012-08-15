@@ -1,9 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:webdav="antlib:org.apache.webdav.ant" name="teian" basedir="." default="transform-annotator-types-v0.3-to-v0.4.xml">
-	<import file="/home/claudius/workspace-claudius/_commons/_workspace/build.xml"/>
-
-	<target name="transform-annotator-types-v0.3-to-v0.4.xml" description="Generate the test-plan file">
-		<echo>Transforming...</echo>
-		<xslt in="annotator-types-0.3.xml" out="annotator-types-0.4.xml" style="annotator-types-v0.3-to-v0.4.xml" />
-	</target>
-
+    <import file="/home/claudius/workspace-claudius/_commons/_workspace/build.xml"/>
+    <target name="transform-annotator-types-v0.3-to-v0.4.xml" description="Generate the test-plan file">
+        <echo>Transforming...</echo>
+        <xslt in="annotator-types-0.3.xml" out="annotator-types-0.4.xml" style="annotator-types-v0.3-to-v0.4.xml"/>
+    </target>
 </project>
