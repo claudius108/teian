@@ -55,26 +55,6 @@
         <teian:annotator-icon-name/>
         <teian:content-model/>
     </teian:annotator>
-    <teian:annotator id="accept-all-changes-button" name="" editable="false" type-code="action">
-        <teian:description>Accept all changes.</teian:description>
-        <teian:annotator-icon-name/>
-        <teian:content-model/>
-    </teian:annotator>
-    <teian:annotator id="reject-all-changes-button" name="" editable="false" type-code="action">
-        <teian:description>Reject all changes.</teian:description>
-        <teian:annotator-icon-name/>
-        <teian:content-model/>
-    </teian:annotator>
-    <teian:annotator id="accept-a-change-button" name="" editable="false" type-code="action">
-        <teian:description>Accept a change.</teian:description>
-        <teian:annotator-icon-name/>
-        <teian:content-model/>
-    </teian:annotator>
-    <teian:annotator id="reject-a-change-button" name="" editable="false" type-code="action">
-        <teian:description>Reject a change.</teian:description>
-        <teian:annotator-icon-name/>
-        <teian:content-model/>
-    </teian:annotator>
     <teian:annotator id="help-button" name="" editable="false" type-code="action">
         <teian:description>Display documentation for teian.</teian:description>
         <teian:annotator-icon-name/>
@@ -141,5 +121,13 @@
 		});		
 		</script>
         </teian:annotator-panel>
+    </teian:annotator>
+    <teian:annotator id="insert-tracker" name="" editable="false" type-code="change-tracker">
+        <teian:description>Track insertion.</teian:description>
+        <teian:content-model><?zinc_insert_start?><?zinc_insert_end?></teian:content-model>
+    </teian:annotator>
+    <teian:annotator id="delete-tracker" name="" editable="false" type-code="change-tracker">
+        <teian:description>Track deletion.</teian:description>
+        <teian:content-model><?zinc_delete_start?><?zinc_delete_end?></teian:content-model>
     </teian:annotator>
 </teian:annotators>
