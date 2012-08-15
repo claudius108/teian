@@ -2,6 +2,7 @@
 <html xmlns:teian="http://kuberam.ro/ns/teian" xmlns="http://www.w3.org/1999/xhtml" xmlns:kyer="http://kuberam.ro/ns/kyer">
     <head>
 	<!--dependencies for teian-->
+        <link rel="stylesheet" href="track-changes/track-changes.css" type="text/css"/>
         <link rel="stylesheet" href="teian.css" type="text/css"/>
 	<!--dependencies for jquery-->
         <script type="text/javascript" charset="utf-8" src="../../jquery/core/jquery.min.js">/**/</script>
@@ -17,13 +18,9 @@
         <link rel="stylesheet" type="text/css" href="../../jquery/themes/jquery.themes.css"/>
         <script type="text/javascript" src="../../jquery/themeswitcher/themeswitchertool.js">/**/</script>
         <script type="text/javascript" src="../../jquery/themes/jquery.themes.min.js">/**/</script>
-	<!--dependencies for contextMenu plugin-->
-        <link rel="stylesheet" type="text/css" href="../../jquery/contextMenu/jquery.contextMenu.css"/>
-        <script type="text/javascript" src="../../jquery/contextMenu/jquery.contextMenu.js">/**/</script>
         <!--dependencies for context menu plugin-->
         <link rel="stylesheet" type="text/css" href="../../jquery/jQuery-contextMenu/jquery.contextMenu.css"/>
-        <script type="text/javascript" src="../../jquery/jQuery-contextMenu/jquery.contextMenu.js">/**/</script>
-        
+        <script type="text/javascript" src="../../jquery/jQuery-contextMenu/jquery.contextMenu.js">/**/</script>        
 	<!--dependencies for teian-->
         <script type="text/javascript" charset="utf-8" src="teian.js">/**/</script>
 	<!--dependencies for kyer-->
@@ -100,21 +97,24 @@
         </div>-->
         <menu id="teian-context-menu" type="context" style="display:none">
             <menu label="Insert">
-                <command label="introduction" onclick="$('#introduction-placeholder').trigger('click');"/>
-                <command label="table" onclick="$('#table-placeholder').trigger('click');"/>
-                <command label="assessment" onclick="$('#assessment-placeholder').trigger('click');"/>
-                <command label="mediaobject audio" onclick="$('#mediaobject-audio-annotator').trigger('click');"/>
-                <command label="mediaobject video" onclick="$('#mediaobject-video-annotator').trigger('click');"/>
-                <command label="mediaobject image" onclick="$('#mediaobject-image-annotator').trigger('click');"/>
+                <command label="Edit entity" onclick="teian.editEntity();"/>
+                <command label="Clear entity" onclick="teian.ui['clear-entity-dialog'].dialog('open');"/>
             </menu>
         </menu>
 <!-- 	<p><span id="label">Select your new theme:</span> <span id="themeSelection"></span></p> -->
-        <form id="teian-form" action="../services/store.xq" method="post">
-            <textarea id="data" name="data" style="display: none;">/**/</textarea>
-            <div id="teian-content" class="ui-corner-all ui-helper-clearfix" style="border: 2px solid black; margin-top: 3px; height: 300px; overflow-y: auto; padding: 10px;"/>
-            <div id="changes-container">
-                <span>Changes</span>
+        <textarea id="data" name="data" style="display: none;">/**/</textarea>
+        <div id="teian-content" class="ui-corner-all ui-helper-clearfix"/>
+        <div id="changes-container" class="ui-corner-all ui-helper-clearfix">
+            <div id="changes-container-title">Changes</div>
+            <div id="track-changes-toolbar">
+                <button id="accept-all-changes-button" title="Accept all changes" onclick="teian.acceptAllChanges();">Accept all</button>
+                <button id="reject-all-changes-button" title="Reject all changes" onclick="teian.rejectAllChanges();">Reject all</button>
+                <br/>
+                <button id="first-change-button" title="First change" onclick="teian.goToChange('first');">&lt;&lt;</button>
+                <button id="previous-change-button" title="Previous change" onclick="teian.goToChange('previous');">&lt;</button>
+                <button id="next-change-button" title="Next change" onclick="teian.goToChange('next');">&gt;</button>
+                <button id="last-change-button" title="Last change" onclick="teian.goToChange('last');">&gt;&gt;</button>
             </div>
-        </form>
+        </div>
     </body>
 </html>

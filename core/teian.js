@@ -6,9 +6,8 @@
 
 window.teian = {
 	"name" : "teian",
-	"version" : "2.3.4",
+	"version" : "2.3.5",
 	"compatibility" : {
-		"standard-annotators" : "0.1",
 		"annotator-types" : "0.4"
 	},
 	"utils" : {
@@ -103,21 +102,18 @@ window.teian = {
 		}
 	} ],
 	"ui" : {},
-	"save" : function() {
-		teian.utils.oSavedSelection = null;
-		var content = $x.serializeToString($x._fDocFromNode($('#teian-content *')[0].cloneNode(true)));
-		//filter out HTML br elements
-		content = content.replace(/<br xmlns=\"http:\/\/www.w3.org\/1999\/xhtml\" \/>/g, "");
-		$('#data').text(content);
-		$('#teian-form').submit();
-		return false;
-	},
 	"store" : function() {
 		var utils = teian.utils;
 		utils.oSavedSelection = null;
 		var content = $('#teian-content *')[0].cloneNode(true);
 		content.setAttribute("content-url", teian.contentUrl);
-		$x.instance('data').load($x._fDocFromNode(content));
+		var contentAsString = $x.serializeToString(content);
+		if (teian._processChangesPIs) {
+		  contentAsString = teian._convertTrackChangesHtmlToPi(contentAsString);		  
+		}
+		//filter out HTML br elements
+		contentAsString = contentAsString.replace(/<br xmlns=\"http:\/\/www.w3.org\/1999\/xhtml\" \/>/g, "");
+		$x.instance('data').load($x.parseFromString(contentAsString));
 		$x.submission({
 			"ref" : "simpath:instance('data')/*",
 			"resource" : utils.baseURI + "services/store.xq",
@@ -161,6 +157,30 @@ window.teian = {
 		oSelection.addRange(oRange);
 		$('#' + sHTMLAnnotatorID).click();
 	},
+	"changesViewStatus" : "show",
+	"toggleViewChanges" : function() {
+	  //toggle view changes based upon teian.changesViewStatus
+	  if (teian.changesViewStatus == 'show') {
+	    teian._hideChanges();
+	    teian.changesViewStatus = 'hide';
+	  } else {
+	    teian._showChanges();
+	    teian.changesViewStatus = 'show';	    
+	  }
+	},
+	"_showChanges" : function() {
+	    document.getElementById("teian-content").style.width = '700px';
+	    document.getElementById("changes-container").style.display = 'inline';
+	    document.styleSheets[0].deleteRule(0);
+	    document.styleSheets[0].insertRule("ins, del {display: inline;}", 0);	    
+	    
+	},
+	"_hideChanges" : function() {document.getElementById("teian-content").style.width = '98%';
+	    document.getElementById("changes-container").style.display = 'none';
+	    document.styleSheets[0].deleteRule(0);
+	    document.styleSheets[0].insertRule("del {display: none;}", 0);	    
+	},
+	"changesTrackStatus" : "false",	
 	"_errors" : [],
 	"_fGetData" : function(sURI) {
 		$x.submission({
@@ -169,6 +189,7 @@ window.teian = {
 			"mode" : "synchronous",
 			"method" : "get"
 		});
+		
 		var contentRootElement = $x._instances['data'].documentElement;
 		var contentRootElementClarkName = '{' + contentRootElement.namespaceURI + '}' + contentRootElement.nodeName;
 		// load the CSS stlying file
@@ -200,26 +221,174 @@ window.teian = {
 			"mode" : "synchronous",
 			"method" : "get"
 		});
+		
 		_errors = teian._errors;
 		_errors.push($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:selection-empty/text()"));
 		_errors.push($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:forbidden-overlapping/text()"));
 		_errors.push($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:selection-non-empty/text()"));
 		_errors.push($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:non-editable-entity/text()"));
+		
+		if (teian._processChangesPIs) {
+		  //use the vocabulary specific PIs for tracking changes
+		  var changeTrackers = teian._changeTrackers;
+		  if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-start-tracker']") != "") {
+		     changeTrackers.insertStart = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-start-tracker']/teian:content-model")[0].childNodes[0].target;
+		  }
+		  if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-end-tracker']") != "") {
+		    changeTrackers.insertEnd = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-end-tracker']/teian:content-model")[0].childNodes[0].target;
+		  }
+		  if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-start-tracker']") != "") {
+		    changeTrackers.deleteStart = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-start-tracker']/teian:content-model")[0].childNodes[0].target;
+		  }
+		  if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-end-tracker']") != "") {
+		    changeTrackers.deleteEnd = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-end-tracker']/teian:content-model")[0].childNodes[0].target;
+		  }		  
+		  var contentAsString = $x.instance('data').source();
+		  contentAsString = contentAsString.replace(new RegExp("\\?" + changeTrackers.insertEnd + "\\?", "g"), "/ins")
+		    .replace(new RegExp("\\?" + changeTrackers.deleteEnd + "\\?", "g"), "/del")
+		    .replace(new RegExp("(\\?" + changeTrackers.insertStart + ")([^>]*)(\\?>)", "g"), "ins xmlns=\"http://www.w3.org/1999/xhtml\"$2>")
+		    .replace(new RegExp("(\\?" + changeTrackers.deleteStart + ")([^>]*)(\\?)", "g"), "del xmlns=\"http://www.w3.org/1999/xhtml\"$2")		    
+		  ;
+		  document.getElementById("teian-content").appendChild($x.parseFromString(contentAsString).documentElement);
+		  return;
+		}		
 
-		($x.utils.isIE) ? $("#teian-content").html($x.instance('data').source()) : $("#teian-content").append($($x.instance('data').root().cloneNode(true)));
+		($x.utils.isIE) ? $("#teian-content").html($x.instance('data').source()) : $("#teian-content").append($($x._instances["data"].documentElement.cloneNode(true)));
 	}
 };
-function fSaveDoc() {
-	$.ajax({
-		type : 'POST',
-		url : "echo.xq",
-		data : $x.serializeToString($("#teian-content > *")[0]),
-		dataType : "text"
-	});
-}
+
+teian.acceptAllChanges = function() {
+  teian._acceptOrRejectAllChanges("accept");
+};
+
+teian.acceptChange = function(changeId, changeType) {
+  var change = document.getElementById(changeId);  
+  switch (changeType) {
+    case "Added":
+      var changeChildren = change.childNodes;
+      var fragment = document.createDocumentFragment();
+      for (var i = 0, il = changeChildren.length; i < il; i++) {
+	fragment.appendChild(changeChildren[i].cloneNode(true));	
+      }
+      change.parentNode.replaceChild(fragment.cloneNode(true), change);      
+    break;
+    case "Deleted":
+      change.parentNode.removeChild(change);
+    break;
+  }
+  var changeSummary = document.getElementById("summary-" + changeId);
+  changeSummary.parentNode.removeChild(changeSummary);  
+};
+
+teian.rejectAllChanges = function() {
+  teian._acceptOrRejectAllChanges("reject");
+};
+
+teian.rejectChange = function(changeId, changeType) {
+  var change = document.getElementById(changeId);
+  switch (changeType) {
+    case "Added":
+      change.parentNode.removeChild(change);
+    break;
+    case "Deleted":
+      var changeChildren = change.childNodes;
+      var fragment = document.createDocumentFragment();
+      for (var i = 0, il = changeChildren.length; i < il; i++) {
+	fragment.appendChild(changeChildren[i].cloneNode(true));	
+      }
+      change.parentNode.replaceChild(fragment.cloneNode(true), change);
+    break;
+  }
+  var changeSummary = document.getElementById("summary-" + changeId);
+  changeSummary.parentNode.removeChild(changeSummary);
+};
+
+teian.toggleTrackChanges = function() {
+  //toggle track changes based upon teian.changesTrackStatus
+  var currentButton = document.getElementById("toggle-track-changes-button");
+  var currentButtonText = currentButton.textContent;
+  if (teian.changesTrackStatus == "true") {
+    currentButton.textContent = currentButtonText.substring(0, currentButtonText.indexOf(" ✔"));
+    teian.changesTrackStatus = "false";
+  } else {
+    currentButton.textContent = currentButtonText + " ✔";
+    teian.changesTrackStatus = "true";
+  }
+};
+
+teian._acceptOrRejectAllChanges = function(action) {
+  var contentNode = document.getElementById("teian-content").firstElementChild;
+  var content = contentNode.cloneNode(true);
+  contentNode.parentNode.replaceChild($x.transform($x._fDocFromNode(content), $x._instances[action + '-all-changes']).documentElement, contentNode);
+  var changes = document.getElementById("changes-container").querySelectorAll(".teian-change-container");
+  for (var i = 0, il = changes.length; i < il; i++) {
+    var change = changes[i];
+    change.parentNode.removeChild(change);
+  }
+};
+
+teian._changeTrackers = {
+  "insertStart" : "teian-insert-start",
+  "insertEnd" : "teian-insert-end",
+  "deleteStart" : "teian-delete-start",
+  "deleteEnd" : "teian-delete-end"  
+};
+
+teian.sessionParameters = {
+  "changes-summary-index" : -1,
+  "change-trackers" : {
+  }
+};
+
+teian._convertTrackChangesHtmlToPi = function(contentAsString) {
+  var changeTrackers = teian._changeTrackers;
+  contentAsString = contentAsString.replace(/\/ins/g, "?" + changeTrackers.insertEnd + "?")
+    .replace(/\/del/g, "?" + changeTrackers.deleteEnd + "?")
+    .replace(new RegExp("(ins xmlns=\"http://www.w3.org/1999/xhtml\")([^>]*)", "g"), "?" + changeTrackers.insertStart + "$2?")
+    .replace(new RegExp("(del xmlns=\"http://www.w3.org/1999/xhtml\")([^>]*)", "g"), "?" + changeTrackers.deleteStart + "$2?")
+  ;
+  return contentAsString;
+};
+
+teian._addClass = function(element, newClass) {
+  var currentClass = element.getAttribute("class");
+  element.setAttribute("class", currentClass + " " + newClass)
+};
+
+teian._removeClass = function(element, classToRemove) {
+  var currentClass = element.getAttribute("class");
+  element.setAttribute("class", currentClass.replace(classToRemove, ""))
+};
+
+teian.goToChange = function(goToAction) {
+  var sessionParameters = teian.sessionParameters;
+  var currentChangesSummaryIndex = sessionParameters["changes-summary-index"];
+  var changeHtmlElements = document.querySelectorAll("ins, del");
+  var lastChangesSummaryIndex = changeHtmlElements.length - 1;
+  teian._removeClass(changeHtmlElements[currentChangesSummaryIndex], "change-selection");
+  var goToChangesSummaryIndex;
+  switch (goToAction) {
+    case "first":
+      goToChangesSummaryIndex = 0;
+    break;
+    case "previous":
+      goToChangesSummaryIndex = (currentChangesSummaryIndex == 0) ? lastChangesSummaryIndex : currentChangesSummaryIndex - 1;
+    break;    
+    case "next":
+      goToChangesSummaryIndex = (currentChangesSummaryIndex == lastChangesSummaryIndex) ? 0 : currentChangesSummaryIndex + 1;
+    break;    
+    case "last":
+      goToChangesSummaryIndex = lastChangesSummaryIndex;
+    break;    
+  }
+  teian._addClass(changeHtmlElements[goToChangesSummaryIndex], "change-selection");
+  sessionParameters["changes-summary-index"] = goToChangesSummaryIndex;
+};
+
 $(document)
 		.ready(
 				function() {
+				  var sessionParameters = teian.sessionParameters;
 					// get the tei-ann module's base uri
 					var sDocumentURL = document.URL, sModuleBaseURI = sDocumentURL.substring(0, sDocumentURL.indexOf("core/teian.html")), utils = teian.utils, _errors = teian._errors;
 					utils.baseURI = sModuleBaseURI;
@@ -250,16 +419,31 @@ $(document)
 					var q = document.location.search || document.location.hash;
 					if (q) {
 						teian.contentUrl = q.substring(9);
+						//set flag for processing changes PIs
+						var _processChangesPIs = teian._processChangesPIs = true;
 						teian._fGetData(teian.contentUrl);
 						
-						//process track changes processing instructions
-// 						$('#teian-content *')[0].querySelector("para").setAttribute('teian-track-change', 'added');
+						//toggle changes based upon teian.changesViewStatus
+						if (teian.changesViewStatus == 'show') {
+						  teian._showChanges();
+						} else {
+						  teian._hideChanges();						  
+						}
 						
-						//select authors of changes
+						//process processing instructions for tracking changes
+						
+						
+
+						//summarize changes for rendering them
 						var changesAuthors = {};
-						$("ins, del").each(function(index) {
-							changesAuthors[$(this).attr("author")] = 1;
-						});
+						var changeHtmlElements = document.querySelectorAll("ins, del");
+						for (var i = 0, il = changeHtmlElements.length; i < il; i++) {
+						  var changeHtmlElement = changeHtmlElements[i];
+						  changeHtmlElement.setAttribute("id", "teian-change-" + i);
+						  //TODO: set @class = @author + ...
+						  changeHtmlElement.setAttribute("class", "Reviewer1_track_changes");
+						  changesAuthors[changeHtmlElement.getAttribute("author")] = 1;						  
+						}
 						
 						var changesContainer = document.getElementById("changes-container");
 						//output the changes
@@ -272,27 +456,66 @@ $(document)
 						  var changes = document.querySelectorAll("ins[author = '" + changesAuthor + "'], del[author = '" + changesAuthor + "']");
 						  for (var i = 0, il = changes.length; i < il; i++) {
 						    var change = changes[i];						    
-						    var changeContainer = document.createElement("div");						    
-						    changeContainer.textContent = ((change.nodeName == "INS") ? "Added" : "Deleted") + ": " + change.textContent + " " + change.getAttribute("timestamp");
+						    var changeContainer = document.createElement("div");
+						    changeContainer.setAttribute("class", "teian-change-container");
+						    var changeId = change.getAttribute("id");
+						    changeContainer.setAttribute("id", "summary-" + changeId);
+						    var changeType = ((change.nodeName == "INS") ? "Added" : "Deleted");
+						    changeContainer.textContent = changeType + ": " + change.textContent + " " + change.getAttribute("timestamp");
+						    var image = document.createElement("input");
+						    image.setAttribute("type", "image");
+						    image.setAttribute("src", "../resources/images/passed.png");
+						    image.setAttribute("title", "Accept change");
+						    image.setAttribute("onclick", "teian.acceptChange('" + changeId + "', '" + changeType + "');");
+						    changeContainer.appendChild(image.cloneNode(true));
+						    image.setAttribute("src", "../resources/images/failed.png");
+						    image.setAttribute("title", "Reject change");
+						    image.setAttribute("onclick", "teian.rejectChange('" + changeId + "', '" + changeType + "');");
+						    changeContainer.appendChild(image.cloneNode(true));
 						    authorChangesContainer.appendChild(changeContainer);
 						  }
 						  changesContainer.appendChild(authorChangesContainer);
 						}
 						
+						//initialize change selection
+						teian._addClass(changeHtmlElements[0], "change-selection");
+						sessionParameters["changes-summary-index"] = 0;
 						
 						
-
-
 						
-						//document.styleSheets[0].insertRule("", 1);
+						
+	
+						
+						
+						//load XSLT stylesheets for processing changes markup
+						$x.submission({
+							"ref" : "simpath:instance('accept-all-changes')",
+							"resource" : sModuleBaseURI + "core/track-changes/accept-all-changes.xml",
+							"mode" : "synchronous",
+							"method" : "get"
+						});						
+						$x.submission({
+							"ref" : "simpath:instance('reject-all-changes')",
+							"resource" : sModuleBaseURI + "core/track-changes/reject-all-changes.xml",
+							"mode" : "synchronous",
+							"method" : "get"
+						});						
+						
+						
+						
+						
+						
 						
 						// get the tei-ann module's base uri
-						var sStandardAnnotatorIDs = "", sAnnotatorIDs = "", sEditableAnnotatorIDs = "", oDataRoot = $("#teian-content > *")[0], sDataRootPrefix = oDataRoot.prefix ? oDataRoot.prefix
-								+ ":" : "";
+						var sStandardAnnotatorIDs = "";
+						var sAnnotatorIDs = "";
+						var sEditableAnnotatorIDs = "";
+						var oDataRoot = $("#teian-content > *")[0];
+						var sDataRootPrefix = oDataRoot.prefix ? oDataRoot.prefix + ":" : "";
 						var oDataRootNodeName = oDataRoot.nodeName;
 						// generate the annotators' IDs string
 						$($x.xpath("simpath:instance('standard-annotators')//teian:annotator/@id")).each(function(index) {
-							sAnnotatorIDs += $(this).val() + ' ';
+						  sAnnotatorIDs += this.value + ' ';
 						});
 						sStandardAnnotatorIDs = sAnnotatorIDs;
 						$($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator/@id")).each(function(index) {
@@ -319,8 +542,9 @@ $(document)
 							// , onSelect: reloadIE
 							});
 							// generate the annotators
-							var oToolbarMenuItems = $("div[appearance='kyer-toolbar-menu']").find("button[id]"), oContextMenuItems = $(
-									"ul[appearance='kyer-context-menu']").find("a[id]"), oMenuItems = oToolbarMenuItems.add(oContextMenuItems);
+							var oToolbarMenuItems = $("div[appearance='kyer-toolbar-menu']").find("button[id]");
+							var oContextMenuItems = $("ul[appearance='kyer-context-menu']").find("a[id]");
+							var oMenuItems = oToolbarMenuItems.add(oContextMenuItems);
 
 							oMenuItems
 									.each(function(index) {
@@ -328,11 +552,12 @@ $(document)
 												.attr('appearance');
 
 										if (sAnnotatorIDs.indexOf(sAnnotatorId) != -1 && sAnnotatorId != '') {
-											// generate the standard annotation
-											// markup
+											// generate the standard annotation markup
 											if (sStandardAnnotatorIDs.indexOf(sAnnotatorId) != -1) {
-												var oAnnotator0 = $x.xpath("simpath:instance('standard-annotators')//teian:annotator[@id = '" + sAnnotatorId + "']")[0], oAnnotator = $(oAnnotator0), oLang0 = $x
-														.xpath("simpath:instance('standard-ui-lang')//teian:annotator[@id = '" + sAnnotatorId + "']")[0], oLang = $(oLang0);
+												var oAnnotator0 = $x.xpath("simpath:instance('standard-annotators')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
+												var oAnnotator = $(oAnnotator0);
+												var oLang0 = $x.xpath("simpath:instance('standard-ui-lang')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
+												var oLang = $(oLang0);
 												// set the annotator title
 												oHTMLAnnotator.attr('title', $x.xpath("/teian:annotator/teian:toolbar-button-title/text()", oLang0));
 												// set the annotator label
@@ -342,8 +567,7 @@ $(document)
 												$($x.xpath("simpath:instance('standard-annotators')//teian:annotator[@id = '" + sAnnotatorId
 																+ "']/teian:annotator/teian:annotator-panel")[0]).appendTo("body");
 											}
-											// generate the vocabulary
-											// annotation markup
+											// generate the vocabulary specific annotation markup
 											else {
 												var oAnnotator0 = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = '" + sAnnotatorId + "']")[0], oAnnotator = $(oAnnotator0), oLang0 = $x
 														.xpath("simpath:instance('vocabulary-ui-lang')//teian:annotator[@id = '" + sAnnotatorId + "']")[0], oLang = $(oLang0), sAnnotatorType = oAnnotator
@@ -485,7 +709,7 @@ $(document)
 							switch (event.which) {
 							case 3:
 								teian.utils.oEntityToClear = event.target;
-								break;
+							break;
 							}
 						});
 						document.addEventListener("kyer-model-construct-done", generateAnnotators, false);
