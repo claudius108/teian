@@ -6,7 +6,7 @@
 
 window.teian = {
 	"name" : "teian",
-	"version" : "2.3.5",
+	"version" : "2.3.4",
 	"compatibility" : {
 		"annotator-types" : "0.4"
 	},
