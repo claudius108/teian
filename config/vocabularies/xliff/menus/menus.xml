@@ -22,7 +22,7 @@
       <kyer:label>Changes</kyer:label>
       <kyer:option id="track-changes-button" appearance="text-button" />
       <kyer:option id="untrack-changes-button" appearance="text-button" />
-      <kyer:option id="toggle-changes-button" appearance="text-button" />
+      <kyer:option id="toggle-changes-button" command="teian.toggleChanges()" appearance="text-button" />
       <kyer:option id="remove-changes-button" appearance="text-button" />
     </kyer:optionset>
     <kyer:optionset id="language-dd-menu" selection="none" type="drop-down">
