@@ -6,7 +6,7 @@
 
 window.teian = {
 	"name" : "teian",
-	"version" : "2.3.4",
+	"version" : "2.3.5",
 	"compatibility" : {
 		"annotator-types" : "0.4"
 	},
@@ -80,6 +80,8 @@ window.teian = {
 		  }		  
 		}
 		
+		alert();
+		
 		var nodeToInsert = oAnnotator.oAnnotatorMarkup.cloneNode(true);
 
 		if ("insert insert-parametrized".indexOf(sAnnotatorType) != -1) {
@@ -108,7 +110,7 @@ window.teian = {
 		var content = $('#teian-content *')[0].cloneNode(true);
 		content.setAttribute("content-url", teian.contentUrl);
 		var contentAsString = $x.serializeToString(content);
-		if (teian._processChangesPIs) {
+		if (teian.sessionParameters["track-changes"] == "true") {
 		  contentAsString = teian._convertTrackChangesHtmlToPi(contentAsString);		  
 		}
 		//filter out HTML br elements
@@ -157,15 +159,15 @@ window.teian = {
 		oSelection.addRange(oRange);
 		$('#' + sHTMLAnnotatorID).click();
 	},
-	"changesViewStatus" : "show",
 	"toggleViewChanges" : function() {
-	  //toggle view changes based upon teian.changesViewStatus
-	  if (teian.changesViewStatus == 'show') {
+	  //toggle view changes based upon teian.sessionParameters["show-changes"]
+	  var sessionParameters = teian.sessionParameters;
+	  if (sessionParameters["show-changes"] == "true") {
 	    teian._hideChanges();
-	    teian.changesViewStatus = 'hide';
+	    sessionParameters["show-changes"] = "false";
 	  } else {
 	    teian._showChanges();
-	    teian.changesViewStatus = 'show';	    
+	    sessionParameters["show-changes"] = "true";	    
 	  }
 	},
 	"_showChanges" : function() {
@@ -228,26 +230,26 @@ window.teian = {
 		_errors.push($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:selection-non-empty/text()"));
 		_errors.push($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:non-editable-entity/text()"));
 		
-		if (teian._processChangesPIs) {
+		if (teian.sessionParameters["track-changes"] == "true") {
 		  //use the vocabulary specific PIs for tracking changes
-		  var changeTrackers = teian._changeTrackers;
+		  var changeTrackingParameters = teian._changeTrackingParameters;
 		  if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-start-tracker']") != "") {
-		     changeTrackers.insertStart = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-start-tracker']/teian:content-model")[0].childNodes[0].target;
+		     changeTrackingParameters.insertStart = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-start-tracker']/teian:content-model")[0].childNodes[0].target;
 		  }
 		  if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-end-tracker']") != "") {
-		    changeTrackers.insertEnd = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-end-tracker']/teian:content-model")[0].childNodes[0].target;
+		    changeTrackingParameters.insertEnd = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-end-tracker']/teian:content-model")[0].childNodes[0].target;
 		  }
 		  if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-start-tracker']") != "") {
-		    changeTrackers.deleteStart = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-start-tracker']/teian:content-model")[0].childNodes[0].target;
+		    changeTrackingParameters.deleteStart = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-start-tracker']/teian:content-model")[0].childNodes[0].target;
 		  }
 		  if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-end-tracker']") != "") {
-		    changeTrackers.deleteEnd = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-end-tracker']/teian:content-model")[0].childNodes[0].target;
+		    changeTrackingParameters.deleteEnd = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-end-tracker']/teian:content-model")[0].childNodes[0].target;
 		  }		  
 		  var contentAsString = $x.instance('data').source();
-		  contentAsString = contentAsString.replace(new RegExp("\\?" + changeTrackers.insertEnd + "\\?", "g"), "/ins")
-		    .replace(new RegExp("\\?" + changeTrackers.deleteEnd + "\\?", "g"), "/del")
-		    .replace(new RegExp("(\\?" + changeTrackers.insertStart + ")([^>]*)(\\?>)", "g"), "ins xmlns=\"http://www.w3.org/1999/xhtml\"$2>")
-		    .replace(new RegExp("(\\?" + changeTrackers.deleteStart + ")([^>]*)(\\?)", "g"), "del xmlns=\"http://www.w3.org/1999/xhtml\"$2")		    
+		  contentAsString = contentAsString.replace(new RegExp("\\?" + changeTrackingParameters.insertEnd + "\\?", "g"), "/ins")
+		    .replace(new RegExp("\\?" + changeTrackingParameters.deleteEnd + "\\?", "g"), "/del")
+		    .replace(new RegExp("(\\?" + changeTrackingParameters.insertStart + ")([^>]*)(\\?>)", "g"), "ins xmlns=\"http://www.w3.org/1999/xhtml\"$2>")
+		    .replace(new RegExp("(\\?" + changeTrackingParameters.deleteStart + ")([^>]*)(\\?)", "g"), "del xmlns=\"http://www.w3.org/1999/xhtml\"$2")		    
 		  ;
 		  document.getElementById("teian-content").appendChild($x.parseFromString(contentAsString).documentElement);
 		  return;
@@ -327,25 +329,25 @@ teian._acceptOrRejectAllChanges = function(action) {
   }
 };
 
-teian._changeTrackers = {
+teian._changeTrackingParameters = {
   "insertStart" : "teian-insert-start",
   "insertEnd" : "teian-insert-end",
   "deleteStart" : "teian-delete-start",
-  "deleteEnd" : "teian-delete-end"  
+  "deleteEnd" : "teian-delete-end",
+  "changes-summary-index" : -1
 };
 
 teian.sessionParameters = {
-  "changes-summary-index" : -1,
-  "change-trackers" : {
-  }
+  "track-changes" : "true",
+  "show-changes" : "true"
 };
 
 teian._convertTrackChangesHtmlToPi = function(contentAsString) {
-  var changeTrackers = teian._changeTrackers;
-  contentAsString = contentAsString.replace(/\/ins/g, "?" + changeTrackers.insertEnd + "?")
-    .replace(/\/del/g, "?" + changeTrackers.deleteEnd + "?")
-    .replace(new RegExp("(ins xmlns=\"http://www.w3.org/1999/xhtml\")([^>]*)", "g"), "?" + changeTrackers.insertStart + "$2?")
-    .replace(new RegExp("(del xmlns=\"http://www.w3.org/1999/xhtml\")([^>]*)", "g"), "?" + changeTrackers.deleteStart + "$2?")
+  var changeTrackingParameters = teian._changeTrackingParameters;
+  contentAsString = contentAsString.replace(/\/ins/g, "?" + changeTrackingParameters.insertEnd + "?")
+    .replace(/\/del/g, "?" + changeTrackingParameters.deleteEnd + "?")
+    .replace(new RegExp("(ins xmlns=\"http://www.w3.org/1999/xhtml\")([^>]*)", "g"), "?" + changeTrackingParameters.insertStart + "$2?")
+    .replace(new RegExp("(del xmlns=\"http://www.w3.org/1999/xhtml\")([^>]*)", "g"), "?" + changeTrackingParameters.deleteStart + "$2?")
   ;
   return contentAsString;
 };
@@ -361,8 +363,7 @@ teian._removeClass = function(element, classToRemove) {
 };
 
 teian.goToChange = function(goToAction) {
-  var sessionParameters = teian.sessionParameters;
-  var currentChangesSummaryIndex = sessionParameters["changes-summary-index"];
+  var currentChangesSummaryIndex = teian._changeTrackingParameters["changes-summary-index"];
   var changeHtmlElements = document.querySelectorAll("ins, del");
   var lastChangesSummaryIndex = changeHtmlElements.length - 1;
   teian._removeClass(changeHtmlElements[currentChangesSummaryIndex], "change-selection");
@@ -382,16 +383,15 @@ teian.goToChange = function(goToAction) {
     break;    
   }
   teian._addClass(changeHtmlElements[goToChangesSummaryIndex], "change-selection");
-  sessionParameters["changes-summary-index"] = goToChangesSummaryIndex;
+  teian._changeTrackingParameters["changes-summary-index"] = goToChangesSummaryIndex;
 };
 
-$(document)
-		.ready(
-				function() {
-				  var sessionParameters = teian.sessionParameters;
-					// get the tei-ann module's base uri
-					var sDocumentURL = document.URL, sModuleBaseURI = sDocumentURL.substring(0, sDocumentURL.indexOf("core/teian.html")), utils = teian.utils, _errors = teian._errors;
-					utils.baseURI = sModuleBaseURI;
+$(document).ready(
+  function() {
+    var sessionParameters = teian.sessionParameters;
+    // get the tei-ann module's base uri
+    var sDocumentURL = document.URL, sModuleBaseURI = sDocumentURL.substring(0, sDocumentURL.indexOf("core/teian.html")), utils = teian.utils, _errors = teian._errors;
+    utils.baseURI = sModuleBaseURI;
 					// load the standard annotators
 					$x.submission({
 						"ref" : "simpath:instance('standard-annotators')",
@@ -419,16 +419,14 @@ $(document)
 					var q = document.location.search || document.location.hash;
 					if (q) {
 						teian.contentUrl = q.substring(9);
-						//set flag for processing changes PIs
-						var _processChangesPIs = teian._processChangesPIs = true;
 						teian._fGetData(teian.contentUrl);
 						
-						//toggle changes based upon teian.changesViewStatus
-						if (teian.changesViewStatus == 'show') {
+						//toggle changes based upon sessionParameters["show-changes"]
+						if (sessionParameters["show-changes"] == "true") {
 						  teian._showChanges();
 						} else {
-						  teian._hideChanges();						  
-						}
+						  teian._hideChanges();	    
+						}						
 						
 						//process processing instructions for tracking changes
 						
@@ -479,7 +477,7 @@ $(document)
 						
 						//initialize change selection
 						teian._addClass(changeHtmlElements[0], "change-selection");
-						sessionParameters["changes-summary-index"] = 0;
+						teian._changeTrackingParameters["changes-summary-index"] = 0;
 						
 						
 						
