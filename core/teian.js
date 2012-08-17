@@ -15,6 +15,7 @@ window.teian = {
 	},
 	"annotator" : [ function(oAnnotator, sAnnotatorType, eventObject) {
 		var utils = teian.utils;
+		var sessionParameters = teian.sessionParameters;
 		teian.utils.restoreSelection();
 		var oSelection = rangy.getSelection(), sOperationType = utils.sOperationType;
 		if (oSelection == "" && "insert insert-parametrized".indexOf(sAnnotatorType) == -1) {
@@ -80,10 +81,16 @@ window.teian = {
 		  }		  
 		}
 		
-		alert();
-		
 		var nodeToInsert = oAnnotator.oAnnotatorMarkup.cloneNode(true);
-
+		
+		if (sessionParameters["track-changes"] == "true") {
+		  var insertChangeTemplate = teian._changeTrackingParameters["insert-change-template"].cloneNode(true);
+		  insertChangeTemplate.setAttribute("timestamp", Date.now());
+		  insertChangeTemplate.setAttribute("class", sessionParameters.user + "_track_changes");
+		  insertChangeTemplate.appendChild(nodeToInsert);
+		  nodeToInsert = insertChangeTemplate;
+		}
+		
 		if ("insert insert-parametrized".indexOf(sAnnotatorType) != -1) {
 		  if (calculatedPrecedingSiblingNode == null || calculatedPrecedingSiblingNode.nextElementSibling == null) {
 		    calculatedParentNode.appendChild(nodeToInsert);
@@ -182,7 +189,6 @@ window.teian = {
 	    document.styleSheets[0].deleteRule(0);
 	    document.styleSheets[0].insertRule("del {display: none;}", 0);	    
 	},
-	"changesTrackStatus" : "false",	
 	"_errors" : [],
 	"_fGetData" : function(sURI) {
 		$x.submission({
@@ -306,15 +312,16 @@ teian.rejectChange = function(changeId, changeType) {
 };
 
 teian.toggleTrackChanges = function() {
-  //toggle track changes based upon teian.changesTrackStatus
+  //toggle track changes based upon teian.sessionParameters["track-changes"] == "true"
   var currentButton = document.getElementById("toggle-track-changes-button");
   var currentButtonText = currentButton.textContent;
-  if (teian.changesTrackStatus == "true") {
+  var sessionParameters = teian.sessionParameters;
+  if (sessionParameters["track-changes"] == "true") {
     currentButton.textContent = currentButtonText.substring(0, currentButtonText.indexOf(" ✔"));
-    teian.changesTrackStatus = "false";
+    sessionParameters["track-changes"] = "false";
   } else {
     currentButton.textContent = currentButtonText + " ✔";
-    teian.changesTrackStatus = "true";
+    sessionParameters["track-changes"] = "true";
   }
 };
 
@@ -339,7 +346,8 @@ teian._changeTrackingParameters = {
 
 teian.sessionParameters = {
   "track-changes" : "true",
-  "show-changes" : "true"
+  "show-changes" : "true",
+  "user" : "Reviewer1"
 };
 
 teian._convertTrackChangesHtmlToPi = function(contentAsString) {
@@ -421,6 +429,7 @@ $(document).ready(
 						teian.contentUrl = q.substring(9);
 						teian._fGetData(teian.contentUrl);
 						
+			
 						//toggle changes based upon sessionParameters["show-changes"]
 						if (sessionParameters["show-changes"] == "true") {
 						  teian._showChanges();
@@ -437,10 +446,11 @@ $(document).ready(
 						var changeHtmlElements = document.querySelectorAll("ins, del");
 						for (var i = 0, il = changeHtmlElements.length; i < il; i++) {
 						  var changeHtmlElement = changeHtmlElements[i];
+						  var author = changeHtmlElement.getAttribute("author");
 						  changeHtmlElement.setAttribute("id", "teian-change-" + i);
 						  //TODO: set @class = @author + ...
-						  changeHtmlElement.setAttribute("class", "Reviewer1_track_changes");
-						  changesAuthors[changeHtmlElement.getAttribute("author")] = 1;						  
+						  changeHtmlElement.setAttribute("class", author + "_track_changes");
+						  changesAuthors[author] = 1;						  
 						}
 						
 						var changesContainer = document.getElementById("changes-container");
@@ -478,6 +488,11 @@ $(document).ready(
 						//initialize change selection
 						teian._addClass(changeHtmlElements[0], "change-selection");
 						teian._changeTrackingParameters["changes-summary-index"] = 0;
+						
+						//Initialize the HTML templates for rendering changes
+						var insertChangeTemplate = document.createElement("ins");
+						insertChangeTemplate.setAttribute("author", sessionParameters.user);
+						teian._changeTrackingParameters["insert-change-template"] = insertChangeTemplate;
 						
 						
 						
