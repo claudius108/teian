@@ -85,10 +85,12 @@ window.teian = {
 		
 		if (sessionParameters["track-changes"] == "true") {
 		  var insertChangeTemplate = teian._changeTrackingParameters["insert-change-template"].cloneNode(true);
+		  var author = sessionParameters.user;
 		  insertChangeTemplate.setAttribute("timestamp", Date.now());
-		  insertChangeTemplate.setAttribute("class", sessionParameters.user + "_track_changes");
+		  insertChangeTemplate.setAttribute("class", author + "_track_changes");
 		  insertChangeTemplate.appendChild(nodeToInsert);
 		  nodeToInsert = insertChangeTemplate;
+		  teian._addChangeSummary(nodeToInsert, document.querySelector("div[author = '" + author + "']"));
 		}
 		
 		if ("insert insert-parametrized".indexOf(sAnnotatorType) != -1) {
@@ -336,6 +338,26 @@ teian._acceptOrRejectAllChanges = function(action) {
   }
 };
 
+teian._addChangeSummary = function(change, authorChangesContainer) {
+  var changeContainer = document.createElement("div");
+  changeContainer.setAttribute("class", "teian-change-container");
+  var changeId = change.getAttribute("id");
+  changeContainer.setAttribute("id", "summary-" + changeId);
+  var changeType = ((change.nodeName == "INS") ? "Added" : "Deleted");
+  changeContainer.textContent = changeType + ": " + change.textContent + " " + change.getAttribute("timestamp");
+  var image = document.createElement("input");
+  image.setAttribute("type", "image");
+  image.setAttribute("src", "../resources/images/passed.png");
+  image.setAttribute("title", "Accept change");
+  image.setAttribute("onclick", "teian.acceptChange('" + changeId + "', '" + changeType + "');");
+  changeContainer.appendChild(image.cloneNode(true));
+  image.setAttribute("src", "../resources/images/failed.png");
+  image.setAttribute("title", "Reject change");
+  image.setAttribute("onclick", "teian.rejectChange('" + changeId + "', '" + changeType + "');");
+  changeContainer.appendChild(image.cloneNode(true));
+  authorChangesContainer.appendChild(changeContainer); 
+};
+
 teian._changeTrackingParameters = {
   "insertStart" : "teian-insert-start",
   "insertEnd" : "teian-insert-end",
@@ -455,32 +477,17 @@ $(document).ready(
 						
 						var changesContainer = document.getElementById("changes-container");
 						//output the changes
-						for (var changesAuthor in changesAuthors) {
+						for (var author in changesAuthors) {
 						  var authorChangesContainer = document.createElement("div");
+						  authorChangesContainer.setAttribute("author", author);						  
 						  var changeAuthorContainer = document.createElement("span");
-						  changeAuthorContainer.textContent = changesAuthor;
+						  changeAuthorContainer.textContent = author;
 						  changeAuthorContainer.setAttribute("style", "background-color: pink;");
 						  authorChangesContainer.appendChild(changeAuthorContainer);						  
-						  var changes = document.querySelectorAll("ins[author = '" + changesAuthor + "'], del[author = '" + changesAuthor + "']");
+						  var changes = document.querySelectorAll("ins[author = '" + author + "'], del[author = '" + author + "']");
 						  for (var i = 0, il = changes.length; i < il; i++) {
-						    var change = changes[i];						    
-						    var changeContainer = document.createElement("div");
-						    changeContainer.setAttribute("class", "teian-change-container");
-						    var changeId = change.getAttribute("id");
-						    changeContainer.setAttribute("id", "summary-" + changeId);
-						    var changeType = ((change.nodeName == "INS") ? "Added" : "Deleted");
-						    changeContainer.textContent = changeType + ": " + change.textContent + " " + change.getAttribute("timestamp");
-						    var image = document.createElement("input");
-						    image.setAttribute("type", "image");
-						    image.setAttribute("src", "../resources/images/passed.png");
-						    image.setAttribute("title", "Accept change");
-						    image.setAttribute("onclick", "teian.acceptChange('" + changeId + "', '" + changeType + "');");
-						    changeContainer.appendChild(image.cloneNode(true));
-						    image.setAttribute("src", "../resources/images/failed.png");
-						    image.setAttribute("title", "Reject change");
-						    image.setAttribute("onclick", "teian.rejectChange('" + changeId + "', '" + changeType + "');");
-						    changeContainer.appendChild(image.cloneNode(true));
-						    authorChangesContainer.appendChild(changeContainer);
+						    var change = changes[i];
+						    teian._addChangeSummary(change, authorChangesContainer);
 						  }
 						  changesContainer.appendChild(authorChangesContainer);
 						}
