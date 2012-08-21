@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns:teian="http://kuberam.ro/ns/teian" xmlns="http://www.w3.org/1999/xhtml" xmlns:kyer="http://kuberam.ro/ns/kyer">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:teian="http://kuberam.ro/ns/teian" xmlns:kyer="http://kuberam.ro/ns/kyer">
     <head>
 	<!--dependencies for teian-->
         <link rel="stylesheet" href="track-changes/track-changes.css" type="text/css"/>
@@ -96,9 +96,14 @@
             </div>
         </div>-->
         <menu id="teian-context-menu" type="context" style="display:none">
+            <command id="clear-entity-button" label="Delete" onclick="teian.ui['clear-entity-dialog'].dialog('open');"/>
             <menu label="Insert">
-                <command label="Edit entity" onclick="teian.editEntity();"/>
-                <command label="Clear entity" onclick="teian.ui['clear-entity-dialog'].dialog('open');"/>
+                <command label="introduction" onclick="$('#introduction-placeholder').trigger('click');"/>
+                <command label="table" onclick="$('#table-placeholder').trigger('click');"/>
+                <command label="assessment" onclick="$('#assessment-placeholder').trigger('click');"/>
+                <command label="mediaobject audio" onclick="$('#mediaobject-audio-annotator').trigger('click');"/>
+                <command label="mediaobject video" onclick="$('#mediaobject-video-annotator').trigger('click');"/>
+                <command label="mediaobject image" onclick="$('#mediaobject-image-annotator').trigger('click');"/>
             </menu>
         </menu>
 <!-- 	<p><span id="label">Select your new theme:</span> <span id="themeSelection"></span></p> -->

@@ -2,6 +2,11 @@ ins, del {
   display: inline;
 }
 
+ins, del {
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
 ins *, del * {
   background-color: inherit;
 }

@@ -61,12 +61,11 @@
         <teian:content-model/>
         <teian:annotator-panel>
             <div id="help-dialog" title="">
-                <div id="help-dialog-content" ref="simpath:instance('ui-lang')//teian:annotator[@id = 'help-button']/teian:annotator-panel/teian:annotator-panel-element[@id = 'help-dialog-content']/text()"/>
+                <div id="help-dialog-content" ref="simpath:instance('standard-ui-lang')//teian:annotator[@id = 'help-button']/teian:annotator-panel/teian:annotator-panel-element[@id = 'help-dialog-content']/text()"/>
             </div>
             <script type="text/javascript" charset="utf-8">
-		$("#help-dialog").attr('title', $x.xpath("simpath:instance('ui-lang')//teian:annotator[@id = 'help-button']/teian:annotator-panel/teian:annotator-panel-title/text()"));
-		//alert($x.xpath("simpath:instance('ui-lang')//teian:annotator[@id = 'help-button']/teian:annotator-panel/teian:annotator-panel-element/@xlink:href")[0].value);
-		$("#help-dialog-content").load($x.xpath("simpath:instance('ui-lang')//teian:annotator[@id = 'help-button']/teian:annotator-panel/teian:annotator-panel-element/@xlink:href")[0].value + ' .article, .copyright');
+		$("#help-dialog").attr('title', $x.xpath("simpath:instance('standard-ui-lang')//teian:annotator[@id = 'help-button']/teian:annotator-panel/teian:annotator-panel-title/text()"));
+		$("#help-dialog-content").load($x.xpath("simpath:instance('standard-ui-lang')//teian:annotator[@id = 'help-button']/teian:annotator-panel/teian:annotator-panel-element/@xlink:href")[0].value + ' .article, .copyright');
 		teian.ui['help-dialog'] = $("#help-dialog").dialog({
 			autoOpen: false,
 			width : 1000,
@@ -92,34 +91,47 @@
         <teian:content-model/>
         <teian:annotator-panel>
             <div id="clear-entity-dialog" title="">
-                <span id="clear-entity-label" ref="simpath:instance('ui-lang')//teian:annotator[@id = 'clear-entity-button']/teian:annotator-panel/teian:annotator-panel-element[@id = 'clear-entity-label']/text()" style="white-space: normal;"/>
+                <span id="clear-entity-label" ref="simpath:instance('standard-ui-lang')//teian:annotator[@id = 'clear-entity-button']/teian:annotator-panel/teian:annotator-panel-element[@id = 'clear-entity-label']/text()" style="white-space: normal;"/>
             </div>
             <script type="text/javascript" charset="utf-8">
-		$("#clear-entity-dialog").attr('title', $x.xpath("simpath:instance('ui-lang')//teian:annotator[@id = 'clear-entity-button']/teian:annotator-panel/teian:annotator-panel-title/text()"));
-		$("#clear-entity-label").text($x.xpath($("#clear-entity-label").attr('ref')));
-		$("#help-dialog-content").load($x.xpath("simpath:instance('ui-lang')//teian:annotator[@id = 'help-button']/teian:annotator-panel/teian:annotator-panel-element/@xlink:href")[0].value + ' .article, .copyright');
-		teian.ui['clear-entity-dialog'] = $("#clear-entity-dialog").dialog({
-			autoOpen: false,
-			width : 390,
-			height : 200,
-			modal : true,
-			buttons: {			
-				"Clear": function() {
-					$(this).dialog("close");
-					$(teian.utils.oEntityToClear).replaceWith($(teian.utils.oEntityToClear).text());
-					$("#clear-entity-label").text($x.xpath($("#clear-entity-label").attr('ref')));
-				},			
-				"Cancel": function() {
-					$(this).dialog("close");
-					teian.utils.oEntityToClear = null;
-					$("#clear-entity-label").text($x.xpath($("#clear-entity-label").attr('ref')));
-				}				
-			},
-			open: function(event, ui) {
-				$("#clear-entity-label").text($("#clear-entity-label").text().replace(/%entityName/, teian.utils.oEntityToClear.nodeName));
-			}
-		});		
-		</script>
+	      $("#clear-entity-dialog").attr('title', $x.xpath("simpath:instance('standard-ui-lang')//teian:annotator[@id = 'clear-entity-button']/teian:annotator-panel/teian:annotator-panel-title/text()"));
+	      $("#clear-entity-label").text($x.xpath($("#clear-entity-label").attr('ref')));
+	      $("#help-dialog-content").load($x.xpath("simpath:instance('standard-ui-lang')//teian:annotator[@id = 'help-button']/teian:annotator-panel/teian:annotator-panel-element/@xlink:href")[0].value + ' .article, .copyright');
+	      teian.ui['clear-entity-dialog'] = $("#clear-entity-dialog").dialog({
+		autoOpen: false,
+		width : 390,
+		height : 200,
+		modal : true,
+		buttons: {
+		  "Clear": function() {
+		    $(this).dialog("close");
+		    var sessionParameters = teian.sessionParameters;
+		    var nodeToDelete = teian.utils.oEntityToClear;
+		    var nodeToDeleteParentNode = nodeToDelete.parentNode;		    
+
+		    if (sessionParameters["track-changes"] == "true") {
+		      var deleteChangeTemplate = teian._changeTrackingParameters["delete-change-template"].cloneNode(true);
+		      var author = sessionParameters.user;
+		      deleteChangeTemplate.setAttribute("timestamp", Date.now());
+		      deleteChangeTemplate.setAttribute("class", author + "_track_changes");
+		      deleteChangeTemplate.appendChild(nodeToDelete.cloneNode(true));
+		      teian._addChangeSummary(deleteChangeTemplate, document.querySelector("div[author = '" + author + "']"));
+		      nodeToDeleteParentNode.replaceChild(deleteChangeTemplate, nodeToDelete);
+		    }
+		    
+		    $("#clear-entity-label").text($x.xpath($("#clear-entity-label").attr('ref')));
+		  },
+		  "Cancel": function() {
+		    $(this).dialog("close");
+		    teian.utils.oEntityToClear = null;
+		    $("#clear-entity-label").text($x.xpath($("#clear-entity-label").attr('ref')));
+		  }
+		},
+		open: function(event, ui) {
+		  $("#clear-entity-label").text($("#clear-entity-label").text().replace(/%entityName/, teian.utils.oEntityToClear.nodeName));
+		}
+	      });
+	    </script>
         </teian:annotator-panel>
     </teian:annotator>
     <teian:annotator id="insert-tracker" name="" editable="false" type-code="change-tracker">

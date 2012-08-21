@@ -151,119 +151,6 @@ window.teian = {
 	},
 	"unlock" : function() {
 		$('#teian-content')[0].contentEditable = true;
-	},
-	"editEntity" : function() {
-		var utils = teian.utils, oEntityToClear = utils.oEntityToClear, sEntityToClearName = oEntityToClear.nodeName;
-		if (utils.sEditableAnnotatorIDs.indexOf(' ' + sEntityToClearName + ' ') == -1) {
-			var errorMsg = teian._errors[3];
-			alert(errorMsg.replace(/%entityName/, sEntityToClearName));
-			return;
-		}
-		utils.sOperationType = 'edit';
-		var oRange = rangy.createRange(), sHTMLAnnotatorID = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@name = '" + sEntityToClearName
-				+ "']/@id")[0].value;
-		oRange.selectNodeContents(oEntityToClear);
-		var oSelection = rangy.getSelection();
-		oSelection.removeAllRanges();
-		oSelection.addRange(oRange);
-		$('#' + sHTMLAnnotatorID).click();
-	},
-	"toggleViewChanges" : function() {
-	  //toggle view changes based upon teian.sessionParameters["show-changes"]
-	  var sessionParameters = teian.sessionParameters;
-	  if (sessionParameters["show-changes"] == "true") {
-	    teian._hideChanges();
-	    sessionParameters["show-changes"] = "false";
-	  } else {
-	    teian._showChanges();
-	    sessionParameters["show-changes"] = "true";	    
-	  }
-	},
-	"_showChanges" : function() {
-	    document.getElementById("teian-content").style.width = '700px';
-	    document.getElementById("changes-container").style.display = 'inline';
-	    document.styleSheets[0].deleteRule(0);
-	    document.styleSheets[0].insertRule("ins, del {display: inline;}", 0);	    
-	    
-	},
-	"_hideChanges" : function() {document.getElementById("teian-content").style.width = '98%';
-	    document.getElementById("changes-container").style.display = 'none';
-	    document.styleSheets[0].deleteRule(0);
-	    document.styleSheets[0].insertRule("del {display: none;}", 0);	    
-	},
-	"_errors" : [],
-	"_fGetData" : function(sURI) {
-		$x.submission({
-			"ref" : "simpath:instance('data')",
-			"resource" : sURI,
-			"mode" : "synchronous",
-			"method" : "get"
-		});
-		
-		var contentRootElement = $x._instances['data'].documentElement;
-		var contentRootElementClarkName = '{' + contentRootElement.namespaceURI + '}' + contentRootElement.nodeName;
-		// load the CSS stlying file
-		var fileref = document.createElement("link");
-		fileref.setAttribute("rel", "stylesheet");
-		fileref.setAttribute("type", "text/css");
-		fileref.setAttribute("href", $x
-				.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@css-href")[0].value);
-		document.getElementsByTagName("head")[0].appendChild(fileref);
-		// load the specific annotators
-		$x.submission({
-		  "ref" : "simpath:instance('vocabulary-annotators')",
-		  "resource" : $x.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@annotators-href")[0].value,
-		  "mode" : "synchronous",
-		  "method" : "get"
-		});
-		// load kyer-toolbar-menu
-		$x.submission({
-					"ref" : "simpath:instance('menus')",
-					"resource" : $x.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@menus-href")[0].value,
-					"mode" : "synchronous",
-					"method" : "get"
-		});
-		// load vocabulary specific lang file
-		$x.submission({
-			"ref" : "simpath:instance('vocabulary-ui-lang')",
-			"resource" : $x.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@lang-href")[0].value,
-			"mode" : "synchronous",
-			"method" : "get"
-		});
-		
-		_errors = teian._errors;
-		_errors.push($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:selection-empty/text()"));
-		_errors.push($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:forbidden-overlapping/text()"));
-		_errors.push($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:selection-non-empty/text()"));
-		_errors.push($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:non-editable-entity/text()"));
-		
-		//process processing instructions for tracking changes
-		if (teian.sessionParameters["track-changes"] == "true") {
-		  //use the vocabulary specific PIs for tracking changes
-		  var changeTrackingParameters = teian._changeTrackingParameters;
-		  if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-start-tracker']") != "") {
-		     changeTrackingParameters.insertStart = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-start-tracker']/teian:content-model")[0].childNodes[0].target;
-		  }
-		  if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-end-tracker']") != "") {
-		    changeTrackingParameters.insertEnd = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-end-tracker']/teian:content-model")[0].childNodes[0].target;
-		  }
-		  if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-start-tracker']") != "") {
-		    changeTrackingParameters.deleteStart = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-start-tracker']/teian:content-model")[0].childNodes[0].target;
-		  }
-		  if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-end-tracker']") != "") {
-		    changeTrackingParameters.deleteEnd = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-end-tracker']/teian:content-model")[0].childNodes[0].target;
-		  }		  
-		  var contentAsString = $x.instance('data').source();
-		  contentAsString = contentAsString.replace(new RegExp("\\?" + changeTrackingParameters.insertEnd + "\\?", "g"), "/ins")
-		    .replace(new RegExp("\\?" + changeTrackingParameters.deleteEnd + "\\?", "g"), "/del")
-		    .replace(new RegExp("(\\?" + changeTrackingParameters.insertStart + ")([^>]*)(\\?>)", "g"), "ins xmlns=\"http://www.w3.org/1999/xhtml\"$2>")
-		    .replace(new RegExp("(\\?" + changeTrackingParameters.deleteStart + ")([^>]*)(\\?)", "g"), "del xmlns=\"http://www.w3.org/1999/xhtml\"$2")		    
-		  ;
-		  document.getElementById("teian-content").appendChild($x.parseFromString(contentAsString).documentElement);
-		  return;
-		}		
-
-		($x.utils.isIE) ? $("#teian-content").html($x.instance('data').source()) : $("#teian-content").append($($x._instances["data"].documentElement.cloneNode(true)));
 	}
 };
 
@@ -290,6 +177,24 @@ teian.acceptChange = function(changeId, changeType) {
   changeSummary.parentNode.removeChild(changeSummary);  
 };
 
+teian.editEntity = function() {
+  var utils = teian.utils;
+  var oEntityToClear = utils.oEntityToClear;
+  var sEntityToClearName = oEntityToClear.nodeName;
+  if (utils.sEditableAnnotatorIDs.indexOf(' ' + sEntityToClearName + ' ') == -1) {
+    var errorMsg = teian._errors[3];
+    alert(errorMsg.replace(/%entityName/, sEntityToClearName));
+    return;
+  }
+  utils.sOperationType = 'edit';
+  var oRange = rangy.createRange(), sHTMLAnnotatorID = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@name = '" + sEntityToClearName + "']/@id")[0].value;
+  oRange.selectNodeContents(oEntityToClear);
+  var oSelection = rangy.getSelection();
+  oSelection.removeAllRanges();
+  oSelection.addRange(oRange);
+  $('#' + sHTMLAnnotatorID).click();
+};
+	
 teian.goToChange = function(goToAction) {
   var currentChangesSummaryIndex = teian._changeTrackingParameters["changes-summary-index"];
   var changeHtmlElements = document.querySelectorAll("ins, del");
@@ -346,6 +251,18 @@ teian.sessionParameters = {
       "name" : "Reviewer1",
       "color" : "pink"
     }
+  }
+};
+
+teian.toggleViewChanges = function() {
+  //toggle view changes based upon teian.sessionParameters["show-changes"]
+  var sessionParameters = teian.sessionParameters;
+  if (sessionParameters["show-changes"] == "true") {
+    teian._hideChanges();
+    sessionParameters["show-changes"] = "false";
+  } else {
+    teian._showChanges();
+    sessionParameters["show-changes"] = "true";
   }
 };
 
@@ -422,6 +339,8 @@ teian._deleteChangeSummary = function(changeId) {
   changeSummary.parentNode.removeChild(changeSummary);
 };
 
+teian._errors = [];
+
 teian._generateChangesSummary = function(sessionParameters, sModuleBaseURI) {
   //summarize changes for rendering them
   var changesAuthors = {};
@@ -459,6 +378,9 @@ teian._generateChangesSummary = function(sessionParameters, sModuleBaseURI) {
   var insertChangeTemplate = document.createElement("ins");
   insertChangeTemplate.setAttribute("author", sessionParameters.user);
   teian._changeTrackingParameters["insert-change-template"] = insertChangeTemplate;
+  var deleteChangeTemplate = document.createElement("del");
+  deleteChangeTemplate.setAttribute("author", sessionParameters.user);
+  teian._changeTrackingParameters["delete-change-template"] = deleteChangeTemplate;
   
   //load XSLT stylesheets for processing changes markup
   $x.submission({
@@ -475,9 +397,100 @@ teian._generateChangesSummary = function(sessionParameters, sModuleBaseURI) {
   });  
 };
 
+teian._getContent = function(sURI) {
+  $x.submission({
+    "ref" : "simpath:instance('data')",
+    "resource" : sURI,
+    "mode" : "synchronous",
+    "method" : "get"
+  });
+  
+  var contentRootElement = $x._instances['data'].documentElement;
+  var contentRootElementClarkName = '{' + contentRootElement.namespaceURI + '}' + contentRootElement.nodeName;
+  
+  // load the CSS stlying file
+  var fileref = document.createElement("link");
+  fileref.setAttribute("rel", "stylesheet");
+  fileref.setAttribute("type", "text/css");
+  fileref.setAttribute("href", $x	.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@css-href")[0].value);
+  document.getElementsByTagName("head")[0].appendChild(fileref);
+  
+  // load the specific annotators
+  $x.submission({
+    "ref" : "simpath:instance('vocabulary-annotators')",
+    "resource" : $x.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@annotators-href")[0].value,
+    "mode" : "synchronous",
+    "method" : "get"
+  });
+  
+  // load kyer-toolbar-menu
+  $x.submission({
+    "ref" : "simpath:instance('menus')",
+    "resource" : $x.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@menus-href")[0].value,
+    "mode" : "synchronous",
+    "method" : "get"
+  });
+  
+  // load vocabulary specific lang file
+  $x.submission({
+    "ref" : "simpath:instance('vocabulary-ui-lang')",
+    "resource" : $x.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@lang-href")[0].value,
+    "mode" : "synchronous",
+    "method" : "get"
+  });
+  
+  _errors = teian._errors;
+  _errors.push($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:selection-empty/text()"));
+  _errors.push($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:forbidden-overlapping/text()"));
+  _errors.push($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:selection-non-empty/text()"));
+  _errors.push($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:non-editable-entity/text()"));
+  
+  //process processing instructions for tracking changes
+  if (teian.sessionParameters["track-changes"] == "true") {
+    //use the vocabulary specific PIs for tracking changes
+    var changeTrackingParameters = teian._changeTrackingParameters;
+    if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-start-tracker']") != "") {
+      changeTrackingParameters.insertStart = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-start-tracker']/teian:content-model")[0].childNodes[0].target;
+    }
+    if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-end-tracker']") != "") {
+      changeTrackingParameters.insertEnd = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-end-tracker']/teian:content-model")[0].childNodes[0].target;
+    }
+    if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-start-tracker']") != "") {
+      changeTrackingParameters.deleteStart = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-start-tracker']/teian:content-model")[0].childNodes[0].target;
+    }
+    if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-end-tracker']") != "") {
+      changeTrackingParameters.deleteEnd = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-end-tracker']/teian:content-model")[0].childNodes[0].target;
+    }
+    var contentAsString = $x.instance('data').source();
+    contentAsString = contentAsString.replace(new RegExp("\\?" + changeTrackingParameters.insertEnd + "\\?", "g"), "/ins")
+      .replace(new RegExp("\\?" + changeTrackingParameters.deleteEnd + "\\?", "g"), "/del")
+      .replace(new RegExp("(\\?" + changeTrackingParameters.insertStart + ")([^>]*)(\\?>)", "g"), "ins xmlns=\"http://www.w3.org/1999/xhtml\"$2>")
+      .replace(new RegExp("(\\?" + changeTrackingParameters.deleteStart + ")([^>]*)(\\?)", "g"), "del xmlns=\"http://www.w3.org/1999/xhtml\"$2")
+    ;
+    document.getElementById("teian-content").appendChild($x.parseFromString(contentAsString).documentElement);
+    return;
+  }
+  
+  ($x.utils.isIE) ? $("#teian-content").html($x.instance('data').source()) : $("#teian-content").append($($x._instances["data"].documentElement.cloneNode(true)));
+};
+
+teian._hideChanges = function() {
+  document.getElementById("teian-content").style.width = '98%';
+  document.getElementById("changes-container").style.display = 'none';
+  document.styleSheets[0].deleteRule(0);
+  document.styleSheets[0].insertRule("del {display: none;}", 0);
+};
+
 teian._removeClass = function(element, classToRemove) {
   var currentClass = element.getAttribute("class");
   element.setAttribute("class", currentClass.replace(classToRemove, ""))
+};
+
+teian._showChanges = function() {
+  document.getElementById("teian-content").style.width = '700px';
+  document.getElementById("changes-container").style.display = 'inline';
+  document.styleSheets[0].deleteRule(0);
+  document.styleSheets[0].insertRule("ins, del {display: inline;}", 0);
 };
 
 $(document).ready(
@@ -486,22 +499,24 @@ $(document).ready(
     // get the tei-ann module's base uri
     var sDocumentURL = document.URL, sModuleBaseURI = sDocumentURL.substring(0, sDocumentURL.indexOf("core/teian.html")), utils = teian.utils, _errors = teian._errors;
     utils.baseURI = sModuleBaseURI;
-					// load the standard annotators
-					$x.submission({
-						"ref" : "simpath:instance('standard-annotators')",
-						"resource" : sModuleBaseURI + "core/standard-annotators.xml",
-						"mode" : "synchronous",
-						"method" : "get"
-					});
-					// load standard lang file and initialize the error messages
-					$x.submission({
-						"ref" : "simpath:instance('standard-ui-lang')",
-						"resource" : sModuleBaseURI + "config/lang/en.xml",
-						"mode" : "synchronous",
-						"method" : "get"
-					});
-
-					// load the teian configuration file
+    
+    // load the standard annotators
+    $x.submission({
+      "ref" : "simpath:instance('standard-annotators')",
+      "resource" : sModuleBaseURI + "core/standard-annotators.xml",
+      "mode" : "synchronous",
+      "method" : "get"
+    });
+    
+    // load standard lang file and initialize the error messages
+    $x.submission({
+      "ref" : "simpath:instance('standard-ui-lang')",
+      "resource" : sModuleBaseURI + "config/lang/en.xml",
+      "mode" : "synchronous",
+      "method" : "get"
+    });
+    
+    // load the teian configuration file
 					$x.submission({
 						"ref" : "simpath:instance('config')",
 						"resource" : sModuleBaseURI + "config/config.xml",
@@ -513,7 +528,7 @@ $(document).ready(
 					var q = document.location.search || document.location.hash;
 					if (q) {
 						teian.contentUrl = q.substring(9);
-						teian._fGetData(teian.contentUrl);						
+						teian._getContent(teian.contentUrl);						
 			
 						//toggle changes based upon sessionParameters["show-changes"]
 						if (sessionParameters["show-changes"] == "true") {
@@ -531,7 +546,7 @@ $(document).ready(
 						var sStandardAnnotatorIDs = "";
 						var sAnnotatorIDs = "";
 						var sEditableAnnotatorIDs = "";
-						var oDataRoot = $("#teian-content > *")[0];
+						var oDataRoot = document.querySelector("#teian-content > *");
 						var sDataRootPrefix = oDataRoot.prefix ? oDataRoot.prefix + ":" : "";
 						var oDataRootNodeName = oDataRoot.nodeName;
 						// generate the annotators' IDs string
@@ -540,7 +555,7 @@ $(document).ready(
 						});
 						sStandardAnnotatorIDs = sAnnotatorIDs;
 						$($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator/@id")).each(function(index) {
-							sAnnotatorIDs += $(this).val() + ' ';
+						   sAnnotatorIDs += this.value + ' ';
 						});
 
 						// generate the editable annotators' IDs string
@@ -563,36 +578,43 @@ $(document).ready(
 							// , onSelect: reloadIE
 							});
 							// generate the annotators
-							var oToolbarMenuItems = $("div[appearance='kyer-toolbar-menu']").find("button[id]");
-							var oContextMenuItems = $("ul[appearance='kyer-context-menu']").find("a[id]");
-							var oMenuItems = oToolbarMenuItems.add(oContextMenuItems);
+							var oToolbarMenuItems = $(document.querySelectorAll("div[appearance = 'kyer-toolbar-menu'] button[id]"));
+							var oContextMenuItems = $(document.querySelectorAll("ul[appearance = 'kyer-context-menu'] a[id]"));
+							var oTeianContextMenuItems = $(document.querySelectorAll("#teian-context-menu command[id]"));
+							var oMenuItems = oToolbarMenuItems.add(oContextMenuItems).add(oTeianContextMenuItems);
 
-							oMenuItems
-									.each(function(index) {
-										var oHTMLAnnotator = $(this), oHTMLAnnotator0 = this, sAnnotatorId = oHTMLAnnotator.attr('id'), sHTMLAnnotatorType = oHTMLAnnotator
-												.attr('appearance');
+							oMenuItems.each(function(index) {
+										var oHTMLAnnotator = $(this);
+										var oHTMLAnnotator0 = this;
+										var sAnnotatorId = oHTMLAnnotator.attr('id');
+										var sHTMLAnnotatorType = oHTMLAnnotator.attr('appearance');
 
 										if (sAnnotatorIDs.indexOf(sAnnotatorId) != -1 && sAnnotatorId != '') {
 											// generate the standard annotation markup
 											if (sStandardAnnotatorIDs.indexOf(sAnnotatorId) != -1) {
-												var oAnnotator0 = $x.xpath("simpath:instance('standard-annotators')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
-												var oAnnotator = $(oAnnotator0);
-												var oLang0 = $x.xpath("simpath:instance('standard-ui-lang')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
-												var oLang = $(oLang0);
-												// set the annotator title
-												oHTMLAnnotator.attr('title', $x.xpath("/teian:annotator/teian:toolbar-button-title/text()", oLang0));
-												// set the annotator label
-												oHTMLAnnotator.html((sHTMLAnnotatorType == 'image-button' ? "<img src=\"" + sModuleBaseURI + "config/images/"
-														+ $x.xpath("/teian:annotator/teian:annotator-icon-name/text()", oAnnotator0) + "\"/>" : "")
-														+ $x.serializeToString($x.xpath("/teian:annotator/teian:toolbar-button-label", oLang0)[0]));
-												$($x.xpath("simpath:instance('standard-annotators')//teian:annotator[@id = '" + sAnnotatorId
-																+ "']/teian:annotator/teian:annotator-panel")[0]).appendTo("body");
+											  var oAnnotator0 = $x.xpath("simpath:instance('standard-annotators')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
+											  var oLang0 = $x.xpath("simpath:instance('standard-ui-lang')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
+											  var oLang = $(oLang0);
+											  // set the annotator title
+											  oHTMLAnnotator.attr('title', $x.xpath("/teian:annotator/teian:toolbar-button-title/text()", oLang0));
+											  // set the annotator label
+											  oHTMLAnnotator.html((sHTMLAnnotatorType == 'image-button' ? "<img src=\"" + sModuleBaseURI + "config/images/"
+											    + $x.xpath("/teian:annotator/teian:annotator-icon-name/text()", oAnnotator0) + "\"/>" : "")
+											    + $x.serializeToString($x.xpath("/teian:annotator/teian:toolbar-button-label", oLang0)[0]));
+											  // load the annotator's UI
+											  if ($x.xpath("/teian:annotator/teian:annotator-panel", oAnnotator0)) {
+											    $($x.xpath("/teian:annotator/teian:annotator-panel", oAnnotator0)[0]).appendTo("body");
+											    
+											  }
 											}
 											// generate the vocabulary specific annotation markup
 											else {
-												var oAnnotator0 = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = '" + sAnnotatorId + "']")[0], oAnnotator = $(oAnnotator0), oLang0 = $x
-														.xpath("simpath:instance('vocabulary-ui-lang')//teian:annotator[@id = '" + sAnnotatorId + "']")[0], oLang = $(oLang0), sAnnotatorType = oAnnotator
-														.attr('type-code');
+												var oAnnotator0 = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
+												var oAnnotator = $(oAnnotator0);
+												var oLang0 = $x.xpath("simpath:instance('vocabulary-ui-lang')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
+												var oLang = $(oLang0);
+												var sAnnotatorType = oAnnotator.attr('type-code');
+												
 												// set the annotator title
 												oHTMLAnnotator.attr('title', $x.xpath("/teian:annotator/teian:toolbar-button-title/text()", oLang0));
 												// set the annotator label
@@ -609,8 +631,7 @@ $(document).ready(
 												//set the possible preceding siblings names
 												var possiblePrecedingSiblingNames = $x.xpath(
 														"normalize-space(/teian:annotator/teian:annotator-possible-preceding-sibling-element-names/text())", oAnnotator0);
-												oHTMLAnnotator0.possiblePrecedingSiblingNames = possiblePrecedingSiblingNames.replace(/@/g, "");
-												
+												oHTMLAnnotator0.possiblePrecedingSiblingNames = possiblePrecedingSiblingNames.replace(/@/g, "");												
 
 												var oAnnotatorMarkup = $(typeof (document.createElementNS) == 'undefined' ? document.createElement(sDataRootPrefix
 														+ oAnnotator.attr('name')) : document.createElementNS(oDataRoot.namespaceURI, sDataRootPrefix
@@ -627,15 +648,13 @@ $(document).ready(
 
 												switch (sAnnotatorType) {
 												case 'selected-wrap':
-													// set the command for
-													// annotator
+													// set the command for annotator
 													oHTMLAnnotator.click(function() {
 														teian.annotator[0](this, 'selected-wrap');
 													});		
 													break;
 												case 'selected-wrap-parameterized':
-													// set the command for
-													// annotator
+													// set the command for annotator
 													oHTMLAnnotator.click(function() {
 														if (rangy.getSelection() == "") {
 															alert(teian._errors[0]);
@@ -644,8 +663,7 @@ $(document).ready(
 														teian.utils.saveSelection();
 														teian.ui[sAnnotatorId].dialog('open');
 													});
-													// load the data model containing the annotator's UI
-													//alert($x.serializeToString(oAnnotator0));	
+													// load the annotator's UI
 													$($x.xpath("/teian:annotator/teian:annotator-panel", oAnnotator0)[0]).appendTo("body");
 													break;
 												case 'insert':
