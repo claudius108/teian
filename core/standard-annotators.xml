@@ -4,7 +4,7 @@
     By Claudius Teodorescu
     Licensed under LGPL.
 -->
-<teian:annotators xmlns:teian="http://kuberam.ro/ns/teian" xmlns="http://www.w3.org/1999/xhtml">
+<teian:annotators xmlns="http://www.w3.org/1999/xhtml" xmlns:teian="http://kuberam.ro/ns/teian">
     <teian:annotator id="save-button" name="" editable="false" type-code="action">
         <teian:description>Save current document.</teian:description>
         <teian:annotator-icon-name/>
@@ -111,11 +111,8 @@
 
 		    if (sessionParameters["track-changes"] == "true") {
 		      var deleteChangeTemplate = teian._changeTrackingParameters["delete-change-template"].cloneNode(true);
-		      var author = sessionParameters.user;
-		      deleteChangeTemplate.setAttribute("timestamp", Date.now());
-		      deleteChangeTemplate.setAttribute("class", author + "_track_changes");
 		      deleteChangeTemplate.appendChild(nodeToDelete.cloneNode(true));
-		      teian._addChangeSummary(deleteChangeTemplate, document.querySelector("div[author = '" + author + "']"));
+		      teian._addChangeSummary(deleteChangeTemplate, null);
 		      nodeToDeleteParentNode.replaceChild(deleteChangeTemplate, nodeToDelete);
 		    }
 		    
