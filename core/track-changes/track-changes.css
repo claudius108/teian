@@ -34,6 +34,6 @@ ins *, del * {
   font-weight: bold;
 }
 
-.teian-change-container {
+.change-container {
   border-bottom: 1px solid black;  
 }

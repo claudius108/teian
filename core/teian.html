@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:teian="http://kuberam.ro/ns/teian" xmlns:kyer="http://kuberam.ro/ns/kyer">
+<html xmlns:teian="http://kuberam.ro/ns/teian" xmlns="http://www.w3.org/1999/xhtml" xmlns:kyer="http://kuberam.ro/ns/kyer">
     <head>
 	<!--dependencies for teian-->
         <link rel="stylesheet" href="track-changes/track-changes.css" type="text/css"/>
@@ -119,6 +119,30 @@
                 <button id="previous-change-button" title="Previous change" onclick="teian.goToChange('previous');">&lt;</button>
                 <button id="next-change-button" title="Next change" onclick="teian.goToChange('next');">&gt;</button>
                 <button id="last-change-button" title="Last change" onclick="teian.goToChange('last');">&gt;&gt;</button>
+            </div>
+        </div>
+        <div id="data-instances" style="display: none;">
+            <div id="insert-change-template">
+                <ins author=""/>
+            </div>
+            <div id="delete-change-template">
+                <del author=""/>
+            </div>
+            <div id="change-summary-template">
+                <div class="change-container" id="">
+                    <div class="change-summary-title"/>
+                    <input type="image" src="../resources/images/passed.png" title="Accept change" onclick=""/>
+                    <input type="image" src="../resources/images/failed.png" title="Reject change" onclick=""/>
+                </div>
+            </div>
+            <div id="session-parameters">
+                <teian:session-parameters>
+                    <teian:track-changes>true</teian:track-changes>
+                    <teian:show-changes>true</teian:show-changes>
+                    <teian:lock-content>false</teian:lock-content>
+                    <teian:user-name>Reviewer1</teian:user-name>
+                    <teian:changes-authors/>
+                </teian:session-parameters>
             </div>
         </div>
     </body>
