@@ -108,12 +108,12 @@ teian.annotator = [
     }
     
     var nodeToInsert = oAnnotator.oAnnotatorMarkup.cloneNode(true);
+    
     if (sessionParameters["track-changes"] == "true") {
       var insertChangeTemplate = document.querySelector("#insert-change-template > *").cloneNode(true);
       insertChangeTemplate.appendChild(nodeToInsert);
       nodeToInsert = insertChangeTemplate;
-      teian._addChangeSummary(nodeToInsert, null);
-    }
+    }    
     
     if ("insert insert-parametrized".indexOf(sAnnotatorType) != -1) {
       if (calculatedPrecedingSiblingNode == null || calculatedPrecedingSiblingNode.nextElementSibling == null) {
@@ -133,6 +133,10 @@ teian.annotator = [
       }
       oSelection.removeAllRanges();
     }
+    
+    if (sessionParameters["track-changes"] == "true") {
+      teian._addChangeSummary(nodeToInsert, null);
+    }    
   }
 ];
 
@@ -233,7 +237,7 @@ teian.store = function() {
   utils.oSavedSelection = null;
   var content = $('#teian-content *')[0].cloneNode(true);
   content.setAttribute("content-url", teian.contentUrl);
-  var contentAsString = $x.serializeToString(content);
+  var contentAsString = $x.serializeToString(content);alert(contentAsString);
   if (teian.sessionParameters["track-changes"] == "true") {
     contentAsString = teian._convertTrackChangesHtmlToPi(contentAsString);
   }
@@ -361,8 +365,10 @@ teian._generateChangesSummary = function(sessionParameters, sModuleBaseURI) {
   
   //summarize changes for rendering them
   var changesAuthors = {};
-  var changeHtmlElements = document.querySelectorAll("ins, del");
-  for (var i = 0, il = changeHtmlElements.length; i < il; i++) {
+  changesAuthors[currentAuthor] = 1;
+  var changeHtmlElements = document.getElementById("teian-content").querySelectorAll("ins, del");
+  var changeHtmlElementsNumber = changeHtmlElements.length;
+  for (var i = 0, il = changeHtmlElementsNumber; i < il; i++) {
     var changeHtmlElement = changeHtmlElements[i];
     var author = changeHtmlElement.getAttribute("author");
     changeHtmlElement.setAttribute("id", "teian-change-" + i);
@@ -387,10 +393,6 @@ teian._generateChangesSummary = function(sessionParameters, sModuleBaseURI) {
     changesContainer.appendChild(authorChangesContainer);
   }
   
-  //initialize change selection
-  teian._addClass(changeHtmlElements[0], "change-selection");
-  _changeTrackingParameters["changes-summary-index"] = 0;
-  
   //initialize the HTML templates for rendering changes
   document.querySelector("#insert-change-template > *").setAttribute("author", currentAuthor);
   document.querySelector("#delete-change-template > *").setAttribute("author", currentAuthor);
@@ -407,7 +409,15 @@ teian._generateChangesSummary = function(sessionParameters, sModuleBaseURI) {
     "resource" : sModuleBaseURI + "core/track-changes/reject-all-changes.xml",
     "mode" : "synchronous",
     "method" : "get"
-  });  
+  }); 
+  
+  if (changeHtmlElementsNumber == 0) {
+   return; 
+  }
+  
+  //initialize change selection
+  teian._addClass(changeHtmlElements[0], "change-selection");
+  _changeTrackingParameters["changes-summary-index"] = 0;
 };
 
 teian._getContent = function(sURI) {
@@ -500,7 +510,7 @@ teian._removeClass = function(element, classToRemove) {
 };
 
 teian._showChanges = function() {
-  document.getElementById("teian-content").style.width = '700px';
+  document.getElementById("teian-content").style.width = '77%';
   document.getElementById("changes-container").style.display = 'inline';
   document.styleSheets[0].deleteRule(0);
   document.styleSheets[0].insertRule("ins, del {display: inline;}", 0);

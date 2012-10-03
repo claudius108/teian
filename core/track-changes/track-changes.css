@@ -18,7 +18,7 @@ ins *, del * {
 #changes-container {
   float: left;
   margin-top: 3px;   
-  width: 180px;
+  width: 17%;
   border: 1px solid black; 
   font-size: 9px;
 }
