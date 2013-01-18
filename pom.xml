@@ -14,91 +14,15 @@
 	<packaging>pom</packaging>
 	<name>teian</name>
 
-	<properties>
-		<sourceforge-username>claudius108</sourceforge-username>
-		<sourceforge-project-unix-name>teiann</sourceforge-project-unix-name>
-		<web-sourceforge-url>sftp://${sourceforge-username},${sourceforge-project-unix-name}@web.sourceforge.net/home/project-web/teiann/htdocs</web-sourceforge-url>
-		<sourceforge-public-key-path>/home/claudius/workspaces/archive/crypto-keys/sourceforge-claudius108/sourceforge-claudius108</sourceforge-public-key-path>
-		<sourceforge-shell-arg-line>-t -i ${sourceforge-public-key-path} ${sourceforge-username},teiann@shell.sourceforge.net</sourceforge-shell-arg-line>
-		<resources-excluded-from-uploading>.*,pom.xml,target/*/*.*,core/*/*.*,documentation/*/*.*,resources/*/*.*,services/*/*.*</resources-excluded-from-uploading>
-	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>com.jcraft</groupId>
-			<artifactId>jsch</artifactId>
-			<version>0.1.48</version>
-		</dependency>
-	</dependencies>
-
 	<build>
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ssh</artifactId>
-				<version>2.3</version>
-			</extension>
-		</extensions>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.7</version>
-				<executions>
-					<execution>
-						<id>create-project-shell</id>
-						<phase>package</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<target>
-								<echo>Create project shell</echo>
-								<exec executable="ssh">
-									<arg line="${sourceforge-shell-arg-line} create" />
-								</exec>
-								<echo>Delete project's resources</echo>
-								<exec executable="ssh"
-									inputstring="rm -rf /home/project-web/teiann/htdocs/latest/* ; rm -rf /home/project-web/teiann/htdocs/stable/${project.version}/* ; exit">
-									<arg line="${sourceforge-shell-arg-line}" />
-								</exec>
-							</target>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>wagon-maven-plugin</artifactId>
-				<version>1.0-beta-4</version>
-				<executions>
-					<execution>
-						<id>upload-project-resources-to-latest</id>
-						<phase>package</phase>
-						<goals>
-							<goal>upload</goal>
-						</goals>
-						<configuration>
-							<!-- <excludes>${resources-excluded-from-uploading}</excludes> -->
-							<includes>documentation/*/*.*</includes>
-							<serverId>web-sourceforge-teian</serverId>
-							<url>${web-sourceforge-url}/latest</url>
-						</configuration>
-					</execution>
-					<execution>
-						<id>upload-project-resources-to-stable</id>
-						<phase>package</phase>
-						<goals>
-							<goal>upload</goal>
-						</goals>
-						<configuration>
-							<!-- <excludes>${resources-excluded-from-uploading}</excludes> -->
-							<includes>documentation/*/*.*</includes>
-							<serverId>web-sourceforge-teian</serverId>
-							<url>${web-sourceforge-url}/stable/${project.version}</url>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
