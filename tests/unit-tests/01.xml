@@ -1,0 +1,6 @@
+<structured-subjects-annotator-ui xmlns="http://www.w3.org/1999/xhtml">
+	<div id="date-dialog" title="Enter date in format YYYY-MM-DD"> 
+		<label>Enter date:</label>
+		<input type="text" id="date-input"/>
+	</div>
+</structured-subjects-annotator-ui>
