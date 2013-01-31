@@ -5,8 +5,8 @@
 
 	<parent>
 		<groupId>ro.kuberam</groupId>
-		<artifactId>models</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<artifactId>js-libs</artifactId>
+		<version>0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>teian</artifactId>
