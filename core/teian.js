@@ -213,8 +213,8 @@ teian.rejectChange = function(changeId, changeType) {
 };
 
 teian.sessionParameters = {
-  "track-changes" : "true",
-  "show-changes" : "true",
+  "track-changes" : "false",
+  "show-changes" : "false",
   "lock-content" : "false",
   "user" : "Reviewer1",
   "user-color" : "pink",
@@ -564,14 +564,14 @@ $(document).ready(
       
       //toggle changes
       if (sessionParameters["show-changes"] == "true") {
-	teian._showChanges();
+    	  teian._showChanges();
       } else {
-	teian._hideChanges();
+    	  teian._hideChanges();
       }
       
       //initialize tracking of changes
       if (sessionParameters["track-changes"] == "true") {
-	teian._generateChangesSummary(sessionParameters, sModuleBaseURI);
+    	  teian._generateChangesSummary(sessionParameters, sModuleBaseURI);
       }
       
       //get the tei-ann module's base uri
@@ -581,185 +581,186 @@ $(document).ready(
       var oDataRoot = document.querySelector("#teian-content > *");
       var sDataRootPrefix = oDataRoot.prefix ? oDataRoot.prefix + ":" : "";
       var oDataRootNodeName = oDataRoot.nodeName;
-      
+
       // generate the annotators' IDs string
       $($x.xpath("simpath:instance('standard-annotators')//teian:annotator/@id")).each(function(index) {
-	sAnnotatorIDs += this.value + ' ';
+    	  sAnnotatorIDs += this.value + ' ';
       });
       sStandardAnnotatorIDs = sAnnotatorIDs;
       $($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator/@id")).each(function(index) {
-	sAnnotatorIDs += this.value + ' ';
+    	  sAnnotatorIDs += this.value + ' ';
       });
-      
+
       //generate the editable annotators' IDs string
       $($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@editable = 'true']/@name")).each(function(index) {
-	sEditableAnnotatorIDs += $(this).val() + ' ';
+    	  sEditableAnnotatorIDs += $(this).val() + ' ';
       });
       utils.sEditableAnnotatorIDs = sEditableAnnotatorIDs;
       
-      function generateAnnotators() {
-	// themes roller
-	// load main theme
-	$.themes.setDefaults({
-	  "defaultTheme" : "cupertino" // The ID of the default theme, first one if blank
-	});
-	$.themes.init({
-	  themeBase : 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/'
-	  // , onSelect: reloadIE
-	});
-	
-	//generate the annotators
-	var oToolbarMenuItems = $(document.querySelectorAll("div[appearance = 'kyer-toolbar-menu'] button[id]"));
-	var oContextMenuItems = $(document.querySelectorAll("ul[appearance = 'kyer-context-menu'] a[id]"));
-	var oTeianContextMenuItems = $(document.querySelectorAll("#teian-context-menu command[id]"));
-	var oMenuItems = oToolbarMenuItems.add(oContextMenuItems).add(oTeianContextMenuItems);
-	
-	oMenuItems.each(function(index) {
-	  var oHTMLAnnotator = $(this);
-	  var oHTMLAnnotator0 = this;
-	  var sAnnotatorId = oHTMLAnnotator.attr('id');
-	  var sHTMLAnnotatorType = oHTMLAnnotator.attr('appearance');
-	  
-	  if (sAnnotatorIDs.indexOf(sAnnotatorId) != -1 && sAnnotatorId != '') {
-	    //generate the standard annotation markup
-	    if (sStandardAnnotatorIDs.indexOf(sAnnotatorId) != -1) {
-	      var oAnnotator0 = $x.xpath("simpath:instance('standard-annotators')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
-	      var oLang0 = $x.xpath("simpath:instance('standard-ui-lang')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
-	      var oLang = $(oLang0);
-	      
-	      //set the annotator title
-	      oHTMLAnnotator.attr('title', $x.xpath("/teian:annotator/teian:toolbar-button-title/text()", oLang0));
-	      
-	      //set the annotator label
-	      oHTMLAnnotator.html((sHTMLAnnotatorType == 'image-button' ? "<img src=\"" + sModuleBaseURI + "config/images/"
-		+ $x.xpath("/teian:annotator/teian:annotator-icon-name/text()", oAnnotator0) + "\"/>" : "")
-		+ $x.serializeToString($x.xpath("/teian:annotator/teian:toolbar-button-label", oLang0)[0]));
-	      
-	      //load the annotator's UI
-	      if ($x.xpath("/teian:annotator/teian:annotator-panel", oAnnotator0)) {
-		$($x.xpath("/teian:annotator/teian:annotator-panel", oAnnotator0)[0]).appendTo("body");
-	      }
-	    }
-	    
-	    //generate the vocabulary specific annotation markup
-	    else {
-	      var oAnnotator0 = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
-	      var oAnnotator = $(oAnnotator0);
-	      var oLang0 = $x.xpath("simpath:instance('vocabulary-ui-lang')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
-	      var oLang = $(oLang0);
-	      var sAnnotatorType = oAnnotator.attr('type-code');
-	      
-	      //set the annotator title
-	      oHTMLAnnotator.attr('title', $x.xpath("/teian:annotator/teian:toolbar-button-title/text()", oLang0));
-	      
-	      //set the annotator label
-	      oHTMLAnnotator.html((sHTMLAnnotatorType == 'image-button' ? "<img src=\"" + sModuleBaseURI + "config/images/"
-		+ $x.xpath("/teian:annotator/teian:annotator-icon-name/text()", oAnnotator0) + "\"/>" : "")
-		+ $x.serializeToString($x.xpath("/teian:annotator/teian:toolbar-button-label", oLang0)[0]));
-	      $($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = '" + sAnnotatorId
-		+ "']/teian:annotator/teian:annotator-panel")[0]).appendTo("body");
-		
-	      //set the possible parents names
-	      var possibleParentNames = $x.xpath("normalize-space(/teian:annotator/teian:annotator-possible-parent-element-names/text())", oAnnotator0);
-	      oHTMLAnnotator0.sPossibleParents = (possibleParentNames != "") ? ", " + possibleParentNames + "," : ", " + oDataRootNodeName + ",";
-	      
-	      //set the possible preceding siblings names
-	      var possiblePrecedingSiblingNames = $x.xpath("normalize-space(/teian:annotator/teian:annotator-possible-preceding-sibling-element-names/text())", oAnnotator0);
-	      oHTMLAnnotator0.possiblePrecedingSiblingNames = possiblePrecedingSiblingNames.replace(/@/g, "");
-	      
-	      var oAnnotatorMarkup = $(typeof (document.createElementNS) == 'undefined' ? document.createElement(sDataRootPrefix
-		+ oAnnotator.attr('name')) : document.createElementNS(oDataRoot.namespaceURI, sDataRootPrefix
-		+ oAnnotator.attr('name')));
-	      
-	      //append the annotator attributes
-	      if ($x.xpath("count(/teian:annotator/teian:annotator-attribute)", oAnnotator0) != 0) {
-		$($x.xpath("/teian:annotator/teian:annotator-attribute", oAnnotator0)).each(function(index) {
-		  var oAnnotatorAttr = $(this);
-		  oAnnotatorMarkup.attr(oAnnotatorAttr.attr('name'), oAnnotatorAttr.attr('value'));
+      function generateAnnotators() { 	  
+		// themes roller
+		// load main theme
+		$.themes.setDefaults({
+		  "defaultTheme" : "cupertino" // The ID of the default theme, first one if blank
 		});
-	      }
-	      oHTMLAnnotator0.oAnnotatorMarkup = oAnnotatorMarkup[0];
-	      
-	      switch (sAnnotatorType) {
-		case 'selected-wrap':
-		  //set the command for annotator
-		  oHTMLAnnotator.click(function() {
-		    teian.annotator[0](this, 'selected-wrap');
-		  });
-		break;
-		case 'selected-wrap-parameterized':
-		  //set the command for annotator
-		  oHTMLAnnotator.click(function() {
-		    if (rangy.getSelection() == "") {
-		      alert(teian._errors[0]);
-		      return;
-		    }
-		    teian.utils.saveSelection();
-		    teian.ui[sAnnotatorId].dialog('open');
-		  });
+          
+		$.themes.init({
+		  themeBase : 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/'
+		  // , onSelect: reloadIE
+		});
+		
+		//generate the annotators
+		var oToolbarMenuItems = $(document.querySelectorAll("menu[data-kyerType = 'toolbar-menu'] button[id]"));
+		var oContextMenuItems = $(document.querySelectorAll("menu[data-kyerType = 'context-menu'] a[id]"));
+		var oTeianContextMenuItems = $(document.querySelectorAll("#teian-context-menu command[id]"));
+		var oMenuItems = oToolbarMenuItems.add(oContextMenuItems).add(oTeianContextMenuItems);
+		
+		oMenuItems.each(function(index) {
+		  var oHTMLAnnotator = $(this);
+		  var oHTMLAnnotator0 = this;
+		  var sAnnotatorId = oHTMLAnnotator.attr('id');
+		  var sHTMLAnnotatorType = oHTMLAnnotator.attr('appearance');
 		  
-		  //load the annotator's UI
-		  $($x.xpath("/teian:annotator/teian:annotator-panel", oAnnotator0)[0]).appendTo("body");
-		break;
-		case 'insert':
-		  oHTMLAnnotator.click(function(eventObject) {
-		    if (rangy.getSelection() != "") {
-		      alert(teian._errors[2]);
-		      return;
+		  if (sAnnotatorIDs.indexOf(sAnnotatorId) != -1 && sAnnotatorId != '') {
+		    //generate the standard annotation markup
+		    if (sStandardAnnotatorIDs.indexOf(sAnnotatorId) != -1) {
+		      var oAnnotator0 = $x.xpath("simpath:instance('standard-annotators')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
+		      var oLang0 = $x.xpath("simpath:instance('standard-ui-lang')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
+		      var oLang = $(oLang0);
+		      
+		      //set the annotator title
+		      oHTMLAnnotator.attr('title', $x.xpath("/teian:annotator/teian:toolbar-button-title/text()", oLang0));
+		      
+		      //set the annotator label
+		      oHTMLAnnotator.html((sHTMLAnnotatorType == 'image-button' ? "<img src=\"" + sModuleBaseURI + "config/images/"
+			+ $x.xpath("/teian:annotator/teian:annotator-icon-name/text()", oAnnotator0) + "\"/>" : "")
+			+ $x.serializeToString($x.xpath("/teian:annotator/teian:toolbar-button-label", oLang0)[0]));
+		      
+		      //load the annotator's UI
+		      if ($x.xpath("/teian:annotator/teian:annotator-panel", oAnnotator0)) {
+			$($x.xpath("/teian:annotator/teian:annotator-panel", oAnnotator0)[0]).appendTo("body");
+		      }
 		    }
-		    teian.utils.saveSelection();
-		    teian.annotator[0](this, 'insert', eventObject);
-		  });
-		  oHTMLAnnotator0.oAnnotatorMarkup = $x.xpath("/teian:annotator/teian:content-model/*", oAnnotator0)[0].cloneNode(true);
-		break;
-		case 'insert-parametrized':
-		  oHTMLAnnotator.click(function(eventObject) {
-		    if (rangy.getSelection() != "") {
-		      alert(teian._errors[2]);
-		      return;
-		    }
-		    teian.utils.saveSelection();
-		    teian.ui[sAnnotatorId].dialog('open');
-		  });
-		  $($x.xpath("/teian:annotator/teian:annotator-panel", oAnnotator0)[0]).appendTo("body");
-		  oHTMLAnnotator0.oAnnotatorMarkup = $x.xpath("/teian:annotator/teian:content-model/*", oAnnotator0)[0].cloneNode(true);
-		break;
-		case 'selected-wrap-server':
-		  oHTMLAnnotator.click(function() {
-		    if (rangy.getSelection() == "") {
-		      alert(teian._errors[0]);
-		      return;
-		    }
-		    teian.utils.saveSelection();
 		    
-		    //registering the active annotator's id - to be removed in v. 2.1
-		    teian.ui.activeAnnotatorId = sAnnotatorId;
-		    teian.ui['selected-wrap-server-annotator'].dialog('option', 'title', 
-		      $x.xpath("simpath:instance('standard-ui-lang')//teian:annotator[@id = '" + sAnnotatorId
-		      + "']/teian:annotator-panel/teian:annotator-panel-title/text()"));
-		    teian.ui['selected-wrap-server-annotator'].dialog('open');
-		  });
-		  
-		  //registering the annotator's main attribute, which will hold the search result - to be removed in v. 2.1
-		  oHTMLAnnotator0.sMainAttrName = $($x.xpath("/teian:annotator/teian:annotator-attribute/@name", oAnnotator0)[0]).val();
-		  
-		  //register the service URI
-		  oHTMLAnnotator0.sServiceURI = $x.xpath("/teian:annotator/teian:annotator-id-service-uri/text()", oAnnotator0);
-		  
-		  //count these annotators
-		  teian.ui['selected-wrap-server-annotators-counter'] = sAnnotatorId;
-		break;
-	      }
-	    }
-	  }
-	});
-	
-	//load the data model containing the 'selected-wrap-server'vocabulary-annotators' UI
-	//this have to be done separately as the UI is common to all annotators
-	if (teian.ui['selected-wrap-server-annotators-counter']) {
-	  $($x.xpath("simpath:instance('vocabulary-annotators')/teian:annotators/teian:common-panels/teian:common-panel[@id = 'selected-wrap-server-annotator-panel']")[0])
-	    .appendTo("body");
-	}
+		    //generate the vocabulary specific annotation markup
+		    else {
+		      var oAnnotator0 = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
+		      var oAnnotator = $(oAnnotator0);
+		      var oLang0 = $x.xpath("simpath:instance('vocabulary-ui-lang')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
+		      var oLang = $(oLang0);
+		      var sAnnotatorType = oAnnotator.attr('type-code');
+		      
+		      //set the annotator title
+		      oHTMLAnnotator.attr('title', $x.xpath("/teian:annotator/teian:toolbar-button-title/text()", oLang0));
+		      
+		      //set the annotator label
+		      oHTMLAnnotator.html((sHTMLAnnotatorType == 'image-button' ? "<img src=\"" + sModuleBaseURI + "config/images/"
+			+ $x.xpath("/teian:annotator/teian:annotator-icon-name/text()", oAnnotator0) + "\"/>" : "")
+			+ $x.serializeToString($x.xpath("/teian:annotator/teian:toolbar-button-label", oLang0)[0]));
+		      $($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = '" + sAnnotatorId
+			+ "']/teian:annotator/teian:annotator-panel")[0]).appendTo("body");
+			
+		      //set the possible parents names
+		      var possibleParentNames = $x.xpath("normalize-space(/teian:annotator/teian:annotator-possible-parent-element-names/text())", oAnnotator0);
+		      oHTMLAnnotator0.sPossibleParents = (possibleParentNames != "") ? ", " + possibleParentNames + "," : ", " + oDataRootNodeName + ",";
+		      
+		      //set the possible preceding siblings names
+		      var possiblePrecedingSiblingNames = $x.xpath("normalize-space(/teian:annotator/teian:annotator-possible-preceding-sibling-element-names/text())", oAnnotator0);
+		      oHTMLAnnotator0.possiblePrecedingSiblingNames = possiblePrecedingSiblingNames.replace(/@/g, "");
+		      
+		      var oAnnotatorMarkup = $(typeof (document.createElementNS) == 'undefined' ? document.createElement(sDataRootPrefix
+			+ oAnnotator.attr('name')) : document.createElementNS(oDataRoot.namespaceURI, sDataRootPrefix
+			+ oAnnotator.attr('name')));
+		      
+		      //append the annotator attributes
+		      if ($x.xpath("count(/teian:annotator/teian:annotator-attribute)", oAnnotator0) != 0) {
+			$($x.xpath("/teian:annotator/teian:annotator-attribute", oAnnotator0)).each(function(index) {
+			  var oAnnotatorAttr = $(this);
+			  oAnnotatorMarkup.attr(oAnnotatorAttr.attr('name'), oAnnotatorAttr.attr('value'));
+			});
+		      }
+		      oHTMLAnnotator0.oAnnotatorMarkup = oAnnotatorMarkup[0];
+		      
+		      switch (sAnnotatorType) {
+			case 'selected-wrap':
+			  //set the command for annotator
+			  oHTMLAnnotator.click(function() {
+			    teian.annotator[0](this, 'selected-wrap');
+			  });
+			break;
+			case 'selected-wrap-parameterized':
+			  //set the command for annotator
+			  oHTMLAnnotator.click(function() {
+			    if (rangy.getSelection() == "") {
+			      alert(teian._errors[0]);
+			      return;
+			    }
+			    teian.utils.saveSelection();
+			    teian.ui[sAnnotatorId].dialog('open');
+			  });
+			  
+			  //load the annotator's UI
+			  $($x.xpath("/teian:annotator/teian:annotator-panel", oAnnotator0)[0]).appendTo("body");
+			break;
+			case 'insert':
+			  oHTMLAnnotator.click(function(eventObject) {
+			    if (rangy.getSelection() != "") {
+			      alert(teian._errors[2]);
+			      return;
+			    }
+			    teian.utils.saveSelection();
+			    teian.annotator[0](this, 'insert', eventObject);
+			  });
+			  oHTMLAnnotator0.oAnnotatorMarkup = $x.xpath("/teian:annotator/teian:content-model/*", oAnnotator0)[0].cloneNode(true);
+			break;
+			case 'insert-parametrized':
+			  oHTMLAnnotator.click(function(eventObject) {
+			    if (rangy.getSelection() != "") {
+			      alert(teian._errors[2]);
+			      return;
+			    }
+			    teian.utils.saveSelection();
+			    teian.ui[sAnnotatorId].dialog('open');
+			  });
+			  $($x.xpath("/teian:annotator/teian:annotator-panel", oAnnotator0)[0]).appendTo("body");
+			  oHTMLAnnotator0.oAnnotatorMarkup = $x.xpath("/teian:annotator/teian:content-model/*", oAnnotator0)[0].cloneNode(true);
+			break;
+			case 'selected-wrap-server':
+			  oHTMLAnnotator.click(function() {
+			    if (rangy.getSelection() == "") {
+			      alert(teian._errors[0]);
+			      return;
+			    }
+			    teian.utils.saveSelection();
+			    
+			    //registering the active annotator's id - to be removed in v. 2.1
+			    teian.ui.activeAnnotatorId = sAnnotatorId;
+			    teian.ui['selected-wrap-server-annotator'].dialog('option', 'title', 
+			      $x.xpath("simpath:instance('standard-ui-lang')//teian:annotator[@id = '" + sAnnotatorId
+			      + "']/teian:annotator-panel/teian:annotator-panel-title/text()"));
+			    teian.ui['selected-wrap-server-annotator'].dialog('open');
+			  });
+			  
+			  //registering the annotator's main attribute, which will hold the search result - to be removed in v. 2.1
+			  oHTMLAnnotator0.sMainAttrName = $($x.xpath("/teian:annotator/teian:annotator-attribute/@name", oAnnotator0)[0]).val();
+			  
+			  //register the service URI
+			  oHTMLAnnotator0.sServiceURI = $x.xpath("/teian:annotator/teian:annotator-id-service-uri/text()", oAnnotator0);
+			  
+			  //count these annotators
+			  teian.ui['selected-wrap-server-annotators-counter'] = sAnnotatorId;
+			break;
+		      }
+		    }
+		  }
+		});
+		
+		//load the data model containing the 'selected-wrap-server'vocabulary-annotators' UI
+		//this have to be done separately as the UI is common to all annotators
+		if (teian.ui['selected-wrap-server-annotators-counter']) {
+		  $($x.xpath("simpath:instance('vocabulary-annotators')/teian:annotators/teian:common-panels/teian:common-panel[@id = 'selected-wrap-server-annotator-panel']")[0])
+		    .appendTo("body");
+		}
       }
       
       //initialize rangy
@@ -767,36 +768,31 @@ $(document).ready(
       utils.oEntityToClear = null;
       rangy.init();
       utils.saveSelection = function() {
-	//remove markers for previously saved selection
-	if (teian.utils.oSavedSelection) {
-	  rangy.removeMarkers(teian.utils.oSavedSelection);
-	}
-	teian.utils.oSavedSelection = rangy.saveSelection();
+		//remove markers for previously saved selection
+		if (teian.utils.oSavedSelection) {
+		  rangy.removeMarkers(teian.utils.oSavedSelection);
+		}
+		teian.utils.oSavedSelection = rangy.saveSelection();
       }
       utils.restoreSelection = function() {
-	if (teian.utils.oSavedSelection) {
-	  rangy.restoreSelection(teian.utils.oSavedSelection, true);
-	  teian.utils.oSavedSelection = null;
-	}
+		if (teian.utils.oSavedSelection) {
+		  rangy.restoreSelection(teian.utils.oSavedSelection, true);
+		  teian.utils.oSavedSelection = null;
+		}
       }
       
       //define the search results' instance
       $x.instance('search-results').load($x.parseFromString("<db />"));
       $('#teian-content').mousedown(function(event) {
-	switch (event.which) {
-	  case 3:
-	    teian.utils.oEntityToClear = event.target;
-	  break;
-	}
+		switch (event.which) {
+		  case 3:
+		    teian.utils.oEntityToClear = event.target;
+		  break;
+		}
       });
+      
       document.addEventListener("kyer-model-construct-done", generateAnnotators, false);
     }
-    
-    //initialize the context menu
-    $.contextMenu({
-      "selector": "#teian-content",
-      "items": $.contextMenu.fromMenu($('#teian-context-menu'))
-    });
     
     //register listener for click event on #teian-content, in order to get click coordinates
     $('#teian-content').bind("click", function(eventObject) {
