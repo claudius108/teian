@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns:teian="http://kuberam.ro/ns/teian" xmlns="http://www.w3.org/1999/xhtml" xmlns:kyer="http://kuberam.ro/ns/kyer">
     <head>
+        <title>teian</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/> 
+        
 	<!--dependencies for teian-->
         <link rel="stylesheet" href="track-changes/track-changes.css" type="text/css"/>
         <link rel="stylesheet" href="teian.css" type="text/css"/>
+        
 	<!--dependencies for jquery-->
-        <script type="text/javascript" charset="utf-8" src="../../jquery/core/jquery.min.js">/**/</script>
-        <title>teian</title>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/> 
+        <script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">/**/</script>
+        
 	<!--dependencies for dialog plugin-->
-        <link rel="stylesheet" type="text/css" href="../../jquery/ui/themes/base/jquery.ui.all.css"/>
-        <script type="text/javascript" charset="utf-8" src="../../jquery/ui/jquery.ui.core.min.js">/**/</script>
-        <script type="text/javascript" charset="utf-8" src="../../jquery/ui/jquery.ui.position.min.js">/**/</script>
-        <script type="text/javascript" charset="utf-8" src="../../jquery/ui/jquery.ui.widget.min.js">/**/</script>
-        <script type="text/javascript" charset="utf-8" src="../../jquery/ui/jquery.ui.dialog.min.js">/**/</script>
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery.ui.all.css"/>
+        <script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js">/**/</script>
+        
 	<!--dependencies for jQuery UI theme switcher -->
-        <link rel="stylesheet" type="text/css" href="../../jquery/themes/jquery.themes.css"/>
-        <script type="text/javascript" src="../../jquery/themeswitcher/themeswitchertool.js">/**/</script>
-        <script type="text/javascript" src="../../jquery/themes/jquery.themes.min.js">/**/</script>
-        <!--dependencies for context menu plugin-->
-        <link rel="stylesheet" type="text/css" href="../../jquery/jQuery-contextMenu/jquery.contextMenu.css"/>
-        <script type="text/javascript" src="../../jquery/jQuery-contextMenu/jquery.contextMenu.js">/**/</script>        
+<!--         <link rel="stylesheet" type="text/css" href="../../jquery/themes/jquery.themes.css"/> -->
+<!--         <script type="text/javascript" src="../../jquery/themeswitcher/themeswitchertool.js">/**/</script> -->
+<!--         <script type="text/javascript" src="../../jquery/themes/jquery.themes.min.js">/**/</script> -->
+
+		<!-- dependencies for the context menu -->
+		<script type="text/javascript" charset="utf-8" src="http://medialize.github.com/jQuery-contextMenu/src/jquery.contextMenu.js">/**/</script>
+		<link rel="stylesheet" type="text/css" href="http://medialize.github.com/jQuery-contextMenu/src/jquery.contextMenu.css"/>
+               
 	<!--dependencies for teian-->
         <script type="text/javascript" charset="utf-8" src="teian.js">/**/</script>
+        
 	<!--dependencies for kyer-->
-        <link rel="stylesheet" type="text/css" href="../../kyer/extensions/kyer-toolbar-menu.css"/>
-        <script type="text/javascript" charset="utf-8" src="../../kyer/core/kyer.js">/**/</script>        
+        <link rel="stylesheet" type="text/css" href="http://kyer.sourceforge.net/latest/extensions/kyer-toolbar-menu.css"/>
+<!--         <script type="text/javascript" charset="utf-8" src="http://kyer.sourceforge.net/latest/core/kyer.js">/**/</script> -->
+		<script type="text/javascript" charset="utf-8" src="http://127.0.0.1/js-libs/kyer/core/kyer.js">/**/</script>
+		
 	<!--dependencies for simpath-->
-        <script type="text/javascript" charset="utf-8" src="../../simpath/core/simpath.js">/**/</script>
+        <script type="text/javascript" charset="utf-8" src="http://simpath.sourceforge.net/latest/core/simpath.js">/**/</script>
+        
 	<!--dependencies for rangy-->
-        <script type="text/javascript" charset="utf-8" src="../../rangy/rangy-core.js">/**/</script>
-        <script type="text/javascript" charset="utf-8" src="../../rangy/rangy-selectionsaverestore.js">/**/</script>
+        <script type="text/javascript" charset="utf-8" src="http://rangy.googlecode.com/svn/trunk/currentrelease/rangy-core.js">/**/</script>
+        <script type="text/javascript" charset="utf-8" src="http://rangy.googlecode.com/svn/trunk/currentrelease/rangy-selectionsaverestore.js">/**/</script>
     </head>
     <body>
         <div id="kFloadingMask">
@@ -39,11 +46,8 @@
                 <div class="loadingIndicator">Loading ...</div>
             </div>
         </div>
-        
-        
-		<!--separator-->
-<!-- 		<div class="fg-buttonset" style="width: 100%; margin-top: 7px;"> </div> -->
-        <kyer:menu id="teian-toolbar-menu" appearance="kyer-toolbar-menu"/>
+        <menu id="teian-toolbar-menu" type="toolbar" style="display:none" data-kyerType="toolbar-menu"></menu>
+        <menu id="teian-context-menu" type="context" style="display:none" data-kyerType="context-menu"></menu>        
 <!--        <div id="teian-toolbar2" class="fg-toolbar ui-widget-header ui-corner-all ui-helper-clearfix">
             <div class="fg-buttonset ui-helper-clearfix">
 			<a href="#" class="fg-button ui-state-default fg-button-icon-solo ui-corner-all" title="Open"><span class="ui-icon ui-icon-folder-open"></span> Open</a>
@@ -95,20 +99,9 @@
                 </div>
             </div>
         </div>-->
-        <menu id="teian-context-menu" type="context" style="display:none">
-            <command id="clear-entity-button" label="Delete" onclick="teian.ui['clear-entity-dialog'].dialog('open');"/>
-            <menu label="Insert">
-                <command label="introduction" onclick="$('#introduction-placeholder').trigger('click');"/>
-                <command label="table" onclick="$('#table-placeholder').trigger('click');"/>
-                <command label="assessment" onclick="$('#assessment-placeholder').trigger('click');"/>
-                <command label="mediaobject audio" onclick="$('#mediaobject-audio-annotator').trigger('click');"/>
-                <command label="mediaobject video" onclick="$('#mediaobject-video-annotator').trigger('click');"/>
-                <command label="mediaobject image" onclick="$('#mediaobject-image-annotator').trigger('click');"/>
-            </menu>
-        </menu>
 <!-- 	<p><span id="label">Select your new theme:</span> <span id="themeSelection"></span></p> -->
         <textarea id="data" name="data" style="display: none;">/**/</textarea>
-        <div id="teian-content" class="ui-corner-all ui-helper-clearfix"/>
+        <div id="teian-content" contextmenu="teian-context-menu" class="ui-corner-all ui-helper-clearfix"/>
         <div id="changes-container" class="ui-corner-all ui-helper-clearfix">
             <div id="changes-container-title">Changes</div>
             <div id="track-changes-toolbar">
