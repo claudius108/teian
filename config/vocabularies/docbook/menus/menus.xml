@@ -23,10 +23,10 @@
 				</ul>
 			</li>
 			<li>
-				<a href="#">Operations</a>
+				<a href="#">Actions</a>
 				<ul>
 					<li>
-						<a href="#">Annotate</a>
+						<a href="#">Author</a>
 					</li>
 					<li>
 						<a href="#">Source</a>
@@ -44,9 +44,6 @@
 				<ul>
 					<li>
 						<a href="#">Track</a>
-					</li>
-					<li>
-						<a href="#">Untrack</a>
 					</li>
 					<li>
 						<a href="#">Toggle</a>
@@ -74,8 +71,9 @@
 			</li>
 		</ul>
 	</menu>
-	<menu id="teian-context-menu" type="context" style="display:none">
-		<command id="edit-entity-button" label="Delete" onclick="" />
-		<command id="clear-entity-button" label="Delete" onclick="" />
+	<menu id="teian-context-menu" type="context" style="display:none" class="showcase">
+		<command id="insert-entity-button" label="Insert" onclick="" />
+		<command id="edit-entity-button" label="Edit" onclick="teian.editEntity();" />
+		<command id="clear-entity-button" label="Delete" onclick="teian.ui['clear-entity-dialog'].dialog('open');" />
 	</menu>
 </menu>
