@@ -69,6 +69,17 @@
 					</li>
 				</ul>
 			</li>
+			<li>
+				<a href="#">Help</a>
+				<ul>
+					<li>
+						<a href="../documentation/index.html">Documentation</a>
+					</li>
+					<li>
+						<a href="#">About</a>
+					</li>
+				</ul>
+			</li>			
 		</ul>
 	</menu>
 	<menu id="teian-context-menu" type="context" style="display:none" class="showcase">

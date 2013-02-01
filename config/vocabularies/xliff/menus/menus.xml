@@ -1,49 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kyer:menus xmlns:kyer="http://kuberam.ro/ns/kyer">
-  <kyer:menu id="teian-toolbar-menu" type="toolbar" appearance="kyer-toolbar-menu">
-    <kyer:optionset selection="none">
-      <kyer:option id="save-button" command="teian.save()" appearance="text-button"></kyer:option>
-    </kyer:optionset>
-    <kyer:optionset selection="single" type="horizontal">
-      <kyer:option id="annotate-button" command="teian.annotate();" appearance="text-button" />
-      <kyer:option id="source-button" command="teian.source();" appearance="text-button" />
-    </kyer:optionset>
-    <kyer:optionset selection="single" type="horizontal">
-      <kyer:option id="lock-button" command="teian.lock();" appearance="text-button" />
-      <kyer:option id="unlock-button" command="teian.unlock();" appearance="text-button" />
-    </kyer:optionset>
-    <kyer:optionset selection="none">
-      <kyer:option id="back-button" command="history.go(-1);" appearance="text-button"></kyer:option>
-    </kyer:optionset>
-    <kyer:optionset selection="none">
-      <kyer:option id="help-button" command="teian.ui['help-dialog'].dialog('open');" appearance="text-button"></kyer:option>
-    </kyer:optionset>
-    <kyer:optionset id="track-changes-menu-container" selection="none" type="drop-down">
-      <kyer:label>Changes</kyer:label>
-      <kyer:option id="track-changes-button" appearance="text-button" />
-      <kyer:option id="untrack-changes-button" appearance="text-button" />
-      <kyer:option id="toggle-changes-button" command="teian.toggleChanges()" appearance="text-button" />
-      <kyer:option id="remove-changes-button" appearance="text-button" />
-    </kyer:optionset>
-    <kyer:optionset id="language-dd-menu" selection="none" type="drop-down">
-      <kyer:label>UI lang</kyer:label>
-      <kyer:option id="en-language" appearance="text-button">
-        <kyer:label>EN</kyer:label>
-      </kyer:option>
-      <kyer:option id="fr-language" appearance="text-button">
-        <kyer:label>FR</kyer:label>
-      </kyer:option>
-    </kyer:optionset>
-  </kyer:menu>
-  <kyer:menu id="teian-context-menu" type="context" container="#teian-content" appearance="kyer-context-menu">
-    <kyer:optionset selection="none">
-      <kyer:option id="edit-entity-button" command="teian.editEntity();" appearance="text-button">
-        <kyer:label>Edit entity</kyer:label>
-      </kyer:option>
-      <kyer:option id="clear-entity-button" command="teian.ui['clear-entity-dialog'].dialog('open');"
-        appearance="text-button">
-        <kyer:label>Clear entity</kyer:label>
-      </kyer:option>
-    </kyer:optionset>
-  </kyer:menu>
-</kyer:menus>
+<menu xmlns="http://www.w3.org/1999/xhtml">
+	<menu id="teian-toolbar-menu">
+		<ul>
+			<li>
+				<a href="#">File</a>
+				<ul>
+					<li>
+						<a href="#">New</a>
+					</li>
+					<li>
+						<a href="#">Open</a>
+					</li>
+					<li>
+						<a href="#">Close</a>
+					</li>
+					<li>
+						<a href="#">Save</a>
+					</li>
+					<li>
+						<a href="#">Save As...</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">Actions</a>
+				<ul>
+					<li>
+						<a href="#">Author</a>
+					</li>
+					<li>
+						<a href="#">Source</a>
+					</li>
+					<li>
+						<a href="#">Lock</a>
+					</li>
+					<li>
+						<a href="#">Unlock</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">Changes</a>
+				<ul>
+					<li>
+						<a href="#">Track</a>
+					</li>
+					<li>
+						<a href="#">Toggle</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">User Interface</a>
+				<ul>
+					<li>
+						<a href="#">Languages</a>
+						<ul>
+							<li>
+								<a href="#">EN</a>
+							</li>
+							<li>
+								<a href="#">FR</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">Themes</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">Help</a>
+				<ul>
+					<li>
+						<a href="../documentation/index.html">Documentation</a>
+					</li>
+					<li>
+						<a href="#">About</a>
+					</li>
+				</ul>
+			</li>			
+		</ul>
+	</menu>
+	<menu id="teian-context-menu" type="context" style="display:none" class="showcase">
+		<command id="insert-entity-button" label="Insert" onclick="" />
+		<command id="edit-entity-button" label="Edit" onclick="teian.editEntity();" />
+		<command id="clear-entity-button" label="Delete" onclick="teian.ui['clear-entity-dialog'].dialog('open');" />
+	</menu>
+</menu>
