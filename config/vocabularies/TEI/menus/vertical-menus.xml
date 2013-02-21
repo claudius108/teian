@@ -6,16 +6,16 @@
 				<a href="#">hi</a>
 				<ul>
 					<li>
-						<a id="strong-annotator" href="#">strong-annotator</a>
+						<a id="strong-annotator" href="#">strong</a>
 					</li>
 					<li>
-						<a id="italic-annotator" href="#">italic-annotator</a>
+						<a id="italic-annotator" href="#">italic</a>
 					</li>
 					<li>
-						<a id="underline-annotator" href="#">underline-annotator</a>
+						<a id="underline-annotator" href="#">underline</a>
 					</li>
 					<li>
-						<a id="strikethrough-annotator" href="#">strikethrough-annotator</a>
+						<a id="strikethrough-annotator" href="#">strikethrough</a>
 					</li>
 				</ul>
 			</li>
@@ -23,36 +23,36 @@
 				<a href="#">lists</a>
 				<ul>
 					<li>
-						<a id="label-annotator" href="#">label-annotator</a>
+						<a id="label-annotator" href="#">label</a>
 					</li>
 					<li>
-						<a id="list-annotator" href="#">list-annotator</a>
+						<a id="list-annotator" href="#">list</a>
 					</li>
 					<li>
-						<a id="listBibl-annotator" href="#">listBibl-annotator</a>
+						<a id="listBibl-annotator" href="#">listBibl</a>
 					</li>
 				</ul>
 			</li>
 			<li>
-				<a id="date-annotator" href="#">date-annotator</a>
+				<a id="date-annotator" href="#">date</a>
 			</li>
 			<li>
-				<a id="ref-annotator" href="#">ref-annotator</a>
+				<a id="ref-annotator" href="#">ref</a>
 			</li>
 			<li>
-				<a id="lb-annotator" href="#">lb-annotator</a>
+				<a id="lb-annotator" href="#">lb</a>
 			</li>
 			<li>
-				<a id="pb-annotator" href="#">pb-annotator</a>
+				<a id="pb-annotator" href="#">pb</a>
 			</li>
 			<li>
-				<a id="persName-annotator" href="#">persName-annotator</a>
+				<a id="persName-annotator" href="#">persName</a>
 			</li>
 			<li>
-				<a id="orgName-annotator" href="#">orgName-annotator</a>
+				<a id="orgName-annotator" href="#">orgName</a>
 			</li>
 			<li>
-				<a id="placeName-annotator" href="#">placeName-annotator</a>
+				<a id="placeName-annotator" href="#">placeName</a>
 			</li>
 		</ul>
 	</menu>
