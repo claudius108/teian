@@ -28,9 +28,8 @@
         <script type="text/javascript" charset="utf-8" src="teian.js">/**/</script>
         
 	<!--dependencies for kyer-->
-        <link rel="stylesheet" type="text/css" href="http://kyer.sourceforge.net/latest/extensions/kyer-toolbar-menu.css"/>
-<!--         <script type="text/javascript" charset="utf-8" src="http://kyer.sourceforge.net/latest/core/kyer.js">/**/</script> -->
-		<script type="text/javascript" charset="utf-8" src="http://127.0.0.1/js-libs/kyer/core/kyer.js">/**/</script>
+        <link rel="stylesheet" type="text/css" href="http://kyer.sourceforge.net/latest/core/kyer.css"/>
+        <script type="text/javascript" charset="utf-8" src="http://kyer.sourceforge.net/latest/core/kyer.js">/**/</script>
 		
 	<!--dependencies for simpath-->
         <script type="text/javascript" charset="utf-8" src="http://simpath.sourceforge.net/latest/core/simpath.js">/**/</script>
@@ -46,7 +45,8 @@
                 <div class="loadingIndicator">Loading ...</div>
             </div>
         </div>
-        <menu id="teian-toolbar-menu" type="toolbar" style="display:none" data-kyerType="toolbar-menu"></menu>
+        <menu id="teian-toolbar-menu" type="toolbar" style="display:none" data-kyerType="toolbar-menu"></menu>        
+
         <menu id="teian-context-menu" type="context" style="display:none" data-kyerType="context-menu"></menu>        
 <!--   <div id="themes-dd-menu" class="teian-dd-menu fg-buttonset ui-helper-clearfix">
                 <button class="teian-dd-menu-button fg-button ui-state-default ui-corner-all">Themes</button>
@@ -90,7 +90,7 @@
             </div>
         </div>-->
 <!-- 	<p><span id="label">Select your new theme:</span> <span id="themeSelection"></span></p> -->
-		<div id="teian-specific-menu"></div>
+		<menu id="teian-vertical-menu" type="list" style="display:none" data-kyerType="vertical-menu"></menu>
         <div id="teian-content" contextmenu="teian-context-menu" class="ui-corner-all ui-helper-clearfix"></div>
         <div id="changes-container" class="ui-corner-all ui-helper-clearfix">
             <div id="changes-container-title">Changes</div>

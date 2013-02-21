@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu xmlns="http://www.w3.org/1999/xhtml">
+	<menu id="teian-toolbar-menu">
+		<ul>
+			<li>
+				<a href="#">File</a>
+				<ul>
+					<li>
+						<a href="#">New</a>
+					</li>
+					<li>
+						<a href="#">Open</a>
+					</li>
+					<li>
+						<a href="#">Close</a>
+					</li>
+					<li>
+						<a href="#">Print</a>
+					</li>
+					<li>
+						<a href="javascript:teian.save()">Save</a>
+					</li>
+					<li>
+						<a href="#">Save As...</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">Actions</a>
+				<ul>
+					<li>
+						<a href="javascript:teian.annotate();">Author</a>
+					</li>
+					<li>
+						<a href="javascript:teian.source();">Source</a>
+					</li>
+					<li>
+						<a href="javascript:teian.lock();">Lock</a>
+					</li>
+					<li>
+						<a href="javascript:teian.unlock();">Unlock</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">Changes</a>
+				<ul>
+					<li>
+						<a href="#">Track</a>
+					</li>
+					<li>
+						<a href="#">Toggle</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">User Interface</a>
+				<ul>
+					<li>
+						<a href="#">Languages</a>
+						<ul>
+							<li>
+								<a href="#">EN</a>
+							</li>
+							<li>
+								<a href="#">FR</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">Themes</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">Help</a>
+				<ul>
+					<li>
+						<a href="../documentation/index.html">Documentation</a>
+					</li>
+					<li>
+						<a href="#">About</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</menu>
+</menu>

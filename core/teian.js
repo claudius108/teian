@@ -232,12 +232,13 @@ teian.source = function() {
   $("<pre/>").appendTo($("#teian-content")).text(sContent);
 };
 
-teian.store = function() {
+teian.save = function() {
   var utils = teian.utils;
   utils.oSavedSelection = null;
-  var content = $('#teian-content *')[0].cloneNode(true);
+  var content = document.querySelector('#teian-content > *').cloneNode(true);
   content.setAttribute("content-url", teian.contentUrl);
-  var contentAsString = $x.serializeToString(content);alert(contentAsString);
+  var contentAsString = $x.serializeToString(content);
+  alert(contentAsString);
   if (teian.sessionParameters["track-changes"] == "true") {
     contentAsString = teian._convertTrackChangesHtmlToPi(contentAsString);
   }
@@ -446,12 +447,24 @@ teian._getContent = function(sURI) {
     "method" : "get"
   });
   
-  // load kyer-toolbar-menu
+  // load menus
   $x.submission({
-    "ref" : "simpath:instance('menus')",
-    "resource" : $x.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@menus-href")[0].value,
-    "mode" : "synchronous",
-    "method" : "get"
+	    "ref" : "simpath:instance('toolbar-menus')",
+	    "resource" : "menus/toolbar-menus.xml",
+	    "mode" : "synchronous",
+	    "method" : "get"
+  });
+  $x.submission({
+	    "ref" : "simpath:instance('context-menus')",
+	    "resource" : "menus/context-menus.xml",
+	    "mode" : "synchronous",
+	    "method" : "get"
+  });
+  $x.submission({
+	    "ref" : "simpath:instance('vertical-menus')",
+	    "resource" : $x.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@menus-href")[0].value,
+	    "mode" : "synchronous",
+	    "method" : "get"
   });
   
   // load vocabulary specific lang file
@@ -498,7 +511,7 @@ teian._getContent = function(sURI) {
 };
 
 teian._hideChanges = function() {
-  document.getElementById("teian-content").style.width = '98%';
+  document.getElementById("teian-content").style.width = '78%';
   document.getElementById("changes-container").style.display = 'none';
   document.styleSheets[0].deleteRule(0);
   document.styleSheets[0].insertRule("del {display: none;}", 0);
@@ -510,7 +523,7 @@ teian._removeClass = function(element, classToRemove) {
 };
 
 teian._showChanges = function() {
-  document.getElementById("teian-content").style.width = '77%';
+  document.getElementById("teian-content").style.width = '67%';
   document.getElementById("changes-container").style.display = 'inline';
   document.styleSheets[0].deleteRule(0);
   document.styleSheets[0].insertRule("ins, del {display: inline;}", 0);

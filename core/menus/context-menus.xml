@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu xmlns="http://www.w3.org/1999/xhtml">
+	<menu id="teian-context-menu" type="context" style="display:none" class="showcase">
+		<command id="insert-entity-button" label="Insert" onclick="" />
+		<command id="edit-entity-button" label="Edit" onclick="teian.editEntity();" />
+		<command id="clear-entity-button" label="Delete" onclick="teian.ui['clear-entity-dialog'].dialog('open');" />
+	</menu>
+</menu>
