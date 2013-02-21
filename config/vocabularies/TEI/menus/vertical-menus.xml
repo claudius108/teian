@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu xmlns="http://www.w3.org/1999/xhtml">
+	<menu id="teian-vertical-menu">
+		<ul>
+			<li>
+				<a href="#">hi</a>
+				<ul>
+					<li>
+						<a id="strong-annotator" href="#">strong-annotator</a>
+					</li>
+					<li>
+						<a id="italic-annotator" href="#">italic-annotator</a>
+					</li>
+					<li>
+						<a id="underline-annotator" href="#">underline-annotator</a>
+					</li>
+					<li>
+						<a id="strikethrough-annotator" href="#">strikethrough-annotator</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">lists</a>
+				<ul>
+					<li>
+						<a id="label-annotator" href="#">label-annotator</a>
+					</li>
+					<li>
+						<a id="list-annotator" href="#">list-annotator</a>
+					</li>
+					<li>
+						<a id="listBibl-annotator" href="#">listBibl-annotator</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a id="date-annotator" href="#">date-annotator</a>
+			</li>
+			<li>
+				<a id="ref-annotator" href="#">ref-annotator</a>
+			</li>
+			<li>
+				<a id="lb-annotator" href="#">lb-annotator</a>
+			</li>
+			<li>
+				<a id="pb-annotator" href="#">pb-annotator</a>
+			</li>
+			<li>
+				<a id="persName-annotator" href="#">persName-annotator</a>
+			</li>
+			<li>
+				<a id="orgName-annotator" href="#">orgName-annotator</a>
+			</li>
+			<li>
+				<a id="placeName-annotator" href="#">placeName-annotator</a>
+			</li>
+		</ul>
+	</menu>
+</menu>
