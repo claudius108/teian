@@ -69,6 +69,7 @@ section, title, sect1, sect2, sect3, sect4, sect5, bibliodiv {
 book>title, article>title {
 	font-size:xx-large;
 	text-align:center;
+/* 	padding-bottom: 25px; */
 	border-bottom-style:solid;
 }
 
