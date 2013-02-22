@@ -381,6 +381,7 @@
 				<input type="text" id="teian-date-when" />
 			</div>
 			<script type="text/javascript" charset="utf-8">
+				alert('a');
 				$("#date-dialog").attr('title',
 				$x.xpath("simpath:instance('vocabulary-ui-lang')//teian:annotator[@id =
 				'date-annotator']/teian:annotator-panel/teian:annotator-panel-title/text()"));
@@ -695,7 +696,7 @@
 		<teian:annotator-description-text>Insert a list at the selected point in the text</teian:annotator-description-text>
 		<teian:annotator-possible-parent-element-names>teiHeader p div</teian:annotator-possible-parent-element-names>
 		<teian:annotator-possible-preceding-sibling-element-names />
-		<teian:annotator-icon-name>vocabularies/TEI/resources/images/list.png</teian:annotator-icon-name>
+		<teian:annotator-icon-name>vocabularies/TEI/resources/images/list.gif</teian:annotator-icon-name>
 		<teian:content-model>
 			<list xmlns="http://www.tei-c.org/ns/1.0" />
 		</teian:content-model>
