@@ -380,11 +380,8 @@
 					ref="simpath:instance('vocabulary-ui-lang')//teian:annotator[@id = 'date-annotator']/teian:annotator-panel/teian:annotator-panel-element[@id = 'date-when-label']" />
 				<input type="text" id="teian-date-when" />
 			</div>
-			<script type="text/javascript" charset="utf-8">
-				alert('a');
-				$("#date-dialog").attr('title',
-				$x.xpath("simpath:instance('vocabulary-ui-lang')//teian:annotator[@id =
-				'date-annotator']/teian:annotator-panel/teian:annotator-panel-title/text()"));
+			<script type="text/javascript">
+				$("#date-dialog").attr('title', $x.xpath("simpath:instance('vocabulary-ui-lang')//teian:annotator[@id = 'date-annotator']/teian:annotator-panel/teian:annotator-panel-title/text()"));
 				$("label[for='teian-date-when']").text($($x.xpath($("label[for='teian-date-when']").attr('ref'))[0]).text());
 				teian.ui['date-annotator'] = $("#date-dialog").dialog({
 				autoOpen: false,
@@ -454,10 +451,9 @@
 					ref="simpath:instance('vocabulary-ui-lang')//teian:annotator[@id = 'ref-annotator']/teian:annotator-panel/teian:annotator-panel-element[@id = 'ref-target-label']/text()" />
 				<input type="text" id="teian-ref-target" />
 			</div>
-			<script type="text/javascript" charset="utf-8">
+			<script type="text/javascript">
 				$("#ref-dialog").attr('title',
-				$x.xpath("simpath:instance('vocabulary-ui-lang')//teian:annotator[@id =
-				'ref-annotator']/teian:annotator-panel/teian:annotator-panel-title/text()"));
+				$x.xpath("simpath:instance('vocabulary-ui-lang')//teian:annotator[@id = 'ref-annotator']/teian:annotator-panel/teian:annotator-panel-title/text()"));
 				$("label[for='teian-ref-target']").text($x.xpath($("label[for='teian-ref-target']").attr('ref')));
 				teian.ui['ref-annotator'] = $("#ref-dialog").dialog({
 				autoOpen: false,
