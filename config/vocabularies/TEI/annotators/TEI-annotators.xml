@@ -16,9 +16,7 @@
 			</div>
 			<script type="text/javascript" charset="utf-8">
 				$("#teian-search-string-label").text($($x.xpath($("#teian-search-string-label").attr('ref'))[0]).text());
-				$("#teian-search-button").text($($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:common-panel[@id =
-				'selected-wrap-server-annotator-panel']/teian:annotator-panel-element[@id =
-				'teian-search-button']")[0]).text()).click(function() {teian.ui.fGenerateSearchList();});
+				$("#teian-search-button").text($($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:common-panel[@id = 'selected-wrap-server-annotator-panel']/teian:annotator-panel-element[@id = 'teian-search-button']")[0]).text()).click(function() {teian.ui.fGenerateSearchList();});
 				$("#teian-search-list-label").text($($x.xpath($("#teian-search-list-label").attr('ref'))[0]).text());
 				teian.ui.fGenerateSearchList = function() {
 				var oSelectElement = $("#teian-search-list");
