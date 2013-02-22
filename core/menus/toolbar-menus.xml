@@ -18,7 +18,7 @@
 						<a href="#">Print</a>
 					</li>
 					<li>
-						<a href="javascript:teian.save()">Save</a>
+						<a id="save-button" href="javascript:teian.save()" />
 					</li>
 					<li>
 						<a href="#">Save As...</a>
@@ -29,16 +29,16 @@
 				<a href="#">Actions</a>
 				<ul>
 					<li>
-						<a href="javascript:teian.annotate();">Author</a>
+						<a id="annotate-button" href="javascript:teian.annotate();" />
 					</li>
 					<li>
-						<a href="javascript:teian.source();">Source</a>
+						<a id="source-button" href="javascript:teian.source();" />
 					</li>
 					<li>
-						<a href="javascript:teian.lock();">Lock</a>
+						<a id="lock-button" href="javascript:teian.lock();" />
 					</li>
 					<li>
-						<a href="javascript:teian.unlock();">Unlock</a>
+						<a id="unlock-button" href="javascript:teian.unlock();" />
 					</li>
 				</ul>
 			</li>
