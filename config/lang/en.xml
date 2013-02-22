@@ -6,8 +6,8 @@
         <teian:toolbar-button-label>Save</teian:toolbar-button-label>
     </teian:annotator>
     <teian:annotator id="annotate-button">
-        <teian:toolbar-button-title>Annotate</teian:toolbar-button-title>
-        <teian:toolbar-button-label>Annotate</teian:toolbar-button-label>
+        <teian:toolbar-button-title>Author</teian:toolbar-button-title>
+        <teian:toolbar-button-label>Author</teian:toolbar-button-label>
     </teian:annotator>
     <teian:annotator id="source-button">
         <teian:toolbar-button-title>Source</teian:toolbar-button-title>
