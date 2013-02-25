@@ -15,56 +15,53 @@
 				<select id="teian-search-list" size="1" />
 			</div>
 			<script type="text/javascript" charset="utf-8">
-				$("#teian-search-string-label").text($($x.xpath($("#teian-search-string-label").attr('ref'))[0]).text());
+				document.getElementById("teian-search-string-label").textContent = $x.xpath(document.getElementById("teian-search-string-label").getAttribute('ref'))[0].textContent;
 				$("#teian-search-button").text($($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:common-panel[@id = 'selected-wrap-server-annotator-panel']/teian:annotator-panel-element[@id = 'teian-search-button']")[0]).text()).click(function() {teian.ui.fGenerateSearchList();});
 				$("#teian-search-list-label").text($($x.xpath($("#teian-search-list-label").attr('ref'))[0]).text());
 				teian.ui.fGenerateSearchList = function() {
-				var oSelectElement = $("#teian-search-list");
-				$x.submission({
-				"ref" :
-				"simpath:instance('search-results')",
-				"resource" : $("#" + teian.ui.activeAnnotatorId)[0].sServiceURI +
-				$("#teian-search-criterion-input").val(),
-				"mode" : "synchronous",
-				"method" : "get"
-				});
-				oSelectElement.html($("*",
-				$($x.xpath("simpath:instance('search-results')/*")[0])));
-				//oSelectElement[0].selectedIndex = -1;
+					var oSelectElement = $("#teian-search-list");
+					$x.submission({
+						"ref" :
+						"simpath:instance('search-results')",
+						"resource" : $("#" + teian.ui.activeAnnotatorId)[0].sServiceURI + $("#teian-search-criterion-input").val(),
+						"mode" : "synchronous",
+						"method" : "get"
+					});
+					oSelectElement.html($("*", $($x.xpath("simpath:instance('search-results')/*")[0])));
+					//oSelectElement[0].selectedIndex = -1;
 				};
 				$("#teian-search-criterion-input").keyup(function(event){
-				if(event.keyCode == 13){
-				$("#teian-search-button").click();
-				}
+					if(event.keyCode == 13){
+						$("#teian-search-button").click();
+					}
 				});
 				teian.ui['selected-wrap-server-annotator'] = $("#teian-selected-wrap-server-annotator-dialog").dialog({
-				autoOpen: false,
-				width : 700,
-				height : 300,
-				modal : true,
-				buttons: {
-				"Save": function() {
-				$( this ).dialog( "close" );
-				var
-				oActiveAnnotator = $("#" + teian.ui.activeAnnotatorId)
-				, oActiveAnnotator0 = oActiveAnnotator[0]
-				;
-				$(oActiveAnnotator0['oAnnotatorMarkup']).attr(oActiveAnnotator0.sMainAttrName, $("#teian-search-list").val());
-				teian.annotator[0](oActiveAnnotator0, 'selected-wrap-server');
-				$(oActiveAnnotator0['oAnnotatorMarkup']).attr(oActiveAnnotator0.sMainAttrName, '');
-				//reset the UI elements
-				$("#teian-search-criterion-input").val('');
-				$("#teian-search-list")[0].options.length = 0;
-				},
-				"Cancel": function() {
-				$(
-				this ).dialog( "close" );
-				teian.utils.oSavedSelection = null;
-				//reset the UI elements
-				$("#teian-search-criterion-input").val('');
-				$("#teian-search-list")[0].options.length = 0;
-				}
-				}
+					autoOpen: false,
+					width : 700,
+					height : 300,
+					modal : true,
+					buttons: {			
+						"Save": function() {
+							$(this).dialog("close");
+							//var oActiveAnnotator = $("#" + teian.ui.activeAnnotatorId).oAnnotatorMarkup;							
+							var oActiveAnnotator0 = document.getElementById(teian.ui.activeAnnotatorId); //oActiveAnnotator[0];
+							var searchValue = $("#teian-search-list").val() == null ? "" : $("#teian-search-list").val();
+							var attributeHoldingSearchValue = oActiveAnnotator0.oAnnotatorMarkup.attributes[0];    
+							attributeHoldingSearchValue.value = searchValue;						
+							teian.annotator[0](oActiveAnnotator0, 'selected-wrap-server');
+							attributeHoldingSearchValue.value = '';
+							//reset the UI elements
+							$("#teian-search-criterion-input").val('');
+							document.getElementById("teian-search-list").options.length = 0;
+						},
+						"Cancel": function() {
+							$(this).dialog("close");
+							teian.utils.oSavedSelection = null;
+							//reset the UI elements
+							$("#teian-search-criterion-input").val('');
+							document.getElementById("teian-search-list").options.length = 0;
+						}
+					}
 				});
 			</script>
 		</teian:common-panel>
