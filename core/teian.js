@@ -44,14 +44,14 @@ teian.annotator = [
       alert(teian._errors[0]);
       return;
     }
-
+    
     var sOperationType = utils.sOperationType;
     var sessionParameters = teian.sessionParameters;		
     var userSelectedParentNode = (oSelection.anchorNode.nodeName == '#text') ? oSelection.anchorNode.parentNode : oSelection.anchorNode;
     var userSelectedFormerParentNode = null;
     var calculatedParentNode = null;
     var calculatedPrecedingSiblingNode = null;
- 
+    
     function calculateParentNode(currentParentNode) {
       //case when user selects outside the XML content
       if (currentParentNode.id == 'teian-content') {
@@ -63,9 +63,9 @@ teian.annotator = [
 		  return;
 		}
       }
-      
+
       //case when user selects inside the XML content
-      if (oAnnotator.sPossibleParents.indexOf(", " + currentParentNode.nodeName + ",") == -1) {
+      if (oAnnotator.sPossibleParents.indexOf(", " + currentParentNode.nodeName + ",") != -1) {
 		userSelectedFormerParentNode = currentParentNode;
 		return calculateParentNode(currentParentNode.parentNode, currentParentNode);
       } else {
@@ -89,7 +89,7 @@ teian.annotator = [
     
     //calculate the parent node based on annotator schema
     calculateParentNode(userSelectedParentNode);
-   
+
     //calculate the preceding sibling node based on annotator schema
     if (userSelectedFormerParentNode != null && oAnnotator.possiblePrecedingSiblingNames != '') {
       var possiblePrecedingSiblingNodes = calculatedParentNode.querySelectorAll(oAnnotator.possiblePrecedingSiblingNames);
@@ -99,10 +99,10 @@ teian.annotator = [
 		//check if userSelectedFormerParentNode is before all possiblePrecedingSiblingNodes
 		calculatedPrecedingSiblingNode = possiblePrecedingSiblingNodes[0];
       } else if (possiblePrecedingSiblingNodes[lastPossiblePrecedingSiblingNodeIndex].compareDocumentPosition(userSelectedFormerParentNode) & 4) {
-	//check if userSelectedFormerParentNode is after all possiblePrecedingSiblingNodes
+    	//check if userSelectedFormerParentNode is after all possiblePrecedingSiblingNodes
     	calculatedPrecedingSiblingNode = possiblePrecedingSiblingNodes[lastPossiblePrecedingSiblingNodeIndex];
       } else {
-	//calculate the exact preceding sibling node
+    	//calculate the exact preceding sibling node
     	calculatedPrecedingSiblingNode = possiblePrecedingSiblingNodes[calculatePrecedingSiblingNode(userSelectedFormerParentNode, possiblePrecedingSiblingNodesNumber, possiblePrecedingSiblingNodes)];
       }
     }
@@ -113,23 +113,31 @@ teian.annotator = [
       var insertChangeTemplate = document.querySelector("#insert-change-template > *").cloneNode(true);
       insertChangeTemplate.appendChild(nodeToInsert);
       nodeToInsert = insertChangeTemplate;
-    }    
+    }
     
     if ("insert insert-parametrized".indexOf(sAnnotatorType) != -1) {
       if (calculatedPrecedingSiblingNode == null || calculatedPrecedingSiblingNode.nextElementSibling == null) {
-    	  calculatedParentNode.appendChild(nodeToInsert);
+    	  if (calculatedParentNode.nodeName == userSelectedParentNode.nodeName) {
+        	  var range = oSelection.rangeCount ? oSelection.getRangeAt(0) : null;    		  
+    		  if (range) {
+        		  range.insertNode(nodeToInsert);
+        		  rangy.getSelection().setSingleRange(range);
+        	  }
+    	  } else {
+    		  calculatedParentNode.appendChild(nodeToInsert);    		  
+    	  }
       } else {
     	  calculatedParentNode.insertBefore(nodeToInsert, calculatedPrecedingSiblingNode.nextElementSibling);
       }
     } else {
       if (sOperationType == 'add') {
-    	  oSelection.getRangeAt(0).surroundContents(nodeToInsert);
+    	oSelection.getRangeAt(0).surroundContents(nodeToInsert);
       } else {
-	// this gets HTML content for complex entities
-	// only have to append this content to replacing node
-	// oSelection.getRangeAt(0)
-	$(oSelection.anchorNode).replaceWith($(nodeToInsert).text(oSelection.anchorNode.textContent));
-	utils.sOperationType = 'add';
+		// this gets HTML content for complex entities
+		// only have to append this content to replacing node
+		// oSelection.getRangeAt(0)
+		$(oSelection.anchorNode).replaceWith($(nodeToInsert).text(oSelection.anchorNode.textContent));
+		utils.sOperationType = 'add';
       }
       oSelection.removeAllRanges();
     }
@@ -139,6 +147,26 @@ teian.annotator = [
     }    
   }
 ];
+
+//if (sAnnotatorType == 'insert') {
+//	var range = oSelection.rangeCount ? oSelection.getRangeAt(0) : null;
+//	if (range) {
+//		range.insertNode(oAnnotator.oAnnotatorMarkup.cloneNode(true));
+//		rangy.getSelection().setSingleRange(range);
+//	}
+
+
+//} else {
+//	if (sOperationType == 'add') {
+//		oSelection.getRangeAt(0).surroundContents(oAnnotator.oAnnotatorMarkup.cloneNode(true));
+//	} else {
+//		$(oSelection.anchorNode).replaceWith($(oAnnotator.oAnnotatorMarkup.cloneNode(true)).text(oSelection.anchorNode.textContent));
+//		utils.sOperationType = 'add';
+//	}
+//	oSelection.removeAllRanges();
+//  }
+	
+	
 
 teian.compatibility = {};
 
@@ -703,13 +731,11 @@ $(document).ready(
 				  });
 				  
 				  //load the annotator's UI
-				  var annotatorUiElements = $x.xpath("/teian:annotator/teian:annotator-panel/*", oAnnotator0);
-				  for (var i = 0, il = annotatorUiElements.length; i < il; i++) {
-					  document.body.appendChild(annotatorUiElements[i].cloneNode(true));  
-				  }
-
-//				  $($x.xpath("/teian:annotator/teian:annotator-panel", oAnnotator0)[0].cloneNode(true)).appendTo("body");
-			      //alert(sAnnotatorId);				  
+//				  var annotatorUiElements = $x.xpath("/teian:annotator/teian:annotator-panel/*", oAnnotator0);
+//				  for (var i = 0, il = annotatorUiElements.length; i < il; i++) {
+//					  document.body.appendChild(annotatorUiElements[i].cloneNode(true));  
+//				  }
+				  $($x.xpath("/teian:annotator/teian:annotator-panel", oAnnotator0)[0].cloneNode(true)).appendTo("body");				  
 				break;
 				case 'insert':
 				  oHTMLAnnotator.click(function(eventObject) {
