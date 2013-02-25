@@ -269,7 +269,8 @@ tei|pb {
 }
 
 tei|pb:before {
-   content: "Page break: " attr(facs) "), id='" attr(xml|id) "'";
+/*    content: "Page break: (" attr(facs) "), id='" attr(xml|id) "'"; */
+	content: "page break";
 }
 
 
