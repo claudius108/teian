@@ -37,14 +37,15 @@ teian.annotate = function() {
 
 teian.annotator = [
   function(oAnnotator, sAnnotatorType, eventObject) {
-    var utils = teian.utils;
+	  var utils = teian.utils;
+ 
     teian.utils.restoreSelection();
     var oSelection = rangy.getSelection();
     if (oSelection == "" && "insert insert-parametrized".indexOf(sAnnotatorType) == -1) {
       alert(teian._errors[0]);
       return;
     }
-    
+
     var sOperationType = utils.sOperationType;
     var sessionParameters = teian.sessionParameters;		
     var userSelectedParentNode = (oSelection.anchorNode.nodeName == '#text') ? oSelection.anchorNode.parentNode : oSelection.anchorNode;
@@ -131,7 +132,7 @@ teian.annotator = [
       }
     } else {
       if (sOperationType == 'add') {
-    	oSelection.getRangeAt(0).surroundContents(nodeToInsert);
+    	oSelection.getRangeAt(0).surroundContents(nodeToInsert);    	
       } else {
 		// this gets HTML content for complex entities
 		// only have to append this content to replacing node
