@@ -1,22 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- This file is part of the DITA Open Toolkit project hosted on 
- Sourceforge.net. See the accompanying license.txt file for 
- applicable licenses.-->
+<!-- This file is part of the DITA Open Toolkit project hosted on Sourceforge.net. See the accompanying license.txt file 
+	for applicable licenses. -->
 <!-- (c) Copyright IBM Corp. 2004, 2005 All Rights Reserved. -->
 
 <!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN"
  "../../dtd/topic.dtd">
-<topic id="installing" xml:lang="en-us">
-<title>Installing</title>
-<shortdesc>You install components to make them available for your
-solution.</shortdesc>
-<body>
-<p>Usually, you can install the components once and then forget about the
-details of this task. 
-Before installing the components, you should make a plan
-for what you need to accomplish and the components 
-that will support these goals. 
-After installing the components, you will probably want to perform
-some preliminary configuration. </p>
-</body>
+<topic id="installing" xml:lang="en-us" xmlns="http://dita.oasis-open.org/architecture/2005/">
+	<title>Installing</title>
+	<shortdesc>You install components to make them available for your
+		solution.</shortdesc>
+	<body>
+		<p>Usually, you can install the components once and then forget about the
+			details of this task.
+			Before installing the
+			components, you should make a plan
+			for what you need to accomplish and the components
+			that will support these goals.
+			After installing the components, you will probably want to perform
+			some preliminary configuration.
+		</p>
+		<note type="note">
+			This demonstration has the following limitations:
+			<ul>
+				<li>For XSL-FO formatting and thus PDF generation, only the basics have been implemented. Through specialization,
+					the DITA XHTML-based outputs for DITA map are also available for bookmap.</li>
+				<li>
+					The design for the book info component of the proposal has been fleshed out based on antecedents in DocBook and
+					IBMIDDoc (see the comments in the
+					<codeph>bookinfo.mod</codeph>
+					file). Most of the elements in bookinfo aren&apos;t processed.
+				</li>
+				<li>The
+					book list component of the proposal hasn&apos;t been implemented yet. Possible designs for a glossary list have
+					been discussed extensively on the DITA forum (resulting in the proposal posted as
+					<xref href="news://news.software.ibm.com:119/3FA29F54.83AFB251@ca.ibm.com" format="news">news://news.software.ibm.com:119/blfg38$5k0q$1@news.boulder.ibm.com</xref>
+					).
+				</li>
+				<li>The book style component of the proposal is much more experimental than the bookmap and bookinfo components.
+					Processing for this component is limited.</li>
+			</ul>
+		</note>
+		<section>
+			<title> COPYRIGHT LICENSE:</title>
+			<p>This information contains sample application programs in source language, which illustrate programming techniques
+				on various operating platforms. You may copy, modify, and distribute these sample programs in any form without
+				payment to IBM, for the purposes of developing, using, marketing or distributing application programs conforming to
+				the application programming interface for the operating platform for which the sample programs are written. These
+				examples have not been thoroughly tested under all conditions. Retro Tools, therefore, cannot guarantee or imply
+				reliability, serviceability, or function of these programs.
+			</p>
+		</section>
+	</body>
 </topic>
