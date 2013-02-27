@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Teian - Web adnotator
+    By Claudius Teodorescu
+    Licensed under LGPL.
+-->
+<teian:lang xmlns="http://www.w3.org/1999/xhtml" xmlns:teian="http://kuberam.ro/ns/teian" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <teian:general-error-messages>
+    <teian:selection-empty>In order to annotate, you must select something.</teian:selection-empty>
+    <teian:selection-non-empty>In order to annotate, you must NOT select text!</teian:selection-non-empty>
+    <teian:forbidden-overlapping>You are not allowed to overlap these XLIFF elements!</teian:forbidden-overlapping>
+    <teian:non-editable-entity>This entity ('%entityName') is not editable.</teian:non-editable-entity>
+    <!-- <teian:warnOnMissingHyperlinkTarget>URL must not be empty!</teian:warnOnMissingHyperlinkTarget> -->
+    <teian:warnOnSelectingSearchResult>In order to annotate, you must select one search result!</teian:warnOnSelectingSearchResult>
+    <!-- <teian:warnOnInvalidDate>Invalid date!</teian:warnOnInvalidDate> -->
+    <teian:warnOnRemovingRootEntity>You are not allowed to remove the root entity!</teian:warnOnRemovingRootEntity>
+    <teian:warnOnSplittingElement>You are not allowed to insert this entity here!</teian:warnOnSplittingElement>
+  </teian:general-error-messages>
+</teian:lang>
