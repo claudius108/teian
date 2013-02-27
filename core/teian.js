@@ -461,17 +461,18 @@ teian._getContent = function(sURI) {
   var contentRootElement = $x._instances['data'].documentElement;
   var contentRootElementClarkName = '{' + contentRootElement.namespaceURI + '}' + contentRootElement.nodeName;
   
+  var vocabularyFolder = $x.xpath("simpath:instance('config')//teian:vocabulary[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@href")[0].value;  
   // load the CSS file
   var fileref = document.createElement("link");
   fileref.setAttribute("rel", "stylesheet");
   fileref.setAttribute("type", "text/css");
-  fileref.setAttribute("href", $x	.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@css-href")[0].value);
+  fileref.setAttribute("href", vocabularyFolder + "css/style.css");
   document.getElementsByTagName("head")[0].appendChild(fileref);
-  
+    
   // load the specific annotators
   $x.submission({
     "ref" : "simpath:instance('vocabulary-annotators')",
-    "resource" : $x.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@annotators-href")[0].value,
+    "resource" : vocabularyFolder + "annotators/annotators.xml",
     "mode" : "synchronous",
     "method" : "get"
   });
@@ -491,7 +492,7 @@ teian._getContent = function(sURI) {
   });
   $x.submission({
 	    "ref" : "simpath:instance('vertical-menus')",
-	    "resource" : $x.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@menus-href")[0].value,
+	    "resource" : vocabularyFolder + "menus/vertical-menus.xml",
 	    "mode" : "synchronous",
 	    "method" : "get"
   });
@@ -499,7 +500,7 @@ teian._getContent = function(sURI) {
   // load vocabulary specific lang file
   $x.submission({
     "ref" : "simpath:instance('vocabulary-ui-lang')",
-    "resource" : $x.xpath("simpath:instance('config')//teian:file[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@lang-href")[0].value,
+    "resource" : vocabularyFolder + "lang/en-us.xml",
     "mode" : "synchronous",
     "method" : "get"
   });
