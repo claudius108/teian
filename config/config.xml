@@ -22,5 +22,8 @@
 		<teian:vocabulary href="../config/vocabularies/dita/">
 			<teian:content-root-element-name>{http://dita.oasis-open.org/architecture/2005/}topic</teian:content-root-element-name>
 		</teian:vocabulary>
+		<teian:vocabulary href="../config/vocabularies/xproc/">
+			<teian:content-root-element-name>{http://www.w3.org/ns/xproc}p:pipeline</teian:content-root-element-name>
+		</teian:vocabulary>		
 	</teian:vocabularies>
 </teian:configuration>
