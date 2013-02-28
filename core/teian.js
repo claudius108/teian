@@ -592,19 +592,31 @@ $(document).ready(
       "method" : "get"
     });
     
-    // load the teian configuration file
-    $x.submission({
-      "ref" : "simpath:instance('config')",
-      "resource" : sModuleBaseURI + "config/config.xml",
-      "mode" : "synchronous",
-      "method" : "get"
-    });
-    
     // get the content file
     var q = document.location.search || document.location.hash;
     if (q) {
-      teian.contentUrl = q.substring(9);
+      var sessionUrl = q.substring(13);
+      
+      // load the session configuration file
+      $x.submission({
+        "ref" : "simpath:instance('session')",
+        "resource" : sessionUrl,
+        "mode" : "synchronous",
+        "method" : "get"
+      });
+      
+      teian.contentUrl = $x.xpath("simpath:instance('session')//teian:content-url")[0].textContent;
+      
+      // load the teian configuration file
+      $x.submission({
+        "ref" : "simpath:instance('config')",
+        "resource" : $x.xpath("simpath:instance('session')//teian:config-url")[0].textContent,
+        "mode" : "synchronous",
+        "method" : "get"
+      });
+      
       teian._getContent(teian.contentUrl);
+      
       
       //toggle changes
       if (sessionParameters["show-changes"] == "true") {
