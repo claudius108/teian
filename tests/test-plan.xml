@@ -124,7 +124,26 @@
 		<kert:total-test-time />
 		<kert:type>unattended</kert:type>
 		<kert:assertion-type>assert-xml</kert:assertion-type>
-	</kert:test>	
+	</kert:test>
+			<kert:test id="6">
+		<kert:author>Claudius Teodorescu</kert:author>
+		<kert:title>Tokyo War Crimes</kert:title>
+		<kert:version>0.1</kert:version>
+		<kert:description>
+			This test is for rendering Tokyo War Crimes file.
+		</kert:description>
+		<kert:test-url>?session-url=../tests/unit-tests/tokyo-war-crimes-session.xml</kert:test-url>
+		<kert:source-url></kert:source-url>
+		<kert:assertion>//result-token</kert:assertion>
+		<kert:timeout />
+		<kert:run-status timestamp="" />
+		<kert:development-status timestamp="" />
+		<kert:log />
+		<kert:loops-number />
+		<kert:total-test-time />
+		<kert:type>unattended</kert:type>
+		<kert:assertion-type>assert-xml</kert:assertion-type>
+	</kert:test>
 	<kert:traceability-matrix />
 	<kert:test-tree>
 		<ul id="data">	
@@ -133,6 +152,7 @@
 			<li id="tree-2" title="Test 2">Rendering of TEI vocabulary</li>
 			<li id="tree-4" title="Test 4">Rendering of DITA vocabulary</li>
 			<li id="tree-5" title="Test 5">Rendering of XProc vocabulary</li>		
+			<li id="tree-6" title="Test 6">Tokyo War Crimes</li>
 		</ul>
 	</kert:test-tree>
 </kert:test-plan>

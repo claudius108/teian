@@ -149,26 +149,6 @@ teian.annotator = [
   }
 ];
 
-//if (sAnnotatorType == 'insert') {
-//	var range = oSelection.rangeCount ? oSelection.getRangeAt(0) : null;
-//	if (range) {
-//		range.insertNode(oAnnotator.oAnnotatorMarkup.cloneNode(true));
-//		rangy.getSelection().setSingleRange(range);
-//	}
-
-
-//} else {
-//	if (sOperationType == 'add') {
-//		oSelection.getRangeAt(0).surroundContents(oAnnotator.oAnnotatorMarkup.cloneNode(true));
-//	} else {
-//		$(oSelection.anchorNode).replaceWith($(oAnnotator.oAnnotatorMarkup.cloneNode(true)).text(oSelection.anchorNode.textContent));
-//		utils.sOperationType = 'add';
-//	}
-//	oSelection.removeAllRanges();
-//  }
-	
-	
-
 teian.compatibility = {};
 
 teian.compatibility['annotator-types'] = "0.4";	
@@ -268,7 +248,7 @@ teian.save = function() {
   content.setAttribute("content-url", teian.contentUrl);
   var contentAsString = $x.serializeToString(content);
   alert(contentAsString);
-  if (teian.sessionParameters["track-changes"] == "true") {
+  if (teian.sessionParameters['track-changes'] == "true") {
     contentAsString = teian._convertTrackChangesHtmlToPi(contentAsString);
   }
   
@@ -615,8 +595,12 @@ $(document).ready(
         "method" : "get"
       });
       
-      teian._getContent(teian.contentUrl);
+      // set the session parameters
+      sessionParameters["track-changes"] = $x.xpath("simpath:instance('session')//teian:track-changes")[0].textContent;
+      sessionParameters["show-changes"] = $x.xpath("simpath:instance('session')//teian:show-changes")[0].textContent;
+      sessionParameters["lock-content"] = $x.xpath("simpath:instance('session')//teian:show-changes")[0].textContent;
       
+      teian._getContent(teian.contentUrl);      
       
       //toggle changes
       if (sessionParameters["show-changes"] == "true") {

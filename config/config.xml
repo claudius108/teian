@@ -15,6 +15,7 @@
 		</teian:vocabulary>
 		<teian:vocabulary href="../config/vocabularies/TEI/">
 			<teian:content-root-element-name>{http://www.tei-c.org/ns/1.0}TEI</teian:content-root-element-name>
+			<teian:content-root-element-name>{http://www.tei-c.org/ns/1.0}tei:TEI</teian:content-root-element-name>
 		</teian:vocabulary>
 		<teian:vocabulary href="../config/vocabularies/xliff/">
 			<teian:content-root-element-name>{urn:oasis:names:tc:xliff:document:1.2}xliff</teian:content-root-element-name>

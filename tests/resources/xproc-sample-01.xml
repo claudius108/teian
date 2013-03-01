@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <p:pipeline xmlns:p="http://www.w3.org/ns/xproc" version="1.0">
 
-	<p:choose>
+	<p:choose draggable="true">
 		<p:when test="/*[@version &lt; 2.0]">
 			<p:validate-with-xml-schema>
 				<p:input port="schema">

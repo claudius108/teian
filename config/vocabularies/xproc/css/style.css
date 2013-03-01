@@ -1,1 +1,38 @@
-/* @import "dita-ot/topic.css"; */
+@namespace p "http://www.w3.org/ns/xproc";
+
+p|pipeline {
+	text-align: center;
+}
+
+p|* {
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
+	display: block;	
+}
+
+p|choose {
+	margin: 20px;
+	background-color: #00FF80;
+	border: solid 3px #0B3B2E;
+	width: 270px;
+	height: 150px;
+}
+
+p|when {
+	float: left;
+	margin: 20px;
+	background-color: #FACC2E;
+	border: solid 3px #B18904;
+	width: 100px;
+	height: 50px;
+}
+
+p|otherwise {
+	float: left;
+	margin: 20px;
+	background-color: #FACC2E;
+	border: solid 3px #B18904;
+	width: 100px;
+	height: 50px;
+}
