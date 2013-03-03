@@ -225,11 +225,11 @@ teian.sessionParameters = {
   "track-changes" : "false",
   "show-changes" : "false",
   "lock-content" : "false",
-  "user" : "Reviewer1",
+  "user" : "reviewer1",
   "user-color" : "pink",
   "track-changes-authors" : {
     "author" : {
-      "name" : "Reviewer1",
+      "name" : "reviewer1",
       "color" : "pink"
     }
   }
@@ -303,7 +303,7 @@ teian.unlock = function() {
   document.getElementById("teian-content").contentEditable = true;
 };
 
-teian.version = "2.3.5";
+teian.version = "2.3.7";
 
 teian._acceptOrRejectAllChanges = function(action) {
   var contentNode = document.getElementById("teian-content").firstElementChild;
@@ -325,12 +325,12 @@ teian._addChangeSummary = function(change, authorChangesContainer) {
   change.setAttribute("timestamp", timestamp);
   change.setAttribute("class", author + "_track_changes");
   
-  var changeSummary = document.querySelector("#change-summary-template > *").cloneNode(true);
-  var changeType = ((change.nodeName == "INS") ? "Added" : "Deleted");
+  var changeSummary = document.querySelector("#change-summary-template > *").cloneNode(true);  
+  var changeType = ((change.nodeName == "INS") ? "Added" : "Deleted");  
   changeSummary.setAttribute("id", "summary-" + changeId);
   changeSummary.querySelector("div:first-child").textContent = changeType + ": " + change.textContent + " " + change.getAttribute("timestamp");
   changeSummary.querySelectorAll("input[type = 'image']")[0].setAttribute("onclick", "teian.acceptChange('" + changeId + "', '" + changeType + "');");
-  changeSummary.querySelectorAll("input[type = 'image']")[1].setAttribute("onclick", "teian.rejectChange('" + changeId + "', '" + changeType + "');");
+  changeSummary.querySelectorAll("input[type = 'image']")[1].setAttribute("onclick", "teian.rejectChange('" + changeId + "', '" + changeType + "');");  
   
   if (authorChangesContainer != null) {
     authorChangesContainer.appendChild(changeSummary);   
@@ -345,19 +345,19 @@ teian._addClass = function(element, newClass) {
 };
 
 teian._changeTrackingParameters = {
-  "insertStart" : "teian-insert-start",
-  "insertEnd" : "teian-insert-end",
-  "deleteStart" : "teian-delete-start",
-  "deleteEnd" : "teian-delete-end",
+  "insertStartPiTarget" : "teian-insert-start",
+  "insertEndPiTarget" : "teian-insert-end",
+  "deleteStartPiTarget" : "teian-delete-start",
+  "deleteEndPiTarget" : "teian-delete-end",
   "changes-summary-index" : -1
 };
 
 teian._convertTrackChangesHtmlToPi = function(contentAsString) {
   var changeTrackingParameters = teian._changeTrackingParameters;
-  contentAsString = contentAsString.replace(/\/ins/g, "?" + changeTrackingParameters.insertEnd + "?")
-    .replace(/\/del/g, "?" + changeTrackingParameters.deleteEnd + "?")
-    .replace(new RegExp("(ins xmlns=\"http://www.w3.org/1999/xhtml\")([^>]*)", "g"), "?" + changeTrackingParameters.insertStart + "$2?")
-    .replace(new RegExp("(del xmlns=\"http://www.w3.org/1999/xhtml\")([^>]*)", "g"), "?" + changeTrackingParameters.deleteStart + "$2?")
+  contentAsString = contentAsString.replace(/\/ins/g, "?" + changeTrackingParameters.insertEndPiTarget + "?")
+    .replace(/\/del/g, "?" + changeTrackingParameters.deleteEndPiTarget + "?")
+    .replace(new RegExp("(ins xmlns=\"http://www.w3.org/1999/xhtml\")([^>]*)", "g"), "?" + changeTrackingParameters.insertStartPiTarget + "$2?")
+    .replace(new RegExp("(del xmlns=\"http://www.w3.org/1999/xhtml\")([^>]*)", "g"), "?" + changeTrackingParameters.deleteStartPiTarget + "$2?")
   ;
   return contentAsString;
 };
@@ -495,23 +495,28 @@ teian._getContent = function(sURI) {
   if (teian.sessionParameters["track-changes"] == "true") {
     //use the vocabulary specific PIs for tracking changes
     var changeTrackingParameters = teian._changeTrackingParameters;
-    if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-start-tracker']") != "") {
-      changeTrackingParameters.insertStart = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-start-tracker']/teian:content-model")[0].childNodes[0].target;
+    var insertStartPiTarget = $x.xpath("simpath:instance('session')//teian:insert-start-pi-target")[0].textContent;
+    var insertEndPiTarget = $x.xpath("simpath:instance('session')//teian:insert-end-pi-target")[0].textContent;
+    var deleteStartPiTarget = $x.xpath("simpath:instance('session')//teian:delete-start-pi-target")[0].textContent;
+    var deleteEndPiTarget = $x.xpath("simpath:instance('session')//teian:delete-end-pi-target")[0].textContent;    
+    if (insertStartPiTarget != "") {
+      changeTrackingParameters.insertStartPiTarget = insertStartPiTarget;
     }
-    if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-end-tracker']") != "") {
-      changeTrackingParameters.insertEnd = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'insert-end-tracker']/teian:content-model")[0].childNodes[0].target;
+    if (insertEndPiTarget != "") {
+        changeTrackingParameters.insertEndPiTarget = insertEndPiTarget;
     }
-    if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-start-tracker']") != "") {
-      changeTrackingParameters.deleteStart = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-start-tracker']/teian:content-model")[0].childNodes[0].target;
+    if (deleteStartPiTarget != "") {
+        changeTrackingParameters.deleteStartPiTarget = deleteStartPiTarget;
     }
-    if ($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-end-tracker']") != "") {
-      changeTrackingParameters.deleteEnd = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = 'delete-end-tracker']/teian:content-model")[0].childNodes[0].target;
+    if (deleteEndPiTarget != "") {
+        changeTrackingParameters.deleteEndPiTarget = deleteEndPiTarget;
     }
+
     var contentAsString = $x.instance('data').source();
-    contentAsString = contentAsString.replace(new RegExp("\\?" + changeTrackingParameters.insertEnd + "\\?", "g"), "/ins")
-      .replace(new RegExp("\\?" + changeTrackingParameters.deleteEnd + "\\?", "g"), "/del")
-      .replace(new RegExp("(\\?" + changeTrackingParameters.insertStart + ")([^>]*)(\\?>)", "g"), "ins xmlns=\"http://www.w3.org/1999/xhtml\"$2>")
-      .replace(new RegExp("(\\?" + changeTrackingParameters.deleteStart + ")([^>]*)(\\?)", "g"), "del xmlns=\"http://www.w3.org/1999/xhtml\"$2")
+    contentAsString = contentAsString.replace(new RegExp("\\?" + changeTrackingParameters.insertEndPiTarget + "\\?", "g"), "/ins")
+      .replace(new RegExp("\\?" + changeTrackingParameters.deleteEndPiTarget + "\\?", "g"), "/del")
+      .replace(new RegExp("(\\?" + changeTrackingParameters.insertStartPiTarget + ")([^>]*)(\\?>)", "g"), "ins xmlns=\"http://www.w3.org/1999/xhtml\"$2>")
+      .replace(new RegExp("(\\?" + changeTrackingParameters.deleteStartPiTarget + ")([^>]*)(\\?)", "g"), "del xmlns=\"http://www.w3.org/1999/xhtml\"$2")
     ;
     document.getElementById("teian-content").appendChild($x.parseFromString(contentAsString).documentElement);
     return;
@@ -600,7 +605,61 @@ $(document).ready(
       sessionParameters["show-changes"] = $x.xpath("simpath:instance('session')//teian:show-changes")[0].textContent;
       sessionParameters["lock-content"] = $x.xpath("simpath:instance('session')//teian:show-changes")[0].textContent;
       
-      teian._getContent(teian.contentUrl);      
+      teian._getContent(teian.contentUrl);
+
+//      jsPlumb.Defaults.Container = $("#teian-content");
+//      var a = $("#a");
+//      var b = $("#b");
+//      
+//      //Setting up drop options
+//      var targetDropOptions = {
+//              tolerance:'touch',
+//              hoverClass:'dropHover',
+//              activeClass:'dragActive'
+//      };
+//      
+//      //Setting up a Target endPoint
+//      var targetColor = "#316b31";
+//      var targetEndpoint = {
+//         endpoint:["Dot", { radius:4 }],
+//         paintStyle:{ fillStyle:targetColor},
+//         //isSource:true,
+//         scope:"green dot",
+//         connectorStyle:{ strokeStyle:targetColor, lineWidth:2 },
+//         connector: ["Bezier", { curviness:63 } ],
+//         maxConnections:3,
+//         isTarget:true,
+//         dropOptions : targetDropOptions
+//      };
+//      
+//      //Setting up a Source endPoint
+//      var sourceColor = "#ff9696";
+//      var sourceEndpoint = {
+//         endpoint:["Dot", { radius:4 }],
+//         paintStyle:{ fillStyle:sourceColor},
+//         isSource:true,
+//         scope:"green dot",
+//         connectorStyle:{ strokeStyle:sourceColor, lineWidth:2 },
+//         connector: ["Bezier", { curviness:63 } ],
+//         maxConnections:3,
+//         //isTarget:true,
+//         //dropOptions : targetDropOptions
+//      };
+//      
+//      
+//      //Set up endpoints on the divs
+//      jsPlumb.addEndpoint($("#a") , { anchor:"BottomCenter" }, targetEndpoint);
+//      jsPlumb.addEndpoint($("#b") , { anchor:"TopCenter" }, sourceEndpoint);
+//      //jsPlumb.connect({ source:sourceEndpoint, target:targetEndpoint });
+//      
+//      jsPlumb.draggable($(".window"));      
+      
+      
+      
+      
+      
+      
+      
       
       //toggle changes
       if (sessionParameters["show-changes"] == "true") {

@@ -9,11 +9,11 @@
         <link rel="stylesheet" href="teian.css" type="text/css"/>
         
 	<!-- jquery -->
-        <script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">/**/</script>
+        <script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js">/**/</script>
         
 	<!--dependencies for dialog plugin-->
-        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery.ui.all.css"/>
-        <script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js">/**/</script>
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/base/jquery.ui.all.css"/>
+        <script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js">/**/</script>
         
 	<!--dependencies for jQuery UI theme switcher -->
 <!--         <link rel="stylesheet" type="text/css" href="../../jquery/themes/jquery.themes.css"/> -->
@@ -23,6 +23,8 @@
 		<!-- dependencies for the context menu -->
 		<script type="text/javascript" charset="utf-8" src="http://medialize.github.com/jQuery-contextMenu/src/jquery.contextMenu.js">/**/</script>
 		<link rel="stylesheet" type="text/css" href="http://medialize.github.com/jQuery-contextMenu/src/jquery.contextMenu.css"/>
+		
+		<script type="text/javascript" charset="utf-8" src="http://jsplumb.org/js/jquery.jsPlumb-1.3.16-all-min.js">/**/</script>		
                
 	<!--dependencies for teian-->
         <script type="text/javascript" charset="utf-8" src="teian.js">/**/</script>
@@ -45,7 +47,7 @@
                 <div class="loadingIndicator">Loading ...</div>
             </div>
         </div>
-        <menu id="teian-toolbar-menu" type="toolbar" style="display:none" data-kyerType="toolbar-menu"></menu>        
+        <menu id="teian-toolbar-menu" type="toolbar" style="display:none" data-kyerType="toolbar-menu"></menu>                
 
         <menu id="teian-context-menu" type="context" style="display:none" data-kyerType="context-menu"></menu>        
 <!--   <div id="themes-dd-menu" class="teian-dd-menu fg-buttonset ui-helper-clearfix">
@@ -91,7 +93,8 @@
         </div>-->
 <!-- 	<p><span id="label">Select your new theme:</span> <span id="themeSelection"></span></p> -->
 		<menu id="teian-vertical-menu" type="list" style="display:none" data-kyerType="vertical-menu"></menu>
-        <div id="teian-content" contextmenu="teian-context-menu" class="ui-corner-all ui-helper-clearfix"></div>
+        <div id="teian-content" contextmenu="teian-context-menu" class="ui-corner-all ui-helper-clearfix"></div>       
+        
         <div id="changes-container" class="ui-corner-all ui-helper-clearfix">
             <div id="changes-container-title">Changes</div>
             <div id="track-changes-toolbar">
@@ -113,20 +116,20 @@
             </div>
             <div id="change-summary-template">
                 <div class="change-container" id="">
-                    <div class="change-summary-title"/>
+                    <div class="change-summary-title"></div>
                     <input type="image" src="../resources/images/passed.png" title="Accept change" onclick=""/>
                     <input type="image" src="../resources/images/failed.png" title="Reject change" onclick=""/>
                 </div>
             </div>
-            <div id="session-parameters">
-                <teian:session-parameters>
-                    <teian:track-changes>true</teian:track-changes>
-                    <teian:show-changes>true</teian:show-changes>
-                    <teian:lock-content>false</teian:lock-content>
-                    <teian:user-name>Reviewer1</teian:user-name>
-                    <teian:changes-authors/>
-                </teian:session-parameters>
-            </div>
+<!--             <div id="session-parameters"> -->
+<!--                 <teian:session-parameters> -->
+<!--                     <teian:track-changes>true</teian:track-changes> -->
+<!--                     <teian:show-changes>true</teian:show-changes> -->
+<!--                     <teian:lock-content>false</teian:lock-content> -->
+<!--                     <teian:user-name>Reviewer1</teian:user-name> -->
+<!--                     <teian:changes-authors/> -->
+<!--                 </teian:session-parameters> -->
+<!--             </div> -->
         </div>
     </body>
 </html>

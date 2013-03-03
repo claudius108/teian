@@ -21,7 +21,7 @@ p|choose {
 
 p|when {
 	float: left;
-	margin: 20px;
+	margin: 10px;
 	background-color: #FACC2E;
 	border: solid 3px #B18904;
 	width: 100px;
@@ -30,9 +30,17 @@ p|when {
 
 p|otherwise {
 	float: left;
-	margin: 20px;
+	margin: 10px;
 	background-color: #FACC2E;
 	border: solid 3px #B18904;
 	width: 100px;
 	height: 50px;
+}
+
+p|xslt {
+	margin: 20px;
+	background-color: #00FF80;
+	border: solid 3px #0B3B2E;
+	width: 270px;
+	height: 150px;
 }
