@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+	<teiHeader>
+		<fileDesc>
+			<titleStmt>
+				<title>Journal of William John Wills</title>
+				<author>William John Wills</author>
+				<respStmt>
+					<resp>converted from the HTML by</resp>
+					<name>Conal Tuohy</name>
+				</respStmt>
+			</titleStmt>
+			<editionStmt>
+				<edition>
+					<date>2010-09-29</date>
+				</edition>
+			</editionStmt>
+			<publicationStmt>
+				<authority />
+			</publicationStmt>
+			<sourceDesc>
+				<p>
+					Converted from the HTML at
+					<ref target="http://www.nla.gov.au/epubs/wills/pages/print-only.html">National Library of Australia</ref>
+				</p>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<p>PRINT VERSION OF
+				THE TRANSCRIPTION OF THE WILLS DIARY (approx.
+				20 pages when printed)
+			</p>
+			<p>
+				See also the
+				<ref target="http://www.nla.gov.au/epubs/wills/pages/intro10.html">Introduction</ref>
+				for explanation of some conventions used in this 2002 version of the transcript,
+				including:
+			</p>
+			<p>
+				<hi rend="superscript">h</hi>
+				7
+				<hi rend="superscript">m</hi>
+				30.
+				When Wills writes times, he puts 'h' above the hour and 'm' above the
+				minutes. This could not be replicated this exactly in type.
+			</p>
+			<p>New sentences, as
+				far as they can be determined, are indicated by a leading double space.
+				Wills often did not use punctuation or beginning capitals.
+			</p>
+			<p>Wills's crossed-out
+				words and sentences have been reinstated, and this transcript tries to
+				indicate where words were written over others
+			</p>
+
+		</encodingDesc>
+		<revisionDesc>
+			<change>
+				<name>- -</name>
+				<date>2010-07-18T16:50:00</date>
+			</change>
+		</revisionDesc>
+	</teiHeader>
+	<text>
+		<body>
+			<div>
+				<head>
+					<date when-iso="1861-04">April 1861</date>
+
+					Journal of Trip from Cooper Creek Towards Adelaide
+				</head>
+
+				<p>
+					The Advance party
+					of the
+					<orgName>VEE</orgName>
+					, consisting of
+					<persName>Burke</persName>
+					<persName>Wills</persName>
+					and
+					<persName>King</persName>
+					(
+					<name>Gray</name>
+					being dead) having
+					returned from Carpentaria on the 21
+					<hi rend="superscript">st</hi>
+					April 1861 in an exhausted
+					and weak state and finding that the Depôt Party left at
+					<?teian-delete-start author="reviewer1" timestamp="20130302T172240+0200"?><geogName>Cooper Creek</geogName><?teian-delete-end?>
+					had
+					started for the Darling with their horses and Camels fresh and in good
+					condition, deemed it useless to attempt to overtake them, having only
+					two Camels, both done up, and being so weak themselves as to be unable
+					to walk more than four or five miles a day. Finding also that the provisions
+					left at the Depôt for them would scarcely take them to Meninda, started
+					down Cooper Creek for Adelaide, via
+					<geogName ref="http://en.wikipedia.org/wiki/Mount_Hopeless_%28South_Australia%29">Mt Hopeless</geogName>
+					on the morning of April
+					23
+					<hi rend="superscript">rd</hi>
+					1861, intending to follow as nearly as possible the route
+					taken by Gregory.  by so doing they hoped to be able to recruit themselves
+					&amp; the Camels whilst sauntering slowly down the Creek and
+					to have sufficient provisions left to take them comfortably or at least
+					without risk to some station in South Australia.
+				</p>
+			</div>
+			<div>
+				<head>
+					<date when-iso="1861-04-24">
+						Wednesday April 24
+						<hi rend="superscript">th</hi>
+						1861
+					</date>
+				</head>
+				<?teian-insert-start author="reviewer1" timestamp="20130302T172222+0200"?>
+				<p>As
+					we were about to
+					start this morning some blacks came by from whom we were fortunate enough
+					to get about twelve pounds of fish for a few pieces of straps and some
+					matches &amp;c this is a great treat for us as well as a valuable addition
+					to our rations.  We started at
+					<hi rend="superscript">h</hi>
+					8
+					<hi rend="superscript">m</hi>
+					15pm on our way
+					down the Creek the Blacks going in the opposite direction, little thinking
+					that in a few miles they would be able to get lots pieces for nothing
+					better than those they had obtained from us.
+				</p>
+				<?teian-insert-end?>
+			</div>
+		</body>
+	</text>
+</TEI>

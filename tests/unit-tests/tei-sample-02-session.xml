@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <teian:session xmlns:teian="http://kuberam.ro/ns/teian">
-	<teian:content-url>../tests/resources/tei-sample-01.xml</teian:content-url>
+	<teian:content-url>../tests/resources/tei-sample-02.xml</teian:content-url>
 	<teian:config-url>../config/config.xml</teian:config-url>
 	<teian:track-changes>true</teian:track-changes>
 	<teian:show-changes>true</teian:show-changes>
 	<teian:lock-content>false</teian:lock-content>
+	<teian:insert-start-pi-target></teian:insert-start-pi-target>
+	<teian:insert-end-pi-target></teian:insert-end-pi-target>
+	<teian:delete-start-pi-target></teian:delete-start-pi-target>
+	<teian:delete-end-pi-target></teian:delete-end-pi-target>	
 </teian:session>
