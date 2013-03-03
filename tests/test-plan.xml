@@ -13,7 +13,8 @@
 		<kert:result id="unfound" icon-url="" font-color="white" background-color="black" score="0">Unfound
 		</kert:result>
 		<kert:result id="undefined" icon-url="" font-color="white" background-color="black" score="0">Undefined result
-			token</kert:result>
+			token
+		</kert:result>
 		<!--end of standard results - do not remove them -->
 		<kert:result id="partial" icon-url="" font-color="white" background-color="yellow" score="0">Partial
 		</kert:result>
@@ -50,7 +51,8 @@
 		<kert:title>Rendering of XLIFF vocabulary</kert:title>
 		<kert:version>0.1</kert:version>
 		<kert:description>
-			This test is for rendering a file in XLIFF format, styled with a specialized CSS stylesheet. If the test is rendered in a styled manner and can
+			This test is for rendering a file in XLIFF format, styled with a specialized CSS stylesheet. If the
+			test is rendered in a styled manner and can
 			be edited by using the specific annotators, the test is passed.
 		</kert:description>
 		<kert:test-url>?session-url=../tests/unit-tests/xliff-sample-01-session.xml</kert:test-url>
@@ -70,7 +72,8 @@
 		<kert:title>Rendering of TEI vocabulary</kert:title>
 		<kert:version>0.1</kert:version>
 		<kert:description>
-			This test is for rendering a file in TEI format, styled with a specialized CSS stylesheet. If the test is rendered in a styled manner and can
+			This test is for rendering a file in TEI format, styled with a specialized CSS stylesheet. If the
+			test is rendered in a styled manner and can
 			be edited by using the specific annotators, the test is passed.
 		</kert:description>
 		<kert:test-url>?session-url=../tests/unit-tests/tei-sample-01-session.xml</kert:test-url>
@@ -90,7 +93,8 @@
 		<kert:title>Rendering of DITA vocabulary</kert:title>
 		<kert:version>0.1</kert:version>
 		<kert:description>
-			This test is for rendering a file in DITA format, styled with a specialized CSS stylesheet. If the test is rendered in a styled manner and can
+			This test is for rendering a file in DITA format, styled with a specialized CSS stylesheet. If the
+			test is rendered in a styled manner and can
 			be edited by using the specific annotators, the test is passed.
 		</kert:description>
 		<kert:test-url>?session-url=../tests/unit-tests/dita-sample-01-session.xml</kert:test-url>
@@ -108,9 +112,10 @@
 	<kert:test id="5">
 		<kert:author>Claudius Teodorescu</kert:author>
 		<kert:title>Rendering of XProc vocabulary</kert:title>
-		<kert:version>0.1</kert:version>
+		<kert:version>0.2</kert:version>
 		<kert:description>
-			This test is for rendering a file in XProc format, styled with a specialized CSS stylesheet. If the test is rendered in a styled manner and can
+			This test is for rendering a file in XProc format, styled with a specialized CSS stylesheet. If the
+			test is rendered in a styled manner and can
 			be edited by using the specific annotators, the test is passed.
 		</kert:description>
 		<kert:test-url>?session-url=../tests/unit-tests/xproc-sample-01-session.xml</kert:test-url>
@@ -125,7 +130,7 @@
 		<kert:type>unattended</kert:type>
 		<kert:assertion-type>assert-xml</kert:assertion-type>
 	</kert:test>
-			<kert:test id="6">
+	<kert:test id="6">
 		<kert:author>Claudius Teodorescu</kert:author>
 		<kert:title>Tokyo War Crimes</kert:title>
 		<kert:version>0.1</kert:version>
@@ -144,15 +149,37 @@
 		<kert:type>unattended</kert:type>
 		<kert:assertion-type>assert-xml</kert:assertion-type>
 	</kert:test>
+	<kert:test id="7">
+		<kert:author>Claudius Teodorescu</kert:author>
+		<kert:title>Rendering of TEI vocabulary with change tracking</kert:title>
+		<kert:version>0.1</kert:version>
+		<kert:description>
+			This test is for rendering a file in TEI format, styled with a specialized CSS stylesheet and with change tracking. If the
+			test is rendered in a styled manner and can
+			be edited by using the specific annotators, the test is passed.
+		</kert:description>
+		<kert:test-url>?session-url=../tests/unit-tests/tei-sample-02-session.xml</kert:test-url>
+		<kert:source-url></kert:source-url>
+		<kert:assertion>//result-token</kert:assertion>
+		<kert:timeout />
+		<kert:run-status timestamp="" />
+		<kert:development-status timestamp="" />
+		<kert:log />
+		<kert:loops-number />
+		<kert:total-test-time />
+		<kert:type>unattended</kert:type>
+		<kert:assertion-type>assert-xml</kert:assertion-type>
+	</kert:test>	
 	<kert:traceability-matrix />
 	<kert:test-tree>
-		<ul id="data">	
+		<ul id="data">
 			<li id="tree-1" title="Test 1">Rendering of Docbook vocabulary</li>
 			<li id="tree-3" title="Test 3">Rendering of XLIFF vocabulary</li>
 			<li id="tree-2" title="Test 2">Rendering of TEI vocabulary</li>
 			<li id="tree-4" title="Test 4">Rendering of DITA vocabulary</li>
-			<li id="tree-5" title="Test 5">Rendering of XProc vocabulary</li>		
+			<li id="tree-5" title="Test 5">Rendering of XProc vocabulary</li>
 			<li id="tree-6" title="Test 6">Tokyo War Crimes</li>
+			<li id="tree-7" title="Test 7">Rendering of TEI vocabulary with change tracking</li>
 		</ul>
 	</kert:test-tree>
 </kert:test-plan>
