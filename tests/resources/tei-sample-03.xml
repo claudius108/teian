@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+	<teiHeader>
+	</teiHeader>
+	<text>
+		<body>
+			<entry>
+				<form>
+					<orth>DAFINÁŞ</orth>
+				</form>
+				<gramGrp>
+					<pos>n</pos>
+					<gen>masculine</gen>
+				</gramGrp>
+				<sense n="1">
+					<def>(Prin sud-estul Olt.) Diminutiv al lui dafin.</def>
+				</sense>
+				<sense n="2">
+					<def>Gard viu; (regional) dafin.</def>
+				</sense>
+			</entry>
+		</body>
+	</text>
+</TEI>
