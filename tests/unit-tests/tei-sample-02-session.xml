@@ -6,9 +6,13 @@
 	<teian:show-changes>true</teian:show-changes>
 	<teian:lock-content>false</teian:lock-content>
 	<teian:user>reviewer1</teian:user>
-	<teian:user-color>pink</teian:user-color>	
+	<teian:user-color>pink</teian:user-color>
 	<teian:insert-start-pi-target></teian:insert-start-pi-target>
 	<teian:insert-end-pi-target></teian:insert-end-pi-target>
 	<teian:delete-start-pi-target></teian:delete-start-pi-target>
-	<teian:delete-end-pi-target></teian:delete-end-pi-target>	
+	<teian:delete-end-pi-target></teian:delete-end-pi-target>
+	<teian:change-authors>
+		<teian:author name="reviewer1" color="pink" />
+		<teian:author name="reviewer2" color="red" />
+	</teian:change-authors>
 </teian:session>

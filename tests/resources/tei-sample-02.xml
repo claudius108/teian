@@ -42,15 +42,18 @@
 				<hi rend="superscript">m</hi>
 				30.
 				When Wills writes times, he puts 'h' above the hour and 'm' above the
-				minutes. This could not be replicated this exactly in type.
+				minutes. This could not be replicated this
+				exactly in type.
 			</p>
 			<p>New sentences, as
 				far as they can be determined, are indicated by a leading double space.
-				Wills often did not use punctuation or beginning capitals.
+				Wills often did not use
+				punctuation or beginning capitals.
 			</p>
 			<p>Wills's crossed-out
 				words and sentences have been reinstated, and this transcript tries to
-				indicate where words were written over others
+				indicate where words were
+				written over others
 			</p>
 
 		</encodingDesc>
@@ -86,22 +89,31 @@
 					<hi rend="superscript">st</hi>
 					April 1861 in an exhausted
 					and weak state and finding that the Depôt Party left at
-					<?teian-delete-start author="reviewer1" timestamp="20130302T172240+0200"?><geogName>Cooper Creek</geogName><?teian-delete-end?>
+					<?teian-delete-start author="reviewer1" timestamp="2013-03-02T17:22:40.125Z"?>
+					<geogName>Cooper Creek</geogName><?teian-delete-end?>
 					had
 					started for the Darling with their horses and Camels fresh and in good
-					condition, deemed it useless to attempt to overtake them, having only
+					condition, deemed it useless to attempt to
+					overtake them, having only
 					two Camels, both done up, and being so weak themselves as to be unable
-					to walk more than four or five miles a day. Finding also that the provisions
-					left at the Depôt for them would scarcely take them to Meninda, started
+					to walk more than
+					four or five miles a day. Finding also that the provisions
+					left at the Depôt for them would scarcely take them to
+					Meninda, started
 					down Cooper Creek for Adelaide, via
+					<?teian-insert-start author="reviewer2" timestamp="2013-03-02T17:22:17.125Z"?>
 					<geogName ref="http://en.wikipedia.org/wiki/Mount_Hopeless_%28South_Australia%29">Mt Hopeless</geogName>
+					<?teian-insert-end?>
 					on the morning of April
 					23
-					<hi rend="superscript">rd</hi>
+					<?teian-insert-start author="reviewer2" timestamp="2013-03-02T17:22:07.125Z"?>
+					<hi rend="superscript">rd</hi><?teian-insert-end?>
 					1861, intending to follow as nearly as possible the route
-					taken by Gregory.  by so doing they hoped to be able to recruit themselves
+					taken by Gregory.  by so doing they hoped to be able to
+					recruit themselves
 					&amp; the Camels whilst sauntering slowly down the Creek and
-					to have sufficient provisions left to take them comfortably or at least
+					to have sufficient provisions left to
+					take them comfortably or at least
 					without risk to some station in South Australia.
 				</p>
 			</div>
@@ -113,19 +125,22 @@
 						1861
 					</date>
 				</head>
-				<?teian-insert-start author="reviewer1" timestamp="20130302T172222+0200"?>
+				<?teian-insert-start author="reviewer1" timestamp="2013-03-02T17:22:22.125Z"?>
 				<p>As
 					we were about to
 					start this morning some blacks came by from whom we were fortunate enough
-					to get about twelve pounds of fish for a few pieces of straps and some
-					matches &amp;c this is a great treat for us as well as a valuable addition
+					to get about twelve pounds
+					of fish for a few pieces of straps and some
+					matches &amp;c this is a great treat for us as well as a valuable
+					addition
 					to our rations.  We started at
 					<hi rend="superscript">h</hi>
 					8
 					<hi rend="superscript">m</hi>
 					15pm on our way
 					down the Creek the Blacks going in the opposite direction, little thinking
-					that in a few miles they would be able to get lots pieces for nothing
+					that in a few miles they
+					would be able to get lots pieces for nothing
 					better than those they had obtained from us.
 				</p>
 				<?teian-insert-end?>

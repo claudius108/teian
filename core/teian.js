@@ -144,7 +144,7 @@ teian.annotator = [
     }
     
     if (sessionParameters["track-changes"] == "true") {
-      teian._addChangeSummary(nodeToInsert, null);
+      teian._addChangeSummaryForExistingChange(nodeToInsert, null, 'new');
     }    
   }
 ];
@@ -223,17 +223,11 @@ teian.rejectChange = function(changeId, changeType) {
 };
 
 teian.sessionParameters = {
-  "track-changes" : "false",
-  "show-changes" : "false",
-  "lock-content" : "false",
-  "user" : "reviewer1",
-  "user-color" : "pink",
-  "track-changes-authors" : {
-    "author" : {
-      "name" : "reviewer1",
-      "color" : "pink"
-    }
-  }
+  "track-changes"	: "false",
+  "show-changes" 	: "false",
+  "lock-content" 	: "false",
+  "user" 			: "reviewer1",
+  "user-color" 		: "pink"
 };
 
 teian.source = function() {
@@ -317,14 +311,24 @@ teian._acceptOrRejectAllChanges = function(action) {
   }
 };
 
-teian._addChangeSummary = function(change, authorChangesContainer) {
+teian._addChangeSummaryForExistingChange = function(change, authorChangesContainer, changeType) {
+	//changeType is 'new'
+	var timestamp = new Date();
+	var time = timestamp.toISOString();
+	
+    if (changeType == 'existing') {
+    	time = change.getAttribute('timestamp');
+    }
+    teian._addChangeSummary(change, authorChangesContainer, time);
+}
+teian._addChangeSummary = function(change, authorChangesContainer, timestamp) {
   var sessionParameters = teian.sessionParameters;
-  var timestamp = Date.now();
   var changeId = "teian-change-" + Date.now();
   var author = sessionParameters.user;
+  author = change.getAttribute('author');
   change.setAttribute("id", changeId);
   change.setAttribute("timestamp", timestamp);
-  change.setAttribute("class", author + "_track_changes");
+  change.setAttribute("class", author + "-track-changes");
   
   var changeSummary = document.querySelector("#change-summary-template > *").cloneNode(true);  
   var changeType = ((change.nodeName == "INS") ? "Added" : "Deleted");  
@@ -378,7 +382,7 @@ teian._generateChangesSummary = function(sessionParameters, sModuleBaseURI) {
     var changeHtmlElement = changeHtmlElements[i];
     var author = changeHtmlElement.getAttribute("author");
     changeHtmlElement.setAttribute("id", "teian-change-" + i);
-    changeHtmlElement.setAttribute("class", author + "_track_changes");
+    changeHtmlElement.setAttribute("class", author + "-track-changes");
     changesAuthors[author] = 1;
   }
   
@@ -389,12 +393,12 @@ teian._generateChangesSummary = function(sessionParameters, sModuleBaseURI) {
     authorChangesContainer.setAttribute("author", author);
     var changeAuthorContainer = document.createElement("span");
     changeAuthorContainer.textContent = author;
-    changeAuthorContainer.setAttribute("style", "background-color: " + sessionParameters["user-color"] + ";");
+    changeAuthorContainer.setAttribute("style", "background-color: " + $x.xpath("simpath:instance('session')//teian:author[@name = '" + author + "']/@color")[0].value + ";");
     authorChangesContainer.appendChild(changeAuthorContainer);
     var changes = document.querySelectorAll("ins[author = '" + author + "'], del[author = '" + author + "']");
     for (var i = 0, il = changes.length; i < il; i++) {
       var change = changes[i];
-      teian._addChangeSummary(change, authorChangesContainer);
+      teian._addChangeSummaryForExistingChange(change, authorChangesContainer, 'existing');
     }
     changesContainer.appendChild(authorChangesContainer);
   }
@@ -540,6 +544,11 @@ teian._showChanges = function() {
   document.getElementById("changes-container").style.display = 'inline';
   document.styleSheets[0].deleteRule(0);
   document.styleSheets[0].insertRule("ins, del {display: inline;}", 0);
+  var changeAuthors = $x.xpath("simpath:instance('session')//teian:author");
+  for (var i = 0, il = changeAuthors.length; i < il; i++) {
+	  var changeAuthor = changeAuthors[i];
+	  document.styleSheets[0].insertRule('.' + changeAuthor.getAttribute('name') + '-track-changes {background-color: ' + changeAuthor.getAttribute('color') + ';}', 0);
+  }
 };
 
 //Initialization of the module
