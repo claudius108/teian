@@ -603,7 +603,9 @@ $(document).ready(
       // set the session parameters
       sessionParameters["track-changes"] = $x.xpath("simpath:instance('session')//teian:track-changes")[0].textContent;
       sessionParameters["show-changes"] = $x.xpath("simpath:instance('session')//teian:show-changes")[0].textContent;
-      sessionParameters["lock-content"] = $x.xpath("simpath:instance('session')//teian:show-changes")[0].textContent;
+      sessionParameters["lock-content"] = $x.xpath("simpath:instance('session')//teian:lock-content")[0].textContent;
+      sessionParameters["user"] = $x.xpath("simpath:instance('session')//teian:user")[0].textContent;
+      sessionParameters["user-color"] = $x.xpath("simpath:instance('session')//teian:user-color")[0].textContent;
       
       teian._getContent(teian.contentUrl);
 
