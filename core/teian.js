@@ -434,11 +434,13 @@ teian._getContent = function(sURI) {
     "method" : "get"
   });
   
-  var contentRootElement = $x._instances['data'].documentElement;
-  var contentRootElementClarkName = '{' + contentRootElement.namespaceURI + '}' + contentRootElement.nodeName;
+  var contentRootElement = $x.xpath("simpath:instance('data')/*")[0];
+  var contentRootElementName = teian.utils.contentRootElementName = contentRootElement.nodeName;
+  var contentRootElementClarkName = '{' + contentRootElement.namespaceURI + '}' + contentRootElementName;
   
-  var vocabularyFolder = $x.xpath("simpath:instance('config')//teian:vocabulary[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@href")[0].value;  
-  // load the CSS file
+  var vocabularyFolder = $x.xpath("simpath:instance('config')//teian:vocabulary[teian:content-root-element-name = '" + contentRootElementClarkName + "']/@href")[0].value;
+  
+  // load the CSS file specific for the vocabulary
   var fileref = document.createElement("link");
   fileref.setAttribute("rel", "stylesheet");
   fileref.setAttribute("type", "text/css");
@@ -551,7 +553,7 @@ teian._showChanges = function() {
 $(document).ready(
   function() {
     var sessionParameters = teian.sessionParameters;
-    // get the tei-ann module's base uri
+    // get the teian module's base uri
     var sDocumentURL = document.URL;
     var utils = teian.utils;
     var sModuleBaseURI = utils.baseURI;    
@@ -671,22 +673,22 @@ $(document).ready(
     	  teian._generateChangesSummary(sessionParameters, sModuleBaseURI);
       }
       
-      //get the tei-ann module's base uri
+      //get the content's root element name
       var sStandardAnnotatorIDs = "";
       var sAnnotatorIDs = "";
       var sEditableAnnotatorIDs = "";
-      var oDataRoot = document.querySelector("#teian-content > *");
-      var sDataRootPrefix = oDataRoot.prefix ? oDataRoot.prefix + ":" : "";
-      var oDataRootNodeName = oDataRoot.nodeName;
+      var contentRootElementName = utils.contentRootElementName;
 
       // generate the annotators' IDs string
-      $($x.xpath("simpath:instance('standard-annotators')//teian:annotator/@id")).each(function(index) {
-    	  sAnnotatorIDs += this.value + ' ';
-      });
+      var standardAnnotators = $x.xpath("simpath:instance('standard-annotators')//teian:annotator/@id");
+      for (var i = 0, il = standardAnnotators.length; i < il; i++) {
+    	  sAnnotatorIDs += standardAnnotators[i].value + ' ';
+      }      
       sStandardAnnotatorIDs = sAnnotatorIDs;
-      $($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator/@id")).each(function(index) {
-    	  sAnnotatorIDs += this.value + ' ';
-      });
+      var vocabularyAnnotators = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator/@id");
+      for (var i = 0, il = vocabularyAnnotators.length; i < il; i++) {
+    	  sAnnotatorIDs += vocabularyAnnotators[i].value + ' ';
+      }
 
       //generate the editable annotators' IDs string
       $($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@editable = 'true']/@name")).each(function(index) {
@@ -759,7 +761,7 @@ $(document).ready(
 			
 		      //set the possible parents names
 		      var possibleParentNames = $x.xpath("normalize-space(/teian:annotator/teian:annotator-possible-parent-element-names/text())", oAnnotator0);
-		      oHTMLAnnotator0.sPossibleParents = (possibleParentNames != "") ? ", " + possibleParentNames + "," : ", " + oDataRootNodeName + ",";
+		      oHTMLAnnotator0.sPossibleParents = (possibleParentNames != "") ? ", " + possibleParentNames + "," : ", " + contentRootElementName + ",";
 		      
 		      //set the possible preceding siblings names
 		      var possiblePrecedingSiblingNames = $x.xpath("normalize-space(/teian:annotator/teian:annotator-possible-preceding-sibling-element-names/text())", oAnnotator0);
