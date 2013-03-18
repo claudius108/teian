@@ -5,4 +5,6 @@
 	<teian:track-changes>false</teian:track-changes>
 	<teian:show-changes>false</teian:show-changes>
 	<teian:lock-content>falses</teian:lock-content>
+	<teian:user>reviewer1</teian:user>
+	<teian:user-color>pink</teian:user-color>	
 </teian:session>
