@@ -191,7 +191,8 @@ teian.goToChange = function(goToAction) {
       goToChangesSummaryIndex = lastChangesSummaryIndex;
     break;    
   }
-  teian._addClass(changeHtmlElements[goToChangesSummaryIndex], "change-selection");
+  
+  changeHtmlElements[goToChangesSummaryIndex].className += ' change-selection';
   teian._changeTrackingParameters["changes-summary-index"] = goToChangesSummaryIndex;
 };
 
@@ -339,11 +340,6 @@ teian._addChangeSummary = function(change, authorChangesContainer) {
   }  
 };
 
-teian._addClass = function(element, newClass) {
-  var currentClass = element.getAttribute("class");
-  element.setAttribute("class", currentClass + " " + newClass)
-};
-
 teian._changeTrackingParameters = {
   "insertStartPiTarget" : "teian-insert-start",
   "insertEndPiTarget" : "teian-insert-end",
@@ -426,7 +422,7 @@ teian._generateChangesSummary = function(sessionParameters, sModuleBaseURI) {
   }
   
   //initialize change selection
-  teian._addClass(changeHtmlElements[0], "change-selection");
+  changeHtmlElements[0].className += ' change-selection';
   _changeTrackingParameters["changes-summary-index"] = 0;
 };
 
