@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml" xmlns:teian="http://kuberam.ro/ns/teian" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	version="1.0">
+	<xsl:output method="xml" />
+	<xsl:variable name="changes" select="//*[local-name() = 'ins' or local-name() = 'del']" />
+	<xsl:template match="/">
+		<div class="ui-corner-all ui-helper-clearfix" id="changes-container" style="display: inline;">
+			<div id="changes-container-title">Changes</div>
+			<div id="track-changes-toolbar">
+				<button onclick="teian.acceptAllChanges();" title="Accept all changes" id="accept-all-changes-button">Accept all</button>
+				<button onclick="teian.rejectAllChanges();" title="Reject all changes" id="reject-all-changes-button">Reject all</button>
+				<br />
+				<button onclick="teian.goToChange('first');" title="First change" id="first-change-button">&lt;&lt;</button>
+				<button onclick="teian.goToChange('previous');" title="Previous change" id="previous-change-button">&lt;</button>
+				<button onclick="teian.goToChange('next');" title="Next change" id="next-change-button">&gt;</button>
+				<button onclick="teian.goToChange('last');" title="Last change" id="last-change-button">&gt;&gt;</button>
+			</div>
+			<xsl:for-each select="$changes">
+				<xsl:variable name="change" select="." />
+				<xsl:variable name="author" select="$change/@author" />
+				<div>
+					<span style="{concat('background-color: ', document('')//teian:author[@name = $author]/@color, ';')}">
+						<xsl:value-of select="$author" />
+					</span>
+					<div id="{concat('summary-teian-change-', generate-id())}" class="change-container">
+						<div class="change-summary-title">Deleted:
+							Cooper Creek 2013-03-02T17:22:40.125Z
+						</div>
+						<input type="image" onclick="teian.acceptChange('teian-change-1363686467820', 'Deleted');" title="Accept change"
+							src="../resources/images/passed.png" />
+						<input type="image" onclick="teian.rejectChange('teian-change-1363686467820', 'Deleted');" title="Reject change"
+							src="../resources/images/failed.png" />
+					</div>
+				</div>
+
+			</xsl:for-each>
+		</div>
+	</xsl:template>
+</xsl:stylesheet>

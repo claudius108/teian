@@ -231,7 +231,7 @@ teian.sessionParameters = {
 };
 
 teian.source = function() {
-  var sContent = $x.serializeToString($x.transform($x._fDocFromNode($("#teian-content > *")[0]), $x._XSLTtemplates[4]));
+  var sContent = $x.serializeToString($x.transform($x._fDocFromNode(document.querySelector("#teian-content > *")), $x._XSLTtemplates[4]));
   $("#teian-content *").remove();
   $("<pre/>").appendTo($("#teian-content")).text(sContent);
 };
@@ -393,7 +393,7 @@ teian._generateChangesSummary = function(sessionParameters, sModuleBaseURI) {
     authorChangesContainer.setAttribute("author", author);
     var changeAuthorContainer = document.createElement("span");
     changeAuthorContainer.textContent = author;
-    changeAuthorContainer.setAttribute("style", "background-color: " + $x.xpath("simpath:instance('session')//teian:author[@name = '" + author + "']/@color")[0].value + ";");
+    changeAuthorContainer.setAttribute("style", "background-color: " + $x.xpath("simpath:instance('session-parameters')//teian:author[@name = '" + author + "']/@color")[0].value + ";");
     authorChangesContainer.appendChild(changeAuthorContainer);
     var changes = document.querySelectorAll("ins[author = '" + author + "'], del[author = '" + author + "']");
     for (var i = 0, il = changes.length; i < il; i++) {
@@ -419,7 +419,13 @@ teian._generateChangesSummary = function(sessionParameters, sModuleBaseURI) {
     "resource" : sModuleBaseURI + "core/track-changes/reject-all-changes.xml",
     "mode" : "synchronous",
     "method" : "get"
-  }); 
+  });
+  $x.submission({
+	"ref" : "simpath:instance('generate-changes-summary')",
+	"resource" : sModuleBaseURI + "core/track-changes/generate-changes-summary.xml",
+	"mode" : "synchronous",
+	"method" : "get"
+  });  
   
   if (changeHtmlElementsNumber == 0) {
    return; 
@@ -497,10 +503,10 @@ teian._getContent = function(sURI) {
   if (teian.sessionParameters["track-changes"] == "true") {
     //use the vocabulary specific PIs for tracking changes
     var changeTrackingParameters = teian._changeTrackingParameters;
-    var insertStartPiTarget = $x.xpath("simpath:instance('session')//teian:insert-start-pi-target")[0].textContent;
-    var insertEndPiTarget = $x.xpath("simpath:instance('session')//teian:insert-end-pi-target")[0].textContent;
-    var deleteStartPiTarget = $x.xpath("simpath:instance('session')//teian:delete-start-pi-target")[0].textContent;
-    var deleteEndPiTarget = $x.xpath("simpath:instance('session')//teian:delete-end-pi-target")[0].textContent;    
+    var insertStartPiTarget = $x.xpath("simpath:instance('session-parameters')//teian:insert-start-pi-target")[0].textContent;
+    var insertEndPiTarget = $x.xpath("simpath:instance('session-parameters')//teian:insert-end-pi-target")[0].textContent;
+    var deleteStartPiTarget = $x.xpath("simpath:instance('session-parameters')//teian:delete-start-pi-target")[0].textContent;
+    var deleteEndPiTarget = $x.xpath("simpath:instance('session-parameters')//teian:delete-end-pi-target")[0].textContent;    
     if (insertStartPiTarget != "") {
       changeTrackingParameters.insertStartPiTarget = insertStartPiTarget;
     }
@@ -544,7 +550,7 @@ teian._showChanges = function() {
   document.getElementById("changes-container").style.display = 'inline';
   document.styleSheets[0].deleteRule(0);
   document.styleSheets[0].insertRule("ins, del {display: inline;}", 0);
-  var changeAuthors = $x.xpath("simpath:instance('session')//teian:author");
+  var changeAuthors = $x.xpath("simpath:instance('session-parameters')//teian:author");
   for (var i = 0, il = changeAuthors.length; i < il; i++) {
 	  var changeAuthor = changeAuthors[i];
 	  document.styleSheets[0].insertRule('.' + changeAuthor.getAttribute('name') + '-track-changes {background-color: ' + changeAuthor.getAttribute('color') + ';}', 0);
@@ -591,28 +597,28 @@ $(document).ready(
       
       // load the session configuration file
       $x.submission({
-        "ref" : "simpath:instance('session')",
+        "ref" : "simpath:instance('session-parameters')",
         "resource" : sessionUrl,
         "mode" : "synchronous",
         "method" : "get"
       });
       
-      teian.contentUrl = $x.xpath("simpath:instance('session')//teian:content-url")[0].textContent;
+      teian.contentUrl = $x.xpath("simpath:instance('session-parameters')//teian:content-url")[0].textContent;
       
       // load the teian configuration file
       $x.submission({
         "ref" : "simpath:instance('config')",
-        "resource" : $x.xpath("simpath:instance('session')//teian:config-url")[0].textContent,
+        "resource" : $x.xpath("simpath:instance('session-parameters')//teian:config-url")[0].textContent,
         "mode" : "synchronous",
         "method" : "get"
       });
       
       // set the session parameters
-      sessionParameters["track-changes"] = $x.xpath("simpath:instance('session')//teian:track-changes")[0].textContent;
-      sessionParameters["show-changes"] = $x.xpath("simpath:instance('session')//teian:show-changes")[0].textContent;
-      sessionParameters["lock-content"] = $x.xpath("simpath:instance('session')//teian:lock-content")[0].textContent;
-      sessionParameters["user"] = $x.xpath("simpath:instance('session')//teian:user")[0].textContent;
-      sessionParameters["user-color"] = $x.xpath("simpath:instance('session')//teian:user-color")[0].textContent;
+      sessionParameters["track-changes"] = $x.xpath("simpath:instance('session-parameters')//teian:track-changes")[0].textContent;
+      sessionParameters["show-changes"] = $x.xpath("simpath:instance('session-parameters')//teian:show-changes")[0].textContent;
+      sessionParameters["lock-content"] = $x.xpath("simpath:instance('session-parameters')//teian:lock-content")[0].textContent;
+      sessionParameters["user"] = $x.xpath("simpath:instance('session-parameters')//teian:user")[0].textContent;
+      sessionParameters["user-color"] = $x.xpath("simpath:instance('session-parameters')//teian:user-color")[0].textContent;
       
       teian._getContent(teian.contentUrl);
 
@@ -680,6 +686,12 @@ $(document).ready(
       //initialize tracking of changes
       if (sessionParameters["track-changes"] == "true") {
     	  teian._generateChangesSummary(sessionParameters, sModuleBaseURI);
+    	  var generateChangesSummaryInstance = $x._instances['generate-changes-summary'].documentElement;
+    	  generateChangesSummaryInstance.appendChild($x._instances['session-parameters'].documentElement.cloneNode(true));
+    	  var changesContainer = document.getElementById('changes-container');
+    	  changesContainer.parentNode.replaceChild($x.transform($x._fDocFromNode(document.querySelector("#teian-content > *")), $x._instances['generate-changes-summary'].documentElement).documentElement, changesContainer);
+    	  //alert($x.serializeToString($x._instances['generate-changes-summary'].documentElement));
+    	  //alert($x.serializeToString($x.transform($x._fDocFromNode(document.querySelector("#teian-content > *")), $x._instances['generate-changes-summary'].documentElement)));
       }
       
       //get the content's root element name
