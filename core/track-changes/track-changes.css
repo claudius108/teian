@@ -21,6 +21,7 @@ ins *, del * {
   width: 17%;
   border: 1px solid black; 
   font-size: 9px;
+  background-color: #ffffff;
 }
 
 #track-changes-toolbar {
