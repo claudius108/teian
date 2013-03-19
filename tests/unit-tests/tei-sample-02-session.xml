@@ -13,6 +13,6 @@
 	<teian:delete-end-pi-target></teian:delete-end-pi-target>
 	<teian:change-authors>
 		<teian:author name="reviewer1" color="pink" />
-		<teian:author name="reviewer2" color="red" />
+		<teian:author name="reviewer2" color="#D8F781" />
 	</teian:change-authors>
 </teian:session>
