@@ -3,6 +3,7 @@
 	version="1.0">
 	<xsl:output method="xml" />
 	<xsl:variable name="changes" select="//*[local-name() = 'ins' or local-name() = 'del']" />
+	<xsl:variable name="test" />
 	<xsl:template match="/">
 		<div class="ui-corner-all ui-helper-clearfix" id="changes-container" style="display: inline;">
 			<div id="changes-container-title">Changes</div>
@@ -20,32 +21,34 @@
 				<xsl:variable name="change" select="." />
 				<xsl:variable name="author" select="$change/@author" />
 				<div>
-					<div style="{concat('background-color: ', document('')//teian:author[@name = $author]/@color, ';')}" class="change-summary-author">
+					<div style="{concat('background-color: ', document('')//*[@name = $author]/@color, ';')}" class="change-summary-author">
 						<xsl:value-of select="$author" />
 					</div>
 					<div id="{concat('summary-teian-change-', generate-id())}" class="change-container">
 						<div class="change-summary-title">
 							<xsl:choose>
 								<xsl:when test="local-name($change) = 'del'">
-									<xsl:text>Deleted</xsl:text>
+									<xsl:text>Deleted </xsl:text>
+									<xsl:value-of select="local-name(document('')/*/*[5])" />
 								</xsl:when>
 								<xsl:otherwise>
 									<xsl:text>Added</xsl:text>
 								</xsl:otherwise>
 							</xsl:choose>
-							:
+							<xsl:text> on </xsl:text>
 							<xsl:value-of select="$change/@timestamp" />
 							<input style="float: right;" type="image" onclick="teian.acceptChange('teian-change-1363686467820', 'Deleted');"
 								title="Accept change" src="../resources/images/passed.png" />
 							<input style="float: right;" type="image" onclick="teian.rejectChange('teian-change-1363686467820', 'Deleted');"
 								title="Reject change" src="../resources/images/failed.png" />
-							<p />
-							Cooper Creek
+						</div>
+						<div class="change-summary-content">
+							<xsl:value-of select="$change" />
 						</div>
 					</div>
 				</div>
 
 			</xsl:for-each>
 		</div>
-	</xsl:template>
+	</xsl:template>	
 </xsl:stylesheet>

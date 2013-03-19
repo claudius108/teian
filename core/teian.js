@@ -689,8 +689,12 @@ $(document).ready(
     	  var generateChangesSummaryInstance = $x._instances['generate-changes-summary'].documentElement;
     	  generateChangesSummaryInstance.appendChild($x._instances['session-parameters'].documentElement.cloneNode(true));
     	  var changesContainer = document.getElementById('changes-container');
+    	  generateChangesSummaryInstance.querySelector("*[name = 'test']").appendChild($x._instances['session-parameters'].documentElement.childNodes[1].cloneNode(true));
+//    	  alert(generateChangesSummaryInstance.querySelector("*[name = 'test']").textContent);
+    	  //alert($x.serializeToString($x.transform($x._fDocFromNode(document.querySelector("#teian-content > *")), $x.parseFromString(a).documentElement)));
+    	  //changesContainer.parentNode.replaceChild($x.transform($x._fDocFromNode(document.querySelector("#teian-content > *")), $x.parseFromString(a).documentElement).documentElement, changesContainer);
+    	  //alert($x._instances['generate-changes-summary'].documentElement.lastElementChild);
     	  changesContainer.parentNode.replaceChild($x.transform($x._fDocFromNode(document.querySelector("#teian-content > *")), $x._instances['generate-changes-summary'].documentElement).documentElement, changesContainer);
-    	  //alert($x.serializeToString($x._instances['generate-changes-summary'].documentElement));
     	  //alert($x.serializeToString($x.transform($x._fDocFromNode(document.querySelector("#teian-content > *")), $x._instances['generate-changes-summary'].documentElement)));
       }
       

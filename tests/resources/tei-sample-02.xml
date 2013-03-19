@@ -106,8 +106,8 @@
 					<?teian-insert-end?>
 					on the morning of April
 					23
-					<?teian-insert-start author="reviewer2" timestamp="2013-03-02T17:22:07.125Z"?>
-					<hi rend="superscript">rd</hi><?teian-insert-end?>
+					<?teian-delete-start author="reviewer2" timestamp="2013-03-02T17:22:07.125Z"?>
+					<hi rend="superscript">rd</hi><?teian-delete-end?>
 					1861, intending to follow as nearly as possible the route
 					taken by Gregory.  by so doing they hoped to be able to
 					recruit themselves

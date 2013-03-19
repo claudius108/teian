@@ -32,12 +32,15 @@ ins *,del * {
 #changes-container-title {
 	text-align: center;
 	font-size: 12px;
-	color: blue;
 	font-weight: bold;
 }
 
 .change-container {
 	border-bottom: 1px solid black;
+}
+
+.change-summary-title {
+	font-style:italic;
 }
 
 .change-summary-author {
