@@ -1,40 +1,45 @@
-ins, del {
-  display: inline;
+ins,del {
+	display: inline;
 }
 
-ins, del {
-  margin-left: 1px;
-  margin-right: 1px;
+ins,del {
+	margin-left: 1px;
+	margin-right: 1px;
 }
 
-ins *, del * {
-  background-color: inherit;
+ins *,del * {
+	background-color: inherit;
 }
 
 .change-selection {
-  border: 3px solid black;  
+	border: 3px solid black;
 }
 
 #changes-container {
-  float: left;
-  margin-top: 10px;   
-  width: 17%;
-  border: 1px solid black; 
-  font-size: 9px;
-  background-color: #ffffff;
+	float: left;
+	margin-top: 10px;
+	width: 17%;
+	border: 1px solid black;
+	font-size: 9px;
+	background-color: #ffffff;
 }
 
 #track-changes-toolbar {
-  text-align: center;
+	text-align: center;
+	margin-bottom: 5px;
 }
 
 #changes-container-title {
-  text-align: center;
-  font-size: 12px;
-  color: blue;
-  font-weight: bold;
+	text-align: center;
+	font-size: 12px;
+	color: blue;
+	font-weight: bold;
 }
 
 .change-container {
-  border-bottom: 1px solid black;  
+	border-bottom: 1px solid black;
+}
+
+.change-summary-author {
+	width: 100%;
 }

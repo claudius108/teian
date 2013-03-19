@@ -16,20 +16,32 @@
 				<button onclick="teian.goToChange('last');" title="Last change" id="last-change-button">&gt;&gt;</button>
 			</div>
 			<xsl:for-each select="$changes">
+				<xsl:sort select="@timestamp" />
 				<xsl:variable name="change" select="." />
 				<xsl:variable name="author" select="$change/@author" />
 				<div>
-					<span style="{concat('background-color: ', document('')//teian:author[@name = $author]/@color, ';')}">
+					<div style="{concat('background-color: ', document('')//teian:author[@name = $author]/@color, ';')}" class="change-summary-author">
 						<xsl:value-of select="$author" />
-					</span>
+					</div>
 					<div id="{concat('summary-teian-change-', generate-id())}" class="change-container">
-						<div class="change-summary-title">Deleted:
-							Cooper Creek 2013-03-02T17:22:40.125Z
+						<div class="change-summary-title">
+							<xsl:choose>
+								<xsl:when test="local-name($change) = 'del'">
+									<xsl:text>Deleted</xsl:text>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:text>Added</xsl:text>
+								</xsl:otherwise>
+							</xsl:choose>
+							:
+							<xsl:value-of select="$change/@timestamp" />
+							<input style="float: right;" type="image" onclick="teian.acceptChange('teian-change-1363686467820', 'Deleted');"
+								title="Accept change" src="../resources/images/passed.png" />
+							<input style="float: right;" type="image" onclick="teian.rejectChange('teian-change-1363686467820', 'Deleted');"
+								title="Reject change" src="../resources/images/failed.png" />
+							<p />
+							Cooper Creek
 						</div>
-						<input type="image" onclick="teian.acceptChange('teian-change-1363686467820', 'Deleted');" title="Accept change"
-							src="../resources/images/passed.png" />
-						<input type="image" onclick="teian.rejectChange('teian-change-1363686467820', 'Deleted');" title="Reject change"
-							src="../resources/images/failed.png" />
 					</div>
 				</div>
 
