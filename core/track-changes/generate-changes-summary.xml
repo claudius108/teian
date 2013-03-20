@@ -21,11 +21,11 @@
 				<xsl:variable name="change" select="." />
 				<xsl:variable name="author" select="$change/@author" />
 				<xsl:variable name="changeId" select="$change/@id" />
-				<div>
+				<div id="summary-{$changeId}">
 					<div class="change-summary-author {concat($author, '-track-changes')}">
 						<xsl:value-of select="$author" />
 					</div>
-					<div id="{concat('summary-', $changeId)}" class="change-container">
+					<div class="change-container">
 						<div class="change-summary-title">
 							<xsl:choose>
 								<xsl:when test="local-name($change) = 'del'">
@@ -37,18 +37,17 @@
 							</xsl:choose>
 							<xsl:text> on </xsl:text>
 							<xsl:value-of select="$change/@timestamp" />
-							<input style="float: right;" type="image" onclick="teian.acceptChange('{$changeId}', 'Deleted');"
-								title="Accept change" src="../resources/images/passed.png" />
-							<input style="float: right;" type="image" onclick="teian.rejectChange('{$changeId}', 'Deleted');"
-								title="Reject change" src="../resources/images/failed.png" />
+							<input style="float: right;" type="image" onclick="teian.acceptChange('{$changeId}', 'Deleted');" title="Accept change"
+								src="../resources/images/passed.png" />
+							<input style="float: right;" type="image" onclick="teian.rejectChange('{$changeId}', 'Deleted');" title="Reject change"
+								src="../resources/images/failed.png" />
 						</div>
 						<div class="change-summary-content">
 							<xsl:value-of select="$change" />
 						</div>
 					</div>
 				</div>
-
 			</xsl:for-each>
 		</div>
-	</xsl:template>	
+	</xsl:template>
 </xsl:stylesheet>

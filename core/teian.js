@@ -340,7 +340,7 @@ teian._addChangeSummary = function(change, authorChangesContainer, timestamp) {
   if (authorChangesContainer != null) {
     authorChangesContainer.appendChild(changeSummary);   
   } else {
-    document.querySelector("div[author = '" + author + "']").appendChild(changeSummary);    
+    document.querySelector("#changes-container").appendChild(changeSummary);    
   }  
 };
 
@@ -374,34 +374,33 @@ teian._errors = [];
 
 
 teian._generateChangesSummary = function(sessionParameters, sModuleBaseURI) {
+	var currentAuthor = sessionParameters.user;
+	var _changeTrackingParameters = teian._changeTrackingParameters;
+	
+	//summarize changes for rendering them
+	var changeHtmlElements = document.getElementById("teian-content").querySelectorAll("ins, del");
+	var changeHtmlElementsNumber = changeHtmlElements.length;
+	for (var i = 0, il = changeHtmlElementsNumber; i < il; i++) {
+		var changeHtmlElement = changeHtmlElements[i];
+		var author = changeHtmlElement.getAttribute("author");
+		changeHtmlElement.setAttribute("id", "teian-change-" + Date.now() + Math.random());
+		changeHtmlElement.setAttribute("class", author + "-track-changes");
+	}
+	
 	var changesContainer = document.getElementById('changes-container');
 	changesContainer.parentNode.replaceChild($x.transform($x._fDocFromNode(document.querySelector("#teian-content > *")), $x._instances['generate-changes-summary'].documentElement).documentElement, changesContainer);
+
+	//initialize the HTML templates for rendering changes
+	document.querySelector("#insert-change-template > *").setAttribute("author", currentAuthor);
+	document.querySelector("#delete-change-template > *").setAttribute("author", currentAuthor);
 	
-  var currentAuthor = sessionParameters.user;
-  var _changeTrackingParameters = teian._changeTrackingParameters;
-  
-  //summarize changes for rendering them
-  var changeHtmlElements = document.getElementById("teian-content").querySelectorAll("ins, del");
-  var changeHtmlElementsNumber = changeHtmlElements.length;
-  for (var i = 0, il = changeHtmlElementsNumber; i < il; i++) {
-    var changeHtmlElement = changeHtmlElements[i];
-    var author = changeHtmlElement.getAttribute("author");
-    changeHtmlElement.setAttribute("id", "teian-change-" + Date.now() + Math.random());
-    //alert(changeHtmlElement.id);
-    changeHtmlElement.setAttribute("class", author + "-track-changes");
-  }
-  
-  //initialize the HTML templates for rendering changes
-  document.querySelector("#insert-change-template > *").setAttribute("author", currentAuthor);
-  document.querySelector("#delete-change-template > *").setAttribute("author", currentAuthor);
-  
-  if (changeHtmlElementsNumber == 0) {
-   return; 
-  }
-  
-  //initialize change selection
-  changeHtmlElements[0].className += ' change-selection';
-  _changeTrackingParameters["changes-summary-index"] = 0;
+	if (changeHtmlElementsNumber == 0) {
+		return;
+	}
+	
+	//initialize change selection
+	changeHtmlElements[0].className += ' change-selection';
+	_changeTrackingParameters["changes-summary-index"] = 0;
 };
 
 
