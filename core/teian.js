@@ -369,63 +369,31 @@ teian._deleteChangeSummary = function(changeId) {
 
 teian._errors = [];
 
+
+
+
+
 teian._generateChangesSummary = function(sessionParameters, sModuleBaseURI) {
+	var changesContainer = document.getElementById('changes-container');
+	changesContainer.parentNode.replaceChild($x.transform($x._fDocFromNode(document.querySelector("#teian-content > *")), $x._instances['generate-changes-summary'].documentElement).documentElement, changesContainer);
+	
   var currentAuthor = sessionParameters.user;
   var _changeTrackingParameters = teian._changeTrackingParameters;
   
   //summarize changes for rendering them
-  var changesAuthors = {};
-  changesAuthors[currentAuthor] = 1;
   var changeHtmlElements = document.getElementById("teian-content").querySelectorAll("ins, del");
   var changeHtmlElementsNumber = changeHtmlElements.length;
   for (var i = 0, il = changeHtmlElementsNumber; i < il; i++) {
     var changeHtmlElement = changeHtmlElements[i];
     var author = changeHtmlElement.getAttribute("author");
-    changeHtmlElement.setAttribute("id", "teian-change-" + i);
+    changeHtmlElement.setAttribute("id", "teian-change-" + Date.now() + Math.random());
+    //alert(changeHtmlElement.id);
     changeHtmlElement.setAttribute("class", author + "-track-changes");
-    changesAuthors[author] = 1;
-  }
-  
-  var changesContainer = document.getElementById("changes-container");
-  //output the changes
-  for (var author in changesAuthors) {
-    var authorChangesContainer = document.createElement("div");
-    authorChangesContainer.setAttribute("author", author);
-    var changeAuthorContainer = document.createElement("span");
-    changeAuthorContainer.textContent = author;
-    changeAuthorContainer.setAttribute("style", "background-color: " + $x.xpath("simpath:instance('session-parameters')//teian:author[@name = '" + author + "']/@color")[0].value + ";");
-    authorChangesContainer.appendChild(changeAuthorContainer);
-    var changes = document.querySelectorAll("ins[author = '" + author + "'], del[author = '" + author + "']");
-    for (var i = 0, il = changes.length; i < il; i++) {
-      var change = changes[i];
-      teian._addChangeSummaryForExistingChange(change, authorChangesContainer, 'existing');
-    }
-    changesContainer.appendChild(authorChangesContainer);
   }
   
   //initialize the HTML templates for rendering changes
   document.querySelector("#insert-change-template > *").setAttribute("author", currentAuthor);
   document.querySelector("#delete-change-template > *").setAttribute("author", currentAuthor);
-
-  //load XSLT stylesheets for processing changes markup
-  $x.submission({
-    "ref" : "simpath:instance('accept-all-changes')",
-    "resource" : sModuleBaseURI + "core/track-changes/accept-all-changes.xml",
-    "mode" : "synchronous",
-    "method" : "get"
-  });
-  $x.submission({
-    "ref" : "simpath:instance('reject-all-changes')",
-    "resource" : sModuleBaseURI + "core/track-changes/reject-all-changes.xml",
-    "mode" : "synchronous",
-    "method" : "get"
-  });
-  $x.submission({
-	"ref" : "simpath:instance('generate-changes-summary')",
-	"resource" : sModuleBaseURI + "core/track-changes/generate-changes-summary.xml",
-	"mode" : "synchronous",
-	"method" : "get"
-  });  
   
   if (changeHtmlElementsNumber == 0) {
    return; 
@@ -435,6 +403,14 @@ teian._generateChangesSummary = function(sessionParameters, sModuleBaseURI) {
   changeHtmlElements[0].className += ' change-selection';
   _changeTrackingParameters["changes-summary-index"] = 0;
 };
+
+
+
+
+
+
+
+
 
 teian._getContent = function(sURI) {
   $x.submission({
@@ -499,6 +475,9 @@ teian._getContent = function(sURI) {
   _errors.push($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:selection-non-empty/text()"));
   _errors.push($x.xpath("simpath:instance('vocabulary-ui-lang')//teian:non-editable-entity/text()"));
   
+  //get content
+  var content = $x._instances["data"].documentElement.cloneNode(true);
+  
   //process processing instructions for tracking changes
   if (teian.sessionParameters["track-changes"] == "true") {
     //use the vocabulary specific PIs for tracking changes
@@ -520,17 +499,38 @@ teian._getContent = function(sURI) {
         changeTrackingParameters.deleteEndPiTarget = deleteEndPiTarget;
     }
 
-    var contentAsString = $x.instance('data').source();
+    var contentAsString = $x.serializeToString(content);
     contentAsString = contentAsString.replace(new RegExp("\\?" + changeTrackingParameters.insertEndPiTarget + "\\?", "g"), "/ins")
       .replace(new RegExp("\\?" + changeTrackingParameters.deleteEndPiTarget + "\\?", "g"), "/del")
       .replace(new RegExp("(\\?" + changeTrackingParameters.insertStartPiTarget + ")([^>]*)(\\?>)", "g"), "ins xmlns=\"http://www.w3.org/1999/xhtml\"$2>")
       .replace(new RegExp("(\\?" + changeTrackingParameters.deleteStartPiTarget + ")([^>]*)(\\?)", "g"), "del xmlns=\"http://www.w3.org/1999/xhtml\"$2")
     ;
-    document.getElementById("teian-content").appendChild($x.parseFromString(contentAsString).documentElement);
-    return;
+
+    content = $x.parseFromString(contentAsString).documentElement;
+
+    //load XSLT stylesheets for processing changes markup
+    var baseURI = teian.utils.baseURI;
+    $x.submission({
+    	"ref" : "simpath:instance('accept-all-changes')",
+    	"resource" : baseURI + "core/track-changes/accept-all-changes.xml",
+    	"mode" : "synchronous",
+    	"method" : "get"
+    });
+    $x.submission({
+    	"ref" : "simpath:instance('reject-all-changes')",
+    	"resource" : baseURI + "core/track-changes/reject-all-changes.xml",
+    	"mode" : "synchronous",
+    	"method" : "get"
+    });
+    $x.submission({
+	  	"ref" : "simpath:instance('generate-changes-summary')",
+	  	"resource" : baseURI + "core/track-changes/generate-changes-summary.xml",
+	  	"mode" : "synchronous",
+	  	"method" : "get"
+    });
   }
   
-  ($x.utils.isIE) ? $("#teian-content").html($x.instance('data').source()) : $("#teian-content").append($($x._instances["data"].documentElement.cloneNode(true)));
+  document.getElementById("teian-content").appendChild(content);
 };
 
 teian._hideChanges = function() {
@@ -557,7 +557,6 @@ teian._showChanges = function() {
   }
 };
 
-//Initialization of the module
 //set the module's base URL
 (function(sModuleName, sModuleNS) {
 	var scriptUri = document.querySelector("script[src*='" + sModuleName + "']").src;
@@ -686,16 +685,6 @@ $(document).ready(
       //initialize tracking of changes
       if (sessionParameters["track-changes"] == "true") {
     	  teian._generateChangesSummary(sessionParameters, sModuleBaseURI);
-    	  var generateChangesSummaryInstance = $x._instances['generate-changes-summary'].documentElement;
-    	  generateChangesSummaryInstance.appendChild($x._instances['session-parameters'].documentElement.cloneNode(true));
-    	  var changesContainer = document.getElementById('changes-container');
-    	  generateChangesSummaryInstance.querySelector("*[name = 'test']").appendChild($x._instances['session-parameters'].documentElement.childNodes[1].cloneNode(true));
-//    	  alert(generateChangesSummaryInstance.querySelector("*[name = 'test']").textContent);
-    	  //alert($x.serializeToString($x.transform($x._fDocFromNode(document.querySelector("#teian-content > *")), $x.parseFromString(a).documentElement)));
-    	  //changesContainer.parentNode.replaceChild($x.transform($x._fDocFromNode(document.querySelector("#teian-content > *")), $x.parseFromString(a).documentElement).documentElement, changesContainer);
-    	  //alert($x._instances['generate-changes-summary'].documentElement.lastElementChild);
-    	  changesContainer.parentNode.replaceChild($x.transform($x._fDocFromNode(document.querySelector("#teian-content > *")), $x._instances['generate-changes-summary'].documentElement).documentElement, changesContainer);
-    	  //alert($x.serializeToString($x.transform($x._fDocFromNode(document.querySelector("#teian-content > *")), $x._instances['generate-changes-summary'].documentElement)));
       }
       
       //get the content's root element name
