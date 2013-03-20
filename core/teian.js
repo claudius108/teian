@@ -338,9 +338,9 @@ teian._addChangeSummary = function(change, authorChangesContainer, timestamp) {
   changeSummary.querySelectorAll("input[type = 'image']")[1].setAttribute("onclick", "teian.rejectChange('" + changeId + "', '" + changeType + "');");  
   
   if (authorChangesContainer != null) {
-    authorChangesContainer.appendChild(changeSummary);   
+	  authorChangesContainer.appendChild(changeSummary);   
   } else {
-    document.querySelector("#changes-container").appendChild(changeSummary);    
+	  document.querySelector("#changes-container").appendChild($x.transform($x._fDocFromNode(change), $x._instances['generate-change-summary'].documentElement).documentElement); 
   }  
 };
 
@@ -527,6 +527,12 @@ teian._getContent = function(sURI) {
 	  	"mode" : "synchronous",
 	  	"method" : "get"
     });
+    $x.submission({
+	  	"ref" : "simpath:instance('generate-change-summary')",
+	  	"resource" : baseURI + "core/track-changes/generate-change-summary.xml",
+	  	"mode" : "synchronous",
+	  	"method" : "get"
+    });    
   }
   
   document.getElementById("teian-content").appendChild(content);
