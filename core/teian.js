@@ -38,32 +38,34 @@ teian.annotate = function() {
 teian.annotator = [
   function(oAnnotator, sAnnotatorType, eventObject) {
 	  var utils = teian.utils;
- 
-    teian.utils.restoreSelection();
-    var oSelection = rangy.getSelection();
-    if (oSelection == "" && "insert insert-parametrized".indexOf(sAnnotatorType) == -1) {
-      alert(teian._errors[0]);
-      return;
-    }
-
-    var sOperationType = utils.sOperationType;
-    var sessionParameters = teian.sessionParameters;		
-    var userSelectedParentNode = (oSelection.anchorNode.nodeName == '#text') ? oSelection.anchorNode.parentNode : oSelection.anchorNode;
-    var userSelectedFormerParentNode = null;
-    var calculatedParentNode = null;
-    var calculatedPrecedingSiblingNode = null;
-    
-    function calculateParentNode(currentParentNode) {
-      //case when user selects outside the XML content
-      if (currentParentNode.id == 'teian-content') {
-		calculatedParentNode = currentParentNode.firstElementChild;
-		if (utils.clickY < utils.contenContainerHalfHeight) {
-		  userSelectedFormerParentNode = (calculatedParentNode.firstElementChild != null) ? calculatedParentNode.firstElementChild : null;
+	  
+	  teian.utils.restoreSelection();
+	  var oSelection = rangy.getSelection();
+	  
+	  if (oSelection == "" && "insert insert-parametrized".indexOf(sAnnotatorType) == -1) {
+		  alert(teian._errors[0]);
 		  return;
-		} else {
-		  return;
-		}
-      }
+	  }
+	  
+	  var sOperationType = utils.sOperationType;
+	  var sessionParameters = teian.sessionParameters;
+	  var userSelectedParentNode = (oSelection.anchorNode.nodeName == '#text') ? oSelection.anchorNode.parentNode : oSelection.anchorNode;
+	  var userSelectedFormerParentNode = null;
+	  var calculatedParentNode = null;
+	  var calculatedPrecedingSiblingNode = null;
+	  var trackChanges = sessionParameters["track-changes"];
+	  
+	  function calculateParentNode(currentParentNode) {
+		  //case when user selects outside the XML content
+		  if (currentParentNode.id == 'teian-content') {
+			  calculatedParentNode = currentParentNode.firstElementChild;
+			  if (utils.clickY < utils.contenContainerHalfHeight) {
+				  userSelectedFormerParentNode = (calculatedParentNode.firstElementChild != null) ? calculatedParentNode.firstElementChild : null;
+				  return;
+			  } else {
+				  return;
+			  }
+		  }
 
       //case when user selects inside the XML content
       if (oAnnotator.sPossibleParents.indexOf(", " + currentParentNode.nodeName + ",") != -1) {
@@ -110,13 +112,17 @@ teian.annotator = [
     
     var nodeToInsert = oAnnotator.oAnnotatorMarkup.cloneNode(true);
     
-    if (sessionParameters["track-changes"] == "true") {
-      var insertChangeTemplate = document.querySelector("#insert-change-template > *").cloneNode(true);
-      insertChangeTemplate.appendChild(nodeToInsert);
-      nodeToInsert = insertChangeTemplate;
+    if (trackChanges == "true") {
+        var insertChangeTemplate = $x.xpath("simpath:instance('session-parameters')//teian:template[@id = 'insert-change-template']/*")[0].cloneNode(true);
     }
     
+    //alert($x.serializeToString(nodeToInsert));
+    
     if ("insert insert-parametrized".indexOf(sAnnotatorType) != -1) {
+        if (trackChanges == "true") {
+            insertChangeTemplate.appendChild(nodeToInsert);
+            nodeToInsert = insertChangeTemplate;
+        }    	
       if (calculatedPrecedingSiblingNode == null || calculatedPrecedingSiblingNode.nextElementSibling == null) {
     	  if (calculatedParentNode.nodeName == userSelectedParentNode.nodeName) {
         	  var range = oSelection.rangeCount ? oSelection.getRangeAt(0) : null;    		  
@@ -132,7 +138,10 @@ teian.annotator = [
       }
     } else {
       if (sOperationType == 'add') {
-    	oSelection.getRangeAt(0).surroundContents(nodeToInsert);    	
+    	  oSelection.getRangeAt(0).surroundContents(nodeToInsert);
+    	  oSelection.getRangeAt(0).surroundContents(insertChangeTemplate);
+    	  //alert($x.serializeToString(insertChangeTemplate));
+          nodeToInsert = insertChangeTemplate;    	  
       } else {
 		// this gets HTML content for complex entities
 		// only have to append this content to replacing node
@@ -143,7 +152,7 @@ teian.annotator = [
       oSelection.removeAllRanges();
     }
     
-    if (sessionParameters["track-changes"] == "true") {
+    if (trackChanges == "true") {
       teian._addChangeSummaryForExistingChange(nodeToInsert, null, 'new');
     }    
   }
@@ -391,8 +400,8 @@ teian._generateChangesSummary = function(sessionParameters, sModuleBaseURI) {
 	changesContainer.parentNode.replaceChild($x.transform($x._fDocFromNode(document.querySelector("#teian-content > *")), $x._instances['generate-changes-summary'].documentElement).documentElement, changesContainer);
 
 	//initialize the HTML templates for rendering changes
-	document.querySelector("#insert-change-template > *").setAttribute("author", currentAuthor);
-	document.querySelector("#delete-change-template > *").setAttribute("author", currentAuthor);
+	$x.setvalue("simpath:instance('session-parameters')//teian:template[@id = 'insert-change-template']/*/@author", "'" + currentAuthor + "'");
+	$x.setvalue("simpath:instance('session-parameters')//teian:template[@id = 'delete-change-template']/*/@author", "'" + currentAuthor + "'");
 	
 	if (changeHtmlElementsNumber == 0) {
 		return;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<teian:session xmlns:teian="http://kuberam.ro/ns/teian">
+<teian:session xmlns:teian="http://kuberam.ro/ns/teian" xmlns="http://www.w3.org/1999/xhtml">
 	<teian:content-url>../tests/resources/tei-sample-02.xml</teian:content-url>
 	<teian:config-url>../config/config.xml</teian:config-url>
 	<teian:track-changes>true</teian:track-changes>
@@ -15,4 +15,10 @@
 		<teian:author name="reviewer1" color="pink" />
 		<teian:author name="reviewer2" color="#D8F781" />
 	</teian:change-authors>
+	<teian:template id="insert-change-template">
+		<ins author="" />
+	</teian:template>
+	<teian:template id="delete-change-template">
+		<del author=""/>
+	</teian:template>
 </teian:session>
