@@ -140,7 +140,6 @@ teian.annotator = [
       if (sOperationType == 'add') {
     	  oSelection.getRangeAt(0).surroundContents(nodeToInsert);
     	  oSelection.getRangeAt(0).surroundContents(insertChangeTemplate);
-    	  //alert($x.serializeToString(insertChangeTemplate));
           nodeToInsert = insertChangeTemplate;    	  
       } else {
 		// this gets HTML content for complex entities
@@ -223,7 +222,7 @@ teian.rejectChange = function(changeId, changeType) {
       var changeChildren = change.childNodes;
       var fragment = document.createDocumentFragment();
       for (var i = 0, il = changeChildren.length; i < il; i++) {
-	fragment.appendChild(changeChildren[i].cloneNode(true));	
+    	  fragment.appendChild(changeChildren[i].cloneNode(true));	
       }
       change.parentNode.replaceChild(fragment.cloneNode(true), change);
     break;
