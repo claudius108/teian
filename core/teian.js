@@ -11,13 +11,13 @@ teian.acceptAllChanges = function() {
 };
 
 teian.acceptChange = function(changeId, changeType) {
-  var change = document.getElementById(changeId);  
+  var change = document.getElementById(changeId);
   switch (changeType) {
     case "Added":
       var changeChildren = change.childNodes;
       var fragment = document.createDocumentFragment();
       for (var i = 0, il = changeChildren.length; i < il; i++) {
-	fragment.appendChild(changeChildren[i].cloneNode(true));	
+    	  fragment.appendChild(changeChildren[i].cloneNode(true));	
       }
       change.parentNode.replaceChild(fragment.cloneNode(true), change);      
     break;
