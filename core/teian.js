@@ -330,21 +330,6 @@ teian._addChangeSummaryForExistingChange = function(change, authorChangesContain
     teian._addChangeSummary(change, authorChangesContainer, time);
 }
 teian._addChangeSummary = function(change, authorChangesContainer, timestamp) {
-  var sessionParameters = teian.sessionParameters;
-  var changeId = "teian-change-" + Date.now();
-  var author = sessionParameters.user;
-  author = change.getAttribute('author');
-  change.setAttribute("id", changeId);
-  change.setAttribute("timestamp", timestamp);
-  change.setAttribute("class", author + "-track-changes");
-  
-  var changeSummary = document.querySelector("#change-summary-template > *").cloneNode(true);  
-  var changeType = ((change.nodeName == "INS") ? "Added" : "Deleted");  
-  changeSummary.setAttribute("id", "summary-" + changeId);
-  changeSummary.querySelector("div:first-child").textContent = changeType + ": " + change.textContent + " " + change.getAttribute("timestamp");
-  changeSummary.querySelectorAll("input[type = 'image']")[0].setAttribute("onclick", "teian.acceptChange('" + changeId + "', '" + changeType + "');");
-  changeSummary.querySelectorAll("input[type = 'image']")[1].setAttribute("onclick", "teian.rejectChange('" + changeId + "', '" + changeType + "');");  
-  
   if (authorChangesContainer != null) {
 	  authorChangesContainer.appendChild(changeSummary);   
   } else {

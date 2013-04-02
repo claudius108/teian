@@ -3,7 +3,6 @@
 	version="1.0">
 	<xsl:template name="changeSummary">
 		<xsl:param name="change" />
-		<!-- <xsl:variable name="change" select="$changeElement/*" /> -->
 		<xsl:variable name="author" select="$change//@author" />
 		<xsl:variable name="changeId" select="$change//@id" />
 		<xsl:variable name="changeType">
@@ -23,10 +22,10 @@
 			<div class="change-container">
 				<div class="change-summary-title">
 					<xsl:value-of select="concat($changeType, ' on ', $change//@timestamp)" />
-					<input style="float: right;" type="image" onclick="teian.acceptChange('{$changeId}', '{$changeType}');" title="Accept change"
-						src="../resources/images/passed.png" />
-					<input style="float: right;" type="image" onclick="teian.rejectChange('{$changeId}', '{$changeType}');" title="Reject change"
-						src="../resources/images/failed.png" />
+					<input style="float: right;" type="image" onclick="teian.acceptChange('{$changeId}', '{$changeType}');"
+						title="Accept change" src="../resources/images/passed.png" />
+					<input style="float: right;" type="image" onclick="teian.rejectChange('{$changeId}', '{$changeType}');"
+						title="Reject change" src="../resources/images/failed.png" />
 				</div>
 				<div class="change-summary-content">
 					<xsl:value-of select="$change" />
