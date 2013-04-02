@@ -564,6 +564,8 @@ teian._showChanges = function() {
 
 $(document).ready(
   function() {
+	//load the session parameters
+	  
     var sessionParameters = teian.sessionParameters;
     // get the teian module's base uri
     var sDocumentURL = document.URL;
@@ -592,14 +594,19 @@ $(document).ready(
     if (q) {
       var sessionUrl = q.substring(13);
       
-      // load the session configuration file
+      // load the external session parameters
       $x.submission({
         "ref" : "simpath:instance('session-parameters')",
         "resource" : sessionUrl,
         "mode" : "synchronous",
         "method" : "get"
       });
-      
+    } else {
+    	//load the inline session parameters
+    	
+    	
+    }
+      //alert($x.serializeToString(document.getElementById));
       teian.contentUrl = $x.xpath("simpath:instance('session-parameters')//teian:content-url")[0].textContent;
       
       // load the teian configuration file
@@ -894,7 +901,7 @@ $(document).ready(
       });
       
       document.addEventListener("kyer-model-construct-done", generateAnnotators, false);
-    }
+    
     
     //register listener for click event on #teian-content, in order to get click coordinates
     $('#teian-content').bind("click", function(eventObject) {

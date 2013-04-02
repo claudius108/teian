@@ -92,7 +92,7 @@
             </div>
         </div>-->
 <!-- 	<p><span id="label">Select your new theme:</span> <span id="themeSelection"></span></p> -->
-		<menu id="teian-vertical-menu" type="list" style="display:none" data-kyerType="vertical-menu"></menu>
+		<menu id="teian-vertical-menu" type="list" style="display: none;" data-kyerType="vertical-menu"></menu>
         <div id="teian-content" contextmenu="teian-context-menu" class="ui-corner-all ui-helper-clearfix"></div>       
         
         <div id="changes-container" class="ui-corner-all ui-helper-clearfix">
@@ -107,5 +107,28 @@
                 <button id="last-change-button" title="Last change" onclick="teian.goToChange('last');">&gt;&gt;</button>
             </div>
         </div>
+		<teian:session id="inline-session-parameters" style="display: none;">
+			<teian:content-url></teian:content-url>
+			<teian:config-url></teian:config-url>
+			<teian:track-changes>true</teian:track-changes>
+			<teian:show-changes>true</teian:show-changes>
+			<teian:lock-content>false</teian:lock-content>
+			<teian:user>reviewer1</teian:user>
+			<teian:user-color>pink</teian:user-color>
+			<teian:insert-start-pi-target>teian-insert-start</teian:insert-start-pi-target>
+			<teian:insert-end-pi-target>teian-insert-end</teian:insert-end-pi-target>
+			<teian:delete-start-pi-target>teian-delete-start</teian:delete-start-pi-target>
+			<teian:delete-end-pi-target>teian-delete-end</teian:delete-end-pi-target>
+			<teian:change-authors>
+				<teian:author name="reviewer1" color="pink" />
+				<teian:author name="reviewer2" color="#D8F781" />
+			</teian:change-authors>
+			<teian:template id="insert-change-template">
+				<ins author="" />
+			</teian:template>
+			<teian:template id="delete-change-template">
+				<del author=""/>
+			</teian:template>
+		</teian:session>        
     </body>
 </html>
