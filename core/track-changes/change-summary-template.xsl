@@ -15,7 +15,7 @@
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-		<div id="summary-{$changeId}" test="{$author}">
+		<div id="summary-{$changeId}">
 			<div class="change-summary-author {concat($author, '-track-changes')}">
 				<xsl:value-of select="$author" />
 			</div>
