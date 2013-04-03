@@ -633,7 +633,7 @@ $(document).ready(
     	
     }
       //alert($x.serializeToString(document.getElementById));
-      teian.contentUrl = $x.xpath("simpath:instance('session-parameters')//teian:content-url")[0].textContent;
+      teian.contentUrl = utils.gup('content');
       
       // load the teian configuration file
       $x.submission({

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <teian:session xmlns:teian="http://kuberam.ro/ns/teian">
-	<teian:content-url>../tests/resources/dita-sample-01.dita</teian:content-url>
 	<teian:config-url>../config/config.xml</teian:config-url>
 	<teian:track-changes>false</teian:track-changes>
 	<teian:show-changes>false</teian:show-changes>
