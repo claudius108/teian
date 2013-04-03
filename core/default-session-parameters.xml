@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <teian:session xmlns:teian="http://kuberam.ro/ns/teian" xmlns="http://www.w3.org/1999/xhtml">
 	<teian:config-url>../config/config.xml</teian:config-url>
-	<teian:track-changes>true</teian:track-changes>
-	<teian:show-changes>true</teian:show-changes>
+	<teian:track-changes>false</teian:track-changes>
+	<teian:show-changes>false</teian:show-changes>
 	<teian:lock-content>false</teian:lock-content>
 	<teian:user>reviewer1</teian:user>
 	<teian:user-color>pink</teian:user-color>

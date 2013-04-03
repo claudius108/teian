@@ -158,7 +158,7 @@
 			test is rendered in a styled manner and can
 			be edited by using the specific annotators, the test is passed.
 		</kert:description>
-		<kert:test-url>?content=../tests/resources/tei-sample-02.xml</kert:test-url>
+		<kert:test-url>?session=../tests/unit-tests/tei-sample-02-session.xml&amp;content=../tests/resources/tei-sample-02.xml</kert:test-url>
 		<kert:source-url></kert:source-url>
 		<kert:assertion>//result-token</kert:assertion>
 		<kert:timeout />
