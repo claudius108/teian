@@ -78,7 +78,7 @@ teian.annotator = [
    
     function calculatePrecedingSiblingNode(userSelectedFormerParentNode, possiblePrecedingSiblingNodesNumber, possiblePrecedingSiblingNodes) {
       var startNodeIndex = 0;
-      var middleNodeIndex;
+      var middleNodeIndex = 0;
       while (startNodeIndex <= possiblePrecedingSiblingNodesNumber) {
 		if (possiblePrecedingSiblingNodes[(middleNodeIndex = (startNodeIndex + possiblePrecedingSiblingNodesNumber) >> 1)].compareDocumentPosition(userSelectedFormerParentNode) & 4) {
 		  startNodeIndex = middleNodeIndex + 1;
@@ -112,8 +112,10 @@ teian.annotator = [
     
     var nodeToInsert = oAnnotator.oAnnotatorMarkup.cloneNode(true);
     
+    var insertChangeTemplate = null;
+    
     if (trackChanges == "true") {
-        var insertChangeTemplate = $x.xpath("simpath:instance('session-parameters')//teian:template[@id = 'insert-change-template']/*")[0].cloneNode(true);
+        insertChangeTemplate = $x.xpath("simpath:instance('session-parameters')//teian:template[@id = 'insert-change-template']/*")[0].cloneNode(true);
     }
     
     //alert($x.serializeToString(nodeToInsert));
@@ -184,11 +186,8 @@ teian.goToChange = function(goToAction) {
   var changeHtmlElements = document.querySelectorAll("ins, del");
   var lastChangesSummaryIndex = changeHtmlElements.length - 1;
   teian._removeClass(changeHtmlElements[currentChangesSummaryIndex], "change-selection");
-  var goToChangesSummaryIndex;
+  var goToChangesSummaryIndex = 0;
   switch (goToAction) {
-    case "first":
-      goToChangesSummaryIndex = 0;
-    break;
     case "previous":
       goToChangesSummaryIndex = (currentChangesSummaryIndex == 0) ? lastChangesSummaryIndex : currentChangesSummaryIndex - 1;
     break;    
@@ -302,6 +301,34 @@ teian.utils = {};
 
 teian.utils.sOperationType = "add";
 
+teian.utils.gup = function(name) {
+	name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+	var regexS = "[\\?&]"+name+"=([^&#]*)";
+    var regex = new RegExp( regexS );
+    var results = regex.exec(window.location.href);
+    if( results == null ) {
+    	return "";
+    } else {
+    	return results[1];	
+    }
+};
+
+teian.utils.saveSelection = function() {
+	//remove markers for previously saved selection
+	if (teian.utils.oSavedSelection) {
+		rangy.removeMarkers(teian.utils.oSavedSelection);
+	}
+	teian.utils.oSavedSelection = rangy.saveSelection();
+};
+
+teian.utils.restoreSelection = function() {
+	
+	if (teian.utils.oSavedSelection) {
+	  rangy.restoreSelection(teian.utils.oSavedSelection, true);
+	  teian.utils.oSavedSelection = null;
+	}
+};
+
 teian.unlock = function() {
   document.getElementById("teian-content").contentEditable = true;
 };
@@ -328,7 +355,8 @@ teian._addChangeSummaryForExistingChange = function(change, authorChangesContain
     	time = change.getAttribute('timestamp');
     }
     teian._addChangeSummary(change, authorChangesContainer, time);
-}
+};
+
 teian._addChangeSummary = function(change, authorChangesContainer, timestamp) {
   if (authorChangesContainer != null) {
 	  authorChangesContainer.appendChild(changeSummary);   
@@ -540,7 +568,7 @@ teian._hideChanges = function() {
 
 teian._removeClass = function(element, classToRemove) {
   var currentClass = element.getAttribute("class");
-  element.setAttribute("class", currentClass.replace(classToRemove, ""))
+  element.setAttribute("class", currentClass.replace(classToRemove, ""));
 };
 
 teian._showChanges = function() {
@@ -568,10 +596,8 @@ $(document).ready(
 	  
     var sessionParameters = teian.sessionParameters;
     // get the teian module's base uri
-    var sDocumentURL = document.URL;
     var utils = teian.utils;
-    var sModuleBaseURI = utils.baseURI;    
-    var _errors = teian._errors;
+    var sModuleBaseURI = utils.baseURI;
     
     // load the standard annotators
     $x.submission({
@@ -589,11 +615,10 @@ $(document).ready(
       "method" : "get"
     });
     
-    // get the content file
-    var q = document.location.search || document.location.hash;
-    if (q) {
-      var sessionUrl = q.substring(13);
-      
+    // get the session file url
+    var sessionUrl = utils.gup('session-url');
+    
+    if (sessionUrl) {
       // load the external session parameters
       $x.submission({
         "ref" : "simpath:instance('session-parameters')",
@@ -745,7 +770,6 @@ $(document).ready(
 		    if (sStandardAnnotatorIDs.indexOf(sAnnotatorId) != -1) {
 		      var oAnnotator0 = $x.xpath("simpath:instance('standard-annotators')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
 		      var oLang0 = $x.xpath("simpath:instance('standard-ui-lang')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
-		      var oLang = $(oLang0);
 		      
 		      //set the annotator title
 		      oHTMLAnnotator.attr('title', $x.xpath("/teian:annotator/teian:toolbar-button-title/text()", oLang0));
@@ -766,7 +790,6 @@ $(document).ready(
 		      var oAnnotator0 = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
 		      var oAnnotator = $(oAnnotator0);
 		      var oLang0 = $x.xpath("simpath:instance('vocabulary-ui-lang')//teian:annotator[@id = '" + sAnnotatorId + "']")[0];
-		      var oLang = $(oLang0);
 		      var sAnnotatorType = oAnnotator.attr('type-code');
 		      
 		      //set the annotator title
@@ -876,20 +899,7 @@ $(document).ready(
       utils.oSavedSelection = null;
       utils.oEntityToClear = null;
       rangy.init();
-      utils.saveSelection = function() {
-		//remove markers for previously saved selection
-		if (teian.utils.oSavedSelection) {
-		  rangy.removeMarkers(teian.utils.oSavedSelection);
-		}
-		teian.utils.oSavedSelection = rangy.saveSelection();
-      }
-      utils.restoreSelection = function() {
-		if (teian.utils.oSavedSelection) {
-		  rangy.restoreSelection(teian.utils.oSavedSelection, true);
-		  teian.utils.oSavedSelection = null;
-		}
-      }
-      
+
       //define the search results' instance
       $x.instance('search-results').load($x.parseFromString("<db />"));
       $('#teian-content').mousedown(function(event) {
