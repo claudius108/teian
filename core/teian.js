@@ -620,7 +620,7 @@ $(document).ready(
     var sessionUrl = utils.gup('session');
     
     if (sessionUrl) {
-      // load the external session parameters
+      // load the session parameters
       $x.submission({
         "ref" : "simpath:instance('session-parameters')",
         "resource" : sessionUrl,
@@ -628,11 +628,15 @@ $(document).ready(
         "method" : "get"
       });
     } else {
-    	//load the inline session parameters
-    	
-    	
+    	//load the default session parameters
+    	$x.submission({
+    		"ref" : "simpath:instance('session-parameters')",
+    		"resource" : "default-session-parameters.xml",
+    		"mode" : "synchronous",
+    		"method" : "get"
+    	});
     }
-      //alert($x.serializeToString(document.getElementById));
+
       teian.contentUrl = utils.gup('content');
       
       // load the teian configuration file

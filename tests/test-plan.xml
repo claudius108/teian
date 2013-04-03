@@ -34,7 +34,7 @@
 			the test is rendered in
 			a styled manner and can be edited by using the specific annotators, the test is passed.
 		</kert:description>
-		<kert:test-url>?session=../tests/unit-tests/docbook-sample-01-session.xml&amp;content=../tests/resources/dita-sample-01.dita</kert:test-url>
+		<kert:test-url>?content=../tests/resources/dita-sample-01.dita</kert:test-url>
 		<kert:source-url></kert:source-url>
 		<kert:assertion>//result-token</kert:assertion>
 		<kert:timeout />
@@ -55,7 +55,7 @@
 			test is rendered in a styled manner and can
 			be edited by using the specific annotators, the test is passed.
 		</kert:description>
-		<kert:test-url>?session=../tests/unit-tests/xliff-sample-01-session.xml&amp;content=../tests/resources/xliff-sample-01.xml</kert:test-url>
+		<kert:test-url>?content=../tests/resources/xliff-sample-01.xml</kert:test-url>
 		<kert:source-url></kert:source-url>
 		<kert:assertion>//result-token</kert:assertion>
 		<kert:timeout />
@@ -76,7 +76,7 @@
 			test is rendered in a styled manner and can
 			be edited by using the specific annotators, the test is passed.
 		</kert:description>
-		<kert:test-url>?session=../tests/unit-tests/tei-sample-01-session.xml&amp;content=../tests/resources/tei-sample-01.xml</kert:test-url>
+		<kert:test-url>?content=../tests/resources/tei-sample-01.xml</kert:test-url>
 		<kert:source-url></kert:source-url>
 		<kert:assertion>//result-token</kert:assertion>
 		<kert:timeout />
@@ -97,7 +97,7 @@
 			test is rendered in a styled manner and can
 			be edited by using the specific annotators, the test is passed.
 		</kert:description>
-		<kert:test-url>?session=../tests/unit-tests/dita-sample-01-session.xml&amp;content=../tests/resources/dita-sample-01.dita</kert:test-url>
+		<kert:test-url>?content=../tests/resources/dita-sample-01.dita</kert:test-url>
 		<kert:source-url></kert:source-url>
 		<kert:assertion>//result-token</kert:assertion>
 		<kert:timeout />
@@ -118,7 +118,7 @@
 			test is rendered in a styled manner and can
 			be edited by using the specific annotators, the test is passed.
 		</kert:description>
-		<kert:test-url>?session=../tests/unit-tests/xproc-sample-01-session.xml&amp;content=../tests/resources/xproc-sample-01.xml</kert:test-url>
+		<kert:test-url>?content=../tests/resources/xproc-sample-01.xml</kert:test-url>
 		<kert:source-url></kert:source-url>
 		<kert:assertion>//result-token</kert:assertion>
 		<kert:timeout />
@@ -137,7 +137,7 @@
 		<kert:description>
 			This test is for rendering Tokyo War Crimes file.
 		</kert:description>
-		<kert:test-url>?session=../tests/unit-tests/tokyo-war-crimes-session.xml&amp;content=../tests/resources/tokyo-war-crimes.xml</kert:test-url>
+		<kert:test-url>?content=../tests/resources/tokyo-war-crimes.xml</kert:test-url>
 		<kert:source-url></kert:source-url>
 		<kert:assertion>//result-token</kert:assertion>
 		<kert:timeout />
@@ -158,7 +158,7 @@
 			test is rendered in a styled manner and can
 			be edited by using the specific annotators, the test is passed.
 		</kert:description>
-		<kert:test-url>?session=../tests/unit-tests/tei-sample-02-session.xml&amp;content=../tests/resources/tei-sample-02.xml</kert:test-url>
+		<kert:test-url>?content=../tests/resources/tei-sample-02.xml</kert:test-url>
 		<kert:source-url></kert:source-url>
 		<kert:assertion>//result-token</kert:assertion>
 		<kert:timeout />
@@ -179,7 +179,7 @@
 			test is rendered in a styled manner and can
 			be edited by using the specific annotators, the test is passed.
 		</kert:description>
-		<kert:test-url>?session=../tests/unit-tests/tei-sample-03-session.xml&amp;content=../tests/resources/tei-sample-03.xml</kert:test-url>
+		<kert:test-url>?content=../tests/resources/tei-sample-03.xml</kert:test-url>
 		<kert:source-url></kert:source-url>
 		<kert:assertion>//result-token</kert:assertion>
 		<kert:timeout />

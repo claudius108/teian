@@ -106,29 +106,6 @@
                 <button id="next-change-button" title="Next change" onclick="teian.goToChange('next');">&gt;</button>
                 <button id="last-change-button" title="Last change" onclick="teian.goToChange('last');">&gt;&gt;</button>
             </div>
-        </div>
-		<teian:session id="inline-session-parameters" style="display: none;">
-			<!-- url for the default config file -->
-			<teian:config-url>../config/config.xml</teian:config-url>
-			<teian:track-changes>true</teian:track-changes>
-			<teian:show-changes>true</teian:show-changes>
-			<teian:lock-content>false</teian:lock-content>
-			<teian:user>reviewer1</teian:user>
-			<teian:user-color>pink</teian:user-color>
-			<teian:insert-start-pi-target>teian-insert-start</teian:insert-start-pi-target>
-			<teian:insert-end-pi-target>teian-insert-end</teian:insert-end-pi-target>
-			<teian:delete-start-pi-target>teian-delete-start</teian:delete-start-pi-target>
-			<teian:delete-end-pi-target>teian-delete-end</teian:delete-end-pi-target>
-			<teian:change-authors>
-				<teian:author name="reviewer1" color="pink" />
-				<teian:author name="reviewer2" color="#D8F781" />
-			</teian:change-authors>
-			<teian:template id="insert-change-template">
-				<ins author="" />
-			</teian:template>
-			<teian:template id="delete-change-template">
-				<del author=""/>
-			</teian:template>
-		</teian:session>        
+        </div>       
     </body>
 </html>
