@@ -592,12 +592,13 @@ teian._showChanges = function() {
 
 $(document).ready(
   function() {
-	//load the session parameters
-	  
-    var sessionParameters = teian.sessionParameters;
-    // get the teian module's base uri
-    var utils = teian.utils;
-    var sModuleBaseURI = utils.baseURI;
+	    var utils = teian.utils;
+	    
+	    // load the session parameters
+	    var sessionParameters = teian.sessionParameters;
+	    
+	    // get the teian module's base uri
+	    var sModuleBaseURI = utils.baseURI;
     
     // load the standard annotators
     $x.submission({
@@ -616,7 +617,7 @@ $(document).ready(
     });
     
     // get the session file url
-    var sessionUrl = utils.gup('session-url');
+    var sessionUrl = utils.gup('session');
     
     if (sessionUrl) {
       // load the external session parameters
