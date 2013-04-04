@@ -198,11 +198,11 @@
 	</kert:test>
 	<kert:test id="9">
 		<kert:author>Claudius Teodorescu</kert:author>
-		<kert:title>Missing content</kert:title>
+		<kert:title>Missing content url</kert:title>
 		<kert:version>0.1</kert:version>
 		<kert:description>
 			This test is for the non-fatal (recoverable) error that occurs when the 'content' parameter of the
-			teian main page's query string is missing. If the content is specifying that the content is missing, the test is
+			teian main page's query string is missing. If the default content is specifying that the content is missing, the test is
 			passed.
 		</kert:description>
 		<kert:test-url></kert:test-url>
@@ -217,6 +217,27 @@
 		<kert:type>unattended</kert:type>
 		<kert:assertion-type>assert-xml</kert:assertion-type>
 	</kert:test>
+	<kert:test id="10">
+		<kert:author>Claudius Teodorescu</kert:author>
+		<kert:title>Wrong content url</kert:title>
+		<kert:version>0.1</kert:version>
+		<kert:description>
+			This test is for the non-fatal (recoverable) error that occurs when the 'content' parameter of the
+			teian main page's query string is wrong. If the default content is specifying that the content is missing, the test is
+			passed.
+		</kert:description>
+		<kert:test-url>?content=../tests/resources/wrong-url.xml</kert:test-url>
+		<kert:source-url></kert:source-url>
+		<kert:assertion>//result-token</kert:assertion>
+		<kert:timeout />
+		<kert:run-status timestamp="" />
+		<kert:development-status timestamp="" />
+		<kert:log />
+		<kert:loops-number />
+		<kert:total-test-time />
+		<kert:type>unattended</kert:type>
+		<kert:assertion-type>assert-xml</kert:assertion-type>
+	</kert:test>	
 	<kert:traceability-matrix />
 	<kert:test-tree>
 		<ul id="data">
@@ -228,7 +249,8 @@
 			<li id="tree-6" title="Test 6">Tokyo War Crimes</li>
 			<li id="tree-7" title="Test 7">Rendering of TEI vocabulary with change tracking</li>
 			<li id="tree-8" title="Test 8">Rendering of TEI vocabulary, dictionary section</li>
-			<li id="tree-9" title="Test 9">Missing content</li>
+			<li id="tree-9" title="Test 9">Missing content url</li>
+			<li id="tree-10" title="Test 10">Wrong content url</li>
 		</ul>
 	</kert:test-tree>
 </kert:test-plan>
