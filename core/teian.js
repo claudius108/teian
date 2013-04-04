@@ -53,7 +53,7 @@ teian.annotator = [
 	  var userSelectedFormerParentNode = null;
 	  var calculatedParentNode = null;
 	  var calculatedPrecedingSiblingNode = null;
-	  var trackChanges = sessionParameters["track-changes"];
+	  var trackChanges = sessionParameters.trackChanges;
 	  
 	  function calculateParentNode(currentParentNode) {
 		  //case when user selects outside the XML content
@@ -182,7 +182,7 @@ teian.editEntity = function() {
 };
 	
 teian.goToChange = function(goToAction) {
-  var currentChangesSummaryIndex = teian._changeTrackingParameters["changes-summary-index"];
+  var currentChangesSummaryIndex = teian._changeTrackingParameters.changesSummaryIndex;
   var changeHtmlElements = document.querySelectorAll("ins, del");
   var lastChangesSummaryIndex = changeHtmlElements.length - 1;
   teian._removeClass(changeHtmlElements[currentChangesSummaryIndex], "change-selection");
@@ -200,7 +200,7 @@ teian.goToChange = function(goToAction) {
   }
   
   changeHtmlElements[goToChangesSummaryIndex].className += ' change-selection';
-  teian._changeTrackingParameters["changes-summary-index"] = goToChangesSummaryIndex;
+  teian._changeTrackingParameters.changesSummaryIndex = goToChangesSummaryIndex;
 };
 
 teian.lock = function() {
@@ -230,11 +230,11 @@ teian.rejectChange = function(changeId, changeType) {
 };
 
 teian.sessionParameters = {
-  "track-changes"	: "false",
-  "show-changes" 	: "false",
-  "lock-content" 	: "false",
+  "trackChanges"	: "false",
+  "showChanges" 	: "false",
+  "lockContent" 	: "false",
   "user" 			: "reviewer1",
-  "user-color" 		: "pink"
+  "userColor" 		: "pink"
 };
 
 teian.source = function() {
@@ -250,8 +250,8 @@ teian.save = function() {
   content.setAttribute("content-url", teian.contentUrl);
   var contentAsString = $x.serializeToString(content);
   alert(contentAsString);
-  if (teian.sessionParameters['track-changes'] == "true") {
-    contentAsString = teian._convertTrackChangesHtmlToPi(contentAsString);
+  if (teian.sessionParameters.trackChanges == "true") {
+    contentAsString = teian._convertHtmlWithChangeMarkupToChangePi(contentAsString);
   }
   
   //filter out HTML br elements
@@ -270,28 +270,28 @@ teian.save = function() {
 };
 
 teian.toggleViewChanges = function() {
-  //toggle view changes based upon teian.sessionParameters["show-changes"]
+  //toggle view changes based upon teian.sessionParameters.showChanges
   var sessionParameters = teian.sessionParameters;
-  if (sessionParameters["show-changes"] == "true") {
+  if (sessionParameters.showChanges == "true") {
     teian._hideChanges();
-    sessionParameters["show-changes"] = "false";
+    sessionParameters.showChanges = "false";
   } else {
     teian._showChanges();
-    sessionParameters["show-changes"] = "true";
+    sessionParameters.showChanges = "true";
   }
 };
 
 teian.toggleTrackChanges = function() {
-  //toggle track changes based upon teian.sessionParameters["track-changes"] == "true"
+  //toggle track changes based upon teian.sessionParameters.trackChanges == "true"
   var currentButton = document.getElementById("toggle-track-changes-button");
   var currentButtonText = currentButton.textContent;
   var sessionParameters = teian.sessionParameters;
-  if (sessionParameters["track-changes"] == "true") {
+  if (sessionParameters.trackChanges == "true") {
     currentButton.textContent = currentButtonText.substring(0, currentButtonText.indexOf(" ✔"));
-    sessionParameters["track-changes"] = "false";
+    sessionParameters.trackChanges = "false";
   } else {
     currentButton.textContent = currentButtonText + " ✔";
-    sessionParameters["track-changes"] = "true";
+    sessionParameters.trackChanges = "true";
   }
 };
 
@@ -366,14 +366,10 @@ teian._addChangeSummary = function(change, authorChangesContainer, timestamp) {
 };
 
 teian._changeTrackingParameters = {
-  "insertStartPiTarget" : "teian-insert-start",
-  "insertEndPiTarget" : "teian-insert-end",
-  "deleteStartPiTarget" : "teian-delete-start",
-  "deleteEndPiTarget" : "teian-delete-end",
-  "changes-summary-index" : -1
+  "changesSummaryIndex" : -1
 };
 
-teian._convertTrackChangesHtmlToPi = function(contentAsString) {
+teian._convertHtmlWithChangeMarkupToChangePi = function(contentAsString) {
   var changeTrackingParameters = teian._changeTrackingParameters;
   contentAsString = contentAsString.replace(/\/ins/g, "?" + changeTrackingParameters.insertEndPiTarget + "?")
     .replace(/\/del/g, "?" + changeTrackingParameters.deleteEndPiTarget + "?")
@@ -389,10 +385,6 @@ teian._deleteChangeSummary = function(changeId) {
 };
 
 teian._errors = [];
-
-
-
-
 
 teian._generateChangesSummary = function(sessionParameters, sModuleBaseURI) {
 	var currentAuthor = sessionParameters.user;
@@ -421,16 +413,8 @@ teian._generateChangesSummary = function(sessionParameters, sModuleBaseURI) {
 	
 	//initialize change selection
 	changeHtmlElements[0].className += ' change-selection';
-	_changeTrackingParameters["changes-summary-index"] = 0;
+	_changeTrackingParameters.changesSummaryIndex = 0;
 };
-
-
-
-
-
-
-
-
 
 teian._getContent = function(sURI) {
   $x.submission({
@@ -499,31 +483,19 @@ teian._getContent = function(sURI) {
   var content = $x._instances["data"].documentElement.cloneNode(true);
   
   //process processing instructions for tracking changes
-  if (teian.sessionParameters["track-changes"] == "true") {
+  if (teian.sessionParameters.trackChanges == "true") {
     //use the vocabulary specific PIs for tracking changes
     var changeTrackingParameters = teian._changeTrackingParameters;
-    var insertStartPiTarget = $x.xpath("simpath:instance('session-parameters')//teian:insert-start-pi-target")[0].textContent;
-    var insertEndPiTarget = $x.xpath("simpath:instance('session-parameters')//teian:insert-end-pi-target")[0].textContent;
-    var deleteStartPiTarget = $x.xpath("simpath:instance('session-parameters')//teian:delete-start-pi-target")[0].textContent;
-    var deleteEndPiTarget = $x.xpath("simpath:instance('session-parameters')//teian:delete-end-pi-target")[0].textContent;    
-    if (insertStartPiTarget != "") {
-      changeTrackingParameters.insertStartPiTarget = insertStartPiTarget;
-    }
-    if (insertEndPiTarget != "") {
-        changeTrackingParameters.insertEndPiTarget = insertEndPiTarget;
-    }
-    if (deleteStartPiTarget != "") {
-        changeTrackingParameters.deleteStartPiTarget = deleteStartPiTarget;
-    }
-    if (deleteEndPiTarget != "") {
-        changeTrackingParameters.deleteEndPiTarget = deleteEndPiTarget;
-    }
+    var insertStartPiTarget = changeTrackingParameters.insertStartPiTarget = $x.xpath("simpath:instance('session-parameters')//teian:insert-start-pi-target")[0].textContent;
+    var insertEndPiTarget = changeTrackingParameters.insertEndPiTarget = $x.xpath("simpath:instance('session-parameters')//teian:insert-end-pi-target")[0].textContent;
+    var deleteStartPiTarget = changeTrackingParameters.deleteStartPiTarget = $x.xpath("simpath:instance('session-parameters')//teian:delete-start-pi-target")[0].textContent;
+    var deleteEndPiTarget = changeTrackingParameters.deleteEndPiTarget = $x.xpath("simpath:instance('session-parameters')//teian:delete-end-pi-target")[0].textContent;    
 
     var contentAsString = $x.serializeToString(content);
-    contentAsString = contentAsString.replace(new RegExp("\\?" + changeTrackingParameters.insertEndPiTarget + "\\?", "g"), "/ins")
-      .replace(new RegExp("\\?" + changeTrackingParameters.deleteEndPiTarget + "\\?", "g"), "/del")
-      .replace(new RegExp("(\\?" + changeTrackingParameters.insertStartPiTarget + ")([^>]*)(\\?>)", "g"), "ins xmlns=\"http://www.w3.org/1999/xhtml\"$2>")
-      .replace(new RegExp("(\\?" + changeTrackingParameters.deleteStartPiTarget + ")([^>]*)(\\?)", "g"), "del xmlns=\"http://www.w3.org/1999/xhtml\"$2")
+    contentAsString = contentAsString.replace(new RegExp("\\?" + insertEndPiTarget + "\\?", "g"), "/ins")
+      .replace(new RegExp("\\?" + deleteEndPiTarget + "\\?", "g"), "/del")
+      .replace(new RegExp("(\\?" + insertStartPiTarget + ")([^>]*)(\\?>)", "g"), "ins xmlns=\"http://www.w3.org/1999/xhtml\"$2>")
+      .replace(new RegExp("(\\?" + deleteStartPiTarget + ")([^>]*)(\\?)", "g"), "del xmlns=\"http://www.w3.org/1999/xhtml\"$2")
     ;
 
     content = $x.parseFromString(contentAsString).documentElement;
@@ -648,11 +620,11 @@ $(document).ready(
       });
       
       // set the session parameters
-      sessionParameters["track-changes"] = $x.xpath("simpath:instance('session-parameters')//teian:track-changes")[0].textContent;
-      sessionParameters["show-changes"] = $x.xpath("simpath:instance('session-parameters')//teian:show-changes")[0].textContent;
-      sessionParameters["lock-content"] = $x.xpath("simpath:instance('session-parameters')//teian:lock-content")[0].textContent;
-      sessionParameters["user"] = $x.xpath("simpath:instance('session-parameters')//teian:user")[0].textContent;
-      sessionParameters["user-color"] = $x.xpath("simpath:instance('session-parameters')//teian:user-color")[0].textContent;
+      sessionParameters.trackChanges = $x.xpath("simpath:instance('session-parameters')//teian:track-changes")[0].textContent;
+      sessionParameters.showChanges = $x.xpath("simpath:instance('session-parameters')//teian:show-changes")[0].textContent;
+      sessionParameters.lockContent = $x.xpath("simpath:instance('session-parameters')//teian:lock-content")[0].textContent;
+      sessionParameters.user = $x.xpath("simpath:instance('session-parameters')//teian:user")[0].textContent;
+      sessionParameters.userColor = $x.xpath("simpath:instance('session-parameters')//teian:user-color")[0].textContent;
       
       teian._getContent(teian.contentUrl);
 
@@ -711,14 +683,14 @@ $(document).ready(
       
       
       //toggle changes
-      if (sessionParameters["show-changes"] == "true") {
+      if (sessionParameters.showChanges == "true") {
     	  teian._showChanges();
       } else {
     	  teian._hideChanges();
       }
       
       //initialize tracking of changes
-      if (sessionParameters["track-changes"] == "true") {
+      if (sessionParameters.trackChanges == "true") {
     	  teian._generateChangesSummary(sessionParameters, sModuleBaseURI);
       }
       
@@ -928,7 +900,7 @@ $(document).ready(
 
 $(window).load(function() {
 	$("#kFloadingMask").fadeOut();
-	if (teian.sessionParameters["lock-content"] == "true") {
+	if (teian.sessionParameters.lockContent == "true") {
 	  teian.lock(); 
 	} else {
 	  teian.unlock();

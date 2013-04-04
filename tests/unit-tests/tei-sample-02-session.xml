@@ -6,10 +6,10 @@
 	<teian:lock-content>false</teian:lock-content>
 	<teian:user>reviewer1</teian:user>
 	<teian:user-color>pink</teian:user-color>
-	<teian:insert-start-pi-target></teian:insert-start-pi-target>
-	<teian:insert-end-pi-target></teian:insert-end-pi-target>
-	<teian:delete-start-pi-target></teian:delete-start-pi-target>
-	<teian:delete-end-pi-target></teian:delete-end-pi-target>
+	<teian:insert-start-pi-target>teian-insert-start</teian:insert-start-pi-target>
+	<teian:insert-end-pi-target>teian-insert-end</teian:insert-end-pi-target>
+	<teian:delete-start-pi-target>teian-delete-start</teian:delete-start-pi-target>
+	<teian:delete-end-pi-target>teian-delete-end</teian:delete-end-pi-target>
 	<teian:change-authors>
 		<teian:author name="reviewer1" color="pink" />
 		<teian:author name="reviewer2" color="#D8F781" />
@@ -18,6 +18,6 @@
 		<ins author="" />
 	</teian:template>
 	<teian:template id="delete-change-template">
-		<del author=""/>
+		<del author="" />
 	</teian:template>
 </teian:session>
