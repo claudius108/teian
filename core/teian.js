@@ -229,13 +229,7 @@ teian.rejectChange = function(changeId, changeType) {
   teian._deleteChangeSummary(changeId);
 };
 
-teian.sessionParameters = {
-  "trackChanges"	: "false",
-  "showChanges" 	: "false",
-  "lockContent" 	: "false",
-  "user" 			: "reviewer1",
-  "userColor" 		: "pink"
-};
+teian.sessionParameters = {};
 
 teian.source = function() {
   var sContent = $x.serializeToString($x.transform($x._fDocFromNode(document.querySelector("#teian-content > *")), $x._XSLTtemplates[4]));
@@ -421,7 +415,15 @@ teian._getContent = function(sURI) {
     "ref" : "simpath:instance('data')",
     "resource" : sURI,
     "mode" : "synchronous",
-    "method" : "get"
+    "method" : "get",
+    "submit-error" : function() {
+    	$x.submission({
+    		"ref" : "simpath:instance('data')",
+    		"resource" : "default-content.xml",
+    		"mode" : "synchronous",
+    		"method" : "get"
+    	});
+	}
   });
   
   var contentRootElement = $x.xpath("simpath:instance('data')/*")[0];
@@ -609,7 +611,11 @@ $(document).ready(
     	});
     }
 
-      teian.contentUrl = utils.gup('content');
+      var contentUrl = utils.gup('content');
+      
+      contentUrl = (contentUrl != '') ? contentUrl : "default-content.xml";
+      
+      teian.contentUrl = contentUrl;
       
       // load the teian configuration file
       $x.submission({
