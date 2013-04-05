@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="http://127.0.0.1/js-libs/kert/resources/xsl/generate-tests-presentation.xsl"?>
 <kert:test-plan xmlns="http://www.w3.org/1999/xhtml" xmlns:kert="http://kuberam.ro/ns/kert" xml:base="../core/teian.html"
 	test-plan-version="0.4">
 	<kert:description>Test plan for teian</kert:description>
