@@ -447,22 +447,16 @@ teian._getContent = function(sURI) {
     "method" : "get"
   });
   
-  // load menus
+  // load standard menus
   $x.submission({
-	    "ref" : "simpath:instance('toolbar-menus')",
-	    "resource" : "menus/toolbar-menus.xml",
+	    "ref" : "simpath:instance('standard-menus')",
+	    "resource" : "menus/standard-menus.xml",
 	    "mode" : "synchronous",
 	    "method" : "get"
   });
   $x.submission({
-	    "ref" : "simpath:instance('context-menus')",
-	    "resource" : "menus/context-menus.xml",
-	    "mode" : "synchronous",
-	    "method" : "get"
-  });
-  $x.submission({
-	    "ref" : "simpath:instance('vertical-menus')",
-	    "resource" : vocabularyFolder + "menus/vertical-menus.xml",
+	    "ref" : "simpath:instance('vocabulary-menus')",
+	    "resource" : vocabularyFolder + "menus/vocabulary-menus.xml",
 	    "mode" : "synchronous",
 	    "method" : "get"
   });

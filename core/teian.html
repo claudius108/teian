@@ -47,9 +47,13 @@
                 <div class="loadingIndicator">Loading ...</div>
             </div>
         </div>
-        <menu id="teian-toolbar-menu" type="toolbar" style="display:none" data-kyerType="toolbar-menu"></menu>                
-
-        <menu id="teian-context-menu" type="context" style="display:none" data-kyerType="context-menu"></menu>        
+        <menu id="teian-toolbar-menu" ref="simpath:instance('standard-menus')//*[@id = 'teian-toolbar-menu']" type="toolbar" style="display:none"></menu>
+        <div id="teian-vocabulary-menu-container">
+        	<menu id="teian-vocabulary-menu" ref="simpath:instance('vocabulary-menus')/*/*[1]" style="display: none;" type="list"></menu>
+        </div>        
+        <menu id="teian-context-menu" ref="simpath:instance('standard-menus')//*[@id = 'teian-context-menu']" style="display:none" type="context"></menu>
+        <div id="teian-content" contextmenu="teian-context-menu" class="ui-corner-all ui-helper-clearfix"></div>
+        
 <!--   <div id="themes-dd-menu" class="teian-dd-menu fg-buttonset ui-helper-clearfix">
                 <button class="teian-dd-menu-button fg-button ui-state-default ui-corner-all">Themes</button>
                 <div class="teian-dd-menu-options-container">
@@ -92,8 +96,6 @@
             </div>
         </div>-->
 <!-- 	<p><span id="label">Select your new theme:</span> <span id="themeSelection"></span></p> -->
-		<menu id="teian-vertical-menu" type="list" style="display: none;" data-kyerType="vertical-menu"></menu>
-        <div id="teian-content" contextmenu="teian-context-menu" class="ui-corner-all ui-helper-clearfix"></div>       
         
         <div id="changes-container" class="ui-corner-all ui-helper-clearfix">
             <div id="changes-container-title">Changes</div>

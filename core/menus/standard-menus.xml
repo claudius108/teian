@@ -85,4 +85,8 @@
 			</li>
 		</ul>
 	</menu>
+	<menu id="teian-context-menu" type="context" style="display:none" class="showcase">
+		<command id="edit-entity-button" label="Edit" onclick="teian.editEntity();" />
+		<command id="clear-entity-button" label="Delete" onclick="teian.ui['clear-entity-dialog'].dialog('open');" />
+	</menu>
 </menu>

@@ -35,10 +35,10 @@ html>body {
 	padding: 10px;
 }
 
-#teian-vertical-menu {
+#teian-vocabulary-menu-container {
 	float: left;
 	height: 80%;
 	width: 150px;
-	font-size: 0.75em;	
+	margin-right: 5px;
 /* 	overflow-y: auto; */
 }
