@@ -734,16 +734,13 @@ $(document).ready(
 //		});
 		
 		//generate the annotators
-		var oToolbarMenuItems = $(document.querySelectorAll("menu[data-kyerType = 'toolbar-menu'] a[id]"));
-		var oVerticalMenuItems = $(document.querySelectorAll("menu[data-kyerType = 'vertical-menu'] a[id]"));
-		//var oContextMenuItems = $(document.querySelectorAll("menu[data-kyerType = 'context-menu'] a[id]"));
-		//var oTeianContextMenuItems = $(document.querySelectorAll("#teian-context-menu command[id]"));
-		var oMenuItems = oToolbarMenuItems.add(oVerticalMenuItems);
+		var oMenuItems = $(document.querySelectorAll("menu[ref] a[id]"));
 		
 		oMenuItems.each(function(index) {
 		  var oHTMLAnnotator = $(this);
 		  var oHTMLAnnotator0 = this;
 		  var sAnnotatorId = oHTMLAnnotator.attr('id');
+		  alert(sAnnotatorId);
 		  var sHTMLAnnotatorType = oHTMLAnnotator.attr('appearance');
 		  
 		  if (sAnnotatorIDs.indexOf(sAnnotatorId) != -1 && sAnnotatorId != '') {
