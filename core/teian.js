@@ -710,6 +710,10 @@ $(document).ready(
       for (var i = 0, il = vocabularyAnnotators.length; i < il; i++) {
     	  sAnnotatorIDs += vocabularyAnnotators[i].value + ' ';
       }
+      
+      if (vocabularyAnnotators.length == 0) {
+    	  document.getElementById("teian-content").style.width = '98%';
+      }
 
       //generate the editable annotators' IDs string
       $($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@editable = 'true']/@name")).each(function(index) {
