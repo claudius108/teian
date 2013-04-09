@@ -64,19 +64,19 @@
                 <div id="help-dialog-content" ref="simpath:instance('standard-ui-lang')//teian:annotator[@id = 'help-button']/teian:annotator-panel/teian:annotator-panel-element[@id = 'help-dialog-content']/text()"/>
             </div>
             <script type="text/javascript" charset="utf-8">
-		$("#help-dialog").attr('title', $x.xpath("simpath:instance('standard-ui-lang')//teian:annotator[@id = 'help-button']/teian:annotator-panel/teian:annotator-panel-title/text()"));
-		$("#help-dialog-content").load($x.xpath("simpath:instance('standard-ui-lang')//teian:annotator[@id = 'help-button']/teian:annotator-panel/teian:annotator-panel-element/@xlink:href")[0].value + ' .article, .copyright');
-		teian.ui['help-dialog'] = $("#help-dialog").dialog({
-			autoOpen: false,
-			width : 1000,
-			height : 500,
-			modal : true,
-			buttons: {
-				"Close": function() {
-					$( this ).dialog( "close" );
-				}
-			}
-		});		
+				$("#help-dialog").attr('title', $x.xpath("simpath:instance('standard-ui-lang')//teian:annotator[@id = 'help-button']/teian:annotator-panel/teian:annotator-panel-title/text()"));
+				$("#help-dialog-content").load($x.xpath("simpath:instance('standard-ui-lang')//teian:annotator[@id = 'help-button']/teian:annotator-panel/teian:annotator-panel-element/@xlink:href")[0].value + ' .article, .copyright');
+				teian.ui['help-dialog'] = $("#help-dialog").dialog({
+					autoOpen: false,
+					width : 1000,
+					height : 500,
+					modal : true,
+					buttons: {
+						"Close": function() {
+							$( this ).dialog( "close" );
+						}
+					}
+				});		
 		</script>
         </teian:annotator-panel>
     </teian:annotator>
