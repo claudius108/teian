@@ -528,7 +528,7 @@ teian._getContent = function(sURI) {
 };
 
 teian._hideChanges = function() {
-  document.getElementById("teian-content").style.width = '78%';
+  document.getElementById("teian-content").style.width = 85 + teian.utils.annotatorsToolbarWidth + '%';
   document.getElementById("changes-container").style.display = 'none';
   document.styleSheets[0].deleteRule(0);
   document.styleSheets[0].insertRule("del {display: none;}", 0);
@@ -540,7 +540,7 @@ teian._removeClass = function(element, classToRemove) {
 };
 
 teian._showChanges = function() {
-  document.getElementById("teian-content").style.width = '67%';
+  document.getElementById("teian-content").style.width = 67 + teian.utils.annotatorsToolbarWidth + '%';
   document.getElementById("changes-container").style.display = 'inline';
   document.styleSheets[0].deleteRule(0);
   document.styleSheets[0].insertRule("ins, del {display: inline;}", 0);
@@ -567,66 +567,69 @@ $(document).ready(
 	    
 	    // get the teian module's base uri
 	    var sModuleBaseURI = utils.baseURI;
-    
-    // load the standard annotators
-    $x.submission({
-      "ref" : "simpath:instance('standard-annotators')",
-      "resource" : sModuleBaseURI + "core/standard-annotators.xml",
-      "mode" : "synchronous",
-      "method" : "get"
-    });
-    
-    // load standard lang file and initialize the error messages
-    $x.submission({
-      "ref" : "simpath:instance('standard-ui-lang')",
-      "resource" : sModuleBaseURI + "config/lang/en.xml",
-      "mode" : "synchronous",
-      "method" : "get"
-    });
-    
-    // get the session file url
-    var sessionUrl = utils.gup('session');
-    
-    if (sessionUrl) {
-      // load the session parameters
-      $x.submission({
-        "ref" : "simpath:instance('session-parameters')",
-        "resource" : sessionUrl,
-        "mode" : "synchronous",
-        "method" : "get"
-      });
-    } else {
-    	//load the default session parameters
-    	$x.submission({
-    		"ref" : "simpath:instance('session-parameters')",
-    		"resource" : "default-session-parameters.xml",
-    		"mode" : "synchronous",
-    		"method" : "get"
-    	});
-    }
+	    
+	    // set the annotators toolbar width
+	    utils.annotatorsToolbarWidth = (document.getElementById("teian-vocabulary-menu").type == "list") ? 0: 20;
 
-      var contentUrl = utils.gup('content');
+	    // load the standard annotators
+	    $x.submission({
+	      "ref" : "simpath:instance('standard-annotators')",
+	      "resource" : sModuleBaseURI + "core/standard-annotators.xml",
+	      "mode" : "synchronous",
+	      "method" : "get"
+	    });
+    
+	    // load standard lang file and initialize the error messages
+	    $x.submission({
+	      "ref" : "simpath:instance('standard-ui-lang')",
+	      "resource" : sModuleBaseURI + "config/lang/en.xml",
+	      "mode" : "synchronous",
+	      "method" : "get"
+	    });
+    
+	    // get the session file url
+	    var sessionUrl = utils.gup('session');
+    
+	    if (sessionUrl) {
+	      // load the session parameters
+	      $x.submission({
+	        "ref" : "simpath:instance('session-parameters')",
+	        "resource" : sessionUrl,
+	        "mode" : "synchronous",
+	        "method" : "get"
+	      });
+	    } else {
+	    	//load the default session parameters
+	    	$x.submission({
+	    		"ref" : "simpath:instance('session-parameters')",
+	    		"resource" : "default-session-parameters.xml",
+	    		"mode" : "synchronous",
+	    		"method" : "get"
+	    	});
+	    }
+
+	      var contentUrl = utils.gup('content');
+	      
+	      contentUrl = (contentUrl != '') ? contentUrl : "default-content.xml";
+	      
+	      teian.contentUrl = contentUrl;
       
-      contentUrl = (contentUrl != '') ? contentUrl : "default-content.xml";
+	      // load the teian configuration file
+	      $x.submission({
+	        "ref" : "simpath:instance('config')",
+	        "resource" : $x.xpath("simpath:instance('session-parameters')//teian:config-url")[0].textContent,
+	        "mode" : "synchronous",
+	        "method" : "get"
+	      });
       
-      teian.contentUrl = contentUrl;
-      
-      // load the teian configuration file
-      $x.submission({
-        "ref" : "simpath:instance('config')",
-        "resource" : $x.xpath("simpath:instance('session-parameters')//teian:config-url")[0].textContent,
-        "mode" : "synchronous",
-        "method" : "get"
-      });
-      
-      // set the session parameters
-      sessionParameters.trackChanges = $x.xpath("simpath:instance('session-parameters')//teian:track-changes")[0].textContent;
-      sessionParameters.showChanges = $x.xpath("simpath:instance('session-parameters')//teian:show-changes")[0].textContent;
-      sessionParameters.lockContent = $x.xpath("simpath:instance('session-parameters')//teian:lock-content")[0].textContent;
-      sessionParameters.user = $x.xpath("simpath:instance('session-parameters')//teian:user")[0].textContent;
-      sessionParameters.userColor = $x.xpath("simpath:instance('session-parameters')//teian:user-color")[0].textContent;
-      
-      teian._getContent(teian.contentUrl);
+	      // set the session parameters
+	      sessionParameters.trackChanges = $x.xpath("simpath:instance('session-parameters')//teian:track-changes")[0].textContent;
+	      sessionParameters.showChanges = $x.xpath("simpath:instance('session-parameters')//teian:show-changes")[0].textContent;
+	      sessionParameters.lockContent = $x.xpath("simpath:instance('session-parameters')//teian:lock-content")[0].textContent;
+	      sessionParameters.user = $x.xpath("simpath:instance('session-parameters')//teian:user")[0].textContent;
+	      sessionParameters.userColor = $x.xpath("simpath:instance('session-parameters')//teian:user-color")[0].textContent;
+	      
+	      teian._getContent(teian.contentUrl);
 
 //      jsPlumb.Defaults.Container = $("#teian-content");
 //      var a = $("#a");
@@ -711,16 +714,16 @@ $(document).ready(
     	  sAnnotatorIDs += vocabularyAnnotators[i].value + ' ';
       }
       
-      if (vocabularyAnnotators.length == 0) {
-    	  document.getElementById("teian-content").style.width = '98%';
-      }
+//      if (vocabularyAnnotators.length == 0) {
+//    	  document.getElementById("teian-content").style.width = '98%';
+//      }
 
       //generate the editable annotators' IDs string
       $($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@editable = 'true']/@name")).each(function(index) {
     	  sEditableAnnotatorIDs += $(this).val() + ' ';
       });
       utils.sEditableAnnotatorIDs = sEditableAnnotatorIDs;
-      
+     
       function generateAnnotators() {
 		// themes roller
 		// load main theme
@@ -735,12 +738,11 @@ $(document).ready(
 		
 		//generate the annotators
 		var oMenuItems = $(document.querySelectorAll("menu[ref] a[id]"));
-		
+
 		oMenuItems.each(function(index) {
 		  var oHTMLAnnotator = $(this);
 		  var oHTMLAnnotator0 = this;
 		  var sAnnotatorId = oHTMLAnnotator.attr('id');
-		  alert(sAnnotatorId);
 		  var sHTMLAnnotatorType = oHTMLAnnotator.attr('appearance');
 		  
 		  if (sAnnotatorIDs.indexOf(sAnnotatorId) != -1 && sAnnotatorId != '') {

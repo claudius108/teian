@@ -25,7 +25,13 @@ html>body {
 	margin: -35px 0 0 -30px;
 }
 
+#teian-toolbar-menu {
+	position: relative;
+	z-index: 17;	
+}
+
 #teian-content {
+	position: relative;
 	float: left;
 	background-color: #ffffff;
 	margin: 10 0 0 5;
@@ -36,14 +42,11 @@ html>body {
 }
 
 #teian-vocabulary-menu {
+	position: relative;
 	float: left;
 	height: 80%;
-	width: 150px;
+/* 	width: 150px; */
 	font-size: 0.75em;
+	z-index: 10;
 /* 	overflow-y: auto; */
-}
-
-#teian-toolbar-menu {
-	position: relative;
-	z-index: 17;	
 }
