@@ -49,9 +49,25 @@
         </div>
         <menu id="teian-toolbar-menu" ref="simpath:instance('standard-menus')//*[@id = 'teian-toolbar-menu']" type="toolbar" style="display:none"></menu>
        	<menu id="teian-vocabulary-menu" ref="simpath:instance('vocabulary-menus')/*/*[1]" style="display: none;" type="list"></menu>      
-        <div id="teian-content" contextmenu="teian-context-menu" class="ui-corner-all ui-helper-clearfix"></div>
         <menu id="teian-context-menu" ref="simpath:instance('standard-menus')//*[@id = 'teian-context-menu']" style="display:none" type="context"></menu>
-                
+
+		<div id="teian-content-container">
+	        <div id="teian-content" contextmenu="teian-context-menu" class="ui-corner-all ui-helper-clearfix"></div>
+	        <div id="changes-container" class="ui-corner-all ui-helper-clearfix">
+	            <div id="changes-container-title">Changes</div>
+	            <div id="track-changes-toolbar">
+	                <button id="accept-all-changes-button" title="Accept all changes" onclick="teian.acceptAllChanges();">Accept all</button>
+	                <button id="reject-all-changes-button" title="Reject all changes" onclick="teian.rejectAllChanges();">Reject all</button>
+	                <br/>
+	                <button id="first-change-button" title="First change" onclick="teian.goToChange('first');">&lt;&lt;</button>
+	                <button id="previous-change-button" title="Previous change" onclick="teian.goToChange('previous');">&lt;</button>
+	                <button id="next-change-button" title="Next change" onclick="teian.goToChange('next');">&gt;</button>
+	                <button id="last-change-button" title="Last change" onclick="teian.goToChange('last');">&gt;&gt;</button>
+	            </div>
+	        </div>		
+		</div>
+        
+                        
 <!--   <div id="themes-dd-menu" class="teian-dd-menu fg-buttonset ui-helper-clearfix">
                 <button class="teian-dd-menu-button fg-button ui-state-default ui-corner-all">Themes</button>
                 <div class="teian-dd-menu-options-container">
@@ -93,19 +109,6 @@
                 </div>
             </div>
         </div>-->
-<!-- 	<p><span id="label">Select your new theme:</span> <span id="themeSelection"></span></p> -->
-        
-        <div id="changes-container" class="ui-corner-all ui-helper-clearfix">
-            <div id="changes-container-title">Changes</div>
-            <div id="track-changes-toolbar">
-                <button id="accept-all-changes-button" title="Accept all changes" onclick="teian.acceptAllChanges();">Accept all</button>
-                <button id="reject-all-changes-button" title="Reject all changes" onclick="teian.rejectAllChanges();">Reject all</button>
-                <br/>
-                <button id="first-change-button" title="First change" onclick="teian.goToChange('first');">&lt;&lt;</button>
-                <button id="previous-change-button" title="Previous change" onclick="teian.goToChange('previous');">&lt;</button>
-                <button id="next-change-button" title="Next change" onclick="teian.goToChange('next');">&gt;</button>
-                <button id="last-change-button" title="Last change" onclick="teian.goToChange('last');">&gt;&gt;</button>
-            </div>
-        </div>       
+<!-- 	<p><span id="label">Select your new theme:</span> <span id="themeSelection"></span></p> -->      
     </body>
 </html>

@@ -568,9 +568,6 @@ $(document).ready(
 	    // get the teian module's base uri
 	    var sModuleBaseURI = utils.baseURI;
 	    
-	    // set the annotators toolbar width
-	    utils.annotatorsToolbarWidth = (document.getElementById("teian-vocabulary-menu").type == "list") ? 0: 20;
-
 	    // load the standard annotators
 	    $x.submission({
 	      "ref" : "simpath:instance('standard-annotators')",
@@ -714,10 +711,6 @@ $(document).ready(
     	  sAnnotatorIDs += vocabularyAnnotators[i].value + ' ';
       }
       
-//      if (vocabularyAnnotators.length == 0) {
-//    	  document.getElementById("teian-content").style.width = '98%';
-//      }
-
       //generate the editable annotators' IDs string
       $($x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator[@editable = 'true']/@name")).each(function(index) {
     	  sEditableAnnotatorIDs += $(this).val() + ' ';
@@ -908,6 +901,22 @@ $(window).load(function() {
 	} else {
 	  teian.unlock();
 	}
+	
+    // calculate percentual width of annotators menu's width
+    var e = document.documentElement;
+    var b = document.getElementsByTagName('body')[0];
+    var clientWidth = window.innerWidth || e.clientWidth || b.clientWidth;
+    //var clientHeight = window.innerHeight|| e.clientHeight|| b.clientHeight;
+
+    var vocabularyAnnotators = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator/@id");
+    if (vocabularyAnnotators.length == 0) {
+  	  document.getElementById("teian-content-container").style.width = '98%';    	
+    } else {
+  	  document.getElementById("teian-content-container").style.width = 98 - (document.getElementById("teian-vocabulary-menu").offsetWidth / clientWidth * 100) + '%';
+    }	
+
+    
+    //teian.utils.contentContainerWidth = 95 - (teianVocabularyMenu.offsetWidth / clientWidth * 100);
 });
 
 // $('#themeSelection').themes();
