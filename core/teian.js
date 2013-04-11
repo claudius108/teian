@@ -528,7 +528,7 @@ teian._getContent = function(sURI) {
 };
 
 teian._hideChanges = function() {
-  document.getElementById("teian-content").style.width = 85 + teian.utils.annotatorsToolbarWidth + '%';
+  document.getElementById("teian-content").style.width = '98%';
   document.getElementById("changes-container").style.display = 'none';
   document.styleSheets[0].deleteRule(0);
   document.styleSheets[0].insertRule("del {display: none;}", 0);
@@ -540,7 +540,7 @@ teian._removeClass = function(element, classToRemove) {
 };
 
 teian._showChanges = function() {
-  document.getElementById("teian-content").style.width = 67 + teian.utils.annotatorsToolbarWidth + '%';
+  document.getElementById("teian-content").style.width = '77%';
   document.getElementById("changes-container").style.display = 'inline';
   document.styleSheets[0].deleteRule(0);
   document.styleSheets[0].insertRule("ins, del {display: inline;}", 0);
