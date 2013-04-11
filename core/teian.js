@@ -910,9 +910,11 @@ $(window).load(function() {
 
     var vocabularyAnnotators = $x.xpath("simpath:instance('vocabulary-annotators')//teian:annotator/@id");
     if (vocabularyAnnotators.length == 0) {
-  	  document.getElementById("teian-content-container").style.width = '98%';    	
+    	document.getElementById("teian-content-container").style.width = '98%';    	
     } else {
-  	  document.getElementById("teian-content-container").style.width = 98 - (document.getElementById("teian-vocabulary-menu").offsetWidth / clientWidth * 100) + '%';
+  	    var contentContainerMenuPercentilWidth = 98 - (document.getElementById("teian-vocabulary-menu").offsetWidth / clientWidth * 100);
+    	contentContainerMenuPercentilWidth = (contentContainerMenuPercentilWidth > 0) ? contentContainerMenuPercentilWidth : 98;
+    	document.getElementById("teian-content-container").style.width = contentContainerMenuPercentilWidth + '%';
     }	
 
     
