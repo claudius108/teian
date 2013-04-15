@@ -12,7 +12,7 @@
 				<p />
 				<label id="teian-search-list-label" for="teian-search-list"
 					ref="simpath:instance('vocabulary-ui-lang')//teian:common-panel[@id = 'selected-wrap-server-annotator-panel']/teian:annotator-panel-element[@id = 'teian-search-list-label']" />
-				<select id="teian-search-list" size="1" />
+				<select id="teian-search-list" size="1" style="width: 80%;" />
 			</div>
 			<script type="text/javascript" charset="utf-8">
 				document.getElementById("teian-search-string-label").textContent = $x.xpath(document.getElementById("teian-search-string-label").getAttribute('ref'))[0].textContent;
@@ -47,7 +47,7 @@
 							var oActiveAnnotator0 = document.getElementById(teian.ui.activeAnnotatorId); //oActiveAnnotator[0];
 							var searchValue = $("#teian-search-list").val() == null ? "" : $("#teian-search-list").val();
 							var attributeHoldingSearchValue = oActiveAnnotator0.oAnnotatorMarkup.attributes[0];    
-							attributeHoldingSearchValue.value = searchValue;						
+							attributeHoldingSearchValue.value = searchValue;
 							teian.annotator[0](oActiveAnnotator0, 'selected-wrap-server');
 							attributeHoldingSearchValue.value = '';
 							//reset the UI elements
@@ -531,7 +531,7 @@
 		<teian:content-model>
 			<orgName xmlns="http://www.tei-c.org/ns/1.0" key="" />
 		</teian:content-model>
-		<teian:annotator-id-service-uri>http://demoedb.richmond.edu/exist/rest/db/urbml/apps/tei/utils/teian/services/suggest.xql?type=organizations&amp;word=
+		<teian:annotator-id-service-uri>../services/  http://demoedb.richmond.edu/exist/rest/db/urbml/apps/tei/utils/teian/services/suggest.xql?type=organizations&amp;word=
 		</teian:annotator-id-service-uri>
 		<teian:annotator-possible-parent-element-names>
 			cl phr s span abbr add addrLine address author bibl biblScope corr date
