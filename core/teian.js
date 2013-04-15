@@ -46,7 +46,7 @@ teian.annotator = [
 		  alert(teian._errors[0]);
 		  return;
 	  }
-	  
+
 	  var sOperationType = utils.sOperationType;
 	  var sessionParameters = teian.sessionParameters;
 	  var userSelectedParentNode = (oSelection.anchorNode.nodeName == '#text') ? oSelection.anchorNode.parentNode : oSelection.anchorNode;
@@ -118,8 +118,6 @@ teian.annotator = [
         insertChangeTemplate = $x.xpath("simpath:instance('session-parameters')//teian:template[@id = 'insert-change-template']/*")[0].cloneNode(true);
     }
     
-    //alert($x.serializeToString(nodeToInsert));
-    
     if ("insert insert-parametrized".indexOf(sAnnotatorType) != -1) {
         if (trackChanges == "true") {
             insertChangeTemplate.appendChild(nodeToInsert);
@@ -141,8 +139,11 @@ teian.annotator = [
     } else {
       if (sOperationType == 'add') {
     	  oSelection.getRangeAt(0).surroundContents(nodeToInsert);
-    	  oSelection.getRangeAt(0).surroundContents(insertChangeTemplate);
-          nodeToInsert = insertChangeTemplate;    	  
+    	  if (trackChanges == "true") {
+    		  oSelection.getRangeAt(0).surroundContents(insertChangeTemplate);
+              nodeToInsert = insertChangeTemplate;
+    	  }
+    	  alert($x.serializeToString(nodeToInsert));  
       } else {
 		// this gets HTML content for complex entities
 		// only have to append this content to replacing node
@@ -625,7 +626,7 @@ $(document).ready(
 	      sessionParameters.lockContent = $x.xpath("simpath:instance('session-parameters')//teian:lock-content")[0].textContent;
 	      sessionParameters.user = $x.xpath("simpath:instance('session-parameters')//teian:user")[0].textContent;
 	      sessionParameters.userColor = $x.xpath("simpath:instance('session-parameters')//teian:user-color")[0].textContent;
-	      sessionParameters.serviceUri = $x.xpath("simpath:instance('session-parameters')//teian:service-uri")[0].textContent;
+	      sessionParameters.serviceUrl = $x.xpath("simpath:instance('session-parameters')//teian:service-url")[0].textContent;
 	      
 	      teian._getContent(teian.contentUrl);
 
@@ -851,7 +852,7 @@ $(document).ready(
 				  //oHTMLAnnotator0.sMainAttrName = $($x.xpath("/teian:annotator/teian:annotator-attribute/@name", oAnnotator0)[0]).val();
 				  
 				  //register the service URI
-				  oHTMLAnnotator0.sServiceURI = sessionParameters.serviceUri + '?element-name=' + $x.xpath("/teian:annotator/@name", oAnnotator0)[0].value + '&search-string=';
+				  oHTMLAnnotator0.sServiceURI = sessionParameters.serviceUrl + '?element-name=' + $x.xpath("/teian:annotator/@name", oAnnotator0)[0].value + '&search-string=';
 				  
 				  //count these annotators
 				  teian.ui['selected-wrap-server-annotators-counter'] = sAnnotatorId;
