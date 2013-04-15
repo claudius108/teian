@@ -142,8 +142,7 @@ teian.annotator = [
     	  if (trackChanges == "true") {
     		  oSelection.getRangeAt(0).surroundContents(insertChangeTemplate);
               nodeToInsert = insertChangeTemplate;
-    	  }
-    	  alert($x.serializeToString(nodeToInsert));  
+    	  } 
       } else {
 		// this gets HTML content for complex entities
 		// only have to append this content to replacing node
