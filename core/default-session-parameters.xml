@@ -20,5 +20,5 @@
 	<teian:template id="delete-change-template">
 		<del author="" />
 	</teian:template>
-	<teian:service-url>../services/search.php</teian:service-url>
+	<teian:search-service-url>../services/search.php</teian:search-service-url>
 </teian:session>

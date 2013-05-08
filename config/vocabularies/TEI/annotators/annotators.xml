@@ -23,7 +23,7 @@
 					$x.submission({
 						"ref" :
 						"simpath:instance('search-results')",
-						"resource" : $("#" + teian.ui.activeAnnotatorId)[0].sServiceURI + $("#teian-search-criterion-input").val(),
+						"resource" : $("#" + teian.ui.activeAnnotatorId)[0].searchServiceUrl + $("#teian-search-criterion-input").val(),
 						"mode" : "synchronous",
 						"method" : "get"
 					});

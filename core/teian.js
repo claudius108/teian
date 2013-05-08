@@ -625,7 +625,7 @@ $(document).ready(
 	      sessionParameters.lockContent = $x.xpath("simpath:instance('session-parameters')//teian:lock-content")[0].textContent;
 	      sessionParameters.user = $x.xpath("simpath:instance('session-parameters')//teian:user")[0].textContent;
 	      sessionParameters.userColor = $x.xpath("simpath:instance('session-parameters')//teian:user-color")[0].textContent;
-	      sessionParameters.serviceUrl = $x.xpath("simpath:instance('session-parameters')//teian:service-url")[0].textContent;
+	      sessionParameters.searchServiceUrl = $x.xpath("simpath:instance('session-parameters')//teian:search-service-url")[0].textContent;
 	      
 	      teian._getContent(teian.contentUrl);
 
@@ -851,7 +851,7 @@ $(document).ready(
 				  //oHTMLAnnotator0.sMainAttrName = $($x.xpath("/teian:annotator/teian:annotator-attribute/@name", oAnnotator0)[0]).val();
 				  
 				  //register the service URI
-				  oHTMLAnnotator0.sServiceURI = sessionParameters.serviceUrl + '?element-name=' + $x.xpath("/teian:annotator/@name", oAnnotator0)[0].value + '&search-string=';
+				  oHTMLAnnotator0.searchServiceUrl = sessionParameters.searchServiceUrl + '?element-name=' + $x.xpath("/teian:annotator/@name", oAnnotator0)[0].value + '&search-string=';
 				  
 				  //count these annotators
 				  teian.ui['selected-wrap-server-annotators-counter'] = sAnnotatorId;
