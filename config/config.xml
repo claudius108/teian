@@ -1,30 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <teian:configuration xmlns:teian="http://kuberam.ro/ns/teian">
 	<!--list of ui languages -->
-	<teian:ui-languages>
-		<teian:lang code="en-US" />
-		<teian:lang code="fr-FR" />
-	</teian:ui-languages>
-	<teian:vocabularies>
-		<teian:vocabulary href="../config/vocabularies/docbook/">
-			<teian:content-root-element-name>{http://docbook.org/ns/docbook}book</teian:content-root-element-name>
-			<teian:content-root-element-name>{http://docbook.org/ns/docbook}assembly</teian:content-root-element-name>
-			<teian:content-root-element-name>{http://docbook.org/ns/docbook}bookmap</teian:content-root-element-name>
-			<teian:content-root-element-name>{http://docbook.org/ns/docbook}topic</teian:content-root-element-name>
-			<teian:content-root-element-name>{http://docbook.org/ns/docbook}chapter</teian:content-root-element-name>
-		</teian:vocabulary>
-		<teian:vocabulary href="../config/vocabularies/TEI/">
-			<teian:content-root-element-name>{http://www.tei-c.org/ns/1.0}TEI</teian:content-root-element-name>
-			<teian:content-root-element-name>{http://www.tei-c.org/ns/1.0}tei:TEI</teian:content-root-element-name>
-		</teian:vocabulary>
-		<teian:vocabulary href="../config/vocabularies/xliff/">
-			<teian:content-root-element-name>{urn:oasis:names:tc:xliff:document:1.2}xliff</teian:content-root-element-name>
-		</teian:vocabulary>
-		<teian:vocabulary href="../config/vocabularies/dita/">
-			<teian:content-root-element-name>{http://dita.oasis-open.org/architecture/2005/}topic</teian:content-root-element-name>
-		</teian:vocabulary>
-		<teian:vocabulary href="../config/vocabularies/xproc/">
-			<teian:content-root-element-name>{http://www.w3.org/ns/xproc}p:pipeline</teian:content-root-element-name>
-		</teian:vocabulary>		
-	</teian:vocabularies>
+    <teian:ui-languages>
+        <teian:lang code="en-US"/>
+        <teian:lang code="fr-FR"/>
+    </teian:ui-languages>
+    <teian:vocabularies>
+        <teian:vocabulary href="../config/vocabularies/docbook/">
+            <teian:content-root-element-name>{http://docbook.org/ns/docbook}book</teian:content-root-element-name>
+            <teian:content-root-element-name>{http://docbook.org/ns/docbook}assembly</teian:content-root-element-name>
+            <teian:content-root-element-name>{http://docbook.org/ns/docbook}bookmap</teian:content-root-element-name>
+            <teian:content-root-element-name>{http://docbook.org/ns/docbook}topic</teian:content-root-element-name>
+            <teian:content-root-element-name>{http://docbook.org/ns/docbook}chapter</teian:content-root-element-name>
+        </teian:vocabulary>
+        <teian:vocabulary href="../config/vocabularies/TEI/">
+            <teian:content-root-element-name>{http://www.tei-c.org/ns/1.0}TEI</teian:content-root-element-name>
+            <teian:content-root-element-name>{http://www.tei-c.org/ns/1.0}tei:TEI</teian:content-root-element-name>
+            <teian:content-root-element-name>{http://danmccreary.com/richmond-web-services/ns/1.0}rws:response</teian:content-root-element-name>
+        </teian:vocabulary>
+        <teian:vocabulary href="../config/vocabularies/xliff/">
+            <teian:content-root-element-name>{urn:oasis:names:tc:xliff:document:1.2}xliff</teian:content-root-element-name>
+        </teian:vocabulary>
+        <teian:vocabulary href="../config/vocabularies/dita/">
+            <teian:content-root-element-name>{http://dita.oasis-open.org/architecture/2005/}topic</teian:content-root-element-name>
+        </teian:vocabulary>
+        <teian:vocabulary href="../config/vocabularies/xproc/">
+            <teian:content-root-element-name>{http://www.w3.org/ns/xproc}p:pipeline</teian:content-root-element-name>
+        </teian:vocabulary>
+    </teian:vocabularies>
 </teian:configuration>
