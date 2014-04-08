@@ -296,15 +296,26 @@ teian.utils = {};
 teian.utils.sOperationType = "add";
 
 teian.utils.gup = function(name) {
-	name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-	var regexS = "[\\?&]"+name+"=([^&#]*)";
-    var regex = new RegExp( regexS );
-    var results = regex.exec(window.location.href);
-    if( results == null ) {
-    	return "";
-    } else {
-    	return results[1];	
+    var queryString = location.search.substr(1);
+    var sessionParamIndex = queryString.indexOf("&session=");
+    var result = "";
+    
+    switch(name) {
+        case "session":
+            if (sessionParamIndex != -1) {
+                result = queryString.substr(sessionParamIndex + 9);
+            }
+            break;
+        case "content":
+            if (sessionParamIndex != -1) {
+                result = queryString.substring(8, sessionParamIndex - 1);
+            } else {
+                result = queryString.substr(7);
+            }
+            break;            
     }
+    
+    return result;
 };
 
 teian.utils.saveSelection = function() {
