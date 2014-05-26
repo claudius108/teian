@@ -241,6 +241,7 @@ teian.save = function() {
   var utils = teian.utils;
   utils.oSavedSelection = null;
   var content = document.querySelector('#teian-content > *').cloneNode(true);
+  //this attribute, @content-url, has to be replaced with another mechanism
   content.setAttribute("content-url", teian.contentUrl);
   var contentAsString = $x.serializeToString(content);
   alert(contentAsString);
@@ -253,7 +254,7 @@ teian.save = function() {
   $x.instance('data').load($x.parseFromString(contentAsString));
   $x.submission({
     "ref" : "simpath:instance('data')/*",
-    "resource" : utils.baseURI + "services/store.xq",
+    "resource" : teian.sessionParameters.saveServiceUrl,
     "mode" : "synchronous",
     "method" : "post",
     "simpath-submit-done" : function(xhReq) {
@@ -637,6 +638,7 @@ $(document).ready(
 	      sessionParameters.user = $x.xpath("simpath:instance('session-parameters')//teian:user")[0].textContent;
 	      sessionParameters.userColor = $x.xpath("simpath:instance('session-parameters')//teian:user-color")[0].textContent;
 	      sessionParameters.searchServiceUrl = $x.xpath("simpath:instance('session-parameters')//teian:search-service-url")[0].textContent;
+	      sessionParameters.saveServiceUrl = $x.xpath("simpath:instance('session-parameters')//teian:save-service-url")[0].textContent;
 	      
 	      teian._getContent(teian.contentUrl);
 
