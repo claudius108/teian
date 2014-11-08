@@ -339,7 +339,7 @@ teian.unlock = function() {
   document.getElementById("teian-content").contentEditable = true;
 };
 
-teian.version = "2.3.7";
+teian.version = "2.3.9";
 
 teian._acceptOrRejectAllChanges = function(action) {
   var contentNode = document.getElementById("teian-content").firstElementChild;
