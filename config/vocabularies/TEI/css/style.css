@@ -5,6 +5,10 @@
 @namespace tei url(http://www.tei-c.org/ns/1.0);
 @namespace xml url(http://www.w3.org/XML/1998/namespace);
 
+tei|text {
+	counter-reset: pb;
+}
+
 tei|text * {
 	display: inline;
 }
@@ -270,7 +274,8 @@ tei|pb {
 
 tei|pb:before {
 /*    content: "Page break: (" attr(facs) "), id='" attr(xml|id) "'"; */
-	content: "page break";
+	counter-increment: pb;
+	content: "Page " counter(pb);
 }
 
 
