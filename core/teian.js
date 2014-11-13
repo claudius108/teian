@@ -273,7 +273,6 @@ teian.save = function() {
 	// this attribute, @content-url, has to be replaced with another mechanism
 	content.setAttribute("content-url", teian.contentUrl);
 	var contentAsString = $x.serializeToString(content);
-	alert(contentAsString);
 	if (teian.sessionParameters.trackChanges == "true") {
 		contentAsString = teian
 				._convertHtmlWithChangeMarkupToChangePi(contentAsString);
