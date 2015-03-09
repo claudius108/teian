@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0">
 	<teiHeader>
+		<fileDesc>
+			<titleStmt>
+				<title>Thomas Paine: Common sense, a
+					machine-readable transcript</title>
+				<respStmt>
+					<resp>compiled by</resp>
+					<name>Jon K Adams</name>
+				</respStmt>
+			</titleStmt>
+			<publicationStmt>
+				<distributor>Oxford Text Archive</distributor>
+			</publicationStmt>
+			<sourceDesc>
+				<bibl>The complete writings of Thomas Paine, collected and edited
+					by Phillip S. Foner (New York, Citadel Press, 1945)</bibl>
+			</sourceDesc>
+		</fileDesc>
 	</teiHeader>
 	<text>
 		<body>
