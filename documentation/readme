@@ -4,6 +4,7 @@ teian can be easily extended in order to use new XML vocabularies.
 Version 2.4.0 - 2014-11-08
 1. Added unit test for TEI 'linkGrp' element.
 2. Added support for building xar.
+3. Set width of 'menu.kyer-vertical-menu' to 0px when there are no annotators.
 
 Version 2.3.9 - 2014-11-08
 Version 2.3.8 - 2014-03-14
