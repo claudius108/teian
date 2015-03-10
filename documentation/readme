@@ -1,6 +1,10 @@
 teian is a standalone, web-based annotator for texts in XML format. It works by directly annotating the respective XML file or fragment. The end user does not have to know the XML markup, but just choose the text to annotate, and select an annotator.
 teian can be easily extended in order to use new XML vocabularies.
 
+Version 2.4.0 - 2014-11-08
+1. Added unit test for TEI 'linkGrp' element.
+2. Added support for building xar.
+
 Version 2.3.9 - 2014-11-08
 Version 2.3.8 - 2014-03-14
 Version 2.3.7 - 2013-03-25
