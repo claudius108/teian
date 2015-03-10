@@ -207,13 +207,13 @@ rs {
 
 
 list {
-        background-color: yellow;
+    background-color: yellow;
 	font-size: 90%;
 }
 
 /* DISPLAY: TABLE */
 table {
-        display: table;
+    display: table;
 	border-left: 1px dotted black;
 	border-right: none;
 	border-top: none;
@@ -222,7 +222,7 @@ table {
 	margin-right: 0;
 	margin-top: 0.2em;
 	margin-bottom: 0.1em;
-        background-color: yellow;
+    background-color: yellow;
 }
 
 /* DISPLAY: TABLE-ROW */
@@ -241,19 +241,19 @@ cell {
 /* blue is reserved for regular HTML links.  Red is reserved for non-working links that need to be fixed.  */
 
 tei|hi[rend="strong"] {
-	font-weight:bold;
+	font-weight: bold;
 }
 
 tei|hi[rend="italic"] {
-	font-style:italic;
+	font-style: italic;
 }
 
 tei|hi[rend="underline"] {
-	text-decoration:underline;
+	text-decoration: underline;
 }
 
 tei|hi[rend="strikethrough"] {
-	text-decoration:line-through;
+	text-decoration: line-through;
 }
 
 tei|date {
@@ -290,8 +290,7 @@ tei|persName:after {
 
 /* glossary terms are a deep purple.  */
 tei|orgName {
- color: indigo;
-
+	color: indigo;
 }
 
 tei|orgName:after {
