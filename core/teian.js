@@ -373,7 +373,7 @@ teian.unlock = function() {
 	document.getElementById("teian-content").contentEditable = true;
 };
 
-teian.version = "2.3.9";
+teian.version = "2.4.0";
 
 teian._acceptOrRejectAllChanges = function(action) {
 	var contentNode = document.getElementById("teian-content").firstElementChild;
