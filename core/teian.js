@@ -1202,6 +1202,7 @@ $(window)
 							.xpath("simpath:instance('vocabulary-annotators')//teian:annotator/@id");
 					if (vocabularyAnnotators.length == 0) {
 						document.getElementById("teian-content-container").style.width = '98%';
+						document.querySelector("menu.kyer-vertical-menu").style.width = '0px';
 					} else {
 						var contentContainerMenuPercentilWidth = 98 - (document
 								.getElementById("teian-vocabulary-menu").offsetWidth
