@@ -44,7 +44,6 @@ tagsDecl, correction, hyphenation, interpretation, quotation, segmentation, tei|
 	padding-right: 0;
 	padding-top: 0;
 	padding-bottom: 0;
-	border-left: 1px dotted black;
 	border-right: none;
 	border-top: none;
 	border-bottom: none;
@@ -86,7 +85,6 @@ tei|text, tei|body, tei|div, div1, div2, div3, div4, div5, div6, div7, p, tei|he
 	padding-right: 0;
 	padding-top: 0;
 	padding-bottom: 0;
-	border-left: 1px dotted black;
 	border-right: none;
 	border-top: none;
 	border-bottom: none;
@@ -133,7 +131,6 @@ text head {
 	margin-bottom: 1em;
 	padding-left: 0.5em;
 	padding-right: 0.5em;
-	border: 1px dotted silver;
 }
 
 tei|div tei|head {
@@ -186,7 +183,6 @@ list {
 /* DISPLAY: TABLE */
 tei|table {
     display: table;
-	border-left: 1px dotted black;
 	border-right: none;
 	border-top: none;
 	border-bottom: none;
