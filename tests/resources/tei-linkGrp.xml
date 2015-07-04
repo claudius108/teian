@@ -3,20 +3,17 @@
 	<teiHeader>
 		<fileDesc>
 			<titleStmt>
-				<title>Thomas Paine: Common sense, a
-					machine-readable transcript
-				</title>
+				<title>Test resource for linkGrp</title>
 				<respStmt>
 					<resp>compiled by</resp>
-					<name>Jon K Adams</name>
+					<name>Claudius Teodorescu</name>
 				</respStmt>
 			</titleStmt>
 			<publicationStmt>
-				<distributor>Oxford Text Archive</distributor>
+				<distributor>Teodorescu Claudius Marian, Software Consultant</distributor>
 			</publicationStmt>
 			<sourceDesc>
-				<bibl>The complete writings of Thomas Paine, collected and edited
-					by Phillip S. Foner (New York, Citadel Press, 1945)</bibl>
+				<bibl>Test resource for linkGrp, 2015</bibl>
 			</sourceDesc>
 		</fileDesc>
 	</teiHeader>
