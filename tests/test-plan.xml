@@ -256,6 +256,25 @@
 		<kert:type>unattended</kert:type>
 		<kert:assertion-type>assert-xml</kert:assertion-type>
 	</kert:test>
+	<kert:test id="12">
+		<kert:author>Claudius Teodorescu</kert:author>
+		<kert:title>Sanskrit transliteration in TEI</kert:title>
+		<kert:version>0.1</kert:version>
+		<kert:description>
+			This test is for displaying a text in transliterated Sanskrit in TEI. If the text is displayed, the test is passed.
+		</kert:description>
+		<kert:test-url>?content=../tests/resources/charakasamhita.xml</kert:test-url>
+		<kert:source-url></kert:source-url>
+		<kert:assertion>//result-token</kert:assertion>
+		<kert:timeout />
+		<kert:run-status timestamp="" />
+		<kert:development-status timestamp="" />
+		<kert:log />
+		<kert:loops-number />
+		<kert:total-test-time />
+		<kert:type>unattended</kert:type>
+		<kert:assertion-type>assert-xml</kert:assertion-type>
+	</kert:test>	
 	<kert:traceability-matrix />
 	<kert:test-tree>
 		<ul id="data">
@@ -270,6 +289,7 @@
 			<li id="tree-9" title="Test 9">Missing content url</li>
 			<li id="tree-10" title="Test 10">Wrong content url</li>
 			<li id="tree-11" title="Test 11">External links list in TEI</li>
+			<li id="tree-12" title="Test 12">Sanskrit transliteration in TEI</li>
 		</ul>
 	</kert:test-tree>
 </kert:test-plan>
