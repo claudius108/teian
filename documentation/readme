@@ -5,6 +5,7 @@ Version 2.4.0 - 2015-03-12
 1. Added unit test for TEI 'linkGrp' element.
 2. Added support for building xar.
 3. Set width of 'menu.kyer-vertical-menu' to 0px when there are no annotators.
+4. Styled the 'linkGrp' and 'link' TEI elements. 
 
 Version 2.3.9 - 2014-11-08
 Version 2.3.8 - 2014-03-14
