@@ -34,7 +34,7 @@ titleStmt principal,
 extent,
 sourceDesc,
 encodingDesc, projectDesc, samplingDecl, editorialDecl,
-tagsDecl, correction, hyphenation, interpretation, quotation, segmentation {
+tagsDecl, correction, hyphenation, interpretation, quotation, segmentation, tei|l {
 	display: block; 
 	margin-left: 1em;
 	margin-right: 0;
@@ -76,7 +76,7 @@ interpretation p, tagUsage {
 }
 
 /* DISPLAY: BLOCK */
-tei|text, tei|body, div0, div1, div2, div3, div4, div5, div6, div7, p, head, list {
+tei|text, tei|body, tei|div, div1, div2, div3, div4, div5, div6, div7, p, tei|head, list {
 	display: block; 
 	margin-left: 1em;
 	margin-right: 0;
@@ -122,34 +122,12 @@ item {
 	border: none;
 }
 
-div0, div1, div2, div3, div4, div5, div6 {
+tei|div, div1, div2, div3, div4, div5, div6 {
 	color: black;
 	margin-right: 0.2em;
 }
 
-div0 {
-	border: #330033 solid 2px;
-}
-
-div1 {
-	border: maroon solid 2px;
-}
-
-div2 {
-	border: purple solid 2px;
-}
-
-div3 {
-	border: green solid 2px;
-}
-
-div4 {
-	border: red solid 2px;
-	background-color: silver;
-}
-
 text head {
-	color: white;
 	background-color: transparent;
 	margin-top: 1em;
 	margin-bottom: 1em;
@@ -158,9 +136,8 @@ text head {
 	border: 1px dotted silver;
 }
 
-div0 head {
+tei|div tei|head {
 	font-size: 200%;
-	background-color: #330033;
 }
 
 div1 head {
@@ -207,7 +184,7 @@ list {
 }
 
 /* DISPLAY: TABLE */
-table {
+tei|table {
     display: table;
 	border-left: 1px dotted black;
 	border-right: none;
