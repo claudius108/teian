@@ -15,7 +15,6 @@ tei|text * {
 /* ANY INSTRUCTIONS TO DE INSERTED BELOW THIS COMMENT */
 
 /* DISPLAY: BLOCK */
-/*teiHeader,*/
 fileDesc,
 publicationStmt,
 publicationStmt authority,
@@ -54,11 +53,7 @@ tagsDecl, correction, hyphenation, interpretation, quotation, segmentation {
 	color: black;
 }
 
-tei|teiHeader {
-	/*color: black;
-	font-family: Courier, monospace;
-	/\* background-color: #cce6f3; *\/
-	background-color: #D8F781;*/
+tei|teiHeader, tei|teiHeader * {
 	display: none;
 }
 
@@ -81,7 +76,7 @@ interpretation p, tagUsage {
 }
 
 /* DISPLAY: BLOCK */
-text, body, div0, div1, div2, div3, div4, div5, div6, div7, p, head, list {
+tei|text, tei|body, div0, div1, div2, div3, div4, div5, div6, div7, p, head, list {
 	display: block; 
 	margin-left: 1em;
 	margin-right: 0;
@@ -100,7 +95,7 @@ text, body, div0, div1, div2, div3, div4, div5, div6, div7, p, head, list {
 	color: black;
 }
 
-text {
+tei|text {
 	color: black;
 	background-color: white;
 	font-family: Arial, Helvetica, sans-serif;
@@ -334,4 +329,13 @@ tei|q:after {
 
 tei|stage {
     font-style: italic;
+}
+
+tei|linkGrp * {
+	display: block;
+	margin-bottom: 5px;
+}
+
+tei|link:before {
+	content: attr(target);
 }
