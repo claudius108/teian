@@ -1,0 +1,1 @@
+ teian is a standalone, web-based annotator for texts in XML format. It works by directly annotating the respective XML file or fragment. The end user does not have to know the XML markup, but just choose the text to annotate, and select an annotator.
