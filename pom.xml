@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>teian</artifactId>
-	<version>2.4.1</version>
+	<version>2.4.2</version>
 	<packaging>pom</packaging>
 	<name>teian</name>
 
@@ -19,7 +19,7 @@
 	</prerequisites>
 
 	<properties>
-		<mavenVersion>3.1.1</mavenVersion>
+		<mavenVersion>3.3.3</mavenVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<package-name>http://kuberam.ro/teian/</package-name>
 		<package-title>teian, xml annotator</package-title>
