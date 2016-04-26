@@ -1,10 +1,6 @@
 <package xmlns="http://expath.org/ns/pkg" name="${package-name}"
 	abbrev="${project.artifactId}" version="${project.version}" spec="1.0">
 	<title>${package-title}</title>
-	<dependency package="http://exist-db.org/apps/shared" />
-	<dependency package="http://exist-db.org/apps/xsltforms" />
-	<dependency package="http://xqilla.sourceforge.net/pkg/xqjson" />
-	<dependency package="http://www.functx.com" />
 	<author id="cteodorescu">Claudius Teodorescu</author>
 	<website>${project.url}</website>
 	<license>GNU-LGPL</license>
