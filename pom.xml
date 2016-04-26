@@ -13,6 +13,7 @@
 	<version>2.4.2</version>
 	<packaging>pom</packaging>
 	<name>teian</name>
+	<url>https://cdn.rawgit.com/claudius108/teian/master/documentation/index.html</url>
 
 	<prerequisites>
 		<maven>${mavenVersion}</maven>
