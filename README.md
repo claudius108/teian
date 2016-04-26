@@ -4,6 +4,9 @@ Teian can be easily extended in order to use new XML vocabularies.
  
 Teian was originally developed for the U.S. Department of State, Office of the Historian, and released as open source for the benefit of community. Its development was further funded by the University of Richmond, USA.
 
+Version 2.4.2 - 2016-04-26
+1. Updated the URLs of the dependencies.
+
 Version 2.4.1 - 2015-07-04
 1. Added unit test for Sanskrit transliteration in TEI.
 
