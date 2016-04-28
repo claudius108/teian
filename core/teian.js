@@ -306,7 +306,7 @@ teian.save = function() {
 		"ref" : "simpath:instance('data')/*",
 		"resource" : teian.sessionParameters.saveServiceUrl,
 		"mode" : "synchronous",
-		"method" : "post",
+		"method" : "put",
 		"simpath-submit-done" : function(xhReq) {
 			// alert('Data was saved to file: \n' + xhReq.responseText);
 		}
