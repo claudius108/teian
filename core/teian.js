@@ -6,6 +6,26 @@
 
 window.teian = {};
 
+teian.ui = {};
+
+teian.utils = {};
+
+teian.utils.queryParameters = [];
+
+//http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+(teian.utils.extractQueryParameters = function () {
+    var match,
+        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+        search = /([^&=]+)=?([^&]*)/g,
+        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+        query  = window.location.search.substring(1);
+
+    urlParams = {};
+    while (match = search.exec(query)) {
+       teian.utils.queryParameters[decode(match[1])] = decode(match[2]);
+    }
+})();
+
 teian.acceptAllChanges = function() {
 	teian._acceptOrRejectAllChanges("accept");
 };
@@ -322,36 +342,7 @@ teian.toggleTrackChanges = function() {
 	}
 };
 
-teian.ui = {};
-
-teian.utils = {};
-
 teian.utils.sOperationType = "add";
-
-teian.utils.gup = function(name) {
-	var queryString = location.search.substr(1);
-
-	var sessionParamIndex = queryString.indexOf("&session=");
-	var result = "";
-
-	switch (name) {
-	case "session":
-		if (sessionParamIndex != -1) {
-			result = queryString.substr(sessionParamIndex + 9);
-		}
-		break;
-	case "content":
-		if (sessionParamIndex != -1) {
-			result = queryString.substring(8, sessionParamIndex - 1);
-
-		} else {
-			result = queryString.substr(8);
-		}
-		break;
-	}
-
-	return result;
-};
 
 teian.utils.saveSelection = function() {
 	// remove markers for previously saved selection
@@ -697,7 +688,7 @@ $(document)
 					});
 
 					// get the session file url
-					var sessionUrl = utils.gup('session');
+					var sessionUrl = teian.utils.queryParameters['session'];
 
 					if (sessionUrl) {
 						// load the session parameters
@@ -717,7 +708,7 @@ $(document)
 						});
 					}
 
-					var contentUrl = utils.gup('content');
+					var contentUrl = teian.utils.queryParameters['content'];
 
 					contentUrl = (contentUrl != '') ? contentUrl
 							: "default-content.xml";
