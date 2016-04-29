@@ -4,6 +4,8 @@ Teian can be easily extended in order to use new XML vocabularies.
  
 Teian was originally developed for the U.S. Department of State, Office of the Historian, and released as open source for the benefit of community. Its development was further funded by the University of Richmond, USA.
 
+The documentation is at https://cdn.rawgit.com/claudius108/teian/master/documentation/index.html.
+
 Version 2.4.2 - 2016-04-26
 1. Updated the URLs of the dependencies.
 
