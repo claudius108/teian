@@ -12,8 +12,9 @@ teian.utils = {};
 
 teian.utils.queryParameters = [];
 
-//http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-(teian.utils.extractQueryParameters = function () {
+teian.sessionParameters = {};
+
+(teian.utils.extractQueryStringParameters = function () {
     var match,
         pl     = /\+/g,  // Regex for replacing addition symbol with a space
         search = /([^&=]+)=?([^&]*)/g,
@@ -277,8 +278,6 @@ teian.rejectChange = function(changeId, changeType) {
 	teian._deleteChangeSummary(changeId);
 };
 
-teian.sessionParameters = {};
-
 teian.source = function() {
 	var sContent = $x.serializeToString($x.transform($x._fDocFromNode(document
 			.querySelector("#teian-content > *")), $x._XSLTtemplates[4]));
@@ -306,7 +305,7 @@ teian.save = function() {
 		"ref" : "simpath:instance('data')/*",
 		"resource" : teian.sessionParameters.saveServiceUrl,
 		"mode" : "synchronous",
-		"method" : "put",
+		"method" : "post",
 		"simpath-submit-done" : function(xhReq) {
 			// alert('Data was saved to file: \n' + xhReq.responseText);
 		}
@@ -740,6 +739,8 @@ $(document)
 							.xpath("simpath:instance('session-parameters')//teian:search-service-url")[0].textContent;
 					sessionParameters.saveServiceUrl = $x
 							.xpath("simpath:instance('session-parameters')//teian:save-service-url")[0].textContent;
+							
+					Function($x.xpath("simpath:instance('session-parameters')//teian:functions")[0].textContent)();
 
 					teian._getContent(teian.contentUrl);
 
