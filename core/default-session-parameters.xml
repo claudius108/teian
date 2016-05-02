@@ -22,4 +22,5 @@
 	</teian:template>
 	<teian:search-service-url>../services/search.php</teian:search-service-url>
 	<teian:save-service-url>../services/save.php</teian:save-service-url>
+	<teian:functions />
 </teian:session>
