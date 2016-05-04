@@ -290,7 +290,7 @@ teian.save = function() {
 	utils.oSavedSelection = null;
 	var content = document.querySelector('#teian-content > *').cloneNode(true);
 	// this attribute, @content-url, has to be replaced with another mechanism
-	content.setAttribute("content-url", teian.contentUrl);
+	//content.setAttribute("content-url", teian.contentUrl);
 	var contentAsString = $x.serializeToString(content);
 	if (teian.sessionParameters.trackChanges == "true") {
 		contentAsString = teian
@@ -740,7 +740,7 @@ $(document)
 					sessionParameters.saveServiceUrl = $x
 							.xpath("simpath:instance('session-parameters')//teian:save-service-url")[0].textContent;
 							
-					Function($x.xpath("simpath:instance('session-parameters')//teian:functions")[0].textContent)();
+					Function($x.xpath("simpath:instance('session-parameters')//teian:extension-functions")[0].textContent)();
 
 					teian._getContent(teian.contentUrl);
 
