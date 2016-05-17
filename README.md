@@ -6,6 +6,9 @@ Teian was originally developed for the U.S. Department of State, Office of the H
 
 The documentation is at https://cdn.rawgit.com/claudius108/teian/master/documentation/index.html.
 
+Version 2.4.5 - 2016-05-17
+1. Fixed the paths for rangy files.
+
 Version 2.4.2 - 2016-04-26
 1. Updated the URLs of the dependencies.
 
