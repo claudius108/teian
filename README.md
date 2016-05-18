@@ -8,6 +8,14 @@ The documentation is at https://cdn.rawgit.com/claudius108/teian/master/document
 
 Version 2.4.5 - 2016-05-17
 1. Fixed the paths for rangy files.
+2. Minor changes related to the extension functions.
+
+Version 2.4.4 - 2016-05-02
+1. Added teian:functions parameter for the session configuration file.
+2. Added mechanism for defining custom JS function in session configuration.
+
+Version 2.4.3 - 2016-04-28
+1. Improved the function to extract the query parameters.
 
 Version 2.4.2 - 2016-04-26
 1. Updated the URLs of the dependencies.
