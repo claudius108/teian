@@ -3,12 +3,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>ro.kuberam.maven.sourceforge</groupId>
-		<artifactId>js-libs</artifactId>
-		<version>0.2-SNAPSHOT</version>
-	</parent>
-
+	<groupId>ro.kuberam.libs.js</groupId>
 	<artifactId>teian</artifactId>
 	<version>2.4.5</version>
 	<packaging>pom</packaging>
@@ -32,19 +27,44 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>xml-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>generate-index.html</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>transform</goal>
+						</goals>
+						<configuration>
+							<forceCreation>true</forceCreation>
+							<transformationSets>
+								<transformationSet>
+									<dir>${project.basedir}/tests</dir>
+									<includes>
+										<include>test-plan.xml</include>
+									</includes>
+									<stylesheet>http://kert.sourceforge.net/latest/resources/xsl/generate-tests-presentation.xsl</stylesheet>
+									<fileMappers>
+										<fileMapper
+											implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
+											<pattern>^(.*)\.xml$</pattern>
+											<replacement>index.html</replacement>
+										</fileMapper>
+									</fileMappers>
+									<outputDir>tests</outputDir>
+								</transformationSet>
+							</transformationSets>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>wagon-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
 				<groupId>ro.kuberam.maven.plugins</groupId>
 				<artifactId>kuberam-expath-plugin</artifactId>
-				<version>0.4.5</version>
+				<version>0.5.1-SNAPSHOT</version>
 				<executions>
 					<execution>
 						<id>create-build</id>
