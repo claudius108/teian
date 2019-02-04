@@ -10,12 +10,7 @@
 	<name>teian</name>
 	<url>https://cdn.rawgit.com/claudius108/teian/master/documentation/index.html</url>
 
-	<prerequisites>
-		<maven>${mavenVersion}</maven>
-	</prerequisites>
-
 	<properties>
-		<mavenVersion>3.3.3</mavenVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<package-name>http://kuberam.ro/teian/</package-name>
 		<package-title>teian, xml annotator</package-title>
@@ -27,6 +22,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>xml-maven-plugin</artifactId>
+				<version>1.0.1</version>
 				<executions>
 					<execution>
 						<id>generate-index.html</id>
@@ -58,13 +54,9 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-			</plugin>
-			<plugin>
 				<groupId>ro.kuberam.maven.plugins</groupId>
 				<artifactId>kuberam-expath-plugin</artifactId>
-				<version>0.5.1-SNAPSHOT</version>
+				<version>0.5.9</version>
 				<executions>
 					<execution>
 						<id>create-build</id>
