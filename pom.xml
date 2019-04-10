@@ -5,7 +5,7 @@
 
 	<groupId>ro.kuberam.libs.js</groupId>
 	<artifactId>teian</artifactId>
-	<version>2.4.5</version>
+	<version>2.4.6</version>
 	<packaging>pom</packaging>
 	<name>teian</name>
 	<url>https://cdn.rawgit.com/claudius108/teian/master/documentation/index.html</url>
