@@ -1,10 +1,17 @@
+# Description
 Teian is a standalone, web-based annotator and limited editor for any XML vocabulary. It works by directly annotating the respective XML file or fragment. The end user does not have to know the XML markup, but just choose the text to annotate, and select an annotator.
 
 Teian can be easily extended in order to use new XML vocabularies.
  
 Teian was originally developed for the U.S. Department of State, Office of the Historian, and released as open source for the benefit of community. Its development was further funded by the University of Richmond, USA.
 
-The documentation is at https://cdn.rawgit.com/claudius108/teian/master/documentation/index.html.
+The documentation is [here](documentation/index.html).
+
+The unit tests are [here](tests/index.html).
+
+# Changelog
+Version 2.4.6 - 2019-04-10
+1. Activated gh-pages, in order to proper serve the unit tests' pages.
 
 Version 2.4.5 - 2016-05-17
 1. Fixed the paths for rangy files.
