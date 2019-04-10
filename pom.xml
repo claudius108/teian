@@ -43,10 +43,10 @@
 										<fileMapper
 											implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
 											<pattern>^(.*)\.xml$</pattern>
-											<replacement>index.html</replacement>
+											<replacement>tests.html</replacement>
 										</fileMapper>
 									</fileMappers>
-									<outputDir>tests</outputDir>
+									<outputDir>docs</outputDir>
 								</transformationSet>
 							</transformationSets>
 						</configuration>
