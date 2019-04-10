@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
-                      "http://docbook.org/xml/4.4/docbookx.dtd">
-
 <book xmlns="http://docbook.org/ns/docbook" id="docbookeasy">
 	<title>DocBookEasy</title>
 	<bookinfo id="INFO">

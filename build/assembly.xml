@@ -19,8 +19,6 @@
 			<outputDirectory>/</outputDirectory>
 			<excludes>
 				<exclude>build/</exclude>
-				<exclude>target/</exclude>
-				<exclude>pom.xml</exclude>
 			</excludes>
 		</fileSet>
 	</fileSets>
