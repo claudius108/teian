@@ -3,19 +3,17 @@
 	<teiHeader>
 		<fileDesc>
 			<titleStmt>
-				<title>Thomas Paine: Common sense, a
-					machine-readable transcript</title>
+				<title />
 				<respStmt>
-					<resp>compiled by</resp>
-					<name>Jon K Adams</name>
+					<resp />
+					<name />
 				</respStmt>
 			</titleStmt>
 			<publicationStmt>
-				<distributor>Oxford Text Archive</distributor>
+				<distributor />
 			</publicationStmt>
 			<sourceDesc>
-				<bibl>The complete writings of Thomas Paine, collected and edited
-					by Phillip S. Foner (New York, Citadel Press, 1945)</bibl>
+				<bibl />
 			</sourceDesc>
 		</fileDesc>
 	</teiHeader>
